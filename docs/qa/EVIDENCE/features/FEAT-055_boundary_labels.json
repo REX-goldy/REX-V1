@@ -1,0 +1,5 @@
+{
+  "wrong_symbol": "ValueError: All bars for M1 must match EURUSD",
+  "empty_timeframe_label": "ValueError: Timeframe cannot be empty",
+  "unknown_timeframe": "UnknownTimeframeError: Unsupported timeframe for causal aggregation: 'X9'"
+}

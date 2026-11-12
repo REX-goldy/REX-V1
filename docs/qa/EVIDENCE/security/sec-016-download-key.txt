@@ -1,0 +1,6 @@
+# SEC-016 Download resolves stored key and passes it explicitly without mutating environment
+component: server/research_service.py
+test_data: Stored + env dummy
+expected: build_source api_key=stored key; env var unchanged
+actual: used_stored=True env_unchanged=True
+status: PASS

@@ -1,0 +1,29 @@
+{
+  "test_id": "API-049",
+  "endpoint": "GET health/runs",
+  "scenario": "Repeated requests",
+  "test_data": "50x health; 20x runs",
+  "expected": "all 200; consistent bodies",
+  "actual": "health=50 runs=20 elapsed_ms=1212.8 distinct_run_bodies=1",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "50 health all 200",
+      "ok": true,
+      "detail": "[200]"
+    },
+    {
+      "check": "20 runs all 200",
+      "ok": true,
+      "detail": "[200]"
+    },
+    {
+      "check": "runs responses consistent",
+      "ok": true,
+      "detail": "1"
+    }
+  ],
+  "calls": [],
+  "recorded_at_utc": "2026-11-03T13:38:26.650169+00:00"
+}

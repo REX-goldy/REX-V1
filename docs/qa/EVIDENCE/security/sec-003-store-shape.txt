@@ -1,0 +1,6 @@
+# SEC-003 Atomic write creates 0600 file with versioned JSON shape and no temp leftovers
+component: server/provider_keys.py
+test_data: dummy key SEC-DUMMY-...1234, nested temp path
+expected: File mode 0600, parent dir created, JSON {version:1,providers}, no *.tmp
+actual: file_mode=0o600 parent_mode=0o755 json_shape_ok=True temp_leftovers=[]
+status: PASS

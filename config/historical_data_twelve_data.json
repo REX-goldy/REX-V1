@@ -1,0 +1,18 @@
+{
+  "provider": "twelve_data",
+  "symbols": ["EURUSD", "GBPUSD"],
+  "timeframe": "M1",
+  "start_date": "2020-04-07",
+  "end_date": "2026-10-29",
+  "timeout_seconds": 30,
+  "retries": 3,
+  "retry_delay_seconds": 2,
+  "data_directory": "data/historical",
+  "overwrite_existing_files": false,
+  "duka_threads": 1,
+  "include_header": true,
+  "api_key_env": "TWELVE_DATA_API_KEY",
+  "base_url": "https://api.twelvedata.com",
+  "max_points_per_request": 5000,
+  "requests_per_minute": 8
+}

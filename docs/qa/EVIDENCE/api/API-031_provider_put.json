@@ -1,0 +1,80 @@
+{
+  "test_id": "API-031",
+  "endpoint": "/api/settings/providers/{id}",
+  "scenario": "Store dummy key and mask it",
+  "test_data": "PUT twelve_data dummy-stored-key-9999",
+  "expected": "200 source=stored hint=9999; full key absent; store mode 0600",
+  "actual": "status=200 view={\"id\":\"twelve_data\",\"name\":\"Twelve Data\",\"description\":\"Twelve Data historical M1 candles\",\"env_var\":\"TWELVE_DATA_API_KEY\",\"required\":true,\"configured\":true,\"source\":\"stored\",\"hint\":\"9999\",\"updated_at\":\"2026-11-03T13:38:25.049737+00:00\"} store_mode=0o600",
+  "status": "PASS",
+  "notes": "Dummy key only. Temp store /tmp/opencode/qa-api/keys_a.json.",
+  "assertions": [
+    {
+      "check": "HTTP 200",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "check": "source stored",
+      "ok": true,
+      "detail": "stored"
+    },
+    {
+      "check": "hint last 4",
+      "ok": true,
+      "detail": "9999"
+    },
+    {
+      "check": "no api_key field",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "full key not in response",
+      "ok": true,
+      "detail": "dummy full key absent"
+    },
+    {
+      "check": "store file mode 0600",
+      "ok": true,
+      "detail": "0o600"
+    },
+    {
+      "check": "stored server-side",
+      "ok": true,
+      "detail": "temp store contains dummy"
+    }
+  ],
+  "calls": [
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": {
+        "api_key": "<redacted>"
+      },
+      "request_headers": {},
+      "duration_ms": 3.9,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "237",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "7ef77292db4258b56e23720a785d2c39e879d2be1eff51e1f7154a701ed8a091",
+      "response_bytes": 237,
+      "response_json": {
+        "id": "twelve_data",
+        "name": "Twelve Data",
+        "description": "Twelve Data historical M1 candles",
+        "env_var": "TWELVE_DATA_API_KEY",
+        "required": true,
+        "configured": true,
+        "source": "stored",
+        "hint": "9999",
+        "updated_at": "2026-11-03T13:38:25.049737+00:00"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.052640+00:00"
+}

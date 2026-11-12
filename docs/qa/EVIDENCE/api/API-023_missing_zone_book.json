@@ -1,0 +1,50 @@
+{
+  "test_id": "API-023",
+  "endpoint": "/api/backtests",
+  "scenario": "Zone-based strategy without zone config",
+  "test_data": "AUDUSD + S002",
+  "expected": "400 No zone book is configured for AUDUSD",
+  "actual": "status=400 detail={\"detail\":\"No zone book is configured for AUDUSD in config/zones.json\"}",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "detail mentions zone book",
+      "ok": true,
+      "detail": "{'detail': 'No zone book is configured for AUDUSD in config/zones.json'}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "AUDUSD/M1/2026",
+        "strategy_id": "S002",
+        "start_date": "2026-05-04",
+        "end_date": "2026-05-08"
+      },
+      "request_headers": {},
+      "duration_ms": 15.0,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "71",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "1217b8b917bf103775821045dcd569dfe79ccc7f122930903138ce2b4206f572",
+      "response_bytes": 71,
+      "response_json": {
+        "detail": "No zone book is configured for AUDUSD in config/zones.json"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.750920+00:00"
+}

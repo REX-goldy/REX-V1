@@ -1,0 +1,33 @@
+# SEC-026 Documented security gaps / operating envelope
+generated: 2026-11-03T13:36:21Z
+
+## No authentication / multi-user isolation (UI states this explicitly)
+273:              <span>No authentication or multi-user isolation; run this locally.</span>
+
+## Local-only, plaintext store: documentation in credential module
+3:Keys are stored in a JSON file that is only readable by the server process
+4:(``0600`` on POSIX).  Secrets are never returned to callers: the public
+7:The environment remains a valid fallback so existing deployments that export
+8:``TWELVE_DATA_API_KEY`` keep working.  A stored key takes precedence over the
+
+## No encryption-at-rest implementation (secrets stored as JSON api_key values)
+144:        api_key = entry.get("api_key")
+150:        saved = {"api_key": api_key}
+159:    text = json.dumps(payload, indent=2, sort_keys=True) + "\n"
+199:        secret: str | None = stored.get("api_key") or None
+233:        providers[provider.id] = {"api_key": key, "updated_at": updated_at}
+259:        key = stored.get("api_key", "").strip()
+
+## Environment visibility: env keys are read directly from process environment
+server/provider_keys.py:196:    env_value = os.environ.get(provider.env_var, "")
+server/provider_keys.py:262:    env_value = os.environ.get(provider.env_var, "")
+historical/twelve_data.py:119:        resolved_key = api_key if api_key is not None else os.environ.get(api_key_env)
+
+Gaps to accept/document:
+1. No authentication, authorization, sessions, or per-user isolation on the API.
+2. Provider keys are stored in plaintext JSON at data/provider_keys.json (0600).
+3. No encryption at rest or KMS/secret-manager integration.
+4. Environment variables (TWELVE_DATA_API_KEY/DUKASCOPY_API_KEY) are visible to the process/OS and any child process.
+5. Dev CORS is wildcard with credentials disabled; acceptable for local single-user research only.
+6. No key rotation/expiry/audit trail beyond updated_at; deletion has no audit log.
+7. The API can be reached by any local process on port 16901; deployment must keep it non-public (deploy.json does).

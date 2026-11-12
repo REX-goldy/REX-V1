@@ -1,0 +1,6 @@
+# SEC-021 Dataset .meta.json never records the API key
+component: historical/storage.py
+test_data: Offline fake Twelve Data fetch
+expected: Metadata exists with provenance but no key material
+actual: meta_exists=True key_present=False
+status: PASS

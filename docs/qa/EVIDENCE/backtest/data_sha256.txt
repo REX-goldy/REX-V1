@@ -1,0 +1,2 @@
+65cab86789eb82393f4d54e130d7cbeb1358db869c40814d52058dc130ec4208  data/historical/EURUSD/M1/2026.csv
+7d1b1d3df6cfbd40a43eea99034811e9fe9758a1b47d2b596e5b8cad3bb6a62b  data/historical/GBPUSD/M1/2026.csv

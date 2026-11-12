@@ -1,0 +1,26 @@
+{
+  "symbol": "GBPUSD",
+  "zone": [
+    {
+      "id": 1,
+      "name": "weekly_support",
+      "low": 1.26,
+      "high": 1.2625,
+      "timeframe": "weekly",
+      "strength": 8,
+      "kind": "demand",
+      "source": "manual"
+    }
+  ],
+  "price_min": 1.31419,
+  "price_max": 1.36573,
+  "signals": 0,
+  "final_zone_state": {
+    "1": {
+      "status": "waiting_for_bullish_retest",
+      "broken_level": 1.2625,
+      "breakout_index": 93594
+    }
+  },
+  "note": "The only GBPUSD zone is far above the observed price range; S002 treats close below a zone as a bearish breakout and close above as a bullish breakout, so this zone oscillates through waiting states without ever retesting."
+}

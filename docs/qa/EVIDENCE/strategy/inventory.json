@@ -1,0 +1,270 @@
+{
+  "registry_ids": [
+    "CORE_ZONE_BREAKOUT",
+    "S002",
+    "S008"
+  ],
+  "registered": {
+    "CORE_ZONE_BREAKOUT": {
+      "name": "Existing Zone Breakout",
+      "description": "Existing stateful support/resistance interaction strategy.",
+      "module": "strategies.breakout",
+      "qualname": "BreakoutStrategy"
+    },
+    "S002": {
+      "name": "BreakoutRetest",
+      "description": "Zone breakout followed by a causal boundary retest within max_wait bars.",
+      "module": "strategies.breakout_retest",
+      "qualname": "S002_BreakoutRetest"
+    },
+    "S008": {
+      "name": "Liquidity Sweep V1",
+      "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps.",
+      "module": "strategies.liquidity_sweep",
+      "qualname": "LiquiditySweepStrategy"
+    }
+  },
+  "strategy_specs": {
+    "CORE_ZONE_BREAKOUT": {
+      "trade_simulation": false,
+      "requires_zones": true,
+      "parameters": [],
+      "note": "Signal study only. The default execution layer has no breakout setup factory, so this strategy cannot be trade-simulated yet."
+    },
+    "S002": {
+      "trade_simulation": true,
+      "requires_zones": true,
+      "parameters": [
+        {
+          "name": "tolerance",
+          "label": "Retest tolerance",
+          "type": "number",
+          "default": 0.0005,
+          "min": 1e-05,
+          "max": 0.05,
+          "step": 0.0001,
+          "help": "Price tolerance around the broken zone boundary."
+        },
+        {
+          "name": "max_wait",
+          "label": "Max wait (bars)",
+          "type": "integer",
+          "default": 5,
+          "min": 1,
+          "max": 200,
+          "step": 1,
+          "help": "Bars after breakout to accept a retest."
+        }
+      ],
+      "note": "Zone breakout \u2192 retest. Uses static manual zones."
+    },
+    "S008": {
+      "trade_simulation": true,
+      "requires_zones": false,
+      "parameters": [
+        {
+          "name": "lookback",
+          "label": "Swing lookback",
+          "type": "integer",
+          "default": 10,
+          "min": 2,
+          "max": 200,
+          "step": 1,
+          "help": "Bars used to define the prior swing high/low."
+        },
+        {
+          "name": "min_wick_ratio",
+          "label": "Minimum wick ratio",
+          "type": "number",
+          "default": 0.6,
+          "min": 0.0,
+          "max": 1.0,
+          "step": 0.01,
+          "help": "Wick-to-range ratio required for a sweep."
+        },
+        {
+          "name": "tolerance",
+          "label": "Sweep tolerance",
+          "type": "number",
+          "default": 0.0,
+          "min": 0.0,
+          "max": 0.05,
+          "step": 0.0001,
+          "help": "Extra distance beyond the swing required to sweep."
+        }
+      ],
+      "note": "Liquidity sweep. Trade simulation is wired to the sweep factory."
+    }
+  },
+  "zone_books": {
+    "EURUSD": {
+      "count": 8,
+      "zones": [
+        {
+          "id": 1,
+          "name": "feb_resistance_1",
+          "low": 1.186,
+          "high": 1.1874,
+          "timeframe": "H1",
+          "strength": 9,
+          "kind": null,
+          "source": "manual"
+        },
+        {
+          "id": 2,
+          "name": "feb_resistance_2",
+          "low": 1.1908,
+          "high": 1.1924,
+          "timeframe": "H1",
+          "strength": 8,
+          "kind": null,
+          "source": "manual"
+        },
+        {
+          "id": 3,
+          "name": "feb_support_1",
+          "low": 1.1778,
+          "high": 1.1787,
+          "timeframe": "H1",
+          "strength": 8,
+          "kind": null,
+          "source": "manual"
+        },
+        {
+          "id": 4,
+          "name": "feb_support_2",
+          "low": 1.1592,
+          "high": 1.162,
+          "timeframe": "H1",
+          "strength": 9,
+          "kind": null,
+          "source": "manual"
+        },
+        {
+          "id": 5,
+          "name": "weekly_supply_example",
+          "low": 1.2,
+          "high": 1.205,
+          "timeframe": "weekly",
+          "strength": 9,
+          "kind": "supply",
+          "source": "manual"
+        },
+        {
+          "id": 6,
+          "name": "weekly_demand_example",
+          "low": 1.14,
+          "high": 1.145,
+          "timeframe": "weekly",
+          "strength": 8,
+          "kind": "demand",
+          "source": "manual"
+        },
+        {
+          "id": 7,
+          "name": "daily_supply_example",
+          "low": 1.195,
+          "high": 1.198,
+          "timeframe": "daily",
+          "strength": 7,
+          "kind": "supply",
+          "source": "manual"
+        },
+        {
+          "id": 8,
+          "name": "daily_demand_example",
+          "low": 1.15,
+          "high": 1.153,
+          "timeframe": "daily",
+          "strength": 7,
+          "kind": "demand",
+          "source": "manual"
+        }
+      ]
+    },
+    "GBPUSD": {
+      "count": 1,
+      "zones": [
+        {
+          "id": 1,
+          "name": "weekly_support",
+          "low": 1.26,
+          "high": 1.2625,
+          "timeframe": "weekly",
+          "strength": 8,
+          "kind": "demand",
+          "source": "manual"
+        }
+      ]
+    }
+  },
+  "datasets": {
+    "AUDUSD/M1/2026": {
+      "symbol": "AUDUSD",
+      "timeframe": "M1",
+      "year": 2026,
+      "provider": "twelve_data",
+      "bar_count": 93600,
+      "first_timestamp": "2026-04-01T00:00:00",
+      "last_timestamp": "2026-06-30T23:59:00",
+      "status": "ok"
+    },
+    "EURUSD/M1/2026": {
+      "symbol": "EURUSD",
+      "timeframe": "M1",
+      "year": 2026,
+      "provider": "twelve_data",
+      "bar_count": 184963,
+      "first_timestamp": "2026-01-01T13:00:00",
+      "last_timestamp": "2026-06-30T23:59:00",
+      "status": "warning"
+    },
+    "GBPUSD/M1/2026": {
+      "symbol": "GBPUSD",
+      "timeframe": "M1",
+      "year": 2026,
+      "provider": "twelve_data",
+      "bar_count": 93600,
+      "first_timestamp": "2026-04-01T00:00:00",
+      "last_timestamp": "2026-06-30T23:59:00",
+      "status": "ok"
+    },
+    "USDCAD/M1/2026": {
+      "symbol": "USDCAD",
+      "timeframe": "M1",
+      "year": 2026,
+      "provider": "twelve_data",
+      "bar_count": 93600,
+      "first_timestamp": "2026-04-01T00:00:00",
+      "last_timestamp": "2026-06-30T23:59:00",
+      "status": "ok"
+    },
+    "USDJPY/M1/2026": {
+      "symbol": "USDJPY",
+      "timeframe": "M1",
+      "year": 2026,
+      "provider": "twelve_data",
+      "bar_count": 93600,
+      "first_timestamp": "2026-04-01T00:00:00",
+      "last_timestamp": "2026-06-30T23:59:00",
+      "status": "ok"
+    }
+  },
+  "ui_timeframes": [
+    "M1",
+    "M5",
+    "M15",
+    "H1",
+    "H4"
+  ],
+  "research_symbols": [
+    "AUDUSD",
+    "EURUSD",
+    "GBPUSD",
+    "NZDUSD",
+    "USDCAD",
+    "USDCHF",
+    "USDJPY",
+    "XAUUSD"
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "test_id": "API-036",
+  "endpoint": "/api/settings/providers/{id}",
+  "scenario": "Control characters in key",
+  "test_data": "newline, NUL, tab, DEL",
+  "expected": "400 control-character detail",
+  "actual": "newline=400; nul=400; tab=400; del=400",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "newline 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "newline detail",
+      "ok": true,
+      "detail": "{'detail': 'API key cannot contain control characters or newlines'}"
+    },
+    {
+      "check": "nul 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "nul detail",
+      "ok": true,
+      "detail": "{'detail': 'API key cannot contain control characters or newlines'}"
+    },
+    {
+      "check": "tab 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "tab detail",
+      "ok": true,
+      "detail": "{'detail': 'API key cannot contain control characters or newlines'}"
+    },
+    {
+      "check": "del 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "del detail",
+      "ok": true,
+      "detail": "{'detail': 'API key cannot contain control characters or newlines'}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": {
+        "api_key": "<redacted>"
+      },
+      "request_headers": {},
+      "duration_ms": 1.7,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "66",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "4bcff5e745538b7533bd9314cb4604c0661d4b806bce361aa95e780f0ceb558e",
+      "response_bytes": 66,
+      "response_json": {
+        "detail": "API key cannot contain control characters or newlines"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": {
+        "api_key": "<redacted>"
+      },
+      "request_headers": {},
+      "duration_ms": 1.6,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "66",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "4bcff5e745538b7533bd9314cb4604c0661d4b806bce361aa95e780f0ceb558e",
+      "response_bytes": 66,
+      "response_json": {
+        "detail": "API key cannot contain control characters or newlines"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": {
+        "api_key": "<redacted>"
+      },
+      "request_headers": {},
+      "duration_ms": 1.5,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "66",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "4bcff5e745538b7533bd9314cb4604c0661d4b806bce361aa95e780f0ceb558e",
+      "response_bytes": 66,
+      "response_json": {
+        "detail": "API key cannot contain control characters or newlines"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": {
+        "api_key": "<redacted>"
+      },
+      "request_headers": {},
+      "duration_ms": 1.6,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "66",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "4bcff5e745538b7533bd9314cb4604c0661d4b806bce361aa95e780f0ceb558e",
+      "response_bytes": 66,
+      "response_json": {
+        "detail": "API key cannot contain control characters or newlines"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.085328+00:00"
+}

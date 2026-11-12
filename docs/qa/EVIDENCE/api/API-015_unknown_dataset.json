@@ -1,0 +1,143 @@
+{
+  "test_id": "API-015",
+  "endpoint": "/api/dataset|frame|range|bars",
+  "scenario": "Unknown dataset",
+  "test_data": "dataset_id=NOPE/M1/2026 on 4 read endpoints",
+  "expected": "404 Dataset not found, not 5xx",
+  "actual": "404 with dataset-not-found detail on dataset/frame/range/bars",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "/api/dataset 404",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "/api/dataset detail",
+      "ok": true,
+      "detail": "{'detail': 'Dataset not found: NOPE/M1/2026'}"
+    },
+    {
+      "check": "/api/frame 404",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "/api/frame detail",
+      "ok": true,
+      "detail": "{'detail': 'Dataset not found: NOPE/M1/2026'}"
+    },
+    {
+      "check": "/api/range 404",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "/api/range detail",
+      "ok": true,
+      "detail": "{'detail': 'Dataset not found: NOPE/M1/2026'}"
+    },
+    {
+      "check": "/api/bars 404",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "/api/bars detail",
+      "ok": true,
+      "detail": "{'detail': 'Dataset not found: NOPE/M1/2026'}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/dataset",
+      "params": {
+        "dataset_id": "NOPE/M1/2026"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 3.7,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "44",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "4606bce1bbce246083f3361029a5ba5d568380edc7675a22e272819ee305c036",
+      "response_bytes": 44,
+      "response_json": {
+        "detail": "Dataset not found: NOPE/M1/2026"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/frame",
+      "params": {
+        "dataset_id": "NOPE/M1/2026"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.5,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "44",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "4606bce1bbce246083f3361029a5ba5d568380edc7675a22e272819ee305c036",
+      "response_bytes": 44,
+      "response_json": {
+        "detail": "Dataset not found: NOPE/M1/2026"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/range",
+      "params": {
+        "dataset_id": "NOPE/M1/2026"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.8,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "44",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "4606bce1bbce246083f3361029a5ba5d568380edc7675a22e272819ee305c036",
+      "response_bytes": 44,
+      "response_json": {
+        "detail": "Dataset not found: NOPE/M1/2026"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/bars",
+      "params": {
+        "dataset_id": "NOPE/M1/2026"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.5,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "44",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "4606bce1bbce246083f3361029a5ba5d568380edc7675a22e272819ee305c036",
+      "response_bytes": 44,
+      "response_json": {
+        "detail": "Dataset not found: NOPE/M1/2026"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.410828+00:00"
+}

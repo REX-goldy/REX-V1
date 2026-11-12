@@ -1,0 +1,51 @@
+{
+  "test_id": "API-039",
+  "endpoint": "/api/downloads",
+  "scenario": "Unsupported symbol",
+  "test_data": "symbol=XXXYYY, dukascopy",
+  "expected": "400 before any provider call",
+  "actual": "status=400 detail={\"detail\":\"UI downloads currently support EURUSD and GBPUSD\"}",
+  "status": "PASS",
+  "notes": "Observed message lists only EURUSD/GBPUSD while 7 symbols are accepted: reported as D-01 (LOW).",
+  "assertions": [
+    {
+      "check": "400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "mentions unsupported symbol",
+      "ok": true,
+      "detail": "{'detail': 'UI downloads currently support EURUSD and GBPUSD'}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16901/api/downloads",
+      "params": null,
+      "request_body": {
+        "provider": "dukascopy",
+        "symbol": "XXXYYY",
+        "timeframe": "M1",
+        "start_date": "2025-01-01",
+        "end_date": "2025-01-02"
+      },
+      "request_headers": {},
+      "duration_ms": 2.4,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "61",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "1009f3af0341379a263197b2396b1e90f43c1eca8fd737b3b80511f81c84c74d",
+      "response_bytes": 61,
+      "response_json": {
+        "detail": "UI downloads currently support EURUSD and GBPUSD"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.103276+00:00"
+}

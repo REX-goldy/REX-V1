@@ -1,0 +1,649 @@
+{
+  "test_id": "API-005",
+  "endpoint": "/api/overview",
+  "scenario": "Overview schema and dataset cross-check",
+  "test_data": "GET /api/overview",
+  "expected": "200; 5 datasets with expected counts; EURUSD bounds; 3 strategies; capabilities",
+  "actual": "datasets=[('AUDUSD/M1/2026', 93600), ('EURUSD/M1/2026', 184963), ('GBPUSD/M1/2026', 93600), ('USDCAD/M1/2026', 93600), ('USDJPY/M1/2026', 93600)]; strategies=['CORE_ZONE_BREAKOUT', 'S002', 'S008']; capabilities={'twelve_data': True, 'dukascopy': True, 'trade_simulation': ['S002', 'S008'], 'download_max_days': 31}",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "HTTP 200",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "top-level keys",
+      "ok": true,
+      "detail": "['generated_at', 'data_root', 'instruments', 'datasets', 'strategies', 'runs', 'warnings', 'capabilities']"
+    },
+    {
+      "check": "5 datasets",
+      "ok": true,
+      "detail": "['AUDUSD/M1/2026', 'EURUSD/M1/2026', 'GBPUSD/M1/2026', 'USDCAD/M1/2026', 'USDJPY/M1/2026']"
+    },
+    {
+      "check": "EURUSD/M1/2026 bar_count==184963",
+      "ok": true,
+      "detail": "184963"
+    },
+    {
+      "check": "GBPUSD/M1/2026 bar_count==93600",
+      "ok": true,
+      "detail": "93600"
+    },
+    {
+      "check": "AUDUSD/M1/2026 bar_count==93600",
+      "ok": true,
+      "detail": "93600"
+    },
+    {
+      "check": "USDJPY/M1/2026 bar_count==93600",
+      "ok": true,
+      "detail": "93600"
+    },
+    {
+      "check": "USDCAD/M1/2026 bar_count==93600",
+      "ok": true,
+      "detail": "93600"
+    },
+    {
+      "check": "EURUSD coverage start",
+      "ok": true,
+      "detail": "2026-01-01T13:00:00"
+    },
+    {
+      "check": "EURUSD coverage end",
+      "ok": true,
+      "detail": "2026-06-30T23:59:00"
+    },
+    {
+      "check": "3 strategies",
+      "ok": true,
+      "detail": "['CORE_ZONE_BREAKOUT', 'S002', 'S008']"
+    },
+    {
+      "check": "capabilities present",
+      "ok": true,
+      "detail": "{'twelve_data': True, 'dukascopy': True, 'trade_simulation': ['S002', 'S008'], 'download_max_days': 31}"
+    },
+    {
+      "check": "no non-finite floats",
+      "ok": true,
+      "detail": "[]"
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/overview",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 36.5,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "11061",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "80f2e963002e919e749848957add8a4c2aa4e12cd09e81b81a8b92bdb70fe715",
+      "response_bytes": 11061,
+      "response_json": {
+        "generated_at": "2026-11-03T13:38:23.785918+00:00",
+        "data_root": "/home/user/workspaces/7de05e41da33/data/historical",
+        "instruments": [
+          {
+            "symbol": "AUDUSD",
+            "market": "forex",
+            "asset_class": "forex",
+            "pip_size": 0.0001,
+            "tick_size": 1e-05,
+            "research_enabled": true,
+            "display_name": "Forex"
+          },
+          {
+            "symbol": "EURUSD",
+            "market": "forex",
+            "asset_class": "forex",
+            "pip_size": 0.0001,
+            "tick_size": 1e-05,
+            "research_enabled": true,
+            "display_name": "Forex"
+          },
+          {
+            "symbol": "GBPUSD",
+            "market": "forex",
+            "asset_class": "forex",
+            "pip_size": 0.0001,
+            "tick_size": 1e-05,
+            "research_enabled": true,
+            "display_name": "Forex"
+          },
+          {
+            "symbol": "NZDUSD",
+            "market": "forex",
+            "asset_class": "forex",
+            "pip_size": 0.0001,
+            "tick_size": 1e-05,
+            "research_enabled": true,
+            "display_name": "Forex"
+          },
+          {
+            "symbol": "USDCAD",
+            "market": "forex",
+            "asset_class": "forex",
+            "pip_size": 0.0001,
+            "tick_size": 1e-05,
+            "research_enabled": true,
+            "display_name": "Forex"
+          },
+          {
+            "symbol": "USDCHF",
+            "market": "forex",
+            "asset_class": "forex",
+            "pip_size": 0.0001,
+            "tick_size": 1e-05,
+            "research_enabled": true,
+            "display_name": "Forex"
+          },
+          {
+            "symbol": "USDJPY",
+            "market": "forex",
+            "asset_class": "forex",
+            "pip_size": 0.01,
+            "tick_size": 0.001,
+            "research_enabled": true,
+            "display_name": "Forex"
+          },
+          {
+            "symbol": "XAUUSD",
+            "market": "forex",
+            "asset_class": "forex",
+            "pip_size": 0.1,
+            "tick_size": 0.01,
+            "research_enabled": true,
+            "display_name": "Forex"
+          }
+        ],
+        "datasets": [
+          {
+            "id": "AUDUSD/M1/2026",
+            "symbol": "AUDUSD",
+            "timeframe": "M1",
+            "year": 2026,
+            "provider": "twelve_data",
+            "path": "data/historical/AUDUSD/M1/2026.csv",
+            "bar_count": 93600,
+            "size_bytes": 5008654,
+            "status": "ok",
+            "warnings": [],
+            "coverage": {
+              "start": "2026-04-01",
+              "end": "2026-06-30",
+              "requested_start": "2026-04-01",
+              "requested_end": "2026-06-30",
+              "actual_start": "2026-04-01T00:00:00",
+              "actual_end": "2026-06-30T23:59:00",
+              "retrieved_at": "2026-10-30T06:56:11.260438+00:00"
+            },
+            "quality": {
+              "duplicate_count": 0,
+              "invalid_bar_count": 0,
+              "timestamp_gap_count": 13,
+              "unexpected_gap_count": 0,
+              "notes": [
+                "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+                "Gap count is raw timestamp spacing, not session-aware missing bars."
+              ]
+            },
+            "first_timestamp": "2026-04-01T00:00:00",
+            "last_timestamp": "2026-06-30T23:59:00",
+            "derived": false,
+            "available_timeframes": [
+              "M1",
+              "M5",
+              "M15",
+              "H1",
+              "H4"
+            ]
+          },
+          {
+            "id": "EURUSD/M1/2026",
+            "symbol": "EURUSD",
+            "timeframe": "M1",
+            "year": 2026,
+            "provider": "twelve_data",
+            "path": "data/historical/EURUSD/M1/2026.csv",
+            "bar_count": 184963,
+            "size_bytes": 9902091,
+            "status": "warning",
+            "warnings": [
+              "10 unexpected timestamp gaps (beyond FX closures)."
+            ],
+            "coverage": {
+              "start": "2026-01-01",
+              "end": "2026-06-30",
+              "requested_start": "2026-01-01",
+              "requested_end": "2026-06-30",
+              "actual_start": "2026-01-01T13:00:00",
+              "actual_end": "2026-06-30T23:59:00",
+              "retrieved_at": "2026-10-29T21:33:25.344166+00:00"
+            },
+            "quality": {
+              "duplicate_count": 0,
+              "invalid_bar_count": 0,
+              "timestamp_gap_count": 35,
+              "unexpected_gap_count": 10,
+              "notes": [
+                "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+                "Gap count is raw timestamp spacing, not session-aware missing bars."
+              ]
+            },
+            "first_timestamp": "2026-01-01T13:00:00",
+            "last_timestamp": "2026-06-30T23:59:00",
+            "derived": false,
+            "available_timeframes": [
+              "M1",
+              "M5",
+              "M15",
+              "H1",
+              "H4"
+            ]
+          },
+          {
+            "id": "GBPUSD/M1/2026",
+            "symbol": "GBPUSD",
+            "timeframe": "M1",
+            "year": 2026,
+            "provider": "twelve_data",
+            "path": "data/historical/GBPUSD/M1/2026.csv",
+            "bar_count": 93600,
+            "size_bytes": 5012055,
+            "status": "ok",
+            "warnings": [],
+            "coverage": {
+              "start": "2026-04-01",
+              "end": "2026-06-30",
+              "requested_start": "2026-04-01",
+              "requested_end": "2026-06-30",
+              "actual_start": "2026-04-01T00:00:00",
+              "actual_end": "2026-06-30T23:59:00",
+              "retrieved_at": "2026-10-30T06:49:26.350860+00:00"
+            },
+            "quality": {
+              "duplicate_count": 0,
+              "invalid_bar_count": 0,
+              "timestamp_gap_count": 13,
+              "unexpected_gap_count": 0,
+              "notes": [
+                "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+                "Gap count is raw timestamp spacing, not session-aware missing bars."
+              ]
+            },
+            "first_timestamp": "2026-04-01T00:00:00",
+            "last_timestamp": "2026-06-30T23:59:00",
+            "derived": false,
+            "available_timeframes": [
+              "M1",
+              "M5",
+              "M15",
+              "H1",
+              "H4"
+            ]
+          },
+          {
+            "id": "USDCAD/M1/2026",
+            "symbol": "USDCAD",
+            "timeframe": "M1",
+            "year": 2026,
+            "provider": "twelve_data",
+            "path": "data/historical/USDCAD/M1/2026.csv",
+            "bar_count": 93600,
+            "size_bytes": 5013265,
+            "status": "ok",
+            "warnings": [],
+            "coverage": {
+              "start": "2026-04-01",
+              "end": "2026-06-30",
+              "requested_start": "2026-04-01",
+              "requested_end": "2026-06-30",
+              "actual_start": "2026-04-01T00:00:00",
+              "actual_end": "2026-06-30T23:59:00",
+              "retrieved_at": "2026-10-30T06:59:33.746146+00:00"
+            },
+            "quality": {
+              "duplicate_count": 0,
+              "invalid_bar_count": 0,
+              "timestamp_gap_count": 13,
+              "unexpected_gap_count": 0,
+              "notes": [
+                "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+                "Gap count is raw timestamp spacing, not session-aware missing bars."
+              ]
+            },
+            "first_timestamp": "2026-04-01T00:00:00",
+            "last_timestamp": "2026-06-30T23:59:00",
+            "derived": false,
+            "available_timeframes": [
+              "M1",
+              "M5",
+              "M15",
+              "H1",
+              "H4"
+            ]
+          },
+          {
+            "id": "USDJPY/M1/2026",
+            "symbol": "USDJPY",
+            "timeframe": "M1",
+            "year": 2026,
+            "provider": "twelve_data",
+            "path": "data/historical/USDJPY/M1/2026.csv",
+            "bar_count": 93600,
+            "size_bytes": 5761240,
+            "status": "ok",
+            "warnings": [],
+            "coverage": {
+              "start": "2026-04-01",
+              "end": "2026-06-30",
+              "requested_start": "2026-04-01",
+              "requested_end": "2026-06-30",
+              "actual_start": "2026-04-01T00:00:00",
+              "actual_end": "2026-06-30T23:59:00",
+              "retrieved_at": "2026-10-30T06:52:48.669450+00:00"
+            },
+            "quality": {
+              "duplicate_count": 0,
+              "invalid_bar_count": 0,
+              "timestamp_gap_count": 13,
+              "unexpected_gap_count": 0,
+              "notes": [
+                "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+                "Gap count is raw timestamp spacing, not session-aware missing bars."
+              ]
+            },
+            "first_timestamp": "2026-04-01T00:00:00",
+            "last_timestamp": "2026-06-30T23:59:00",
+            "derived": false,
+            "available_timeframes": [
+              "M1",
+              "M5",
+              "M15",
+              "H1",
+              "H4"
+            ]
+          }
+        ],
+        "strategies": [
+          {
+            "id": "CORE_ZONE_BREAKOUT",
+            "name": "Existing Zone Breakout",
+            "description": "Existing stateful support/resistance interaction strategy.",
+            "trade_simulation": false,
+            "requires_zones": true,
+            "parameters": [],
+            "note": "Signal study only. The default execution layer has no breakout setup factory, so this strategy cannot be trade-simulated yet."
+          },
+          {
+            "id": "S002",
+            "name": "BreakoutRetest",
+            "description": "Zone breakout followed by a causal boundary retest within max_wait bars.",
+            "trade_simulation": true,
+            "requires_zones": true,
+            "parameters": [
+              {
+                "name": "tolerance",
+                "label": "Retest tolerance",
+                "type": "number",
+                "default": 0.0005,
+                "min": 1e-05,
+                "max": 0.05,
+                "step": 0.0001,
+                "help": "Price tolerance around the broken zone boundary."
+              },
+              {
+                "name": "max_wait",
+                "label": "Max wait (bars)",
+                "type": "integer",
+                "default": 5,
+                "min": 1,
+                "max": 200,
+                "step": 1,
+                "help": "Bars after breakout to accept a retest."
+              }
+            ],
+            "note": "Zone breakout → retest. Uses static manual zones."
+          },
+          {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps.",
+            "trade_simulation": true,
+            "requires_zones": false,
+            "parameters": [
+              {
+                "name": "lookback",
+                "label": "Swing lookback",
+                "type": "integer",
+                "default": 10,
+                "min": 2,
+                "max": 200,
+                "step": 1,
+                "help": "Bars used to define the prior swing high/low."
+              },
+              {
+                "name": "min_wick_ratio",
+                "label": "Minimum wick ratio",
+                "type": "number",
+                "default": 0.6,
+                "min": 0.0,
+                "max": 1.0,
+                "step": 0.01,
+                "help": "Wick-to-range ratio required for a sweep."
+              },
+              {
+                "name": "tolerance",
+                "label": "Sweep tolerance",
+                "type": "number",
+                "default": 0.0,
+                "min": 0.0,
+                "max": 0.05,
+                "step": 0.0001,
+                "help": "Extra distance beyond the swing required to sweep."
+              }
+            ],
+            "note": "Liquidity sweep. Trade simulation is wired to the sweep factory."
+          }
+        ],
+        "runs": [
+          {
+            "id": "20261103T133657Z_5249e0f7",
+            "created_at": "2026-11-03T13:36:57.385798+00:00",
+            "dataset_id": "EURUSD/M1/2026",
+            "timeframe": "M1",
+            "range": {
+              "start": "2026-06-01",
+              "end": "2026-06-30",
+              "bar_count": 31680,
+              "gap_count": 4
+            },
+            "strategy": {
+              "id": "S008",
+              "name": "Liquidity Sweep V1",
+              "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+            },
+            "metrics": {
+              "total_signals": 1387,
+              "total_trades": 1310,
+              "wins": 155,
+              "losses": 1155,
+              "win_rate": 11.83206106870229,
+              "profit_factor": 0.2618383521235236,
+              "expectancy": -0.6517210786489162,
+              "max_drawdown_r": 853.7546130300801,
+              "largest_win": 2.0,
+              "largest_loss": -4.468750000001865,
+              "ambiguous_exits": 22,
+              "avg_holding_duration": 2.9625954198473283
+            },
+            "bar_count": 31680,
+            "simulated": true,
+            "warning_count": 4
+          },
+          {
+            "id": "20261103T133655Z_0d7426ea",
+            "created_at": "2026-11-03T13:36:55.384816+00:00",
+            "dataset_id": "EURUSD/M1/2026",
+            "timeframe": "M1",
+            "range": {
+              "start": "2026-06-01",
+              "end": "2026-06-30",
+              "bar_count": 31680,
+              "gap_count": 4
+            },
+            "strategy": {
+              "id": "S008",
+              "name": "Liquidity Sweep V1",
+              "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+            },
+            "metrics": {
+              "total_signals": 1387,
+              "total_trades": 1310,
+              "wins": 155,
+              "losses": 1155,
+              "win_rate": 11.83206106870229,
+              "profit_factor": 0.2618383521235236,
+              "expectancy": -0.6517210786489162,
+              "max_drawdown_r": 853.7546130300801,
+              "largest_win": 2.0,
+              "largest_loss": -4.468750000001865,
+              "ambiguous_exits": 22,
+              "avg_holding_duration": 2.9625954198473283
+            },
+            "bar_count": 31680,
+            "simulated": true,
+            "warning_count": 4
+          },
+          {
+            "id": "20261103T133522Z_0dacd4dc",
+            "created_at": "2026-11-03T13:35:22.436688+00:00",
+            "dataset_id": "EURUSD/M1/2026",
+            "timeframe": "M1",
+            "range": {
+              "start": "2026-06-01",
+              "end": "2026-06-30",
+              "bar_count": 31680,
+              "gap_count": 4
+            },
+            "strategy": {
+              "id": "S008",
+              "name": "Liquidity Sweep V1",
+              "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+            },
+            "metrics": {
+              "total_signals": 1387,
+              "total_trades": 1310,
+              "wins": 155,
+              "losses": 1155,
+              "win_rate": 11.83206106870229,
+              "profit_factor": 0.2618383521235236,
+              "expectancy": -0.6517210786489162,
+              "max_drawdown_r": 853.7546130300801,
+              "largest_win": 2.0,
+              "largest_loss": -4.468750000001865,
+              "ambiguous_exits": 22,
+              "avg_holding_duration": 2.9625954198473283
+            },
+            "bar_count": 31680,
+            "simulated": true,
+            "warning_count": 4
+          },
+          {
+            "id": "20261103T133520Z_8fb5df13",
+            "created_at": "2026-11-03T13:35:20.475198+00:00",
+            "dataset_id": "EURUSD/M1/2026",
+            "timeframe": "M1",
+            "range": {
+              "start": "2026-06-01",
+              "end": "2026-06-30",
+              "bar_count": 31680,
+              "gap_count": 4
+            },
+            "strategy": {
+              "id": "S008",
+              "name": "Liquidity Sweep V1",
+              "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+            },
+            "metrics": {
+              "total_signals": 1387,
+              "total_trades": 1310,
+              "wins": 155,
+              "losses": 1155,
+              "win_rate": 11.83206106870229,
+              "profit_factor": 0.2618383521235236,
+              "expectancy": -0.6517210786489162,
+              "max_drawdown_r": 853.7546130300801,
+              "largest_win": 2.0,
+              "largest_loss": -4.468750000001865,
+              "ambiguous_exits": 22,
+              "avg_holding_duration": 2.9625954198473283
+            },
+            "bar_count": 31680,
+            "simulated": true,
+            "warning_count": 4
+          },
+          {
+            "id": "20261030T105941Z_1684076e",
+            "created_at": "2026-10-30T10:59:41.931426+00:00",
+            "dataset_id": "AUDUSD/M1/2026",
+            "timeframe": "M1",
+            "range": {
+              "start": "2026-05-30",
+              "end": "2026-06-30",
+              "bar_count": 31800,
+              "gap_count": 4
+            },
+            "strategy": {
+              "id": "S008",
+              "name": "Liquidity Sweep V1",
+              "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+            },
+            "metrics": {
+              "total_signals": 944,
+              "total_trades": 926,
+              "wins": 81,
+              "losses": 845,
+              "win_rate": 8.74730021598272,
+              "profit_factor": 0.19171597633136095,
+              "expectancy": -0.7375809935205183,
+              "max_drawdown_r": 683.0,
+              "largest_win": 2.0,
+              "largest_loss": -1.0,
+              "ambiguous_exits": 44,
+              "avg_holding_duration": 1.3714902807775378
+            },
+            "bar_count": 31800,
+            "simulated": true,
+            "warning_count": 4
+          }
+        ],
+        "warnings": [
+          "EURUSD/M1/2026: 10 unexpected timestamp gaps (beyond FX closures)."
+        ],
+        "capabilities": {
+          "twelve_data": true,
+          "dukascopy": true,
+          "trade_simulation": [
+            "S002",
+            "S008"
+          ],
+          "download_max_days": 31
+        }
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:23.788169+00:00"
+}

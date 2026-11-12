@@ -1,0 +1,9 @@
+{
+  "test_id": "STRAT-019",
+  "label": "missing_dataset",
+  "scenario": "Missing dataset",
+  "data_config": "NZDUSD/M1/2026 (not stored)",
+  "expected": "DatasetNotFoundError (\"Dataset not found\").",
+  "actual": "DatasetNotFoundError: Dataset not found: NZDUSD/M1/2026",
+  "status": "PASS"
+}

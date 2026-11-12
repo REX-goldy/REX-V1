@@ -1,0 +1,9 @@
+{
+  "test_id": "STRAT-025",
+  "label": "short_valid_lookback",
+  "scenario": "Short but sufficient range",
+  "data_config": "fixture GBPUSD/M1/2026 five bars, lookback=2",
+  "expected": "Valid run with zero signals (five flat bars, no sweep).",
+  "actual": "NO ERROR; result={'bar_count': 5, 'metrics': {'total_signals': 0, 'total_trades': 0, 'wins': 0, 'losses': 0, 'win_rate': 0.0, 'profit_factor': None, 'expectancy': 0.0, 'max_drawdown_r': 0.0, 'largest_win': 0.0, 'largest_loss': 0.0, 'ambiguous_exits': 0, 'avg_holding_duration': 0.0}}",
+  "status": "PASS"
+}

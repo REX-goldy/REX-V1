@@ -1,0 +1,168 @@
+{
+  "test_id": "API-019",
+  "endpoint": "/api/bars|backtests",
+  "scenario": "Invalid dates",
+  "test_data": "start>end; malformed date",
+  "expected": "400 for start>end, 422 for malformed date",
+  "actual": "bars>400 malformed=422 backtest>400 bm=422",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "bars start>end 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "bars start>end detail",
+      "ok": true,
+      "detail": "{'detail': 'start_date cannot be after end_date'}"
+    },
+    {
+      "check": "bars malformed date 422",
+      "ok": true,
+      "detail": "422"
+    },
+    {
+      "check": "backtest start>end 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "backtest start>end detail",
+      "ok": true,
+      "detail": "{'detail': 'Start date is after the end date.'}"
+    },
+    {
+      "check": "backtest malformed date 422",
+      "ok": true,
+      "detail": "422"
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/bars",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "start": "2026-03-10",
+        "end": "2026-03-01"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.0,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "48",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "a81c9ab8092b36500ed5b829860c262ab664bc47769e059da256e8bd658d6220",
+      "response_bytes": 48,
+      "response_json": {
+        "detail": "start_date cannot be after end_date"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/bars",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "start": "not-a-date"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 1.6,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "215",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "e2cee1951f1e8fb70c4c94c8ec4193a1d42dd3296ed7a84336c808ccd64e7db2",
+      "response_bytes": 215,
+      "response_json": {
+        "detail": [
+          {
+            "type": "date_from_datetime_parsing",
+            "loc": [
+              "query",
+              "start"
+            ],
+            "msg": "Input should be a valid date or datetime, invalid character in year",
+            "input": "not-a-date",
+            "ctx": {
+              "error": "invalid character in year"
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "start_date": "2026-03-10",
+        "end_date": "2026-03-01"
+      },
+      "request_headers": {},
+      "duration_ms": 5.6,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "46",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "539ce1e5d3139be43cc8ecc47432b20ba35a676a9982aee0bd48219865a28c42",
+      "response_bytes": 46,
+      "response_json": {
+        "detail": "Start date is after the end date."
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "start_date": "not-a-date",
+        "end_date": "2026-03-01"
+      },
+      "request_headers": {},
+      "duration_ms": 3.6,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "219",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "d92e7c4f573fcb465319d06efa7a95528ff18c47e2f8b6cdcfec10d3e7bda78e",
+      "response_bytes": 219,
+      "response_json": {
+        "detail": [
+          {
+            "type": "date_from_datetime_parsing",
+            "loc": [
+              "body",
+              "start_date"
+            ],
+            "msg": "Input should be a valid date or datetime, invalid character in year",
+            "input": "not-a-date",
+            "ctx": {
+              "error": "invalid character in year"
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.479040+00:00"
+}

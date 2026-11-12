@@ -1,0 +1,194 @@
+{
+  "test_id": "API-047",
+  "endpoint": "multiple",
+  "scenario": "Sensitive data leakage",
+  "test_data": "provider views + overview + backtests",
+  "expected": "no api_key fields; hints <=4 chars; dummy secrets never echoed",
+  "actual": "provider_views=13; no api_key/hint<=4/dummy values absent; scanned overview + 2 backtests",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "provider views captured",
+      "ok": true,
+      "detail": "13"
+    },
+    {
+      "check": "no api_key in provider view",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "hint <= 4 visible chars",
+      "ok": true,
+      "detail": "0001"
+    },
+    {
+      "check": "no api_key in provider view",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "hint <= 4 visible chars",
+      "ok": true,
+      "detail": "••••"
+    },
+    {
+      "check": "no api_key in provider view",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "hint <= 4 visible chars",
+      "ok": true,
+      "detail": "9999"
+    },
+    {
+      "check": "no api_key in provider view",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "hint <= 4 visible chars",
+      "ok": true,
+      "detail": "9999"
+    },
+    {
+      "check": "no api_key in provider view",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "hint <= 4 visible chars",
+      "ok": true,
+      "detail": "0001"
+    },
+    {
+      "check": "no api_key in provider view",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "hint <= 4 visible chars",
+      "ok": true,
+      "detail": "0001"
+    },
+    {
+      "check": "no api_key in provider view",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "hint <= 4 visible chars",
+      "ok": true,
+      "detail": "bbbb"
+    },
+    {
+      "check": "no api_key in provider view",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "hint <= 4 visible chars",
+      "ok": true,
+      "detail": "0001"
+    },
+    {
+      "check": "no api_key in provider view",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "hint <= 4 visible chars",
+      "ok": true,
+      "detail": "0001"
+    },
+    {
+      "check": "no api_key in provider view",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "hint <= 4 visible chars",
+      "ok": true,
+      "detail": "2222"
+    },
+    {
+      "check": "no api_key in provider view",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "hint <= 4 visible chars",
+      "ok": true,
+      "detail": "2222"
+    },
+    {
+      "check": "no api_key in provider view",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "hint <= 4 visible chars",
+      "ok": true,
+      "detail": "0001"
+    },
+    {
+      "check": "no api_key in provider view",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "hint <= 4 visible chars",
+      "ok": true,
+      "detail": "0001"
+    },
+    {
+      "check": "env dummy value absent",
+      "ok": true,
+      "detail": "dummy env value not echoed"
+    },
+    {
+      "check": "stored dummy value absent",
+      "ok": true,
+      "detail": "dummy stored value not echoed"
+    },
+    {
+      "check": "no secret field in provider views",
+      "ok": true,
+      "detail": "[{\"id\": \"twelve_data\", \"name\": \"Twelve Data\", \"description\": \"Twelve Data historical M1 candles\", \"env_var\": \"TWELVE_DAT"
+    },
+    {
+      "check": "no authorization field in provider views",
+      "ok": true,
+      "detail": "[{\"id\": \"twelve_data\", \"name\": \"Twelve Data\", \"description\": \"Twelve Data historical M1 candles\", \"env_var\": \"TWELVE_DAT"
+    },
+    {
+      "check": "no password field in provider views",
+      "ok": true,
+      "detail": "[{\"id\": \"twelve_data\", \"name\": \"Twelve Data\", \"description\": \"Twelve Data historical M1 candles\", \"env_var\": \"TWELVE_DAT"
+    },
+    {
+      "check": "no token field in provider views",
+      "ok": true,
+      "detail": "[{\"id\": \"twelve_data\", \"name\": \"Twelve Data\", \"description\": \"Twelve Data historical M1 candles\", \"env_var\": \"TWELVE_DAT"
+    },
+    {
+      "check": "eurusd no api_key",
+      "ok": true,
+      "detail": "scan"
+    },
+    {
+      "check": "gbpusd no api_key",
+      "ok": true,
+      "detail": "scan"
+    },
+    {
+      "check": "overview no api_key",
+      "ok": true,
+      "detail": "scan"
+    }
+  ],
+  "calls": [],
+  "recorded_at_utc": "2026-11-03T13:38:25.166097+00:00"
+}

@@ -1,0 +1,160 @@
+{
+  "id": "20261103T133733Z_98212a45",
+  "created_at": "2026-11-03T13:37:33.583860+00:00",
+  "dataset_id": "EURUSD/M1/2026",
+  "strategy": {
+    "id": "S008",
+    "name": "Liquidity Sweep V1",
+    "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+  },
+  "parameters": {
+    "lookback": 10,
+    "min_wick_ratio": 0.6,
+    "tolerance": 0.0
+  },
+  "request": {
+    "start": "2026-05-04",
+    "end": "2026-05-08",
+    "timeframe": "M5",
+    "r_multiple": 2.0,
+    "equity": 100000.0,
+    "risk_fraction": 0.01
+  },
+  "range": {
+    "start": "2026-05-04",
+    "end": "2026-05-08",
+    "bar_count": 1416,
+    "gap_count": 0
+  },
+  "bar_count": 1416,
+  "simulated": true,
+  "metrics": {
+    "total_signals": 95,
+    "total_trades": 85,
+    "wins": 34,
+    "losses": 51,
+    "win_rate": 40.0,
+    "profit_factor": 1.3505725440670189,
+    "expectancy": 0.20631287954318467,
+    "max_drawdown_r": 6.0,
+    "largest_win": 2.0,
+    "largest_loss": -1.0,
+    "ambiguous_exits": 5,
+    "avg_holding_duration": 3.835294117647059
+  },
+  "reconciliation": {
+    "generated": 95,
+    "accepted": 87,
+    "ignored": 8,
+    "rejected": 0,
+    "difference": 0
+  },
+  "signals": {
+    "total": 95,
+    "by_type": {
+      "bearish_sweep": 44,
+      "bullish_sweep": 51
+    }
+  },
+  "assumptions": {
+    "costs_applied": false,
+    "entry_model": "next candle open",
+    "timestamps": "naive UTC",
+    "zone_source": "none",
+    "result_units": "R-multiples",
+    "timeframe": "M5",
+    "derived_timeframe": true
+  },
+  "warnings": [
+    "Transaction costs (spread, commission, slippage) are not applied.",
+    "Performance is in R-multiples; no currency equity or compounding.",
+    "5 ambiguous intrabar exits were conservatively scored at -1R.",
+    "Small sample: 85 closed trades. Not statistically reliable.",
+    "M5 is derived from stored M1 with the existing resampler; incomplete buckets are skipped and no derived data is persisted."
+  ],
+  "warning_count": 5,
+  "trades_count": 85,
+  "trades_by_direction": {
+    "SHORT": 39,
+    "LONG": 46
+  },
+  "trades_by_close_reason": {
+    "SL": 45,
+    "AMBIGUITY": 5,
+    "TP": 33,
+    "TIMEOUT": 1,
+    "FORCE_CLOSE_END_OF_DATA": 1
+  },
+  "first_long_trade": {
+    "symbol": "EURUSD",
+    "direction": "LONG",
+    "entry_time": "2026-05-04T10:25:00",
+    "exit_time": "2026-05-04T13:35:00",
+    "entry_price": 1.16975,
+    "exit_price": 1.17145,
+    "sl_price": 1.1689,
+    "tp_price": 1.17145,
+    "pnl_r": 2.0,
+    "close_reason": "TP",
+    "holding_duration_candles": 38,
+    "strategy_id": "S008"
+  },
+  "first_short_trade": {
+    "symbol": "EURUSD",
+    "direction": "SHORT",
+    "entry_time": "2026-05-04T05:55:00",
+    "exit_time": "2026-05-04T05:55:00",
+    "entry_price": 1.17309,
+    "exit_price": 1.17314,
+    "sl_price": 1.17314,
+    "tp_price": 1.1729899999999998,
+    "pnl_r": -1.0,
+    "close_reason": "SL",
+    "holding_duration_candles": 1,
+    "strategy_id": "S008"
+  },
+  "trade_sample": [
+    {
+      "symbol": "EURUSD",
+      "direction": "SHORT",
+      "entry_time": "2026-05-04T05:55:00",
+      "exit_time": "2026-05-04T05:55:00",
+      "entry_price": 1.17309,
+      "exit_price": 1.17314,
+      "sl_price": 1.17314,
+      "tp_price": 1.1729899999999998,
+      "pnl_r": -1.0,
+      "close_reason": "SL",
+      "holding_duration_candles": 1,
+      "strategy_id": "S008"
+    },
+    {
+      "symbol": "EURUSD",
+      "direction": "SHORT",
+      "entry_time": "2026-05-04T06:10:00",
+      "exit_time": "2026-05-04T06:10:00",
+      "entry_price": 1.17332,
+      "exit_price": 1.17335,
+      "sl_price": 1.17335,
+      "tp_price": 1.17326,
+      "pnl_r": -1.0,
+      "close_reason": "AMBIGUITY",
+      "holding_duration_candles": 1,
+      "strategy_id": "S008"
+    },
+    {
+      "symbol": "EURUSD",
+      "direction": "SHORT",
+      "entry_time": "2026-05-04T08:40:00",
+      "exit_time": "2026-05-04T08:45:00",
+      "entry_price": 1.17194,
+      "exit_price": 1.17221,
+      "sl_price": 1.17221,
+      "tp_price": 1.1714,
+      "pnl_r": -1.0,
+      "close_reason": "SL",
+      "holding_duration_candles": 1,
+      "strategy_id": "S008"
+    }
+  ]
+}

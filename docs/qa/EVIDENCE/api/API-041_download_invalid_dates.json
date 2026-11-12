@@ -1,0 +1,123 @@
+{
+  "test_id": "API-041",
+  "endpoint": "/api/downloads",
+  "scenario": "Invalid download dates/range",
+  "test_data": "start>end; >31 days; future end",
+  "expected": "400 with specific detail each",
+  "actual": "start>end=400:start_date cannot be after end_date; range>31d=400:UI downloads are limited to 31 days; future=400:end_date cannot be in the future",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "start>end 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "start>end detail",
+      "ok": true,
+      "detail": "{'detail': 'start_date cannot be after end_date'}"
+    },
+    {
+      "check": "range>31d 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "range>31d detail",
+      "ok": true,
+      "detail": "{'detail': 'UI downloads are limited to 31 days'}"
+    },
+    {
+      "check": "future 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "future detail",
+      "ok": true,
+      "detail": "{'detail': 'end_date cannot be in the future'}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16901/api/downloads",
+      "params": null,
+      "request_body": {
+        "provider": "dukascopy",
+        "symbol": "NZDUSD",
+        "timeframe": "M1",
+        "start_date": "2025-01-05",
+        "end_date": "2025-01-01"
+      },
+      "request_headers": {},
+      "duration_ms": 3.3,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "48",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "a81c9ab8092b36500ed5b829860c262ab664bc47769e059da256e8bd658d6220",
+      "response_bytes": 48,
+      "response_json": {
+        "detail": "start_date cannot be after end_date"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16901/api/downloads",
+      "params": null,
+      "request_body": {
+        "provider": "dukascopy",
+        "symbol": "NZDUSD",
+        "timeframe": "M1",
+        "start_date": "2025-01-01",
+        "end_date": "2025-03-01"
+      },
+      "request_headers": {},
+      "duration_ms": 2.1,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "48",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "4b73b288f5bf5932f399cacfb0fd43dd75bd1dbe83eb09ed1adf6ca80ec1b09f",
+      "response_bytes": 48,
+      "response_json": {
+        "detail": "UI downloads are limited to 31 days"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16901/api/downloads",
+      "params": null,
+      "request_body": {
+        "provider": "dukascopy",
+        "symbol": "NZDUSD",
+        "timeframe": "M1",
+        "start_date": "2026-12-01",
+        "end_date": "2026-12-31"
+      },
+      "request_headers": {},
+      "duration_ms": 2.5,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "45",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "d394271b4f1ae5bba7fc07419652a39fb1eff5bd5b5289f46fe29512b4ced6c5",
+      "response_bytes": 45,
+      "response_json": {
+        "detail": "end_date cannot be in the future"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.114296+00:00"
+}

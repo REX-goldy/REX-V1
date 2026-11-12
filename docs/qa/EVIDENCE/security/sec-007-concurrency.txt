@@ -1,0 +1,6 @@
+# SEC-007 Concurrent writes/reads stay serialized and leave a valid store
+component: server/provider_keys.py
+test_data: 40 writes across 8 threads
+expected: All operations complete, valid JSON, no temp leftovers
+actual: writes=40 valid_json=True temp_leftovers=[]
+status: PASS

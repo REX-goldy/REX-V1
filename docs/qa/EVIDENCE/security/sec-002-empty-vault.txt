@@ -1,0 +1,6 @@
+# SEC-002 Empty isolated vault lists registered providers with masked state
+component: server/provider_keys.py
+test_data: REX_KEYS_FILE=<temp>
+expected: Two providers, configured=false, source=none, no file created
+actual: ids=['twelve_data', 'dukascopy'] configured=[False, False] file_exists=False
+status: PASS

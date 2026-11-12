@@ -1,0 +1,6 @@
+# SEC-004 Failed atomic replace preserves previous store and cleans temp file
+component: server/provider_keys.py
+test_data: Patch os.replace -> OSError, previous dummy key intact
+expected: ProviderKeyStoreError, original JSON unchanged, no *.tmp
+actual: raised ProviderKeyStoreError; unchanged=True; temp_leftovers=[]
+status: PASS

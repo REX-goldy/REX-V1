@@ -1,0 +1,8 @@
+{
+  "historical_window": 20,
+  "recent_window": 5,
+  "independent_ratio": 1.9789473684213674,
+  "view_ratio": 1.9789473684213674,
+  "expected_state": "high",
+  "view_state": "high"
+}

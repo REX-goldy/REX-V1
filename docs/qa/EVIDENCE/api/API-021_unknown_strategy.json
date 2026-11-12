@@ -1,0 +1,50 @@
+{
+  "test_id": "API-021",
+  "endpoint": "/api/backtests",
+  "scenario": "Unknown strategy",
+  "test_data": "strategy_id=NOPE",
+  "expected": "400 with not-exposed detail",
+  "actual": "status=400 detail={\"detail\":\"Strategy 'NOPE' is not exposed in the UI\"}",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "detail mentions strategy",
+      "ok": true,
+      "detail": "{'detail': \"Strategy 'NOPE' is not exposed in the UI\"}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "NOPE",
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06"
+      },
+      "request_headers": {},
+      "duration_ms": 26.2,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "53",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "83f4697a0f2fd90cdb8664bab7696f9cbd7a0eb2c294c5283e164c3cc8d55e7a",
+      "response_bytes": 53,
+      "response_json": {
+        "detail": "Strategy 'NOPE' is not exposed in the UI"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.567359+00:00"
+}

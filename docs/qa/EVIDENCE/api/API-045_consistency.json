@@ -1,0 +1,129 @@
+{
+  "test_id": "API-045",
+  "endpoint": "/api/backtests + /api/bars",
+  "scenario": "Timestamp/order/count consistency",
+  "test_data": "EURUSD/GBPUSD/S002 runs; 100 bars",
+  "expected": "ascending orders; signal/trade/reconciliation counts consistent; finite",
+  "actual": "backtests=['eurusd', 'gbpusd']; bars_n=100; checks per run = signals/reconciliation/trade order/equity curve/distribution",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "bars ascending",
+      "ok": true,
+      "detail": "[1772490000, 1772490060, 1772490120, 1772490180, 1772490240]"
+    },
+    {
+      "check": "eurusd signals total matches metrics",
+      "ok": true,
+      "detail": "(51, 51)"
+    },
+    {
+      "check": "eurusd signal by_type sums",
+      "ok": true,
+      "detail": "({'bearish_sweep': 51}, 51)"
+    },
+    {
+      "check": "eurusd reconciliation generated == signals",
+      "ok": true,
+      "detail": "({'generated': 51, 'accepted': 51, 'ignored': 0, 'rejected': 0, 'difference': 0}, 51)"
+    },
+    {
+      "check": "eurusd reconciliation diff 0",
+      "ok": true,
+      "detail": "{'generated': 51, 'accepted': 51, 'ignored': 0, 'rejected': 0, 'difference': 0}"
+    },
+    {
+      "check": "eurusd trades sorted by exit_time",
+      "ok": true,
+      "detail": "['2026-03-02T00:49:00', '2026-03-02T03:49:00', '2026-03-02T04:36:00']"
+    },
+    {
+      "check": "eurusd entry<=exit",
+      "ok": true,
+      "detail": "entry/exit order"
+    },
+    {
+      "check": "eurusd equity times unique+sorted",
+      "ok": true,
+      "detail": "(51, 51)"
+    },
+    {
+      "check": "eurusd equity/drawdown lengths equal",
+      "ok": true,
+      "detail": "(51, 51)"
+    },
+    {
+      "check": "eurusd trade distribution sorted",
+      "ok": true,
+      "detail": "['2026-03-02', '2026-03-03', '2026-03-04', '2026-03-05']"
+    },
+    {
+      "check": "eurusd trade distribution sums",
+      "ok": true,
+      "detail": "(51, 51)"
+    },
+    {
+      "check": "eurusd wins+losses<=trades",
+      "ok": true,
+      "detail": "{'total_signals': 51, 'total_trades': 51, 'wins': 18, 'losses': 33, 'win_rate': 35.294117647058826, 'profit_factor': 1.0909090909090908, 'expectancy': 0.058823529411764705, 'max_drawdown_r': 8.0, 'largest_win': 2.0, 'largest_loss': -1.0, 'ambiguous_exits': 3, 'avg_holding_duration': 2.156862745098039}"
+    },
+    {
+      "check": "gbpusd signals total matches metrics",
+      "ok": true,
+      "detail": "(229, 229)"
+    },
+    {
+      "check": "gbpusd signal by_type sums",
+      "ok": true,
+      "detail": "({'bearish_sweep': 125, 'bullish_sweep': 104}, 229)"
+    },
+    {
+      "check": "gbpusd reconciliation generated == signals",
+      "ok": true,
+      "detail": "({'generated': 229, 'accepted': 224, 'ignored': 5, 'rejected': 0, 'difference': 0}, 229)"
+    },
+    {
+      "check": "gbpusd reconciliation diff 0",
+      "ok": true,
+      "detail": "{'generated': 229, 'accepted': 224, 'ignored': 5, 'rejected': 0, 'difference': 0}"
+    },
+    {
+      "check": "gbpusd trades sorted by exit_time",
+      "ok": true,
+      "detail": "['2026-05-01T00:39:00', '2026-05-01T00:56:00', '2026-05-01T01:20:00']"
+    },
+    {
+      "check": "gbpusd entry<=exit",
+      "ok": true,
+      "detail": "entry/exit order"
+    },
+    {
+      "check": "gbpusd equity times unique+sorted",
+      "ok": true,
+      "detail": "(218, 218)"
+    },
+    {
+      "check": "gbpusd equity/drawdown lengths equal",
+      "ok": true,
+      "detail": "(218, 218)"
+    },
+    {
+      "check": "gbpusd trade distribution sorted",
+      "ok": true,
+      "detail": "['2026-05-01', '2026-05-03', '2026-05-04', '2026-05-05']"
+    },
+    {
+      "check": "gbpusd trade distribution sums",
+      "ok": true,
+      "detail": "(218, 218)"
+    },
+    {
+      "check": "gbpusd wins+losses<=trades",
+      "ok": true,
+      "detail": "{'total_signals': 229, 'total_trades': 218, 'wins': 46, 'losses': 172, 'win_rate': 21.100917431192663, 'profit_factor': 0.5099256946894973, 'expectancy': -0.3944028101804123, 'max_drawdown_r': 93.67845038733127, 'largest_win': 2.0, 'largest_loss': -2.600000000005329, 'ambiguous_exits': 6, 'avg_holding_duration': 3.770642201834862}"
+    }
+  ],
+  "calls": [],
+  "recorded_at_utc": "2026-11-03T13:38:25.162498+00:00"
+}

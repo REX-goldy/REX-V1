@@ -1,0 +1,99 @@
+{
+  "test_id": "API-009",
+  "endpoint": "/api/range",
+  "scenario": "Valid range summary",
+  "test_data": "EURUSD 2026-03-02..2026-03-06",
+  "expected": "200; valid true; positive bar_count; total_frame_bars 184963",
+  "actual": "valid=True bars=7078 gaps=1 unexpected=1",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "HTTP 200",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "valid true",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "error empty",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "bar_count positive",
+      "ok": true,
+      "detail": "7078"
+    },
+    {
+      "check": "total_frame_bars 184963",
+      "ok": true,
+      "detail": "184963"
+    },
+    {
+      "check": "first/last available",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "counts are ints",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/range",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "start": "2026-03-02",
+        "end": "2026-03-06"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 27.8,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "641",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "bccc80a2fcdd5b26a1e14b7dd24305204c4afa79aebacd7c9eeec79a52085af2",
+      "response_bytes": 641,
+      "response_json": {
+        "dataset_id": "EURUSD/M1/2026",
+        "timeframe": "M1",
+        "derived": false,
+        "requested_start": "2026-03-02",
+        "requested_end": "2026-03-06",
+        "first_available": "2026-01-01T13:00:00",
+        "last_available": "2026-06-30T23:59:00",
+        "bar_count": 7078,
+        "total_frame_bars": 184963,
+        "gap_count": 1,
+        "unexpected_gap_count": 1,
+        "valid": true,
+        "error": "",
+        "frame_warnings": [
+          "10 unexpected timestamp gaps (beyond FX closures)."
+        ],
+        "quality": {
+          "duplicate_count": 0,
+          "invalid_bar_count": 0,
+          "timestamp_gap_count": 35,
+          "unexpected_gap_count": 10,
+          "notes": [
+            "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+            "Gap count is raw timestamp spacing, not session-aware missing bars."
+          ]
+        }
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.168422+00:00"
+}

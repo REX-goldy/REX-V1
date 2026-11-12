@@ -1,0 +1,23 @@
+{
+  "data_label": "SYNTHETIC TEST FIXTURE \u2014 NOT REAL MARKET DATA",
+  "bullish": {
+    "detected": true,
+    "direction": "bullish",
+    "broken_swing_id": "M15:high:2",
+    "break_index": 6,
+    "break_close": 12.5,
+    "method_id": "swing_bos_v1"
+  },
+  "bearish": {
+    "detected": true,
+    "direction": "bearish",
+    "broken_swing_id": "M15:low:2",
+    "break_close": 8.5
+  },
+  "equality_detected": false,
+  "wick_only_detected": false,
+  "confirmation_same_index_detected": false,
+  "unconfirmed_future_detected": false,
+  "consumption_events": 1,
+  "deterministic": true
+}

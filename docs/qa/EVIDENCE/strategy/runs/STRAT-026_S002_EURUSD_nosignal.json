@@ -1,0 +1,76 @@
+{
+  "id": "20261103T133733Z_34c1b4b6",
+  "created_at": "2026-11-03T13:37:33.778029+00:00",
+  "dataset_id": "EURUSD/M1/2026",
+  "strategy": {
+    "id": "S002",
+    "name": "BreakoutRetest",
+    "description": "Zone breakout followed by a causal boundary retest within max_wait bars."
+  },
+  "parameters": {
+    "tolerance": 0.0005,
+    "max_wait": 5
+  },
+  "request": {
+    "start": "2026-01-01",
+    "end": "2026-01-02",
+    "timeframe": "M1",
+    "r_multiple": 2.0,
+    "equity": 100000.0,
+    "risk_fraction": 0.01
+  },
+  "range": {
+    "start": "2026-01-01",
+    "end": "2026-01-02",
+    "bar_count": 1980,
+    "gap_count": 0
+  },
+  "bar_count": 1980,
+  "simulated": true,
+  "metrics": {
+    "total_signals": 0,
+    "total_trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0.0,
+    "profit_factor": null,
+    "expectancy": 0.0,
+    "max_drawdown_r": 0.0,
+    "largest_win": 0.0,
+    "largest_loss": 0.0,
+    "ambiguous_exits": 0,
+    "avg_holding_duration": 0.0
+  },
+  "reconciliation": {
+    "generated": 0,
+    "accepted": 0,
+    "ignored": 0,
+    "rejected": 0,
+    "difference": 0
+  },
+  "signals": {
+    "total": 0,
+    "by_type": {}
+  },
+  "assumptions": {
+    "costs_applied": false,
+    "entry_model": "next candle open",
+    "timestamps": "naive UTC",
+    "zone_source": "manual/static",
+    "result_units": "R-multiples",
+    "timeframe": "M1",
+    "derived_timeframe": false
+  },
+  "warnings": [
+    "Transaction costs (spread, commission, slippage) are not applied.",
+    "Performance is in R-multiples; no currency equity or compounding.",
+    "Zone levels are static manual annotations without confirmation timestamps."
+  ],
+  "warning_count": 3,
+  "trades_count": 0,
+  "trades_by_direction": {},
+  "trades_by_close_reason": {},
+  "first_long_trade": null,
+  "first_short_trade": null,
+  "trade_sample": []
+}

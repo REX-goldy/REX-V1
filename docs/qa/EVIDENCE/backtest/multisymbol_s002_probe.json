@@ -1,0 +1,34 @@
+{
+  "range": [
+    "2026-05-01",
+    "2026-05-07"
+  ],
+  "individual": {
+    "EURUSD": {
+      "signals": 131,
+      "by_symbol": {
+        "EURUSD": 131
+      },
+      "by_type": {
+        "retest_below": 121,
+        "retest_above": 10
+      }
+    },
+    "GBPUSD": {
+      "signals": 0,
+      "by_symbol": {},
+      "by_type": {}
+    }
+  },
+  "combined_with_EURUSD_book": {
+    "signals": 131,
+    "by_symbol": {
+      "EURUSD": 131
+    },
+    "by_type": {
+      "retest_below": 121,
+      "retest_above": 10
+    }
+  },
+  "sum_individual": 131
+}

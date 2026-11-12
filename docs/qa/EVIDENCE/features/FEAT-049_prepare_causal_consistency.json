@@ -1,0 +1,22 @@
+{
+  "M15": {
+    "direct": 480,
+    "context": 480,
+    "equal": true
+  },
+  "M30": {
+    "direct": 240,
+    "context": 240,
+    "equal": true
+  },
+  "H1": {
+    "direct": 120,
+    "context": 120,
+    "equal": true
+  },
+  "H4": {
+    "direct": 29,
+    "context": 29,
+    "equal": true
+  }
+}

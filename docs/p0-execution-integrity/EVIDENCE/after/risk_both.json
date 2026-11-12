@@ -1,0 +1,14 @@
+{
+  "EURUSD": {
+    "trades": 606,
+    "mismatches": 0,
+    "max_abs_deviation": 0.0,
+    "examples": []
+  },
+  "GBPUSD": {
+    "trades": 468,
+    "mismatches": 0,
+    "max_abs_deviation": 0.0,
+    "examples": []
+  }
+}

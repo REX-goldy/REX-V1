@@ -1,0 +1,47 @@
+{
+  "entry_timeframe": "M1",
+  "entry_trend": "ranging",
+  "expected_entry_trend": "ranging",
+  "structure_score": 35,
+  "expected_structure_score": 35,
+  "by_timeframe": {
+    "M1": {
+      "expected": "ranging",
+      "actual": "ranging",
+      "expected_score": 35,
+      "swing_highs": 681,
+      "swing_lows": 740
+    },
+    "M15": {
+      "expected": "ranging",
+      "actual": "ranging",
+      "expected_score": 35,
+      "swing_highs": 58,
+      "swing_lows": 56
+    },
+    "M30": {
+      "expected": "ranging",
+      "actual": "ranging",
+      "expected_score": 35,
+      "swing_highs": 30,
+      "swing_lows": 32
+    },
+    "H1": {
+      "expected": "ranging",
+      "actual": "ranging",
+      "expected_score": 35,
+      "swing_highs": 14,
+      "swing_lows": 18
+    },
+    "H4": {
+      "expected": "bearish",
+      "actual": "bearish",
+      "expected_score": 85,
+      "swing_highs": 2,
+      "swing_lows": 5
+    }
+  },
+  "multi_timeframe_score": 35,
+  "expected_multi_timeframe_score": 35,
+  "violations": []
+}

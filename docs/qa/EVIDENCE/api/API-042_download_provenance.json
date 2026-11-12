@@ -1,0 +1,51 @@
+{
+  "test_id": "API-042",
+  "endpoint": "/api/downloads",
+  "scenario": "Provider provenance conflict",
+  "test_data": "dukascopy over twelve_data EURUSD 2026 partition",
+  "expected": "400 written by twelve_data, not dukascopy",
+  "actual": "status=400 detail={\"detail\":\"Existing partition 2026.csv was written by twelve_data, not dukascopy. Use a separate REX_DATA_DIR or overwrite it deliberately.\"}",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "provenance detail",
+      "ok": true,
+      "detail": "{'detail': 'Existing partition 2026.csv was written by twelve_data, not dukascopy. Use a separate REX_DATA_DIR or overwrite it deliberately.'}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16901/api/downloads",
+      "params": null,
+      "request_body": {
+        "provider": "dukascopy",
+        "symbol": "EURUSD",
+        "timeframe": "M1",
+        "start_date": "2026-01-01",
+        "end_date": "2026-01-02"
+      },
+      "request_headers": {},
+      "duration_ms": 2.6,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "141",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "9d701c7499102f2336a3b33253b252848b818b8c0657dfa96095fd67ca19cd20",
+      "response_bytes": 141,
+      "response_json": {
+        "detail": "Existing partition 2026.csv was written by twelve_data, not dukascopy. Use a separate REX_DATA_DIR or overwrite it deliberately."
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.117422+00:00"
+}

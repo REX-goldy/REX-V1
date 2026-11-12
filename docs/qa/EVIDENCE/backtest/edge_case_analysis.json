@@ -1,0 +1,398 @@
+{
+  "generated_at": "2026-11-03T13:36:23.963692Z",
+  "edge_cases": {
+    "signal_study_CORE_ZONE_BREAKOUT": {
+      "bars": 7200,
+      "range": [
+        "2026-02-01",
+        "2026-02-07"
+      ],
+      "total_signals": 56818,
+      "by_type": {
+        "break_above": 39,
+        "break_below": 30,
+        "close_outside": 56680,
+        "enter_zone": 69
+      },
+      "total_trades": 0,
+      "closed_trades_len": 0,
+      "wins": 0,
+      "losses": 0,
+      "profit_factor": null,
+      "reconciliation_signals": {
+        "generated": 56818,
+        "accepted": 0,
+        "ignored": 0,
+        "rejected": 0,
+        "difference": 56818
+      },
+      "no_crash": true
+    },
+    "signal_study_S002": {
+      "bars": 7200,
+      "range": [
+        "2026-02-01",
+        "2026-02-07"
+      ],
+      "total_signals": 659,
+      "by_type": {
+        "retest_above": 528,
+        "retest_below": 131
+      },
+      "total_trades": 0,
+      "closed_trades_len": 0,
+      "wins": 0,
+      "losses": 0,
+      "profit_factor": null,
+      "reconciliation_signals": {
+        "generated": 659,
+        "accepted": 0,
+        "ignored": 0,
+        "rejected": 0,
+        "difference": 659
+      },
+      "no_crash": true
+    },
+    "core_simulate_true_no_factory": {
+      "total_signals": 56818,
+      "accepted": 0,
+      "ignored": 0,
+      "rejected_policy_boundary": 56818,
+      "trades": 0,
+      "reconciliation_signals": {
+        "generated": 56818,
+        "accepted": 0,
+        "ignored": 0,
+        "rejected": 56818,
+        "difference": 0
+      },
+      "note": "Breakout signals are outside SweepTradeSetupFactory; server marks CORE simulate_trades False."
+    },
+    "missing_zones_CORE_ZONE_BREAKOUT": {
+      "bars": 500,
+      "total_signals": 0,
+      "total_trades": 0,
+      "no_crash": true,
+      "reconciliation_signals": {
+        "generated": 0,
+        "accepted": 0,
+        "ignored": 0,
+        "rejected": 0,
+        "difference": 0
+      }
+    },
+    "missing_zones_S002": {
+      "bars": 500,
+      "total_signals": 0,
+      "total_trades": 0,
+      "no_crash": true,
+      "reconciliation_signals": {
+        "generated": 0,
+        "accepted": 0,
+        "ignored": 0,
+        "rejected": 0,
+        "difference": 0
+      }
+    },
+    "empty_dataset_sim_true": {
+      "bars": 0,
+      "total_signals": 0,
+      "total_trades": 0,
+      "started_at": null,
+      "ended_at": null,
+      "no_crash": true,
+      "reconciliation_signals": {
+        "generated": 0,
+        "accepted": 0,
+        "ignored": 0,
+        "rejected": 0,
+        "difference": 0
+      },
+      "reconciliation_execution": {
+        "accepted": 0,
+        "closed": 0,
+        "expired": 0,
+        "rejected": 0,
+        "cancelled": 0,
+        "active": 0,
+        "difference": 0
+      }
+    },
+    "insufficient_bars": {
+      "bars": 5,
+      "lookback_required": 11,
+      "total_signals": 0,
+      "total_trades": 0,
+      "no_crash": true,
+      "reconciliation_signals": {
+        "generated": 0,
+        "accepted": 0,
+        "ignored": 0,
+        "rejected": 0,
+        "difference": 0
+      }
+    },
+    "no_signal_actual_window": {
+      "start": "2026-01-01T13:00:00",
+      "end": "2026-01-01T14:59:00",
+      "bars": 120,
+      "total_signals": 0,
+      "total_trades": 0,
+      "no_crash": true,
+      "reconciliation_signals": {
+        "generated": 0,
+        "accepted": 0,
+        "ignored": 0,
+        "rejected": 0,
+        "difference": 0
+      },
+      "reconciliation_execution": {
+        "accepted": 0,
+        "closed": 0,
+        "expired": 0,
+        "rejected": 0,
+        "cancelled": 0,
+        "active": 0,
+        "difference": 0
+      }
+    },
+    "pending_plan_expiry": {
+      "timeout_candles": 3,
+      "updates": [
+        {
+          "bar": "2026-02-01T22:01:00",
+          "active": 1,
+          "terminated": []
+        },
+        {
+          "bar": "2026-02-01T22:02:00",
+          "active": 1,
+          "terminated": []
+        },
+        {
+          "bar": "2026-02-01T22:03:00",
+          "active": 0,
+          "terminated": [
+            "EXPIRED"
+          ]
+        }
+      ],
+      "final_active": 0,
+      "terminated_reason": "EXPIRED",
+      "termination_time": "2026-02-01T22:03:00"
+    },
+    "open_timeout_max_hold_1": {
+      "max_hold_candles": 1,
+      "close_reason": "TIMEOUT",
+      "holding_duration_candles": 2,
+      "entry_time": "2026-05-01T00:01:00",
+      "exit_time": "2026-05-01T00:02:00",
+      "expected_if_max_hold_is_upper_bound": 1,
+      "exceeds_max_hold": true
+    },
+    "open_timeout_max_hold_2": {
+      "max_hold_candles": 2,
+      "close_reason": "TIMEOUT",
+      "holding_duration_candles": 2,
+      "entry_time": "2026-05-01T00:01:00",
+      "exit_time": "2026-05-01T00:02:00",
+      "expected_if_max_hold_is_upper_bound": 2,
+      "exceeds_max_hold": false
+    },
+    "open_timeout_max_hold_3": {
+      "max_hold_candles": 3,
+      "close_reason": "TIMEOUT",
+      "holding_duration_candles": 3,
+      "entry_time": "2026-05-01T00:01:00",
+      "exit_time": "2026-05-01T00:03:00",
+      "expected_if_max_hold_is_upper_bound": 3,
+      "exceeds_max_hold": false
+    },
+    "ambiguous_intrabar_actual": {
+      "ambiguous_count": 39,
+      "examples": [
+        {
+          "signal_id": "EURUSD_2026-05-01T16:36:00_bullish_sweep",
+          "direction": "LONG",
+          "entry_price": 1.1744,
+          "sl": 1.17437,
+          "tp": 1.1744600000000005,
+          "exit_price": 1.17437,
+          "bar_open": 1.17462,
+          "bar_high": 1.17464,
+          "bar_low": 1.17424,
+          "both_levels_touched": true,
+          "recorded_pnl_r": -1.0,
+          "raw_formula_pnl_r": -1.0,
+          "worse_than_minus_1R_raw": false
+        },
+        {
+          "signal_id": "EURUSD_2026-05-04T03:42:00_bullish_sweep",
+          "direction": "LONG",
+          "entry_price": 1.17251,
+          "sl": 1.1725,
+          "tp": 1.1725299999999996,
+          "exit_price": 1.1725,
+          "bar_open": 1.17251,
+          "bar_high": 1.17257,
+          "bar_low": 1.1725,
+          "both_levels_touched": true,
+          "recorded_pnl_r": -1.0,
+          "raw_formula_pnl_r": -1.0,
+          "worse_than_minus_1R_raw": false
+        },
+        {
+          "signal_id": "EURUSD_2026-05-04T04:41:00_bullish_sweep",
+          "direction": "LONG",
+          "entry_price": 1.17283,
+          "sl": 1.17281,
+          "tp": 1.1728700000000003,
+          "exit_price": 1.17281,
+          "bar_open": 1.17283,
+          "bar_high": 1.17288,
+          "bar_low": 1.17281,
+          "both_levels_touched": true,
+          "recorded_pnl_r": -1.0,
+          "raw_formula_pnl_r": -1.0,
+          "worse_than_minus_1R_raw": false
+        },
+        {
+          "signal_id": "EURUSD_2026-05-04T08:03:00_bullish_sweep",
+          "direction": "LONG",
+          "entry_price": 1.17142,
+          "sl": 1.17141,
+          "tp": 1.1714399999999996,
+          "exit_price": 1.17141,
+          "bar_open": 1.17142,
+          "bar_high": 1.17155,
+          "bar_low": 1.17139,
+          "both_levels_touched": true,
+          "recorded_pnl_r": -1.0,
+          "raw_formula_pnl_r": -1.0,
+          "worse_than_minus_1R_raw": false
+        },
+        {
+          "signal_id": "EURUSD_2026-05-04T09:48:00_bullish_sweep",
+          "direction": "LONG",
+          "entry_price": 1.17193,
+          "sl": 1.17192,
+          "tp": 1.1719499999999996,
+          "exit_price": 1.17192,
+          "bar_open": 1.17193,
+          "bar_high": 1.172,
+          "bar_low": 1.17191,
+          "both_levels_touched": true,
+          "recorded_pnl_r": -1.0,
+          "raw_formula_pnl_r": -1.0,
+          "worse_than_minus_1R_raw": false
+        }
+      ],
+      "all_recorded_minus_1R": true
+    },
+    "end_of_data_force_close": {
+      "bars": 7080,
+      "last_bar": "2026-05-08T21:59:00",
+      "last_bar_close": 1.17887,
+      "force_close_count": 1,
+      "examples": [
+        {
+          "signal_id": "EURUSD_2026-05-08T21:57:00_bearish_sweep",
+          "exit_time": "2026-05-08T21:59:00",
+          "exit_price": 1.17887,
+          "at_last_bar": true,
+          "price_equals_last_close": true
+        }
+      ]
+    },
+    "end_of_data_cancelled_plan": {
+      "cancelled_count": 1,
+      "examples": [
+        {
+          "signal_id": "GBPUSD_2026-05-15T21:59:00_bearish_sweep",
+          "setup_time": "2026-05-15T21:59:00",
+          "termination_time": "2026-05-15T21:59:00",
+          "at_last_bar": true
+        }
+      ],
+      "last_bar": "2026-05-15T21:59:00"
+    }
+  },
+  "export": {
+    "json_path": "docs/qa/EVIDENCE/backtest/exports/EURUSD_S008_2026-05-01_2026-05-15_result.json",
+    "json_parse_ok": true,
+    "forbidden_tokens": [],
+    "finite_problems": [],
+    "roundtrip_keyset_equal": true,
+    "roundtrip_trade_count_equal": true,
+    "csv_path": "docs/qa/EVIDENCE/backtest/exports/EURUSD_S008_2026-05-01_2026-05-15_summary.csv",
+    "csv_rows": 1,
+    "csv_header": [
+      "strategy_id",
+      "strategy_name",
+      "symbols",
+      "started_at",
+      "ended_at",
+      "total_signals",
+      "wins",
+      "losses",
+      "win_rate",
+      "profit_factor",
+      "average_win",
+      "average_loss",
+      "expectancy",
+      "max_drawdown",
+      "largest_win",
+      "largest_loss",
+      "total_trades",
+      "consecutive_wins",
+      "consecutive_losses",
+      "ambiguous_exits",
+      "ambiguous_rate",
+      "avg_holding_duration",
+      "expired_setups_count",
+      "cancelled_setups_count",
+      "rejected_setups_count",
+      "ignored_active_lifecycle_count",
+      "rejected_policy_boundary_count",
+      "accepted_setups_count",
+      "currently_active_count"
+    ],
+    "csv_total_signals": "657",
+    "csv_contains_only_summary": true,
+    "xlsx_path": "docs/qa/EVIDENCE/backtest/exports/EURUSD_S008_2026-05-01_2026-05-15_result.xlsx",
+    "xlsx_sheets": [
+      "Summary",
+      "Signal Outcomes",
+      "Closed Trades"
+    ],
+    "xlsx_sheet_max_rows": {
+      "Summary": 29,
+      "Signal Outcomes": 658,
+      "Closed Trades": 607
+    }
+  },
+  "run_archive": {
+    "run_id": "20261103T133504Z_750fee2c",
+    "run_id_matches_regex": true,
+    "get_run_returns_same_id": true,
+    "schema_version": "ui_run_v1",
+    "has_metrics": true,
+    "has_trades": true,
+    "has_equity_curve": true,
+    "list_runs_contains_id": true,
+    "saved_artifact_matches_loaded": true,
+    "finite_problems": [],
+    "forbidden_tokens_in_saved_json": [],
+    "direct_result_has_no_result_id_field": true
+  },
+  "pnl_helper_sanity": {
+    "example_signal_id": "EURUSD_2026-05-01T00:39:00_bearish_sweep",
+    "direction": "SHORT",
+    "entry": 1.17285,
+    "sl": 1.1729,
+    "exit": 1.1727499999999997,
+    "closed_trade_pnl_r": 2.0,
+    "calculate_pnl_r_output": 2.0,
+    "match": true
+  }
+}

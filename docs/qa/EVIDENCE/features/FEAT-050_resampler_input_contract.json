@@ -1,0 +1,4 @@
+{
+  "duplicate_error": "ResampleError: duplicate source timestamp: 2026-01-04 22:00:00",
+  "aware_timestamp_error": "ResampleError: source timestamps must be naive UTC"
+}

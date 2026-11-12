@@ -1,0 +1,32 @@
+# SEC-025 Preview/deploy env references and public surface
+generated: 2026-11-03T13:35:36Z
+
+## .appforge/preview.json (env blocks)
+service=web port=16900 health=/ public_command=True
+  env VITE_API_PROXY_TARGET = 'http://127.0.0.1:16901' (reference=False)
+service=api port=16901 health=/api/health public_command=True
+  env TWELVE_DATA_API_KEY = '$TWELVE_DATA_API_KEY' (reference=True)
+
+## .appforge/deploy.json
+web_service: web
+public_services: {'web': '/'}
+service=web port=16900 public=True health=/
+service=api port=16901 public=False health=/api/health
+env TWELVE_DATA_API_KEY = '$TWELVE_DATA_API_KEY' (reference=True)
+
+## docker-compose.yml credential lines (literal value check)
+7:      TWELVE_DATA_API_KEY: ${TWELVE_DATA_API_KEY:-}
+
+## Literal-secret heuristic across delivery files (should be empty)
+(no literal key assignments)
+
+## Only web is public; api exposes no host port
+10:    expose:
+11-      - "16901"
+12-    volumes:
+13-      # Mount only the data root, not /app/data, so the tracked seed archive
+--
+33:    ports:
+34-      - "16900:16900"
+35-    depends_on:
+36-      api:

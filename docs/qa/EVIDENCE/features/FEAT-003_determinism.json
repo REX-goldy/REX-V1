@@ -1,0 +1,131 @@
+{
+  "equal": true,
+  "first": {
+    "instrument": "EURUSD",
+    "asof": "2026-01-09T21:59:00+00:00",
+    "entry_timeframe": "M1",
+    "schema_hash": "510ee1f393647a11",
+    "multi_timeframe_mapping": {
+      "M1": [
+        "M15",
+        "M30",
+        "H1",
+        "H4"
+      ],
+      "M15": [
+        "M30",
+        "H1",
+        "H4"
+      ],
+      "M30": [
+        "H1",
+        "H4"
+      ],
+      "H1": [
+        "H4"
+      ],
+      "H4": []
+    },
+    "bars": {
+      "M1": {
+        "count": 7200,
+        "first": "2026-01-04T22:00:00+00:00",
+        "last": "2026-01-09T21:59:00+00:00"
+      },
+      "M15": {
+        "count": 479,
+        "first": "2026-01-04T22:00:00+00:00",
+        "last": "2026-01-09T21:30:00+00:00"
+      },
+      "M30": {
+        "count": 239,
+        "first": "2026-01-04T22:00:00+00:00",
+        "last": "2026-01-09T21:00:00+00:00"
+      },
+      "H1": {
+        "count": 119,
+        "first": "2026-01-04T22:00:00+00:00",
+        "last": "2026-01-09T20:00:00+00:00"
+      },
+      "H4": {
+        "count": 29,
+        "first": "2026-01-05T00:00:00+00:00",
+        "last": "2026-01-09T16:00:00+00:00"
+      }
+    },
+    "packs": [
+      "price",
+      "volatility",
+      "indicators",
+      "zones",
+      "session",
+      "structure"
+    ],
+    "packs_digest": "514dff74aefd7a84d901f7b5a17130cbcc738f87f4ed8795678dd6f77c68a6dc",
+    "bars_digest": "d15828c23aab1b64e1f9a097238c58511284ba36c2bb2ff9061a16ca911b7e4b"
+  },
+  "second": {
+    "instrument": "EURUSD",
+    "asof": "2026-01-09T21:59:00+00:00",
+    "entry_timeframe": "M1",
+    "schema_hash": "510ee1f393647a11",
+    "multi_timeframe_mapping": {
+      "M1": [
+        "M15",
+        "M30",
+        "H1",
+        "H4"
+      ],
+      "M15": [
+        "M30",
+        "H1",
+        "H4"
+      ],
+      "M30": [
+        "H1",
+        "H4"
+      ],
+      "H1": [
+        "H4"
+      ],
+      "H4": []
+    },
+    "bars": {
+      "M1": {
+        "count": 7200,
+        "first": "2026-01-04T22:00:00+00:00",
+        "last": "2026-01-09T21:59:00+00:00"
+      },
+      "M15": {
+        "count": 479,
+        "first": "2026-01-04T22:00:00+00:00",
+        "last": "2026-01-09T21:30:00+00:00"
+      },
+      "M30": {
+        "count": 239,
+        "first": "2026-01-04T22:00:00+00:00",
+        "last": "2026-01-09T21:00:00+00:00"
+      },
+      "H1": {
+        "count": 119,
+        "first": "2026-01-04T22:00:00+00:00",
+        "last": "2026-01-09T20:00:00+00:00"
+      },
+      "H4": {
+        "count": 29,
+        "first": "2026-01-05T00:00:00+00:00",
+        "last": "2026-01-09T16:00:00+00:00"
+      }
+    },
+    "packs": [
+      "price",
+      "volatility",
+      "indicators",
+      "zones",
+      "session",
+      "structure"
+    ],
+    "packs_digest": "514dff74aefd7a84d901f7b5a17130cbcc738f87f4ed8795678dd6f77c68a6dc",
+    "bars_digest": "d15828c23aab1b64e1f9a097238c58511284ba36c2bb2ff9061a16ca911b7e4b"
+  }
+}

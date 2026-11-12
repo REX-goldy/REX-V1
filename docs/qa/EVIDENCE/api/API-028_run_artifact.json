@@ -1,0 +1,1904 @@
+{
+  "test_id": "API-028",
+  "endpoint": "/api/runs/{run_id}",
+  "scenario": "Backtest artifact retrieval",
+  "test_data": "GET the EURUSD run id; also list + disk file",
+  "expected": "200; identical metrics/trades; listed; temp-run file exists",
+  "actual": "GET status=200 id=20261103T133824Z_e8c5f403 file_exists=True listed=True",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "GET run 200",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "check": "same id/dataset",
+      "ok": true,
+      "detail": "('20261103T133824Z_e8c5f403', 'EURUSD/M1/2026')"
+    },
+    {
+      "check": "metrics identical",
+      "ok": true,
+      "detail": "({'total_signals': 51, 'total_trades': 51, 'wins': 18, 'losses': 33, 'win_rate': 35.294117647058826, 'profit_factor': 1.0909090909090908, 'expectancy': 0.058823529411764705, 'max_drawdown_r': 8.0, 'largest_win': 2.0, 'largest_loss': -1.0, 'ambiguous_exits': 3, 'avg_holding_duration': 2.156862745098039}, {'total_signals': 51, 'total_trades': 51, 'wins': 18, 'losses': 33, 'win_rate': 35.294117647058826, 'profit_factor': 1.0909090909090908, 'expectancy': 0.058823529411764705, 'max_drawdown_r': 8.0,"
+    },
+    {
+      "check": "trades identical",
+      "ok": true,
+      "detail": "trade arrays compared"
+    },
+    {
+      "check": "listed in /api/runs",
+      "ok": true,
+      "detail": "['20261103T133824Z_5624caff', '20261103T133824Z_e8c5f403', '20261103T133824Z_4adbf61b', '20261103T133802Z_b425d889', '20261103T133800Z_444c9a8a']"
+    },
+    {
+      "check": "artifact file exists in temp runs dir",
+      "ok": true,
+      "detail": "/tmp/opencode/qa-api/runs_a/20261103T133824Z_e8c5f403.json"
+    },
+    {
+      "check": "artifact file matches response",
+      "ok": true,
+      "detail": "disk compared"
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16902/api/runs/20261103T133824Z_e8c5f403",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 3.6,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "20435",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "934868dcd2a334731094230debfc8dfd777ae4393ba51b9ac17e219aaad176a7",
+      "response_bytes": 20435,
+      "response_json": {
+        "schema_version": "ui_run_v1",
+        "id": "20261103T133824Z_e8c5f403",
+        "created_at": "2026-11-03T13:38:24.874393+00:00",
+        "dataset_id": "EURUSD/M1/2026",
+        "dataset": {
+          "id": "EURUSD/M1/2026",
+          "symbol": "EURUSD",
+          "timeframe": "M1",
+          "year": 2026,
+          "provider": "twelve_data",
+          "path": "data/historical/EURUSD/M1/2026.csv",
+          "bar_count": 184963,
+          "size_bytes": 9902091,
+          "status": "warning",
+          "warnings": [
+            "10 unexpected timestamp gaps (beyond FX closures)."
+          ],
+          "coverage": {
+            "start": "2026-01-01",
+            "end": "2026-06-30",
+            "requested_start": "2026-01-01",
+            "requested_end": "2026-06-30",
+            "actual_start": "2026-01-01T13:00:00",
+            "actual_end": "2026-06-30T23:59:00",
+            "retrieved_at": "2026-10-29T21:33:25.344166+00:00"
+          },
+          "quality": {
+            "duplicate_count": 0,
+            "invalid_bar_count": 0,
+            "timestamp_gap_count": 35,
+            "unexpected_gap_count": 10,
+            "notes": [
+              "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+              "Gap count is raw timestamp spacing, not session-aware missing bars."
+            ]
+          },
+          "first_timestamp": "2026-01-01T13:00:00",
+          "last_timestamp": "2026-06-30T23:59:00",
+          "derived": false,
+          "available_timeframes": [
+            "M1",
+            "M5",
+            "M15",
+            "H1",
+            "H4"
+          ]
+        },
+        "strategy": {
+          "id": "S008",
+          "name": "Liquidity Sweep V1",
+          "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+        },
+        "parameters": {
+          "lookback": 10,
+          "min_wick_ratio": 0.6,
+          "tolerance": 0.0
+        },
+        "request": {
+          "start": "2026-03-02",
+          "end": "2026-03-06",
+          "timeframe": "M1",
+          "r_multiple": 2.0,
+          "equity": 100000.0,
+          "risk_fraction": 0.01
+        },
+        "range": {
+          "start": "2026-03-02",
+          "end": "2026-03-06",
+          "bar_count": 7078,
+          "gap_count": 1
+        },
+        "bar_count": 7078,
+        "simulated": true,
+        "metrics": {
+          "total_signals": 51,
+          "total_trades": 51,
+          "wins": 18,
+          "losses": 33,
+          "win_rate": 35.294117647058826,
+          "profit_factor": 1.0909090909090908,
+          "expectancy": 0.058823529411764705,
+          "max_drawdown_r": 8.0,
+          "largest_win": 2.0,
+          "largest_loss": -1.0,
+          "ambiguous_exits": 3,
+          "avg_holding_duration": 2.156862745098039
+        },
+        "reconciliation": {
+          "generated": 51,
+          "accepted": 51,
+          "ignored": 0,
+          "rejected": 0,
+          "difference": 0
+        },
+        "signals": {
+          "total": 51,
+          "by_type": {
+            "bearish_sweep": 51
+          }
+        },
+        "equity_curve": {
+          "equity": [
+            {
+              "time": 1772412540,
+              "value": 2.0
+            },
+            {
+              "time": 1772423340,
+              "value": 4.0
+            },
+            {
+              "time": 1772426160,
+              "value": 3.0
+            },
+            {
+              "time": 1772452380,
+              "value": 2.0
+            },
+            {
+              "time": 1772455440,
+              "value": 4.0
+            },
+            {
+              "time": 1772471640,
+              "value": 3.0
+            },
+            {
+              "time": 1772479620,
+              "value": 2.0
+            },
+            {
+              "time": 1772487000,
+              "value": 4.0
+            },
+            {
+              "time": 1772493120,
+              "value": 3.0
+            },
+            {
+              "time": 1772493300,
+              "value": 2.0
+            },
+            {
+              "time": 1772493720,
+              "value": 1.0
+            },
+            {
+              "time": 1772493900,
+              "value": 0.0
+            },
+            {
+              "time": 1772494200,
+              "value": 2.0
+            },
+            {
+              "time": 1772498280,
+              "value": 4.0
+            },
+            {
+              "time": 1772500500,
+              "value": 3.0
+            },
+            {
+              "time": 1772501340,
+              "value": 5.0
+            },
+            {
+              "time": 1772509320,
+              "value": 4.0
+            },
+            {
+              "time": 1772509560,
+              "value": 3.0
+            },
+            {
+              "time": 1772510760,
+              "value": 2.0
+            },
+            {
+              "time": 1772577960,
+              "value": 1.0
+            },
+            {
+              "time": 1772578260,
+              "value": 0.0
+            },
+            {
+              "time": 1772578380,
+              "value": -1.0
+            },
+            {
+              "time": 1772578860,
+              "value": 1.0
+            },
+            {
+              "time": 1772590020,
+              "value": 0.0
+            },
+            {
+              "time": 1772590320,
+              "value": -1.0
+            },
+            {
+              "time": 1772594520,
+              "value": -2.0
+            },
+            {
+              "time": 1772596860,
+              "value": -3.0
+            },
+            {
+              "time": 1772597340,
+              "value": -1.0
+            },
+            {
+              "time": 1772606700,
+              "value": 1.0
+            },
+            {
+              "time": 1772628000,
+              "value": 3.0
+            },
+            {
+              "time": 1772640120,
+              "value": 2.0
+            },
+            {
+              "time": 1772667000,
+              "value": 1.0
+            },
+            {
+              "time": 1772667060,
+              "value": 0.0
+            },
+            {
+              "time": 1772672460,
+              "value": 2.0
+            },
+            {
+              "time": 1772678640,
+              "value": 1.0
+            },
+            {
+              "time": 1772687460,
+              "value": 0.0
+            },
+            {
+              "time": 1772705580,
+              "value": 2.0
+            },
+            {
+              "time": 1772744940,
+              "value": 1.0
+            },
+            {
+              "time": 1772747580,
+              "value": 0.0
+            },
+            {
+              "time": 1772747940,
+              "value": -1.0
+            },
+            {
+              "time": 1772748180,
+              "value": 1.0
+            },
+            {
+              "time": 1772751660,
+              "value": 3.0
+            },
+            {
+              "time": 1772754180,
+              "value": 2.0
+            },
+            {
+              "time": 1772754600,
+              "value": 4.0
+            },
+            {
+              "time": 1772756700,
+              "value": 3.0
+            },
+            {
+              "time": 1772762220,
+              "value": 5.0
+            },
+            {
+              "time": 1772770680,
+              "value": 4.0
+            },
+            {
+              "time": 1772771400,
+              "value": 3.0
+            },
+            {
+              "time": 1772771580,
+              "value": 2.0
+            },
+            {
+              "time": 1772778540,
+              "value": 4.0
+            },
+            {
+              "time": 1772779260,
+              "value": 3.0
+            }
+          ],
+          "drawdown": [
+            {
+              "time": 1772412540,
+              "value": 0.0
+            },
+            {
+              "time": 1772423340,
+              "value": 0.0
+            },
+            {
+              "time": 1772426160,
+              "value": 1.0
+            },
+            {
+              "time": 1772452380,
+              "value": 2.0
+            },
+            {
+              "time": 1772455440,
+              "value": 0.0
+            },
+            {
+              "time": 1772471640,
+              "value": 1.0
+            },
+            {
+              "time": 1772479620,
+              "value": 2.0
+            },
+            {
+              "time": 1772487000,
+              "value": 0.0
+            },
+            {
+              "time": 1772493120,
+              "value": 1.0
+            },
+            {
+              "time": 1772493300,
+              "value": 2.0
+            },
+            {
+              "time": 1772493720,
+              "value": 3.0
+            },
+            {
+              "time": 1772493900,
+              "value": 4.0
+            },
+            {
+              "time": 1772494200,
+              "value": 2.0
+            },
+            {
+              "time": 1772498280,
+              "value": 0.0
+            },
+            {
+              "time": 1772500500,
+              "value": 1.0
+            },
+            {
+              "time": 1772501340,
+              "value": 0.0
+            },
+            {
+              "time": 1772509320,
+              "value": 1.0
+            },
+            {
+              "time": 1772509560,
+              "value": 2.0
+            },
+            {
+              "time": 1772510760,
+              "value": 3.0
+            },
+            {
+              "time": 1772577960,
+              "value": 4.0
+            },
+            {
+              "time": 1772578260,
+              "value": 5.0
+            },
+            {
+              "time": 1772578380,
+              "value": 6.0
+            },
+            {
+              "time": 1772578860,
+              "value": 4.0
+            },
+            {
+              "time": 1772590020,
+              "value": 5.0
+            },
+            {
+              "time": 1772590320,
+              "value": 6.0
+            },
+            {
+              "time": 1772594520,
+              "value": 7.0
+            },
+            {
+              "time": 1772596860,
+              "value": 8.0
+            },
+            {
+              "time": 1772597340,
+              "value": 6.0
+            },
+            {
+              "time": 1772606700,
+              "value": 4.0
+            },
+            {
+              "time": 1772628000,
+              "value": 2.0
+            },
+            {
+              "time": 1772640120,
+              "value": 3.0
+            },
+            {
+              "time": 1772667000,
+              "value": 4.0
+            },
+            {
+              "time": 1772667060,
+              "value": 5.0
+            },
+            {
+              "time": 1772672460,
+              "value": 3.0
+            },
+            {
+              "time": 1772678640,
+              "value": 4.0
+            },
+            {
+              "time": 1772687460,
+              "value": 5.0
+            },
+            {
+              "time": 1772705580,
+              "value": 3.0
+            },
+            {
+              "time": 1772744940,
+              "value": 4.0
+            },
+            {
+              "time": 1772747580,
+              "value": 5.0
+            },
+            {
+              "time": 1772747940,
+              "value": 6.0
+            },
+            {
+              "time": 1772748180,
+              "value": 4.0
+            },
+            {
+              "time": 1772751660,
+              "value": 2.0
+            },
+            {
+              "time": 1772754180,
+              "value": 3.0
+            },
+            {
+              "time": 1772754600,
+              "value": 1.0
+            },
+            {
+              "time": 1772756700,
+              "value": 2.0
+            },
+            {
+              "time": 1772762220,
+              "value": 0.0
+            },
+            {
+              "time": 1772770680,
+              "value": 1.0
+            },
+            {
+              "time": 1772771400,
+              "value": 2.0
+            },
+            {
+              "time": 1772771580,
+              "value": 3.0
+            },
+            {
+              "time": 1772778540,
+              "value": 1.0
+            },
+            {
+              "time": 1772779260,
+              "value": 2.0
+            }
+          ]
+        },
+        "trade_distribution": [
+          {
+            "date": "2026-03-02",
+            "trades": 13
+          },
+          {
+            "date": "2026-03-03",
+            "trades": 10
+          },
+          {
+            "date": "2026-03-04",
+            "trades": 10
+          },
+          {
+            "date": "2026-03-05",
+            "trades": 11
+          },
+          {
+            "date": "2026-03-06",
+            "trades": 7
+          }
+        ],
+        "trades": [
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T00:48:00",
+            "exit_time": "2026-03-02T00:49:00",
+            "entry_price": 1.17714,
+            "exit_price": 1.1770400000000003,
+            "sl_price": 1.17719,
+            "tp_price": 1.1770400000000003,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T03:48:00",
+            "exit_time": "2026-03-02T03:49:00",
+            "entry_price": 1.1793,
+            "exit_price": 1.17916,
+            "sl_price": 1.17937,
+            "tp_price": 1.17916,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T04:35:00",
+            "exit_time": "2026-03-02T04:36:00",
+            "entry_price": 1.17875,
+            "exit_price": 1.17877,
+            "sl_price": 1.17877,
+            "tp_price": 1.1787099999999997,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T11:52:00",
+            "exit_time": "2026-03-02T11:53:00",
+            "entry_price": 1.17396,
+            "exit_price": 1.17402,
+            "sl_price": 1.17402,
+            "tp_price": 1.1738399999999996,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T12:43:00",
+            "exit_time": "2026-03-02T12:44:00",
+            "entry_price": 1.172,
+            "exit_price": 1.1718999999999997,
+            "sl_price": 1.17205,
+            "tp_price": 1.1718999999999997,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T17:14:00",
+            "exit_time": "2026-03-02T17:14:00",
+            "entry_price": 1.16973,
+            "exit_price": 1.16977,
+            "sl_price": 1.16977,
+            "tp_price": 1.1696499999999999,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T19:27:00",
+            "exit_time": "2026-03-02T19:27:00",
+            "entry_price": 1.17052,
+            "exit_price": 1.17054,
+            "sl_price": 1.17054,
+            "tp_price": 1.1704800000000002,
+            "pnl_r": -1.0,
+            "close_reason": "AMBIGUITY",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T21:29:00",
+            "exit_time": "2026-03-02T21:30:00",
+            "entry_price": 1.16953,
+            "exit_price": 1.1694299999999997,
+            "sl_price": 1.16958,
+            "tp_price": 1.1694299999999997,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T23:11:00",
+            "exit_time": "2026-03-02T23:12:00",
+            "entry_price": 1.16937,
+            "exit_price": 1.16941,
+            "sl_price": 1.16941,
+            "tp_price": 1.16929,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T23:15:00",
+            "exit_time": "2026-03-02T23:15:00",
+            "entry_price": 1.16952,
+            "exit_price": 1.16954,
+            "sl_price": 1.16954,
+            "tp_price": 1.1694799999999996,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T23:22:00",
+            "exit_time": "2026-03-02T23:22:00",
+            "entry_price": 1.16973,
+            "exit_price": 1.16976,
+            "sl_price": 1.16976,
+            "tp_price": 1.16967,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T23:24:00",
+            "exit_time": "2026-03-02T23:25:00",
+            "entry_price": 1.16977,
+            "exit_price": 1.16981,
+            "sl_price": 1.16981,
+            "tp_price": 1.16969,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T23:29:00",
+            "exit_time": "2026-03-02T23:30:00",
+            "entry_price": 1.16979,
+            "exit_price": 1.1697100000000005,
+            "sl_price": 1.16983,
+            "tp_price": 1.1697100000000005,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T00:33:00",
+            "exit_time": "2026-03-03T00:38:00",
+            "entry_price": 1.16914,
+            "exit_price": 1.1689800000000004,
+            "sl_price": 1.16922,
+            "tp_price": 1.1689800000000004,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 5,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T01:15:00",
+            "exit_time": "2026-03-03T01:15:00",
+            "entry_price": 1.1697,
+            "exit_price": 1.16974,
+            "sl_price": 1.16974,
+            "tp_price": 1.1696199999999999,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T01:28:00",
+            "exit_time": "2026-03-03T01:29:00",
+            "entry_price": 1.17065,
+            "exit_price": 1.17059,
+            "sl_price": 1.17068,
+            "tp_price": 1.17059,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T03:42:00",
+            "exit_time": "2026-03-03T03:42:00",
+            "entry_price": 1.16927,
+            "exit_price": 1.16928,
+            "sl_price": 1.16928,
+            "tp_price": 1.16925,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T03:46:00",
+            "exit_time": "2026-03-03T03:46:00",
+            "entry_price": 1.16933,
+            "exit_price": 1.16937,
+            "sl_price": 1.16937,
+            "tp_price": 1.16925,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T04:06:00",
+            "exit_time": "2026-03-03T04:06:00",
+            "entry_price": 1.16924,
+            "exit_price": 1.16926,
+            "sl_price": 1.16926,
+            "tp_price": 1.1692000000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T22:46:00",
+            "exit_time": "2026-03-03T22:46:00",
+            "entry_price": 1.16126,
+            "exit_price": 1.16129,
+            "sl_price": 1.16129,
+            "tp_price": 1.1612,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T22:49:00",
+            "exit_time": "2026-03-03T22:51:00",
+            "entry_price": 1.16126,
+            "exit_price": 1.1613,
+            "sl_price": 1.1613,
+            "tp_price": 1.1611799999999999,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T22:53:00",
+            "exit_time": "2026-03-03T22:53:00",
+            "entry_price": 1.1613,
+            "exit_price": 1.16132,
+            "sl_price": 1.16132,
+            "tp_price": 1.1612600000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T22:55:00",
+            "exit_time": "2026-03-03T23:01:00",
+            "entry_price": 1.16132,
+            "exit_price": 1.1612399999999998,
+            "sl_price": 1.16136,
+            "tp_price": 1.1612399999999998,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 6,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T02:06:00",
+            "exit_time": "2026-03-04T02:07:00",
+            "entry_price": 1.15947,
+            "exit_price": 1.15951,
+            "sl_price": 1.15951,
+            "tp_price": 1.15939,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T02:11:00",
+            "exit_time": "2026-03-04T02:12:00",
+            "entry_price": 1.15955,
+            "exit_price": 1.1596,
+            "sl_price": 1.1596,
+            "tp_price": 1.1594500000000003,
+            "pnl_r": -1.0,
+            "close_reason": "AMBIGUITY",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T03:17:00",
+            "exit_time": "2026-03-04T03:22:00",
+            "entry_price": 1.15997,
+            "exit_price": 1.16003,
+            "sl_price": 1.16003,
+            "tp_price": 1.15985,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 5,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T03:59:00",
+            "exit_time": "2026-03-04T04:01:00",
+            "entry_price": 1.16091,
+            "exit_price": 1.16095,
+            "sl_price": 1.16095,
+            "tp_price": 1.1608300000000005,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T04:08:00",
+            "exit_time": "2026-03-04T04:09:00",
+            "entry_price": 1.16098,
+            "exit_price": 1.1608799999999997,
+            "sl_price": 1.16103,
+            "tp_price": 1.1608799999999997,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T06:44:00",
+            "exit_time": "2026-03-04T06:45:00",
+            "entry_price": 1.16174,
+            "exit_price": 1.1616399999999998,
+            "sl_price": 1.16179,
+            "tp_price": 1.1616399999999998,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T12:39:00",
+            "exit_time": "2026-03-04T12:40:00",
+            "entry_price": 1.16356,
+            "exit_price": 1.1634599999999997,
+            "sl_price": 1.16361,
+            "tp_price": 1.1634599999999997,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T16:02:00",
+            "exit_time": "2026-03-04T16:02:00",
+            "entry_price": 1.164,
+            "exit_price": 1.16404,
+            "sl_price": 1.16404,
+            "tp_price": 1.1639199999999998,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T23:29:00",
+            "exit_time": "2026-03-04T23:30:00",
+            "entry_price": 1.16367,
+            "exit_price": 1.16371,
+            "sl_price": 1.16371,
+            "tp_price": 1.16359,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T23:31:00",
+            "exit_time": "2026-03-04T23:31:00",
+            "entry_price": 1.16368,
+            "exit_price": 1.16372,
+            "sl_price": 1.16372,
+            "tp_price": 1.1636,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T01:00:00",
+            "exit_time": "2026-03-05T01:01:00",
+            "entry_price": 1.16451,
+            "exit_price": 1.1644299999999999,
+            "sl_price": 1.16455,
+            "tp_price": 1.1644299999999999,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T02:44:00",
+            "exit_time": "2026-03-05T02:44:00",
+            "entry_price": 1.16276,
+            "exit_price": 1.16279,
+            "sl_price": 1.16279,
+            "tp_price": 1.1627,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T05:10:00",
+            "exit_time": "2026-03-05T05:11:00",
+            "entry_price": 1.16098,
+            "exit_price": 1.16103,
+            "sl_price": 1.16103,
+            "tp_price": 1.1608799999999997,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T10:10:00",
+            "exit_time": "2026-03-05T10:13:00",
+            "entry_price": 1.16271,
+            "exit_price": 1.1625299999999996,
+            "sl_price": 1.1628,
+            "tp_price": 1.1625299999999996,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 3,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T21:09:00",
+            "exit_time": "2026-03-05T21:09:00",
+            "entry_price": 1.16086,
+            "exit_price": 1.1609,
+            "sl_price": 1.1609,
+            "tp_price": 1.16078,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T21:53:00",
+            "exit_time": "2026-03-05T21:53:00",
+            "entry_price": 1.16058,
+            "exit_price": 1.16061,
+            "sl_price": 1.16061,
+            "tp_price": 1.16052,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T21:58:00",
+            "exit_time": "2026-03-05T21:59:00",
+            "entry_price": 1.16086,
+            "exit_price": 1.1609,
+            "sl_price": 1.1609,
+            "tp_price": 1.16078,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T22:02:00",
+            "exit_time": "2026-03-05T22:03:00",
+            "entry_price": 1.16093,
+            "exit_price": 1.1608100000000001,
+            "sl_price": 1.16099,
+            "tp_price": 1.1608100000000001,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T22:24:00",
+            "exit_time": "2026-03-05T23:01:00",
+            "entry_price": 1.16088,
+            "exit_price": 1.1607199999999998,
+            "sl_price": 1.16096,
+            "tp_price": 1.1607199999999998,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 37,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T23:40:00",
+            "exit_time": "2026-03-05T23:43:00",
+            "entry_price": 1.16097,
+            "exit_price": 1.161,
+            "sl_price": 1.161,
+            "tp_price": 1.16091,
+            "pnl_r": -1.0,
+            "close_reason": "AMBIGUITY",
+            "holding_duration_candles": 3,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T23:49:00",
+            "exit_time": "2026-03-05T23:50:00",
+            "entry_price": 1.16099,
+            "exit_price": 1.16093,
+            "sl_price": 1.16102,
+            "tp_price": 1.16093,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T00:24:00",
+            "exit_time": "2026-03-06T00:25:00",
+            "entry_price": 1.16139,
+            "exit_price": 1.16143,
+            "sl_price": 1.16143,
+            "tp_price": 1.1613099999999998,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T01:57:00",
+            "exit_time": "2026-03-06T01:57:00",
+            "entry_price": 1.16191,
+            "exit_price": 1.16185,
+            "sl_price": 1.16194,
+            "tp_price": 1.16185,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T04:15:00",
+            "exit_time": "2026-03-06T04:18:00",
+            "entry_price": 1.16202,
+            "exit_price": 1.16206,
+            "sl_price": 1.16206,
+            "tp_price": 1.16194,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 3,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T04:30:00",
+            "exit_time": "2026-03-06T04:30:00",
+            "entry_price": 1.16202,
+            "exit_price": 1.16204,
+            "sl_price": 1.16204,
+            "tp_price": 1.1619800000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T04:32:00",
+            "exit_time": "2026-03-06T04:33:00",
+            "entry_price": 1.16201,
+            "exit_price": 1.16205,
+            "sl_price": 1.16205,
+            "tp_price": 1.16193,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T06:26:00",
+            "exit_time": "2026-03-06T06:29:00",
+            "entry_price": 1.16079,
+            "exit_price": 1.1606899999999998,
+            "sl_price": 1.16084,
+            "tp_price": 1.1606899999999998,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 3,
+            "strategy_id": "S008"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T06:41:00",
+            "exit_time": "2026-03-06T06:41:00",
+            "entry_price": 1.16082,
+            "exit_price": 1.16086,
+            "sl_price": 1.16086,
+            "tp_price": 1.1607399999999999,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S008"
+          }
+        ],
+        "trades_truncated": false,
+        "warnings": [
+          "Transaction costs (spread, commission, slippage) are not applied.",
+          "Performance is in R-multiples; no currency equity or compounding.",
+          "3 ambiguous intrabar exits were conservatively scored at -1R.",
+          "Small sample: 51 closed trades. Not statistically reliable.",
+          "Selected range contains 1 timestamp gap(s) larger than one M1 bar (market closures included)."
+        ],
+        "warning_count": 5,
+        "assumptions": {
+          "costs_applied": false,
+          "entry_model": "next candle open",
+          "timestamps": "naive UTC",
+          "zone_source": "none",
+          "result_units": "R-multiples",
+          "timeframe": "M1",
+          "derived_timeframe": false
+        }
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16902/api/runs",
+      "params": {
+        "limit": 25
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 12.1,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "10600",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "5aa232464cb01c79720ddd48950e6e1ee27c1b3781e0b8fd74af0ee2b71e6944",
+      "response_bytes": 10600,
+      "response_json": [
+        {
+          "id": "20261103T133824Z_5624caff",
+          "created_at": "2026-11-03T13:38:24.985481+00:00",
+          "dataset_id": "GBPUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-05-01",
+            "end": "2026-05-08",
+            "bar_count": 8520,
+            "gap_count": 1
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 229,
+            "total_trades": 218,
+            "wins": 46,
+            "losses": 172,
+            "win_rate": 21.100917431192663,
+            "profit_factor": 0.5099256946894973,
+            "expectancy": -0.3944028101804123,
+            "max_drawdown_r": 93.67845038733127,
+            "largest_win": 2.0,
+            "largest_loss": -2.600000000005329,
+            "ambiguous_exits": 6,
+            "avg_holding_duration": 3.770642201834862
+          },
+          "bar_count": 8520,
+          "simulated": true,
+          "warning_count": 4
+        },
+        {
+          "id": "20261103T133824Z_e8c5f403",
+          "created_at": "2026-11-03T13:38:24.874393+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-03-02",
+            "end": "2026-03-06",
+            "bar_count": 7078,
+            "gap_count": 1
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 51,
+            "total_trades": 51,
+            "wins": 18,
+            "losses": 33,
+            "win_rate": 35.294117647058826,
+            "profit_factor": 1.0909090909090908,
+            "expectancy": 0.058823529411764705,
+            "max_drawdown_r": 8.0,
+            "largest_win": 2.0,
+            "largest_loss": -1.0,
+            "ambiguous_exits": 3,
+            "avg_holding_duration": 2.156862745098039
+          },
+          "bar_count": 7078,
+          "simulated": true,
+          "warning_count": 5
+        },
+        {
+          "id": "20261103T133824Z_4adbf61b",
+          "created_at": "2026-11-03T13:38:24.787454+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-01-03",
+            "end": "2026-01-04",
+            "bar_count": 120,
+            "gap_count": 0
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 0,
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "profit_factor": null,
+            "expectancy": 0.0,
+            "max_drawdown_r": 0.0,
+            "largest_win": 0.0,
+            "largest_loss": 0.0,
+            "ambiguous_exits": 0,
+            "avg_holding_duration": 0.0
+          },
+          "bar_count": 120,
+          "simulated": true,
+          "warning_count": 2
+        },
+        {
+          "id": "20261103T133802Z_b425d889",
+          "created_at": "2026-11-03T13:38:02.082824+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-03-02",
+            "end": "2026-03-06",
+            "bar_count": 7078,
+            "gap_count": 1
+          },
+          "strategy": {
+            "id": "S002",
+            "name": "BreakoutRetest",
+            "description": "Zone breakout followed by a causal boundary retest within max_wait bars."
+          },
+          "metrics": {
+            "total_signals": 322,
+            "total_trades": 143,
+            "wins": 46,
+            "losses": 97,
+            "win_rate": 32.16783216783217,
+            "profit_factor": 0.9093279090009806,
+            "expectancy": -0.06277071221481079,
+            "max_drawdown_r": 29.496413866930975,
+            "largest_win": 2.0,
+            "largest_loss": -2.4999999999888978,
+            "ambiguous_exits": 6,
+            "avg_holding_duration": 4.034965034965035
+          },
+          "bar_count": 7078,
+          "simulated": true,
+          "warning_count": 5
+        },
+        {
+          "id": "20261103T133800Z_444c9a8a",
+          "created_at": "2026-11-03T13:38:00.501440+00:00",
+          "dataset_id": "GBPUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-05-01",
+            "end": "2026-05-08",
+            "bar_count": 8520,
+            "gap_count": 1
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 229,
+            "total_trades": 218,
+            "wins": 46,
+            "losses": 172,
+            "win_rate": 21.100917431192663,
+            "profit_factor": 0.5099256946894973,
+            "expectancy": -0.3944028101804123,
+            "max_drawdown_r": 93.67845038733127,
+            "largest_win": 2.0,
+            "largest_loss": -2.600000000005329,
+            "ambiguous_exits": 6,
+            "avg_holding_duration": 3.770642201834862
+          },
+          "bar_count": 8520,
+          "simulated": true,
+          "warning_count": 4
+        },
+        {
+          "id": "20261103T133759Z_a7566fbc",
+          "created_at": "2026-11-03T13:37:59.501184+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-03-02",
+            "end": "2026-03-06",
+            "bar_count": 7078,
+            "gap_count": 1
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 51,
+            "total_trades": 51,
+            "wins": 18,
+            "losses": 33,
+            "win_rate": 35.294117647058826,
+            "profit_factor": 1.0909090909090908,
+            "expectancy": 0.058823529411764705,
+            "max_drawdown_r": 8.0,
+            "largest_win": 2.0,
+            "largest_loss": -1.0,
+            "ambiguous_exits": 3,
+            "avg_holding_duration": 2.156862745098039
+          },
+          "bar_count": 7078,
+          "simulated": true,
+          "warning_count": 5
+        },
+        {
+          "id": "20261103T133759Z_6604990d",
+          "created_at": "2026-11-03T13:37:59.406250+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-01-03",
+            "end": "2026-01-04",
+            "bar_count": 120,
+            "gap_count": 0
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 0,
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "profit_factor": null,
+            "expectancy": 0.0,
+            "max_drawdown_r": 0.0,
+            "largest_win": 0.0,
+            "largest_loss": 0.0,
+            "ambiguous_exits": 0,
+            "avg_holding_duration": 0.0
+          },
+          "bar_count": 120,
+          "simulated": true,
+          "warning_count": 2
+        },
+        {
+          "id": "20261103T133547Z_bebfd3b8",
+          "created_at": "2026-11-03T13:35:47.142795+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-03-07",
+            "end": "2026-03-08",
+            "bar_count": 120,
+            "gap_count": 0
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 0,
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "profit_factor": null,
+            "expectancy": 0.0,
+            "max_drawdown_r": 0.0,
+            "largest_win": 0.0,
+            "largest_loss": 0.0,
+            "ambiguous_exits": 0,
+            "avg_holding_duration": 0.0
+          },
+          "bar_count": 120,
+          "simulated": true,
+          "warning_count": 2
+        },
+        {
+          "id": "20261103T133547Z_9366b3fd",
+          "created_at": "2026-11-03T13:35:47.115882+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-01-03",
+            "end": "2026-01-04",
+            "bar_count": 120,
+            "gap_count": 0
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 0,
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "profit_factor": null,
+            "expectancy": 0.0,
+            "max_drawdown_r": 0.0,
+            "largest_win": 0.0,
+            "largest_loss": 0.0,
+            "ambiguous_exits": 0,
+            "avg_holding_duration": 0.0
+          },
+          "bar_count": 120,
+          "simulated": true,
+          "warning_count": 2
+        },
+        {
+          "id": "20261103T133547Z_9343482c",
+          "created_at": "2026-11-03T13:35:47.081505+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-03-02",
+            "end": "2026-03-02",
+            "bar_count": 1440,
+            "gap_count": 0
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 0,
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "profit_factor": null,
+            "expectancy": 0.0,
+            "max_drawdown_r": 0.0,
+            "largest_win": 0.0,
+            "largest_loss": 0.0,
+            "ambiguous_exits": 0,
+            "avg_holding_duration": 0.0
+          },
+          "bar_count": 1440,
+          "simulated": true,
+          "warning_count": 2
+        },
+        {
+          "id": "20261103T133546Z_6ebea4ca",
+          "created_at": "2026-11-03T13:35:46.991997+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-03-02",
+            "end": "2026-03-02",
+            "bar_count": 1440,
+            "gap_count": 0
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 20,
+            "total_trades": 20,
+            "wins": 4,
+            "losses": 16,
+            "win_rate": 20.0,
+            "profit_factor": 0.5,
+            "expectancy": -0.4,
+            "max_drawdown_r": 8.0,
+            "largest_win": 2.0,
+            "largest_loss": -1.0,
+            "ambiguous_exits": 0,
+            "avg_holding_duration": 2.7
+          },
+          "bar_count": 1440,
+          "simulated": true,
+          "warning_count": 3
+        },
+        {
+          "id": "20261103T133546Z_c8e30653",
+          "created_at": "2026-11-03T13:35:46.917684+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-03-02",
+            "end": "2026-03-02",
+            "bar_count": 1440,
+            "gap_count": 0
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 0,
+            "total_trades": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "profit_factor": null,
+            "expectancy": 0.0,
+            "max_drawdown_r": 0.0,
+            "largest_win": 0.0,
+            "largest_loss": 0.0,
+            "ambiguous_exits": 0,
+            "avg_holding_duration": 0.0
+          },
+          "bar_count": 1440,
+          "simulated": true,
+          "warning_count": 2
+        },
+        {
+          "id": "20261103T133542Z_456a4a79",
+          "created_at": "2026-11-03T13:35:42.822015+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-03-02",
+            "end": "2026-03-06",
+            "bar_count": 7078,
+            "gap_count": 1
+          },
+          "strategy": {
+            "id": "S002",
+            "name": "BreakoutRetest",
+            "description": "Zone breakout followed by a causal boundary retest within max_wait bars."
+          },
+          "metrics": {
+            "total_signals": 322,
+            "total_trades": 143,
+            "wins": 46,
+            "losses": 97,
+            "win_rate": 32.16783216783217,
+            "profit_factor": 0.9093279090009806,
+            "expectancy": -0.06277071221481079,
+            "max_drawdown_r": 29.496413866930975,
+            "largest_win": 2.0,
+            "largest_loss": -2.4999999999888978,
+            "ambiguous_exits": 6,
+            "avg_holding_duration": 4.034965034965035
+          },
+          "bar_count": 7078,
+          "simulated": true,
+          "warning_count": 5
+        },
+        {
+          "id": "20261103T133542Z_0d0b3ef5",
+          "created_at": "2026-11-03T13:35:42.726622+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-01-05",
+            "end": "2026-01-09",
+            "bar_count": 7080,
+            "gap_count": 0
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 2,
+            "total_trades": 2,
+            "wins": 1,
+            "losses": 1,
+            "win_rate": 50.0,
+            "profit_factor": 2.0,
+            "expectancy": 0.5,
+            "max_drawdown_r": 1.0,
+            "largest_win": 2.0,
+            "largest_loss": -1.0,
+            "ambiguous_exits": 0,
+            "avg_holding_duration": 1.5
+          },
+          "bar_count": 7080,
+          "simulated": true,
+          "warning_count": 3
+        },
+        {
+          "id": "20261103T133542Z_e07aeda3",
+          "created_at": "2026-11-03T13:35:42.513651+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-01-01",
+            "end": "2026-01-02",
+            "bar_count": 1980,
+            "gap_count": 0
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 27,
+            "total_trades": 27,
+            "wins": 7,
+            "losses": 20,
+            "win_rate": 25.925925925925924,
+            "profit_factor": 0.7,
+            "expectancy": -0.2222222222222222,
+            "max_drawdown_r": 14.0,
+            "largest_win": 2.0,
+            "largest_loss": -1.0,
+            "ambiguous_exits": 2,
+            "avg_holding_duration": 2.7777777777777777
+          },
+          "bar_count": 1980,
+          "simulated": true,
+          "warning_count": 4
+        },
+        {
+          "id": "20261103T133542Z_9e2b5bc4",
+          "created_at": "2026-11-03T13:35:42.460851+00:00",
+          "dataset_id": "EURUSD/M1/2026",
+          "timeframe": "M1",
+          "range": {
+            "start": "2026-03-02",
+            "end": "2026-03-06",
+            "bar_count": 7078,
+            "gap_count": 1
+          },
+          "strategy": {
+            "id": "S008",
+            "name": "Liquidity Sweep V1",
+            "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+          },
+          "metrics": {
+            "total_signals": 51,
+            "total_trades": 51,
+            "wins": 18,
+            "losses": 33,
+            "win_rate": 35.294117647058826,
+            "profit_factor": 1.0909090909090908,
+            "expectancy": 0.058823529411764705,
+            "max_drawdown_r": 8.0,
+            "largest_win": 2.0,
+            "largest_loss": -1.0,
+            "ambiguous_exits": 3,
+            "avg_holding_duration": 2.156862745098039
+          },
+          "bar_count": 7078,
+          "simulated": true,
+          "warning_count": 5
+        }
+      ],
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.033287+00:00"
+}

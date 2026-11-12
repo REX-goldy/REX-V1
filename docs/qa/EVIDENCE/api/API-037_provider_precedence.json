@@ -1,0 +1,226 @@
+{
+  "test_id": "API-037",
+  "endpoint": "/api/settings/providers/{id}",
+  "scenario": "Stored vs environment precedence",
+  "test_data": "env -> PUT stored -> GET -> DELETE -> GET",
+  "expected": "stored overrides env; delete reverts to env; no full key echoed",
+  "actual": "env->stored->env; before={\"id\":\"twelve_data\",\"name\":\"Twelve Data\",\"description\":\"Twelve Data historical M1 candles\",\"env_var\":\"TWELVE_DATA_API_KEY\",\"required\":true,\"configured\":true,\"source\":\"environment\",\"hint\":\"0001\",\"updated_at\":null}; during={\"id\":\"twelve_data\",\"name\":\"Twelve Data\",\"description\":\"Twelve Data historical M1 candles\",\"env_var\":\"TWELVE_DATA_API_KEY\",\"required\":true,\"configured\":true,\"source\":\"stored\",\"hint\":\"2222\",\"updated_at\":\"2026-11-03T13:38:25.088591+00:00\"}; after={\"id\":\"twelve_data\",\"name\":\"Twelve Data\",\"description\":\"Twelve Data historical M1 candles\",\"env_var\":\"TWELVE_DATA_API_KEY\",\"required\":true,\"configured\":true,\"source\":\"environment\",\"hint\":\"0001\",\"updated_at\":null}",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "starts environment",
+      "ok": true,
+      "detail": "environment"
+    },
+    {
+      "check": "store accepted",
+      "ok": true,
+      "detail": "(200, 'stored')"
+    },
+    {
+      "check": "stored overrides env",
+      "ok": true,
+      "detail": "{'id': 'twelve_data', 'name': 'Twelve Data', 'description': 'Twelve Data historical M1 candles', 'env_var': 'TWELVE_DATA_API_KEY', 'required': True, 'configured': True, 'source': 'stored', 'hint': '2222', 'updated_at': '2026-11-03T13:38:25.088591+00:00'}"
+    },
+    {
+      "check": "delete reverts to env",
+      "ok": true,
+      "detail": "(200, {'id': 'twelve_data', 'name': 'Twelve Data', 'description': 'Twelve Data historical M1 candles', 'env_var': 'TWELVE_DATA_API_KEY', 'required': True, 'configured': True, 'source': 'environment', 'hint': '0001', 'updated_at': None})"
+    },
+    {
+      "check": "env still fallback after delete",
+      "ok": true,
+      "detail": "{'id': 'twelve_data', 'name': 'Twelve Data', 'description': 'Twelve Data historical M1 candles', 'env_var': 'TWELVE_DATA_API_KEY', 'required': True, 'configured': True, 'source': 'environment', 'hint': '0001', 'updated_at': None}"
+    },
+    {
+      "check": "no full key anywhere",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16902/api/settings/providers",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 1.8,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "462",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "9de6de843a5044b1ddf054912cf3bf56a46cc5187f2d5be12b7d1d41a1e4f485",
+      "response_bytes": 462,
+      "response_json": [
+        {
+          "id": "twelve_data",
+          "name": "Twelve Data",
+          "description": "Twelve Data historical M1 candles",
+          "env_var": "TWELVE_DATA_API_KEY",
+          "required": true,
+          "configured": true,
+          "source": "environment",
+          "hint": "0001",
+          "updated_at": null
+        },
+        {
+          "id": "dukascopy",
+          "name": "Dukascopy",
+          "description": "Dukascopy historical adapter; current downloader does not require a key",
+          "env_var": "DUKASCOPY_API_KEY",
+          "required": false,
+          "configured": false,
+          "source": "none",
+          "hint": "••••",
+          "updated_at": null
+        }
+      ],
+      "response_kind": "json"
+    },
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": {
+        "api_key": "<redacted>"
+      },
+      "request_headers": {},
+      "duration_ms": 3.1,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "237",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "665e06bd7c1bf37da5c738d8966ea2a749409c0b23f03374564cfbb91ef66cb9",
+      "response_bytes": 237,
+      "response_json": {
+        "id": "twelve_data",
+        "name": "Twelve Data",
+        "description": "Twelve Data historical M1 candles",
+        "env_var": "TWELVE_DATA_API_KEY",
+        "required": true,
+        "configured": true,
+        "source": "stored",
+        "hint": "2222",
+        "updated_at": "2026-11-03T13:38:25.088591+00:00"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16902/api/settings/providers",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.0,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "487",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "e3d4968462d2be237f3c2fe3c9b64f88608961a395096007c9af137bb046a132",
+      "response_bytes": 487,
+      "response_json": [
+        {
+          "id": "twelve_data",
+          "name": "Twelve Data",
+          "description": "Twelve Data historical M1 candles",
+          "env_var": "TWELVE_DATA_API_KEY",
+          "required": true,
+          "configured": true,
+          "source": "stored",
+          "hint": "2222",
+          "updated_at": "2026-11-03T13:38:25.088591+00:00"
+        },
+        {
+          "id": "dukascopy",
+          "name": "Dukascopy",
+          "description": "Dukascopy historical adapter; current downloader does not require a key",
+          "env_var": "DUKASCOPY_API_KEY",
+          "required": false,
+          "configured": false,
+          "source": "none",
+          "hint": "••••",
+          "updated_at": null
+        }
+      ],
+      "response_kind": "json"
+    },
+    {
+      "method": "DELETE",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.5,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "212",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "c0e851844f78b0436375303327fa63b4341833cbb39813752e33055ee233b1a3",
+      "response_bytes": 212,
+      "response_json": {
+        "id": "twelve_data",
+        "name": "Twelve Data",
+        "description": "Twelve Data historical M1 candles",
+        "env_var": "TWELVE_DATA_API_KEY",
+        "required": true,
+        "configured": true,
+        "source": "environment",
+        "hint": "0001",
+        "updated_at": null
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16902/api/settings/providers",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.0,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "462",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "9de6de843a5044b1ddf054912cf3bf56a46cc5187f2d5be12b7d1d41a1e4f485",
+      "response_bytes": 462,
+      "response_json": [
+        {
+          "id": "twelve_data",
+          "name": "Twelve Data",
+          "description": "Twelve Data historical M1 candles",
+          "env_var": "TWELVE_DATA_API_KEY",
+          "required": true,
+          "configured": true,
+          "source": "environment",
+          "hint": "0001",
+          "updated_at": null
+        },
+        {
+          "id": "dukascopy",
+          "name": "Dukascopy",
+          "description": "Dukascopy historical adapter; current downloader does not require a key",
+          "env_var": "DUKASCOPY_API_KEY",
+          "required": false,
+          "configured": false,
+          "source": "none",
+          "hint": "••••",
+          "updated_at": null
+        }
+      ],
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.097447+00:00"
+}

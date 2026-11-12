@@ -1,0 +1,232 @@
+{
+  "id": "20261103T133731Z_7217c96a",
+  "created_at": "2026-11-03T13:37:31.238566+00:00",
+  "dataset_id": "GBPUSD/M1/2026",
+  "strategy": {
+    "id": "S008",
+    "name": "Liquidity Sweep V1",
+    "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+  },
+  "parameters": {
+    "lookback": 10,
+    "min_wick_ratio": 0.6,
+    "tolerance": 0.0
+  },
+  "request": {
+    "start": "2026-05-04",
+    "end": "2026-05-08",
+    "timeframe": "M1",
+    "r_multiple": 2.0,
+    "equity": 100000.0,
+    "risk_fraction": 0.01
+  },
+  "range": {
+    "start": "2026-05-04",
+    "end": "2026-05-08",
+    "bar_count": 7080,
+    "gap_count": 0
+  },
+  "bar_count": 7080,
+  "simulated": true,
+  "metrics": {
+    "total_signals": 206,
+    "total_trades": 197,
+    "wins": 39,
+    "losses": 158,
+    "win_rate": 19.796954314720814,
+    "profit_factor": 0.467264070377409,
+    "expectancy": -0.4367320554480763,
+    "max_drawdown_r": 93.67845038733125,
+    "largest_win": 2.0,
+    "largest_loss": -2.600000000005329,
+    "ambiguous_exits": 4,
+    "avg_holding_duration": 3.279187817258883
+  },
+  "reconciliation": {
+    "generated": 206,
+    "accepted": 201,
+    "ignored": 5,
+    "rejected": 0,
+    "difference": 0
+  },
+  "signals": {
+    "total": 206,
+    "by_type": {
+      "bearish_sweep": 107,
+      "bullish_sweep": 99
+    }
+  },
+  "assumptions": {
+    "costs_applied": false,
+    "entry_model": "next candle open",
+    "timestamps": "naive UTC",
+    "zone_source": "none",
+    "result_units": "R-multiples",
+    "timeframe": "M1",
+    "derived_timeframe": false
+  },
+  "warnings": [
+    "Transaction costs (spread, commission, slippage) are not applied.",
+    "Performance is in R-multiples; no currency equity or compounding.",
+    "4 ambiguous intrabar exits were conservatively scored at -1R."
+  ],
+  "warning_count": 3,
+  "trades_count": 197,
+  "trades_by_direction": {
+    "SHORT": 102,
+    "LONG": 95
+  },
+  "trades_by_close_reason": {
+    "SL": 154,
+    "AMBIGUITY": 4,
+    "TP": 37,
+    "TIMEOUT": 2
+  },
+  "first_long_trade": {
+    "symbol": "GBPUSD",
+    "direction": "LONG",
+    "entry_time": "2026-05-04T13:35:00",
+    "exit_time": "2026-05-04T14:34:00",
+    "entry_price": 1.35593,
+    "exit_price": 1.35668,
+    "sl_price": 1.35522,
+    "tp_price": 1.35735,
+    "pnl_r": 1.0563,
+    "close_reason": "TIMEOUT",
+    "holding_duration_candles": 60,
+    "strategy_id": "S008"
+  },
+  "first_short_trade": {
+    "symbol": "GBPUSD",
+    "direction": "SHORT",
+    "entry_time": "2026-05-04T00:38:00",
+    "exit_time": "2026-05-04T00:39:00",
+    "entry_price": 1.35815,
+    "exit_price": 1.35818,
+    "sl_price": 1.35818,
+    "tp_price": 1.35809,
+    "pnl_r": -1.0,
+    "close_reason": "SL",
+    "holding_duration_candles": 1,
+    "strategy_id": "S008"
+  },
+  "trade_sample": [
+    {
+      "symbol": "GBPUSD",
+      "direction": "SHORT",
+      "entry_time": "2026-05-04T00:38:00",
+      "exit_time": "2026-05-04T00:39:00",
+      "entry_price": 1.35815,
+      "exit_price": 1.35818,
+      "sl_price": 1.35818,
+      "tp_price": 1.35809,
+      "pnl_r": -1.0,
+      "close_reason": "SL",
+      "holding_duration_candles": 1,
+      "strategy_id": "S008"
+    },
+    {
+      "symbol": "GBPUSD",
+      "direction": "SHORT",
+      "entry_time": "2026-05-04T00:40:00",
+      "exit_time": "2026-05-04T00:40:00",
+      "entry_price": 1.35819,
+      "exit_price": 1.3582,
+      "sl_price": 1.3582,
+      "tp_price": 1.3581699999999999,
+      "pnl_r": -1.0,
+      "close_reason": "AMBIGUITY",
+      "holding_duration_candles": 1,
+      "strategy_id": "S008"
+    },
+    {
+      "symbol": "GBPUSD",
+      "direction": "SHORT",
+      "entry_time": "2026-05-04T00:45:00",
+      "exit_time": "2026-05-04T00:46:00",
+      "entry_price": 1.35822,
+      "exit_price": 1.3583,
+      "sl_price": 1.35828,
+      "tp_price": 1.3581,
+      "pnl_r": -1.3333,
+      "close_reason": "SL",
+      "holding_duration_candles": 1,
+      "strategy_id": "S008"
+    }
+  ],
+  "direct": {
+    "signals_by_type": {
+      "bearish_sweep": 107,
+      "bullish_sweep": 99
+    },
+    "reconcile_signals": {
+      "generated": 206,
+      "accepted": 201,
+      "ignored": 5,
+      "rejected": 0,
+      "difference": 0
+    },
+    "reconcile_execution": {
+      "accepted": 201,
+      "closed": 197,
+      "expired": 0,
+      "rejected": 4,
+      "cancelled": 0,
+      "active": 0,
+      "difference": 0
+    },
+    "accepted_setups": 201,
+    "ignored_active_lifecycle": 5,
+    "rejected_policy_boundary": 0,
+    "terminated_by_reason": {
+      "REJECTED_INVALID_ENTRY": 4
+    },
+    "trades_by_direction": {
+      "SHORT": 102,
+      "LONG": 95
+    },
+    "trades_by_close_reason": {
+      "SL": 154,
+      "AMBIGUITY": 4,
+      "TP": 37,
+      "TIMEOUT": 2
+    },
+    "first_signal_by_direction_class": {
+      "up": "2026-05-04T13:34:00",
+      "down": "2026-05-04T00:37:00"
+    },
+    "first_long_trade": {
+      "symbol": "GBPUSD",
+      "direction": "LONG",
+      "entry_time": "2026-05-04T13:35:00",
+      "exit_time": "2026-05-04T14:34:00",
+      "entry_price": 1.35593,
+      "exit_price": 1.35668,
+      "sl_price": 1.35522,
+      "tp_price": 1.35735,
+      "pnl_r": 1.0563380281690713,
+      "close_reason": "TIMEOUT",
+      "holding_duration_candles": 60,
+      "strategy_id": "S008"
+    },
+    "first_short_trade": {
+      "symbol": "GBPUSD",
+      "direction": "SHORT",
+      "entry_time": "2026-05-04T00:38:00",
+      "exit_time": "2026-05-04T00:39:00",
+      "entry_price": 1.35815,
+      "exit_price": 1.35818,
+      "sl_price": 1.35818,
+      "tp_price": 1.35809,
+      "pnl_r": -1.0,
+      "close_reason": "SL",
+      "holding_duration_candles": 1,
+      "strategy_id": "S008"
+    }
+  },
+  "consistency_check": {
+    "service_signals_equal_direct": true,
+    "service_trades_equal_direct": true,
+    "service_by_type_equal_direct": true
+  }
+}

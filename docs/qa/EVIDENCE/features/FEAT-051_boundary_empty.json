@@ -1,0 +1,4 @@
+{
+  "materialize_empty": "ValueError: Missing entry timeframe candles: M1 (provide entry bars or an explicit asof with aggregatable LTF source)",
+  "aggregate_empty": []
+}

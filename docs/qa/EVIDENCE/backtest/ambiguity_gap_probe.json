@@ -1,0 +1,34 @@
+{
+  "bars": [
+    {
+      "timestamp": "2026-01-01T12:00:00",
+      "open": 1.15,
+      "high": 1.151,
+      "low": 1.14,
+      "close": 1.15
+    },
+    {
+      "timestamp": "2026-01-01T12:01:00",
+      "open": 1.15,
+      "high": 1.155,
+      "low": 1.145,
+      "close": 1.15
+    },
+    {
+      "timestamp": "2026-01-01T12:02:00",
+      "open": 1.1,
+      "high": 1.18,
+      "low": 1.09,
+      "close": 1.15
+    }
+  ],
+  "entry_price": 1.15,
+  "sl": 1.14,
+  "tp": 1.17,
+  "exit_price": 1.1,
+  "close_reason": "AMBIGUITY",
+  "recorded_pnl_r": -1.0,
+  "raw_formula_pnl_r": -4.999999999999978,
+  "understates_loss": true,
+  "explanation": "Bar open gaps below SL while bar also spans TP; fill model returns bar.open with AMBIGUITY, simulator overwrites PnL to -1R."
+}

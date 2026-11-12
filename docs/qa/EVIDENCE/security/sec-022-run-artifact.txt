@@ -1,0 +1,6 @@
+# SEC-022 UI run artifacts contain no credential material
+component: server/research_service.py
+test_data: Offline S008 backtest with stored dummy key
+expected: Run JSON written without any key
+actual: runs=1 key_present=False
+status: PASS

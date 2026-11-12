@@ -1,0 +1,1063 @@
+{
+  "generated_at": "2026-11-03T13:35:02.167177Z",
+  "runs": {
+    "EURUSD_S008_2026-05-01_2026-05-15": {
+      "symbol": "EURUSD",
+      "range": {
+        "start": "2026-05-01",
+        "end": "2026-05-15"
+      },
+      "bars": 15720,
+      "server_run_id": "20261103T133504Z_750fee2c",
+      "server_metrics": {
+        "total_signals": 657,
+        "total_trades": 606,
+        "wins": 112,
+        "losses": 494,
+        "win_rate": 18.48184818481848,
+        "profit_factor": 0.43239411848961756,
+        "expectancy": -0.4795624652478231,
+        "max_drawdown_r": 297.4898539401801,
+        "largest_win": 2.0,
+        "largest_loss": -4.325581395349474,
+        "ambiguous_exits": 39,
+        "avg_holding_duration": 2.622112211221122
+      },
+      "server_warnings": [
+        "Transaction costs (spread, commission, slippage) are not applied.",
+        "Performance is in R-multiples; no currency equity or compounding.",
+        "39 ambiguous intrabar exits were conservatively scored at -1R.",
+        "Selected range contains 2 timestamp gap(s) larger than one M1 bar (market closures included)."
+      ],
+      "server_assumptions": {
+        "costs_applied": false,
+        "entry_model": "next candle open",
+        "timestamps": "naive UTC",
+        "zone_source": "none",
+        "result_units": "R-multiples",
+        "timeframe": "M1",
+        "derived_timeframe": false
+      },
+      "server_reconciliation_signals": {
+        "generated": 657,
+        "accepted": 635,
+        "ignored": 22,
+        "rejected": 0,
+        "difference": 0
+      },
+      "direct_reconciliation_signals": {
+        "generated": 657,
+        "accepted": 635,
+        "ignored": 22,
+        "rejected": 0,
+        "difference": 0
+      },
+      "direct_reconciliation_execution": {
+        "accepted": 635,
+        "closed": 606,
+        "expired": 0,
+        "rejected": 29,
+        "cancelled": 0,
+        "active": 0,
+        "difference": 0
+      },
+      "independent_metrics": {
+        "total_trades": 606,
+        "wins": 112,
+        "losses": 494,
+        "zeros": 0,
+        "decided": 606,
+        "win_rate": 18.48184818481848,
+        "profit_factor": 0.43239411848961756,
+        "gross_profit": 221.38627819548927,
+        "gross_loss": 512.0011321356701,
+        "total_r": -290.6148539401808,
+        "expectancy": -0.4795624652478231,
+        "average_win": 1.9766631981740113,
+        "average_loss": -1.0364395387361742,
+        "max_drawdown": 297.4898539401801,
+        "largest_win": 2.0,
+        "largest_loss": -4.325581395349474,
+        "ambiguous_exits": 39,
+        "avg_holding_duration": 2.622112211221122
+      },
+      "metric_comparison": {
+        "wins": {
+          "reported": 112,
+          "independent": 112,
+          "delta": 0.0,
+          "match": true
+        },
+        "losses": {
+          "reported": 494,
+          "independent": 494,
+          "delta": 0.0,
+          "match": true
+        },
+        "win_rate": {
+          "reported": 18.48184818481848,
+          "independent": 18.48184818481848,
+          "delta": 0.0,
+          "match": true
+        },
+        "profit_factor": {
+          "reported": 0.43239411848961756,
+          "independent": 0.43239411848961756,
+          "delta": 0.0,
+          "match": true
+        },
+        "expectancy": {
+          "reported": -0.4795624652478231,
+          "independent": -0.4795624652478231,
+          "delta": 0.0,
+          "match": true
+        },
+        "max_drawdown": {
+          "reported": 297.4898539401801,
+          "independent": 297.4898539401801,
+          "delta": 0.0,
+          "match": true
+        },
+        "largest_win": {
+          "reported": 2.0,
+          "independent": 2.0,
+          "delta": 0.0,
+          "match": true
+        },
+        "largest_loss": {
+          "reported": -4.325581395349474,
+          "independent": -4.325581395349474,
+          "delta": 0.0,
+          "match": true
+        },
+        "average_win": {
+          "reported": 1.9766631981740113,
+          "independent": 1.9766631981740113,
+          "delta": 0.0,
+          "match": true
+        },
+        "average_loss": {
+          "reported": -1.0364395387361742,
+          "independent": -1.0364395387361742,
+          "delta": 0.0,
+          "match": true
+        },
+        "total_trades": {
+          "reported": 606,
+          "independent": 606,
+          "delta": 0.0,
+          "match": true
+        },
+        "ambiguous_exits": {
+          "reported": 39,
+          "independent": 39,
+          "delta": 0.0,
+          "match": true
+        },
+        "avg_holding_duration": {
+          "reported": 2.622112211221122,
+          "independent": 2.622112211221122,
+          "delta": 0.0,
+          "match": true
+        }
+      },
+      "metric_all_match": true,
+      "reverse_order_max_drawdown": 297.48985394018007,
+      "server_vs_direct_metrics": {
+        "total_signals": {
+          "server": 657,
+          "direct": 657,
+          "match": true
+        },
+        "total_trades": {
+          "server": 606,
+          "direct": 606,
+          "match": true
+        },
+        "wins": {
+          "server": 112,
+          "direct": 112,
+          "match": true
+        },
+        "losses": {
+          "server": 494,
+          "direct": 494,
+          "match": true
+        },
+        "win_rate": {
+          "server": 18.48184818481848,
+          "direct": 18.48184818481848,
+          "match": true
+        },
+        "profit_factor": {
+          "server": 0.43239411848961756,
+          "direct": 0.43239411848961756,
+          "match": true
+        },
+        "expectancy": {
+          "server": -0.4795624652478231,
+          "direct": -0.4795624652478231,
+          "match": true
+        },
+        "max_drawdown": {
+          "server": 297.4898539401801,
+          "direct": 297.4898539401801,
+          "match": true
+        },
+        "largest_win": {
+          "server": 2.0,
+          "direct": 2.0,
+          "match": true
+        },
+        "largest_loss": {
+          "server": -4.325581395349474,
+          "direct": -4.325581395349474,
+          "match": true
+        },
+        "ambiguous_exits": {
+          "server": 39,
+          "direct": 39,
+          "match": true
+        },
+        "avg_holding_duration": {
+          "server": 2.622112211221122,
+          "direct": 2.622112211221122,
+          "match": true
+        }
+      },
+      "server_vs_direct_all_match": true,
+      "lifecycle": {
+        "checks": {
+          "trades_checked": 606,
+          "entry_after_signal": 606,
+          "plan_status_planned": 606,
+          "planned_at_signal_time": 606,
+          "entry_model_next_open": 606,
+          "estimated_fees_zero": 606,
+          "estimated_spread_zero": 606,
+          "estimated_slippage_zero": 606,
+          "entry_at_bar_open": 606,
+          "sl_matches_signal_bar_extreme": 606,
+          "tp_matches_r_multiple": 606,
+          "pnl_r_matches_formula": 567,
+          "known_close_reason": 606,
+          "holding_duration_code_convention": 606,
+          "position_size_from_planned_risk": 606,
+          "ambiguity_forced_minus_1R": 39,
+          "no_same_symbol_overlap": 605,
+          "entry_before_or_at_exit": 606,
+          "trades_sorted_by_exit_time": 1
+        },
+        "failures": [],
+        "failure_count": 0,
+        "holding_distribution_by_reason": {
+          "TP": {
+            "holding=1,span=1": 41,
+            "holding=3,span=4": 10,
+            "holding=2,span=3": 14,
+            "holding=4,span=5": 6,
+            "holding=5,span=6": 3,
+            "holding=14,span=15": 2,
+            "holding=7,span=8": 5,
+            "holding=8,span=9": 2,
+            "holding=9,span=10": 4,
+            "holding=1,span=2": 15,
+            "holding=36,span=37": 1,
+            "holding=6,span=7": 3,
+            "holding=19,span=20": 1,
+            "holding=12,span=13": 1,
+            "holding=15,span=16": 1,
+            "holding=27,span=28": 1
+          },
+          "SL": {
+            "holding=1,span=1": 295,
+            "holding=1,span=2": 67,
+            "holding=8,span=9": 5,
+            "holding=18,span=19": 2,
+            "holding=11,span=12": 3,
+            "holding=14,span=15": 1,
+            "holding=5,span=6": 5,
+            "holding=3,span=4": 20,
+            "holding=28,span=29": 1,
+            "holding=9,span=10": 1,
+            "holding=7,span=8": 7,
+            "holding=2,span=3": 22,
+            "holding=19,span=20": 1,
+            "holding=4,span=5": 6,
+            "holding=54,span=55": 1,
+            "holding=10,span=11": 4,
+            "holding=16,span=17": 1,
+            "holding=6,span=7": 5,
+            "holding=15,span=16": 2,
+            "holding=12,span=13": 2,
+            "holding=32,span=33": 1,
+            "holding=13,span=14": 2,
+            "holding=30,span=31": 1
+          },
+          "AMBIGUITY": {
+            "holding=3,span=4": 2,
+            "holding=1,span=1": 32,
+            "holding=1,span=2": 2,
+            "holding=2,span=3": 2,
+            "holding=5,span=6": 1
+          },
+          "TIMEOUT": {
+            "holding=60,span=60": 2
+          }
+        },
+        "risk": {
+          "trades": 606,
+          "realized_risk_differs_from_planned_count": 543,
+          "max_abs_relative_deviation": 5.499999999991673,
+          "examples": [
+            {
+              "signal_id": "EURUSD_2026-05-01T00:39:00_bearish_sweep",
+              "planned_entry": 1.17275,
+              "actual_entry": 1.17285,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 333.3333333338268,
+              "realized_vs_planned_ratio": 0.33333333333382675
+            },
+            {
+              "signal_id": "EURUSD_2026-05-01T00:46:00_bearish_sweep",
+              "planned_entry": 1.17294,
+              "actual_entry": 1.17297,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 624.999999999653,
+              "realized_vs_planned_ratio": 0.624999999999653
+            },
+            {
+              "signal_id": "EURUSD_2026-05-01T01:05:00_bullish_sweep",
+              "planned_entry": 1.17267,
+              "actual_entry": 1.1727,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 1499.9999999981496,
+              "realized_vs_planned_ratio": 1.4999999999981497
+            },
+            {
+              "signal_id": "EURUSD_2026-05-01T01:17:00_bearish_sweep",
+              "planned_entry": 1.17284,
+              "actual_entry": 1.17285,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 857.1428571446697,
+              "realized_vs_planned_ratio": 0.8571428571446698
+            },
+            {
+              "signal_id": "EURUSD_2026-05-01T01:55:00_bearish_sweep",
+              "planned_entry": 1.17316,
+              "actual_entry": 1.17315,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 1333.3333333358005,
+              "realized_vs_planned_ratio": 1.3333333333358004
+            },
+            {
+              "signal_id": "EURUSD_2026-05-01T01:57:00_bearish_sweep",
+              "planned_entry": 1.17315,
+              "actual_entry": 1.17312,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 1599.9999999982235,
+              "realized_vs_planned_ratio": 1.5999999999982235
+            },
+            {
+              "signal_id": "EURUSD_2026-05-01T02:13:00_bearish_sweep",
+              "planned_entry": 1.17337,
+              "actual_entry": 1.17338,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 666.6666666641995,
+              "realized_vs_planned_ratio": 0.6666666666641995
+            },
+            {
+              "signal_id": "EURUSD_2026-05-01T02:17:00_bearish_sweep",
+              "planned_entry": 1.17335,
+              "actual_entry": 1.17338,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 624.9999999979184,
+              "realized_vs_planned_ratio": 0.6249999999979184
+            },
+            {
+              "signal_id": "EURUSD_2026-05-01T02:24:00_bullish_sweep",
+              "planned_entry": 1.17326,
+              "actual_entry": 1.17332,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 3000.0,
+              "realized_vs_planned_ratio": 3.0
+            },
+            {
+              "signal_id": "EURUSD_2026-05-01T02:25:00_bullish_sweep",
+              "planned_entry": 1.17329,
+              "actual_entry": 1.17337,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 2000.0000000027756,
+              "realized_vs_planned_ratio": 2.0000000000027756
+            }
+          ]
+        },
+        "ambiguity_examples": [
+          {
+            "signal_id": "EURUSD_2026-05-01T16:36:00_bullish_sweep",
+            "entry_price": 1.1744,
+            "sl_price": 1.17437,
+            "tp_price": 1.1744600000000005,
+            "exit_price": 1.17437,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "EURUSD_2026-05-04T03:42:00_bullish_sweep",
+            "entry_price": 1.17251,
+            "sl_price": 1.1725,
+            "tp_price": 1.1725299999999996,
+            "exit_price": 1.1725,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "EURUSD_2026-05-04T04:41:00_bullish_sweep",
+            "entry_price": 1.17283,
+            "sl_price": 1.17281,
+            "tp_price": 1.1728700000000003,
+            "exit_price": 1.17281,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "EURUSD_2026-05-04T08:03:00_bullish_sweep",
+            "entry_price": 1.17142,
+            "sl_price": 1.17141,
+            "tp_price": 1.1714399999999996,
+            "exit_price": 1.17141,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "EURUSD_2026-05-04T09:48:00_bullish_sweep",
+            "entry_price": 1.17193,
+            "sl_price": 1.17192,
+            "tp_price": 1.1719499999999996,
+            "exit_price": 1.17192,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "EURUSD_2026-05-04T16:58:00_bullish_sweep",
+            "entry_price": 1.16826,
+            "sl_price": 1.16818,
+            "tp_price": 1.1684200000000002,
+            "exit_price": 1.16818,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "EURUSD_2026-05-04T17:39:00_bullish_sweep",
+            "entry_price": 1.16933,
+            "sl_price": 1.1693,
+            "tp_price": 1.16939,
+            "exit_price": 1.1693,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "EURUSD_2026-05-05T02:58:00_bullish_sweep",
+            "entry_price": 1.16881,
+            "sl_price": 1.16877,
+            "tp_price": 1.1688899999999995,
+            "exit_price": 1.16876,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.2500000000027756
+          },
+          {
+            "signal_id": "EURUSD_2026-05-05T05:54:00_bullish_sweep",
+            "entry_price": 1.1682,
+            "sl_price": 1.16817,
+            "tp_price": 1.1682599999999999,
+            "exit_price": 1.16817,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "EURUSD_2026-05-05T10:58:00_bearish_sweep",
+            "entry_price": 1.16893,
+            "sl_price": 1.16897,
+            "tp_price": 1.16885,
+            "exit_price": 1.16897,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          }
+        ]
+      },
+      "equity_curve": {
+        "independent_points": 606,
+        "independent_final_r": -290.6148539401808,
+        "independent_max_drawdown": 297.4898539401801,
+        "server_curve_points": 606,
+        "server_curve_final_r": -290.6149,
+        "server_curve_max_drawdown": 297.4899,
+        "duplicate_exit_timestamps": 0
+      },
+      "signal_only": {
+        "simulate_trades": false,
+        "total_signals": 657,
+        "total_trades": 0,
+        "closed_trades_len": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate": 0.0,
+        "profit_factor": null
+      },
+      "signal_simulation_match": true,
+      "reproducibility": {
+        "direct_digest_1": "8b335b462f31a9396568f750bc69d955762b1723691e0bee48fb62f991d37bee",
+        "direct_digest_2": "8b335b462f31a9396568f750bc69d955762b1723691e0bee48fb62f991d37bee",
+        "direct_identical": true,
+        "server_second_run_id": "20261103T133508Z_27eb1ced",
+        "server_comparable_identical": true
+      },
+      "finite_problems_direct": [],
+      "finite_problems_server": []
+    },
+    "GBPUSD_S008_2026-05-01_2026-05-15": {
+      "symbol": "GBPUSD",
+      "range": {
+        "start": "2026-05-01",
+        "end": "2026-05-15"
+      },
+      "bars": 15720,
+      "server_run_id": "20261103T133509Z_d28fb1d5",
+      "server_metrics": {
+        "total_signals": 500,
+        "total_trades": 468,
+        "wins": 71,
+        "losses": 397,
+        "win_rate": 15.17094017094017,
+        "profit_factor": 0.3464678513227338,
+        "expectancy": -0.5593474299141656,
+        "max_drawdown_r": 272.47323496783093,
+        "largest_win": 2.0,
+        "largest_loss": -2.600000000005329,
+        "ambiguous_exits": 14,
+        "avg_holding_duration": 3.0128205128205128
+      },
+      "server_warnings": [
+        "Transaction costs (spread, commission, slippage) are not applied.",
+        "Performance is in R-multiples; no currency equity or compounding.",
+        "14 ambiguous intrabar exits were conservatively scored at -1R.",
+        "Selected range contains 2 timestamp gap(s) larger than one M1 bar (market closures included)."
+      ],
+      "server_assumptions": {
+        "costs_applied": false,
+        "entry_model": "next candle open",
+        "timestamps": "naive UTC",
+        "zone_source": "none",
+        "result_units": "R-multiples",
+        "timeframe": "M1",
+        "derived_timeframe": false
+      },
+      "server_reconciliation_signals": {
+        "generated": 500,
+        "accepted": 485,
+        "ignored": 15,
+        "rejected": 0,
+        "difference": 0
+      },
+      "direct_reconciliation_signals": {
+        "generated": 500,
+        "accepted": 485,
+        "ignored": 15,
+        "rejected": 0,
+        "difference": 0
+      },
+      "direct_reconciliation_execution": {
+        "accepted": 485,
+        "closed": 468,
+        "expired": 0,
+        "rejected": 16,
+        "cancelled": 1,
+        "active": 0,
+        "difference": 0
+      },
+      "independent_metrics": {
+        "total_trades": 468,
+        "wins": 71,
+        "losses": 397,
+        "zeros": 0,
+        "decided": 468,
+        "win_rate": 15.17094017094017,
+        "profit_factor": 0.3464678513227338,
+        "gross_profit": 138.77891455878125,
+        "gross_loss": 400.5535117586108,
+        "total_r": -261.77459719982954,
+        "expectancy": -0.5593474299141656,
+        "average_win": 1.9546325994194542,
+        "average_loss": -1.0089509112307578,
+        "max_drawdown": 272.47323496783093,
+        "largest_win": 2.0,
+        "largest_loss": -2.600000000005329,
+        "ambiguous_exits": 14,
+        "avg_holding_duration": 3.0128205128205128
+      },
+      "metric_comparison": {
+        "wins": {
+          "reported": 71,
+          "independent": 71,
+          "delta": 0.0,
+          "match": true
+        },
+        "losses": {
+          "reported": 397,
+          "independent": 397,
+          "delta": 0.0,
+          "match": true
+        },
+        "win_rate": {
+          "reported": 15.17094017094017,
+          "independent": 15.17094017094017,
+          "delta": 0.0,
+          "match": true
+        },
+        "profit_factor": {
+          "reported": 0.3464678513227338,
+          "independent": 0.3464678513227338,
+          "delta": 0.0,
+          "match": true
+        },
+        "expectancy": {
+          "reported": -0.5593474299141656,
+          "independent": -0.5593474299141656,
+          "delta": 0.0,
+          "match": true
+        },
+        "max_drawdown": {
+          "reported": 272.47323496783093,
+          "independent": 272.47323496783093,
+          "delta": 0.0,
+          "match": true
+        },
+        "largest_win": {
+          "reported": 2.0,
+          "independent": 2.0,
+          "delta": 0.0,
+          "match": true
+        },
+        "largest_loss": {
+          "reported": -2.600000000005329,
+          "independent": -2.600000000005329,
+          "delta": 0.0,
+          "match": true
+        },
+        "average_win": {
+          "reported": 1.9546325994194542,
+          "independent": 1.9546325994194542,
+          "delta": 0.0,
+          "match": true
+        },
+        "average_loss": {
+          "reported": -1.0089509112307578,
+          "independent": -1.0089509112307578,
+          "delta": 0.0,
+          "match": true
+        },
+        "total_trades": {
+          "reported": 468,
+          "independent": 468,
+          "delta": 0.0,
+          "match": true
+        },
+        "ambiguous_exits": {
+          "reported": 14,
+          "independent": 14,
+          "delta": 0.0,
+          "match": true
+        },
+        "avg_holding_duration": {
+          "reported": 3.0128205128205128,
+          "independent": 3.0128205128205128,
+          "delta": 0.0,
+          "match": true
+        }
+      },
+      "metric_all_match": true,
+      "reverse_order_max_drawdown": 272.47323496783093,
+      "server_vs_direct_metrics": {
+        "total_signals": {
+          "server": 500,
+          "direct": 500,
+          "match": true
+        },
+        "total_trades": {
+          "server": 468,
+          "direct": 468,
+          "match": true
+        },
+        "wins": {
+          "server": 71,
+          "direct": 71,
+          "match": true
+        },
+        "losses": {
+          "server": 397,
+          "direct": 397,
+          "match": true
+        },
+        "win_rate": {
+          "server": 15.17094017094017,
+          "direct": 15.17094017094017,
+          "match": true
+        },
+        "profit_factor": {
+          "server": 0.3464678513227338,
+          "direct": 0.3464678513227338,
+          "match": true
+        },
+        "expectancy": {
+          "server": -0.5593474299141656,
+          "direct": -0.5593474299141656,
+          "match": true
+        },
+        "max_drawdown": {
+          "server": 272.47323496783093,
+          "direct": 272.47323496783093,
+          "match": true
+        },
+        "largest_win": {
+          "server": 2.0,
+          "direct": 2.0,
+          "match": true
+        },
+        "largest_loss": {
+          "server": -2.600000000005329,
+          "direct": -2.600000000005329,
+          "match": true
+        },
+        "ambiguous_exits": {
+          "server": 14,
+          "direct": 14,
+          "match": true
+        },
+        "avg_holding_duration": {
+          "server": 3.0128205128205128,
+          "direct": 3.0128205128205128,
+          "match": true
+        }
+      },
+      "server_vs_direct_all_match": true,
+      "lifecycle": {
+        "checks": {
+          "trades_checked": 468,
+          "entry_after_signal": 468,
+          "plan_status_planned": 468,
+          "planned_at_signal_time": 468,
+          "entry_model_next_open": 468,
+          "estimated_fees_zero": 468,
+          "estimated_spread_zero": 468,
+          "estimated_slippage_zero": 468,
+          "entry_at_bar_open": 468,
+          "sl_matches_signal_bar_extreme": 468,
+          "tp_matches_r_multiple": 468,
+          "pnl_r_matches_formula": 454,
+          "known_close_reason": 468,
+          "holding_duration_code_convention": 468,
+          "position_size_from_planned_risk": 468,
+          "ambiguity_forced_minus_1R": 14,
+          "no_same_symbol_overlap": 467,
+          "entry_before_or_at_exit": 468,
+          "trades_sorted_by_exit_time": 1
+        },
+        "failures": [],
+        "failure_count": 0,
+        "holding_distribution_by_reason": {
+          "SL": {
+            "holding=1,span=1": 241,
+            "holding=16,span=17": 1,
+            "holding=1,span=2": 86,
+            "holding=5,span=6": 8,
+            "holding=10,span=11": 4,
+            "holding=2,span=3": 15,
+            "holding=4,span=5": 8,
+            "holding=3,span=4": 8,
+            "holding=9,span=10": 1,
+            "holding=8,span=9": 2,
+            "holding=7,span=8": 1,
+            "holding=42,span=43": 1,
+            "holding=12,span=13": 1,
+            "holding=17,span=18": 1,
+            "holding=6,span=7": 1,
+            "holding=36,span=37": 1,
+            "holding=15,span=16": 1
+          },
+          "TP": {
+            "holding=2,span=3": 8,
+            "holding=1,span=1": 18,
+            "holding=7,span=8": 1,
+            "holding=3,span=4": 5,
+            "holding=5,span=6": 6,
+            "holding=1,span=2": 4,
+            "holding=33,span=34": 1,
+            "holding=11,span=12": 2,
+            "holding=4,span=5": 8,
+            "holding=6,span=7": 3,
+            "holding=30,span=31": 1,
+            "holding=16,span=17": 1,
+            "holding=9,span=10": 1,
+            "holding=39,span=40": 1,
+            "holding=10,span=11": 3,
+            "holding=20,span=21": 1,
+            "holding=19,span=20": 1,
+            "holding=36,span=37": 1,
+            "holding=18,span=19": 1,
+            "holding=15,span=16": 1
+          },
+          "AMBIGUITY": {
+            "holding=1,span=1": 10,
+            "holding=1,span=2": 4
+          },
+          "TIMEOUT": {
+            "holding=60,span=60": 5
+          }
+        },
+        "risk": {
+          "trades": 468,
+          "realized_risk_differs_from_planned_count": 441,
+          "max_abs_relative_deviation": 6.249999999990286,
+          "examples": [
+            {
+              "signal_id": "GBPUSD_2026-05-01T00:38:00_bearish_sweep",
+              "planned_entry": 1.36028,
+              "actual_entry": 1.36023,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 1333.3333333323465,
+              "realized_vs_planned_ratio": 1.3333333333323465
+            },
+            {
+              "signal_id": "GBPUSD_2026-05-01T00:39:00_bearish_sweep",
+              "planned_entry": 1.36022,
+              "actual_entry": 1.36024,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 913.0434782612473,
+              "realized_vs_planned_ratio": 0.9130434782612473
+            },
+            {
+              "signal_id": "GBPUSD_2026-05-01T01:17:00_bearish_sweep",
+              "planned_entry": 1.36032,
+              "actual_entry": 1.3603,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 1285.7142857129263,
+              "realized_vs_planned_ratio": 1.2857142857129262
+            },
+            {
+              "signal_id": "GBPUSD_2026-05-01T01:24:00_bearish_sweep",
+              "planned_entry": 1.36034,
+              "actual_entry": 1.36035,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 857.1428571446697,
+              "realized_vs_planned_ratio": 0.8571428571446698
+            },
+            {
+              "signal_id": "GBPUSD_2026-05-01T03:08:00_bearish_sweep",
+              "planned_entry": 1.36065,
+              "actual_entry": 1.36064,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 1111.111111109192,
+              "realized_vs_planned_ratio": 1.111111111109192
+            },
+            {
+              "signal_id": "GBPUSD_2026-05-01T03:15:00_bearish_sweep",
+              "planned_entry": 1.36086,
+              "actual_entry": 1.36085,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 1166.6666666679002,
+              "realized_vs_planned_ratio": 1.1666666666679002
+            },
+            {
+              "signal_id": "GBPUSD_2026-05-01T03:46:00_bullish_sweep",
+              "planned_entry": 1.36046,
+              "actual_entry": 1.36045,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 666.6666666641995,
+              "realized_vs_planned_ratio": 0.6666666666641995
+            },
+            {
+              "signal_id": "GBPUSD_2026-05-01T04:46:00_bullish_sweep",
+              "planned_entry": 1.35977,
+              "actual_entry": 1.35971,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 400.00000000044406,
+              "realized_vs_planned_ratio": 0.40000000000044406
+            },
+            {
+              "signal_id": "GBPUSD_2026-05-01T05:50:00_bearish_sweep",
+              "planned_entry": 1.35932,
+              "actual_entry": 1.3593,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 1222.222222223867,
+              "realized_vs_planned_ratio": 1.222222222223867
+            },
+            {
+              "signal_id": "GBPUSD_2026-05-01T06:32:00_bearish_sweep",
+              "planned_entry": 1.35917,
+              "actual_entry": 1.35912,
+              "planned_risk_amount": 1000.0,
+              "realized_risk_amount": 1555.5555555547332,
+              "realized_vs_planned_ratio": 1.5555555555547333
+            }
+          ]
+        },
+        "ambiguity_examples": [
+          {
+            "signal_id": "GBPUSD_2026-05-01T03:46:00_bullish_sweep",
+            "entry_price": 1.36045,
+            "sl_price": 1.36043,
+            "tp_price": 1.3604899999999998,
+            "exit_price": 1.36043,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "GBPUSD_2026-05-01T10:18:00_bearish_sweep",
+            "entry_price": 1.3606,
+            "sl_price": 1.36061,
+            "tp_price": 1.36058,
+            "exit_price": 1.36061,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "GBPUSD_2026-05-04T00:39:00_bearish_sweep",
+            "entry_price": 1.35819,
+            "sl_price": 1.3582,
+            "tp_price": 1.3581699999999999,
+            "exit_price": 1.3582,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "GBPUSD_2026-05-04T20:42:00_bearish_sweep",
+            "entry_price": 1.35312,
+            "sl_price": 1.35317,
+            "tp_price": 1.3530200000000003,
+            "exit_price": 1.35323,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -2.2000000000017765
+          },
+          {
+            "signal_id": "GBPUSD_2026-05-07T01:26:00_bearish_sweep",
+            "entry_price": 1.36032,
+            "sl_price": 1.36037,
+            "tp_price": 1.3602199999999998,
+            "exit_price": 1.36037,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "GBPUSD_2026-05-08T03:22:00_bullish_sweep",
+            "entry_price": 1.35553,
+            "sl_price": 1.35552,
+            "tp_price": 1.3555499999999996,
+            "exit_price": 1.35552,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "GBPUSD_2026-05-11T19:05:00_bullish_sweep",
+            "entry_price": 1.36285,
+            "sl_price": 1.36284,
+            "tp_price": 1.3628699999999996,
+            "exit_price": 1.36284,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "GBPUSD_2026-05-12T05:44:00_bullish_sweep",
+            "entry_price": 1.35725,
+            "sl_price": 1.35723,
+            "tp_price": 1.3572900000000003,
+            "exit_price": 1.35723,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "GBPUSD_2026-05-12T11:34:00_bearish_sweep",
+            "entry_price": 1.35396,
+            "sl_price": 1.35403,
+            "tp_price": 1.35382,
+            "exit_price": 1.35403,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          },
+          {
+            "signal_id": "GBPUSD_2026-05-13T00:51:00_bullish_sweep",
+            "entry_price": 1.35311,
+            "sl_price": 1.3531,
+            "tp_price": 1.3531300000000002,
+            "exit_price": 1.3531,
+            "forced_pnl_r": -1.0,
+            "raw_formula_pnl_r": -1.0
+          }
+        ]
+      },
+      "equity_curve": {
+        "independent_points": 468,
+        "independent_final_r": -261.77459719982954,
+        "independent_max_drawdown": 272.47323496783093,
+        "server_curve_points": 468,
+        "server_curve_final_r": -261.7746,
+        "server_curve_max_drawdown": 272.4732,
+        "duplicate_exit_timestamps": 0
+      },
+      "signal_only": {
+        "simulate_trades": false,
+        "total_signals": 500,
+        "total_trades": 0,
+        "closed_trades_len": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate": 0.0,
+        "profit_factor": null
+      },
+      "signal_simulation_match": true,
+      "reproducibility": {
+        "direct_digest_1": "683f5aa25b6e7a417bd03a3cdcfd8e49c73707903b39938b74a481a5c66dee7e",
+        "direct_digest_2": "683f5aa25b6e7a417bd03a3cdcfd8e49c73707903b39938b74a481a5c66dee7e",
+        "direct_identical": true,
+        "server_second_run_id": "20261103T133511Z_fb0a34d2",
+        "server_comparable_identical": true
+      },
+      "finite_problems_direct": [],
+      "finite_problems_server": []
+    }
+  },
+  "multi_symbol_curve_probe": {
+    "bars": 31440,
+    "trades": 1074,
+    "duplicate_exit_timestamp_count": 55,
+    "duplicate_exit_groups": {
+      "2026-05-01T01:20:00": 2,
+      "2026-05-01T03:17:00": 2,
+      "2026-05-04T09:49:00": 2,
+      "2026-05-04T14:42:00": 2,
+      "2026-05-04T23:08:00": 2,
+      "2026-05-04T23:46:00": 2,
+      "2026-05-05T03:56:00": 2,
+      "2026-05-05T04:12:00": 2,
+      "2026-05-05T16:16:00": 2,
+      "2026-05-06T08:51:00": 2,
+      "2026-05-06T10:18:00": 2,
+      "2026-05-06T12:31:00": 2,
+      "2026-05-06T12:56:00": 2,
+      "2026-05-06T14:07:00": 2,
+      "2026-05-06T16:59:00": 2,
+      "2026-05-06T18:29:00": 2,
+      "2026-05-06T19:30:00": 2,
+      "2026-05-06T21:35:00": 2,
+      "2026-05-06T23:28:00": 2,
+      "2026-05-07T07:09:00": 2
+    },
+    "independent_curve_points": 1074,
+    "server_curve_points": 1019,
+    "independent_final_r": -552.3894511400104,
+    "server_curve_final_r": -552.3895,
+    "metrics_max_drawdown": 557.7644511400059,
+    "independent_curve_max_drawdown": 557.7644511400059,
+    "server_curve_max_drawdown": 557.7645,
+    "lossless_curve": false
+  }
+}

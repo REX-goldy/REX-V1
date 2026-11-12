@@ -1,0 +1,60 @@
+{
+  "test_id": "API-003",
+  "endpoint": "OPTIONS /api/overview",
+  "scenario": "CORS preflight",
+  "test_data": "Origin: https://preview.example.test; ACRM: GET; ACRH: content-type",
+  "expected": "200 with allow-origin and GET/content-type allowed",
+  "actual": "status=200 acao=* methods=DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, QUERY headers=content-type",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "HTTP 200",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "check": "allow-origin wildcard or origin",
+      "ok": true,
+      "detail": "*"
+    },
+    {
+      "check": "allow methods covers GET",
+      "ok": true,
+      "detail": "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, QUERY"
+    },
+    {
+      "check": "allow headers covers content-type",
+      "ok": true,
+      "detail": "content-type"
+    }
+  ],
+  "calls": [
+    {
+      "method": "OPTIONS",
+      "url": "http://127.0.0.1:16901/api/overview",
+      "params": null,
+      "request_body": null,
+      "request_headers": {
+        "Origin": "https://preview.example.test",
+        "Access-Control-Request-Method": "GET",
+        "Access-Control-Request-Headers": "content-type"
+      },
+      "duration_ms": 1.8,
+      "status_code": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "response_headers": {
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, QUERY",
+        "access-control-allow-headers": "content-type",
+        "content-length": "2",
+        "content-type": "text/plain; charset=utf-8"
+      },
+      "response_text_sha256": "565339bc4d33d72817b583024112eb7f5cdf3e5eef0252d6ec1b9c9a94e12bb3",
+      "response_bytes": 2,
+      "response_text": "OK",
+      "response_kind": "text"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:23.747924+00:00"
+}

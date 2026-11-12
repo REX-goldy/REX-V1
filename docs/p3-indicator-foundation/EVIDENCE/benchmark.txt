@@ -1,0 +1,8 @@
+P3.1 Stage 1 benchmark
+dataset=EURUSD/M1/2026 bars=184963
+feature packs=default (includes indicator series window=2048)
+
+bars=20000 elapsed=1.675s series=15 series_window=2048 schema=752bb7325c2c2706212eb2eeb1c7377496e21708038c0ea078732066e360cbb0
+bars=184963 elapsed=15.354s series=15 series_window=2048 schema=752bb7325c2c2706212eb2eeb1c7377496e21708038c0ea078732066e360cbb0
+repeated_elapsed=15.156s cache=disabled (Stage 1 exclusion)
+tracemalloc_elapsed=72.665s peak=107.3MiB note=instrumented

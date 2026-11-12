@@ -1,0 +1,8 @@
+.........................................................................................Provider key store failure: Provider key store is not valid JSON
+Provider key store failure: Provider key store is not valid JSON
+....
+----------------------------------------------------------------------
+Ran 93 tests in 0.315s
+
+OK
+exit=0

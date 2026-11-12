@@ -1,0 +1,117 @@
+{
+  "schema_version": "ui_run_v1",
+  "id": "20261103T133732Z_c61a4444",
+  "created_at": "2026-11-03T13:37:32.694071+00:00",
+  "dataset_id": "GBPUSD/M1/2026",
+  "dataset": {
+    "id": "GBPUSD/M1/2026",
+    "symbol": "GBPUSD",
+    "timeframe": "M1",
+    "year": 2026,
+    "provider": "twelve_data",
+    "path": "data/historical/GBPUSD/M1/2026.csv",
+    "bar_count": 93600,
+    "size_bytes": 5012055,
+    "status": "ok",
+    "warnings": [],
+    "coverage": {
+      "start": "2026-04-01",
+      "end": "2026-06-30",
+      "requested_start": "2026-04-01",
+      "requested_end": "2026-06-30",
+      "actual_start": "2026-04-01T00:00:00",
+      "actual_end": "2026-06-30T23:59:00",
+      "retrieved_at": "2026-10-30T06:49:26.350860+00:00"
+    },
+    "quality": {
+      "duplicate_count": 0,
+      "invalid_bar_count": 0,
+      "timestamp_gap_count": 13,
+      "unexpected_gap_count": 0,
+      "notes": [
+        "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+        "Gap count is raw timestamp spacing, not session-aware missing bars."
+      ]
+    },
+    "first_timestamp": "2026-04-01T00:00:00",
+    "last_timestamp": "2026-06-30T23:59:00",
+    "derived": false,
+    "available_timeframes": [
+      "M1",
+      "M5",
+      "M15",
+      "H1",
+      "H4"
+    ]
+  },
+  "strategy": {
+    "id": "CORE_ZONE_BREAKOUT",
+    "name": "Existing Zone Breakout",
+    "description": "Existing stateful support/resistance interaction strategy."
+  },
+  "parameters": {},
+  "request": {
+    "start": "2026-04-01",
+    "end": "2026-04-02",
+    "timeframe": "M1",
+    "r_multiple": 2.0,
+    "equity": 100000.0,
+    "risk_fraction": 0.01
+  },
+  "range": {
+    "start": "2026-04-01",
+    "end": "2026-04-02",
+    "bar_count": 2880,
+    "gap_count": 0
+  },
+  "bar_count": 2880,
+  "simulated": false,
+  "metrics": {
+    "total_signals": 2880,
+    "total_trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0.0,
+    "profit_factor": null,
+    "expectancy": 0.0,
+    "max_drawdown_r": 0.0,
+    "largest_win": 0.0,
+    "largest_loss": 0.0,
+    "ambiguous_exits": 0,
+    "avg_holding_duration": 0.0
+  },
+  "reconciliation": {
+    "generated": 2880,
+    "accepted": 0,
+    "ignored": 0,
+    "rejected": 0,
+    "difference": 2880
+  },
+  "signals": {
+    "total": 2880,
+    "by_type": {
+      "close_outside": 2880
+    }
+  },
+  "equity_curve": {
+    "equity": [],
+    "drawdown": []
+  },
+  "trade_distribution": [],
+  "trades": [],
+  "trades_truncated": false,
+  "warnings": [
+    "Signal study only: this strategy has no trade-simulation factory.",
+    "Zone levels are static manual annotations without confirmation timestamps."
+  ],
+  "warning_count": 2,
+  "assumptions": {
+    "costs_applied": false,
+    "entry_model": "next candle open",
+    "timestamps": "naive UTC",
+    "zone_source": "manual/static",
+    "result_units": "R-multiples",
+    "timeframe": "M1",
+    "derived_timeframe": false
+  }
+}

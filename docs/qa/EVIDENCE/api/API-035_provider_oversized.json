@@ -1,0 +1,125 @@
+{
+  "test_id": "API-035",
+  "endpoint": "/api/settings/providers/{id}",
+  "scenario": "Oversized/boundary key",
+  "test_data": "PUT 513 x's then 512 b's",
+  "expected": "400 >512; 512 accepted and masked; cleanup delete",
+  "actual": "oversized=400 {\"detail\":\"API key cannot be longer than 512 characters\"}; boundary=200 hint=bbbb; cleanup=200",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "513 chars 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "detail mentions 512",
+      "ok": true,
+      "detail": "{'detail': 'API key cannot be longer than 512 characters'}"
+    },
+    {
+      "check": "512 chars accepted 200",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "check": "512 hint last4",
+      "ok": true,
+      "detail": "bbbb"
+    },
+    {
+      "check": "512 full key absent",
+      "ok": true,
+      "detail": "full key absent"
+    },
+    {
+      "check": "cleanup delete 200",
+      "ok": true,
+      "detail": "200"
+    }
+  ],
+  "calls": [
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": {
+        "api_key": "<redacted>"
+      },
+      "request_headers": {},
+      "duration_ms": 1.7,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "57",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "507813f60eeaf836113873ba091cdad66e0436258a3a6e15a09f560e02001859",
+      "response_bytes": 57,
+      "response_json": {
+        "detail": "API key cannot be longer than 512 characters"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": {
+        "api_key": "<redacted>"
+      },
+      "request_headers": {},
+      "duration_ms": 2.9,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "237",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "58a77023bc6d590bcdb1326d0af0568c508655e8bdea80136322edd7ec845e8e",
+      "response_bytes": 237,
+      "response_json": {
+        "id": "twelve_data",
+        "name": "Twelve Data",
+        "description": "Twelve Data historical M1 candles",
+        "env_var": "TWELVE_DATA_API_KEY",
+        "required": true,
+        "configured": true,
+        "source": "stored",
+        "hint": "bbbb",
+        "updated_at": "2026-11-03T13:38:25.073661+00:00"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "DELETE",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.6,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "212",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "c0e851844f78b0436375303327fa63b4341833cbb39813752e33055ee233b1a3",
+      "response_bytes": 212,
+      "response_json": {
+        "id": "twelve_data",
+        "name": "Twelve Data",
+        "description": "Twelve Data historical M1 candles",
+        "env_var": "TWELVE_DATA_API_KEY",
+        "required": true,
+        "configured": true,
+        "source": "environment",
+        "hint": "0001",
+        "updated_at": null
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.078259+00:00"
+}

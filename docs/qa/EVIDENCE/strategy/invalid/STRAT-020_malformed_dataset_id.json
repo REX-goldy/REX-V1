@@ -1,0 +1,9 @@
+{
+  "test_id": "STRAT-020",
+  "label": "malformed_dataset_id",
+  "scenario": "Malformed dataset id",
+  "data_config": "EURUSD/M1 (two components)",
+  "expected": "DatasetNotFoundError stating id must be SYMBOL/TIMEFRAME/YEAR.",
+  "actual": "DatasetNotFoundError: Dataset id must be SYMBOL/TIMEFRAME/YEAR",
+  "status": "PASS"
+}

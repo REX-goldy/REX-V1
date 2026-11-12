@@ -1,0 +1,9 @@
+{
+  "test_id": "STRAT-021",
+  "label": "unsupported_instrument_runner",
+  "scenario": "Unsupported instrument at runner boundary",
+  "data_config": "Direct BacktestRunner with symbol ZZZUSD",
+  "expected": "BacktestDataError naming the unsupported symbol.",
+  "actual": "BacktestDataError: Unsupported backtest symbol 'ZZZUSD'. Supported: ['AUDUSD', 'EURUSD', 'GBPUSD', 'NZDUSD', 'USDCAD', 'USDCHF', 'USDJPY', 'XAUUSD']",
+  "status": "PASS"
+}

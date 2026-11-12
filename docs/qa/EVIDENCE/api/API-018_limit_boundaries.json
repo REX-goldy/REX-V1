@@ -1,0 +1,268 @@
+{
+  "test_id": "API-018",
+  "endpoint": "/api/bars|runs",
+  "scenario": "Limit boundaries",
+  "test_data": "bars 0/5001/-1 and 1; runs 0/101",
+  "expected": "422 for out-of-range, 200 for limit=1",
+  "actual": "bars:0=422; bars:5001=422; bars:-1=422; bars:1=200/n=1; runs:0=422; runs:101=422",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "bars limit=0 422",
+      "ok": true,
+      "detail": "422"
+    },
+    {
+      "check": "bars limit=0 detail list",
+      "ok": true,
+      "detail": "{'detail': [{'type': 'greater_than_equal', 'loc': ['query', 'limit'], 'msg': 'Input should be greater than or equal to 1', 'input': '0', 'ctx': {'ge': 1}}]}"
+    },
+    {
+      "check": "bars limit=5001 422",
+      "ok": true,
+      "detail": "422"
+    },
+    {
+      "check": "bars limit=5001 detail list",
+      "ok": true,
+      "detail": "{'detail': [{'type': 'less_than_equal', 'loc': ['query', 'limit'], 'msg': 'Input should be less than or equal to 5000', 'input': '5001', 'ctx': {'le': 5000}}]}"
+    },
+    {
+      "check": "bars limit=-1 422",
+      "ok": true,
+      "detail": "422"
+    },
+    {
+      "check": "bars limit=-1 detail list",
+      "ok": true,
+      "detail": "{'detail': [{'type': 'greater_than_equal', 'loc': ['query', 'limit'], 'msg': 'Input should be greater than or equal to 1', 'input': '-1', 'ctx': {'ge': 1}}]}"
+    },
+    {
+      "check": "bars limit=1 200 len1",
+      "ok": true,
+      "detail": "(200, 1)"
+    },
+    {
+      "check": "runs limit=0 422",
+      "ok": true,
+      "detail": "422"
+    },
+    {
+      "check": "runs limit=101 422",
+      "ok": true,
+      "detail": "422"
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/bars",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "limit": 0
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 3.1,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "144",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "a9234848bb181df473de085cf69d1a2bd1e4a51d1c8795e4707d4b66cbb97440",
+      "response_bytes": 144,
+      "response_json": {
+        "detail": [
+          {
+            "type": "greater_than_equal",
+            "loc": [
+              "query",
+              "limit"
+            ],
+            "msg": "Input should be greater than or equal to 1",
+            "input": "0",
+            "ctx": {
+              "ge": 1
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/bars",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "limit": 5001
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 3.6,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "147",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "f2cae314bbdd1f6d3bae914bf851665336e3cf5e91241ab6ba264b42d9080884",
+      "response_bytes": 147,
+      "response_json": {
+        "detail": [
+          {
+            "type": "less_than_equal",
+            "loc": [
+              "query",
+              "limit"
+            ],
+            "msg": "Input should be less than or equal to 5000",
+            "input": "5001",
+            "ctx": {
+              "le": 5000
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/bars",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "limit": -1
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.8,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "145",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "87e0c4936b97be2f4a586f0b6a3b1ba08c495f08edb3ac10235bcc2783bb8258",
+      "response_bytes": 145,
+      "response_json": {
+        "detail": [
+          {
+            "type": "greater_than_equal",
+            "loc": [
+              "query",
+              "limit"
+            ],
+            "msg": "Input should be greater than or equal to 1",
+            "input": "-1",
+            "ctx": {
+              "ge": 1
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/bars",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "limit": 1
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 8.8,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "94",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "f775bd667658e0d3cadc2ed00f856c3431ae4101a36c6b77bf8d788344c9eab1",
+      "response_bytes": 94,
+      "response_json": [
+        {
+          "time": 1782863940,
+          "open": 1.1413,
+          "high": 1.14132,
+          "low": 1.14129,
+          "close": 1.14132,
+          "volume": null
+        }
+      ],
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/runs",
+      "params": {
+        "limit": 0
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.2,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "144",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "a9234848bb181df473de085cf69d1a2bd1e4a51d1c8795e4707d4b66cbb97440",
+      "response_bytes": 144,
+      "response_json": {
+        "detail": [
+          {
+            "type": "greater_than_equal",
+            "loc": [
+              "query",
+              "limit"
+            ],
+            "msg": "Input should be greater than or equal to 1",
+            "input": "0",
+            "ctx": {
+              "ge": 1
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/runs",
+      "params": {
+        "limit": 101
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 1.7,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "144",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "621be3f0e19eac324192856099df6c13a42bebff7485558e5e0ebb0373fdaceb",
+      "response_bytes": 144,
+      "response_json": {
+        "detail": [
+          {
+            "type": "less_than_equal",
+            "loc": [
+              "query",
+              "limit"
+            ],
+            "msg": "Input should be less than or equal to 100",
+            "input": "101",
+            "ctx": {
+              "le": 100
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.465283+00:00"
+}

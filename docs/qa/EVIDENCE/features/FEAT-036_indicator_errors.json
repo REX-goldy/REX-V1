@@ -1,0 +1,5 @@
+{
+  "empty_bars_sma": "ValueError: bars must be a non-empty sequence",
+  "three_bars_sma_length20_all_nan": true,
+  "one_bar_pack_all_none": true
+}

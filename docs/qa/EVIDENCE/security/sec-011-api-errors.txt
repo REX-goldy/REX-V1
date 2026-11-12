@@ -1,0 +1,6 @@
+# SEC-011 Unknown provider -> 404, invalid key -> 400, submitted secret never echoed
+component: server/main.py
+test_data: ghost provider; blank/newline/513-char keys
+expected: 404/400 and detail strings exclude submitted key
+actual: unknown:404:"Unknown provider: 'ghost'"; invalid:400:'API key cannot be empty'; invalid:400:'API key cannot contain control characters or newlines'; invalid:400:'API key cannot be longer than 512 characters'
+status: PASS

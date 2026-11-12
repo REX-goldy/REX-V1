@@ -1,0 +1,134 @@
+{
+  "datasets": [
+    {
+      "dataset": "EURUSD",
+      "raw_rows": 184963,
+      "parsed_rows": 184963,
+      "parser_count_match": true,
+      "parser_value_mismatches": 0,
+      "deterministic_repeat_load": true,
+      "assess_dataset_quality": {
+        "instrument": "EURUSD",
+        "timeframe": "M1",
+        "provider": "twelve_data",
+        "first_timestamp": "2026-01-01T13:00:00",
+        "last_timestamp": "2026-06-30T23:59:00",
+        "bar_count": 184963,
+        "duplicate_count": 0,
+        "invalid_bar_count": 0,
+        "timestamp_gap_count": 35,
+        "coverage_start": "2026-01-01",
+        "coverage_end": "2026-06-30",
+        "notes": [
+          "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+          "Gap count is raw timestamp spacing, not session-aware missing bars."
+        ]
+      },
+      "source_sha256_before": "65cab86789eb82393f4d54e130d7cbeb1358db869c40814d52058dc130ec4208"
+    },
+    {
+      "dataset": "GBPUSD",
+      "raw_rows": 93600,
+      "parsed_rows": 93600,
+      "parser_count_match": true,
+      "parser_value_mismatches": 0,
+      "deterministic_repeat_load": true,
+      "assess_dataset_quality": {
+        "instrument": "GBPUSD",
+        "timeframe": "M1",
+        "provider": "twelve_data",
+        "first_timestamp": "2026-04-01T00:00:00",
+        "last_timestamp": "2026-06-30T23:59:00",
+        "bar_count": 93600,
+        "duplicate_count": 0,
+        "invalid_bar_count": 0,
+        "timestamp_gap_count": 13,
+        "coverage_start": "2026-04-01",
+        "coverage_end": "2026-06-30",
+        "notes": [
+          "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+          "Gap count is raw timestamp spacing, not session-aware missing bars."
+        ]
+      },
+      "source_sha256_before": "7d1b1d3df6cfbd40a43eea99034811e9fe9758a1b47d2b596e5b8cad3bb6a62b"
+    },
+    {
+      "dataset": "AUDUSD",
+      "raw_rows": 93600,
+      "parsed_rows": 93600,
+      "parser_count_match": true,
+      "parser_value_mismatches": 0,
+      "deterministic_repeat_load": true,
+      "assess_dataset_quality": {
+        "instrument": "AUDUSD",
+        "timeframe": "M1",
+        "provider": "twelve_data",
+        "first_timestamp": "2026-04-01T00:00:00",
+        "last_timestamp": "2026-06-30T23:59:00",
+        "bar_count": 93600,
+        "duplicate_count": 0,
+        "invalid_bar_count": 0,
+        "timestamp_gap_count": 13,
+        "coverage_start": "2026-04-01",
+        "coverage_end": "2026-06-30",
+        "notes": [
+          "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+          "Gap count is raw timestamp spacing, not session-aware missing bars."
+        ]
+      },
+      "source_sha256_before": "d315a52fd48b2792a1e2b4b51e02205f9e9517dec62b2eb3181417650119d557"
+    },
+    {
+      "dataset": "USDJPY",
+      "raw_rows": 93600,
+      "parsed_rows": 93600,
+      "parser_count_match": true,
+      "parser_value_mismatches": 0,
+      "deterministic_repeat_load": true,
+      "assess_dataset_quality": {
+        "instrument": "USDJPY",
+        "timeframe": "M1",
+        "provider": "twelve_data",
+        "first_timestamp": "2026-04-01T00:00:00",
+        "last_timestamp": "2026-06-30T23:59:00",
+        "bar_count": 93600,
+        "duplicate_count": 0,
+        "invalid_bar_count": 0,
+        "timestamp_gap_count": 13,
+        "coverage_start": "2026-04-01",
+        "coverage_end": "2026-06-30",
+        "notes": [
+          "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+          "Gap count is raw timestamp spacing, not session-aware missing bars."
+        ]
+      },
+      "source_sha256_before": "b252bbc12ac36092e6f1c8f5c8668074c9e4e948d3a94408f1533e75968d004c"
+    },
+    {
+      "dataset": "USDCAD",
+      "raw_rows": 93600,
+      "parsed_rows": 93600,
+      "parser_count_match": true,
+      "parser_value_mismatches": 0,
+      "deterministic_repeat_load": true,
+      "assess_dataset_quality": {
+        "instrument": "USDCAD",
+        "timeframe": "M1",
+        "provider": "twelve_data",
+        "first_timestamp": "2026-04-01T00:00:00",
+        "last_timestamp": "2026-06-30T23:59:00",
+        "bar_count": 93600,
+        "duplicate_count": 0,
+        "invalid_bar_count": 0,
+        "timestamp_gap_count": 13,
+        "coverage_start": "2026-04-01",
+        "coverage_end": "2026-06-30",
+        "notes": [
+          "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+          "Gap count is raw timestamp spacing, not session-aware missing bars."
+        ]
+      },
+      "source_sha256_before": "b7cc92578d76b34151ae3628121758767fc68a2eb47261a50ec3880374a5f55d"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "real_data": "EURUSD M1 week 2026-01-04 22:00:00 .. 2026-01-09 21:59:00",
+  "asof": "2026-01-09T22:00:00+00:00",
+  "resampler_version": "free_ohlc_resample_v1",
+  "comparisons": {
+    "M15": {
+      "causal_count": 480,
+      "resampled_count": 480,
+      "common_count": 480,
+      "only_causal": [],
+      "only_resampled": [],
+      "only_causal_count": 0,
+      "only_resampled_count": 0,
+      "common_mismatches": [],
+      "common_mismatch_count": 0,
+      "all_causal_completed_by_asof": true
+    },
+    "M30": {
+      "causal_count": 240,
+      "resampled_count": 240,
+      "common_count": 240,
+      "only_causal": [],
+      "only_resampled": [],
+      "only_causal_count": 0,
+      "only_resampled_count": 0,
+      "common_mismatches": [],
+      "common_mismatch_count": 0,
+      "all_causal_completed_by_asof": true
+    },
+    "H1": {
+      "causal_count": 120,
+      "resampled_count": 120,
+      "common_count": 120,
+      "only_causal": [],
+      "only_resampled": [],
+      "only_causal_count": 0,
+      "only_resampled_count": 0,
+      "common_mismatches": [],
+      "common_mismatch_count": 0,
+      "all_causal_completed_by_asof": true
+    },
+    "H4": {
+      "causal_count": 29,
+      "resampled_count": 31,
+      "common_count": 29,
+      "only_causal": [],
+      "only_resampled": [
+        "2026-01-04T20:00:00",
+        "2026-01-09T20:00:00"
+      ],
+      "only_causal_count": 0,
+      "only_resampled_count": 2,
+      "common_mismatches": [],
+      "common_mismatch_count": 0,
+      "all_causal_completed_by_asof": true
+    },
+    "D1": {
+      "causal_count": 4,
+      "resampled_count": 6,
+      "common_count": 4,
+      "only_causal": [],
+      "only_resampled": [
+        "2026-01-04T00:00:00",
+        "2026-01-09T00:00:00"
+      ],
+      "only_causal_count": 0,
+      "only_resampled_count": 2,
+      "common_mismatches": [],
+      "common_mismatch_count": 0,
+      "all_causal_completed_by_asof": true
+    }
+  }
+}

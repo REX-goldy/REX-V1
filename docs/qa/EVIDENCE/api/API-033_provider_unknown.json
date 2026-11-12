@@ -1,0 +1,72 @@
+{
+  "test_id": "API-033",
+  "endpoint": "/api/settings/providers/{id}",
+  "scenario": "Unknown provider",
+  "test_data": "PUT and DELETE /api/settings/providers/nope",
+  "expected": "404 Unknown provider on both",
+  "actual": "PUT=404 {\"detail\":\"Unknown provider: 'nope'\"}; DELETE=404 {\"detail\":\"Unknown provider: 'nope'\"}",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "PUT unknown 404",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "PUT unknown detail",
+      "ok": true,
+      "detail": "{'detail': \"Unknown provider: 'nope'\"}"
+    },
+    {
+      "check": "DELETE unknown 404",
+      "ok": true,
+      "detail": "404"
+    }
+  ],
+  "calls": [
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:16902/api/settings/providers/nope",
+      "params": null,
+      "request_body": {
+        "api_key": "<redacted>"
+      },
+      "request_headers": {},
+      "duration_ms": 2.2,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "37",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "13accb17ea70cfe668c31a9ceb06439872b00e2164272de5453c5da00fb6ed83",
+      "response_bytes": 37,
+      "response_json": {
+        "detail": "Unknown provider: 'nope'"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "DELETE",
+      "url": "http://127.0.0.1:16902/api/settings/providers/nope",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 1.8,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "37",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "13accb17ea70cfe668c31a9ceb06439872b00e2164272de5453c5da00fb6ed83",
+      "response_bytes": 37,
+      "response_json": {
+        "detail": "Unknown provider: 'nope'"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.066767+00:00"
+}

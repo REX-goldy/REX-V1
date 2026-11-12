@@ -1,0 +1,14 @@
+{
+  "test_id": "STRAT-040",
+  "title": "UI/API path for AUDUSD + zone-requiring strategy",
+  "ui_references": [
+    "frontend/src/pages/ResearchPage.tsx:428-470 instrument/timeframe/dataset selectors are independent",
+    "frontend/src/pages/ResearchPage.tsx:607-617 strategy selector lists every strategy, including requires_zones=true",
+    "frontend/src/pages/ResearchPage.tsx:261-324 submit() validates dataset/strategy presence, range, R, equity, risk; it does not check zone availability and sends POST /backtests",
+    "frontend/src/api.ts:15-31 request() surfaces payload.detail as the thrown Error message; ResearchPage sets formError",
+    "frontend/src/pages/ResearchPage.tsx:703-707 selectedStrategy.note is shown, but it does not say which instruments have zone books",
+    "server/research_service.py:193-208 /api/strategies exposes requires_zones only; no per-symbol zone catalog endpoint exists",
+    "frontend/src/content/handbook.ts:1141 documents a missing zone book as an expected troubleshooting case"
+  ],
+  "conclusion": "The server guard is correct and the UI surfaces the 400 detail. The application cannot pre-validate because no zone-availability API is exposed; this is a UX/integration gap, not a strategy or engine bug."
+}

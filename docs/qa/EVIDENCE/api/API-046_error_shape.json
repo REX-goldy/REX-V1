@@ -1,0 +1,874 @@
+{
+  "test_id": "API-046",
+  "endpoint": "multiple",
+  "scenario": "Error content type and detail",
+  "test_data": "all captured 4xx/5xx samples",
+  "expected": "application/json with detail string/list",
+  "actual": "samples=['404:/api/runs/does-not-exist_123', '404:/api/runs/bad!id', '404:/api/dataset', '404:/api/frame', '404:/api/range', '404:/api/bars', '404:/api/dataset', '404:/api/dataset', '404:/api/dataset', '404:/api/dataset', '404:/api/dataset', '404:/api/dataset', '404:/api/dataset', '400:/api/dataset', '400:/api/bars', '400:/api/backtests', '422:/api/bars', '422:/api/bars', '422:/api/bars', '422:/api/runs', '422:/api/runs', '400:/api/bars', '422:/api/bars', '400:/api/backtests', '422:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '422:/api/backtests', '422:/api/backtests', '422:/api/backtests', '422:/api/backtests', '422:/api/backtests', '422:/api/backtests', '404:/api/settings/providers/nope', '404:/api/settings/providers/nope', '400:/api/settings/providers/twelve_data', '400:/api/settings/providers/twelve_data', '400:/api/settings/providers/twelve_data', '400:/api/settings/providers/twelve_data', '400:/api/settings/providers/twelve_data', '400:/api/settings/providers/twelve_data', '400:/api/settings/providers/twelve_data', '422:/api/downloads', '400:/api/downloads', '400:/api/downloads', '400:/api/downloads', '400:/api/downloads', '400:/api/downloads', '400:/api/downloads', '503:/api/downloads']",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "have >=6 error samples",
+      "ok": true,
+      "detail": "57"
+    },
+    {
+      "check": "/api/runs/does-not-exist_123 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/runs/does-not-exist_123 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Run not found\"}"
+    },
+    {
+      "check": "/api/runs/does-not-exist_123 404 detail string",
+      "ok": true,
+      "detail": "Run not found"
+    },
+    {
+      "check": "/api/runs/bad!id 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/runs/bad!id 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Invalid run id\"}"
+    },
+    {
+      "check": "/api/runs/bad!id 404 detail string",
+      "ok": true,
+      "detail": "Invalid run id"
+    },
+    {
+      "check": "/api/dataset 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/dataset 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Dataset not found: NOPE/M1/2026\"}"
+    },
+    {
+      "check": "/api/dataset 404 detail string",
+      "ok": true,
+      "detail": "Dataset not found: NOPE/M1/2026"
+    },
+    {
+      "check": "/api/frame 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/frame 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Dataset not found: NOPE/M1/2026\"}"
+    },
+    {
+      "check": "/api/frame 404 detail string",
+      "ok": true,
+      "detail": "Dataset not found: NOPE/M1/2026"
+    },
+    {
+      "check": "/api/range 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/range 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Dataset not found: NOPE/M1/2026\"}"
+    },
+    {
+      "check": "/api/range 404 detail string",
+      "ok": true,
+      "detail": "Dataset not found: NOPE/M1/2026"
+    },
+    {
+      "check": "/api/bars 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/bars 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Dataset not found: NOPE/M1/2026\"}"
+    },
+    {
+      "check": "/api/bars 404 detail string",
+      "ok": true,
+      "detail": "Dataset not found: NOPE/M1/2026"
+    },
+    {
+      "check": "/api/dataset 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/dataset 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Dataset id must be SYMBOL/TIMEFRAME/YEAR\"}"
+    },
+    {
+      "check": "/api/dataset 404 detail string",
+      "ok": true,
+      "detail": "Dataset id must be SYMBOL/TIMEFRAME/YEAR"
+    },
+    {
+      "check": "/api/dataset 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/dataset 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Dataset id must be SYMBOL/TIMEFRAME/YEAR\"}"
+    },
+    {
+      "check": "/api/dataset 404 detail string",
+      "ok": true,
+      "detail": "Dataset id must be SYMBOL/TIMEFRAME/YEAR"
+    },
+    {
+      "check": "/api/dataset 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/dataset 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Dataset id must be SYMBOL/TIMEFRAME/YEAR\"}"
+    },
+    {
+      "check": "/api/dataset 404 detail string",
+      "ok": true,
+      "detail": "Dataset id must be SYMBOL/TIMEFRAME/YEAR"
+    },
+    {
+      "check": "/api/dataset 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/dataset 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Dataset id must be SYMBOL/TIMEFRAME/YEAR\"}"
+    },
+    {
+      "check": "/api/dataset 404 detail string",
+      "ok": true,
+      "detail": "Dataset id must be SYMBOL/TIMEFRAME/YEAR"
+    },
+    {
+      "check": "/api/dataset 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/dataset 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Dataset year is invalid\"}"
+    },
+    {
+      "check": "/api/dataset 404 detail string",
+      "ok": true,
+      "detail": "Dataset year is invalid"
+    },
+    {
+      "check": "/api/dataset 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/dataset 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Dataset not found: EURUSD/M1/1990\"}"
+    },
+    {
+      "check": "/api/dataset 404 detail string",
+      "ok": true,
+      "detail": "Dataset not found: EURUSD/M1/1990"
+    },
+    {
+      "check": "/api/dataset 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/dataset 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Dataset year is invalid\"}"
+    },
+    {
+      "check": "/api/dataset 404 detail string",
+      "ok": true,
+      "detail": "Dataset year is invalid"
+    },
+    {
+      "check": "/api/dataset 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/dataset 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Timeframe must be one of: M1, M5, M15, H1, H4\"}"
+    },
+    {
+      "check": "/api/dataset 400 detail string",
+      "ok": true,
+      "detail": "Timeframe must be one of: M1, M5, M15, H1, H4"
+    },
+    {
+      "check": "/api/bars 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/bars 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Timeframe must be one of: M1, M5, M15, H1, H4\"}"
+    },
+    {
+      "check": "/api/bars 400 detail string",
+      "ok": true,
+      "detail": "Timeframe must be one of: M1, M5, M15, H1, H4"
+    },
+    {
+      "check": "/api/backtests 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Timeframe must be one of: M1, M5, M15, H1, H4\"}"
+    },
+    {
+      "check": "/api/backtests 400 detail string",
+      "ok": true,
+      "detail": "Timeframe must be one of: M1, M5, M15, H1, H4"
+    },
+    {
+      "check": "/api/bars 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/bars 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"greater_than_equal\",\"loc\":[\"query\",\"limit\"],\"msg\":\"Input should be greater than or equal to 1\",\"inpu...<truncated>"
+    },
+    {
+      "check": "/api/bars 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/bars 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/bars 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"query\",\"limit\"],\"msg\":\"Input should be less than or equal to 5000\",\"input\":...<truncated>"
+    },
+    {
+      "check": "/api/bars 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/bars 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/bars 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"greater_than_equal\",\"loc\":[\"query\",\"limit\"],\"msg\":\"Input should be greater than or equal to 1\",\"inpu...<truncated>"
+    },
+    {
+      "check": "/api/bars 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/runs 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/runs 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"greater_than_equal\",\"loc\":[\"query\",\"limit\"],\"msg\":\"Input should be greater than or equal to 1\",\"inpu...<truncated>"
+    },
+    {
+      "check": "/api/runs 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/runs 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/runs 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"query\",\"limit\"],\"msg\":\"Input should be less than or equal to 100\",\"input\":\"...<truncated>"
+    },
+    {
+      "check": "/api/runs 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/bars 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/bars 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"start_date cannot be after end_date\"}"
+    },
+    {
+      "check": "/api/bars 400 detail string",
+      "ok": true,
+      "detail": "start_date cannot be after end_date"
+    },
+    {
+      "check": "/api/bars 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/bars 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"date_from_datetime_parsing\",\"loc\":[\"query\",\"start\"],\"msg\":\"Input should be a valid date or datetime,...<truncated>"
+    },
+    {
+      "check": "/api/bars 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/backtests 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Start date is after the end date.\"}"
+    },
+    {
+      "check": "/api/backtests 400 detail string",
+      "ok": true,
+      "detail": "Start date is after the end date."
+    },
+    {
+      "check": "/api/backtests 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"date_from_datetime_parsing\",\"loc\":[\"body\",\"start_date\"],\"msg\":\"Input should be a valid date or datet...<truncated>"
+    },
+    {
+      "check": "/api/backtests 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/backtests 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Strategy 'NOPE' is not exposed in the UI\"}"
+    },
+    {
+      "check": "/api/backtests 400 detail string",
+      "ok": true,
+      "detail": "Strategy 'NOPE' is not exposed in the UI"
+    },
+    {
+      "check": "/api/backtests 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"lookback must be >= 2\"}"
+    },
+    {
+      "check": "/api/backtests 400 detail string",
+      "ok": true,
+      "detail": "lookback must be >= 2"
+    },
+    {
+      "check": "/api/backtests 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"lookback must be an integer\"}"
+    },
+    {
+      "check": "/api/backtests 400 detail string",
+      "ok": true,
+      "detail": "lookback must be an integer"
+    },
+    {
+      "check": "/api/backtests 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Unknown parameters: foo\"}"
+    },
+    {
+      "check": "/api/backtests 400 detail string",
+      "ok": true,
+      "detail": "Unknown parameters: foo"
+    },
+    {
+      "check": "/api/backtests 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"min_wick_ratio must be <= 1.0\"}"
+    },
+    {
+      "check": "/api/backtests 400 detail string",
+      "ok": true,
+      "detail": "min_wick_ratio must be <= 1.0"
+    },
+    {
+      "check": "/api/backtests 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"tolerance must be >= 0.0\"}"
+    },
+    {
+      "check": "/api/backtests 400 detail string",
+      "ok": true,
+      "detail": "tolerance must be >= 0.0"
+    },
+    {
+      "check": "/api/backtests 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"lookback must be an integer\"}"
+    },
+    {
+      "check": "/api/backtests 400 detail string",
+      "ok": true,
+      "detail": "lookback must be an integer"
+    },
+    {
+      "check": "/api/backtests 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"No zone book is configured for AUDUSD in config/zones.json\"}"
+    },
+    {
+      "check": "/api/backtests 400 detail string",
+      "ok": true,
+      "detail": "No zone book is configured for AUDUSD in config/zones.json"
+    },
+    {
+      "check": "/api/backtests 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"End date 2026-07-02 is after the last available M1 bar (2026-06-30).\"}"
+    },
+    {
+      "check": "/api/backtests 400 detail string",
+      "ok": true,
+      "detail": "End date 2026-07-02 is after the last available M1 bar (2026-06-30)."
+    },
+    {
+      "check": "/api/backtests 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"greater_than\",\"loc\":[\"body\",\"r_multiple\"],\"msg\":\"Input should be greater than 0\",\"input\":0,\"ctx\":{\"g...<truncated>"
+    },
+    {
+      "check": "/api/backtests 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/backtests 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"body\",\"r_multiple\"],\"msg\":\"Input should be less than or equal to 100\",\"inpu...<truncated>"
+    },
+    {
+      "check": "/api/backtests 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/backtests 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"less_than_equal\",\"loc\":[\"body\",\"risk_fraction\"],\"msg\":\"Input should be less than or equal to 0.1\",\"i...<truncated>"
+    },
+    {
+      "check": "/api/backtests 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/backtests 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"greater_than\",\"loc\":[\"body\",\"risk_fraction\"],\"msg\":\"Input should be greater than 0\",\"input\":0,\"ctx\":...<truncated>"
+    },
+    {
+      "check": "/api/backtests 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/backtests 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"greater_than\",\"loc\":[\"body\",\"equity\"],\"msg\":\"Input should be greater than 0\",\"input\":0,\"ctx\":{\"gt\":0...<truncated>"
+    },
+    {
+      "check": "/api/backtests 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/backtests 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/backtests 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"greater_than\",\"loc\":[\"body\",\"equity\"],\"msg\":\"Input should be greater than 0\",\"input\":-5,\"ctx\":{\"gt\":...<truncated>"
+    },
+    {
+      "check": "/api/backtests 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/settings/providers/nope 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/settings/providers/nope 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Unknown provider: 'nope'\"}"
+    },
+    {
+      "check": "/api/settings/providers/nope 404 detail string",
+      "ok": true,
+      "detail": "Unknown provider: 'nope'"
+    },
+    {
+      "check": "/api/settings/providers/nope 404 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/settings/providers/nope 404 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Unknown provider: 'nope'\"}"
+    },
+    {
+      "check": "/api/settings/providers/nope 404 detail string",
+      "ok": true,
+      "detail": "Unknown provider: 'nope'"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"API key cannot be empty\"}"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 detail string",
+      "ok": true,
+      "detail": "API key cannot be empty"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"API key cannot be empty\"}"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 detail string",
+      "ok": true,
+      "detail": "API key cannot be empty"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"API key cannot be longer than 512 characters\"}"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 detail string",
+      "ok": true,
+      "detail": "API key cannot be longer than 512 characters"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"API key cannot contain control characters or newlines\"}"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 detail string",
+      "ok": true,
+      "detail": "API key cannot contain control characters or newlines"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"API key cannot contain control characters or newlines\"}"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 detail string",
+      "ok": true,
+      "detail": "API key cannot contain control characters or newlines"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"API key cannot contain control characters or newlines\"}"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 detail string",
+      "ok": true,
+      "detail": "API key cannot contain control characters or newlines"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"API key cannot contain control characters or newlines\"}"
+    },
+    {
+      "check": "/api/settings/providers/twelve_data 400 detail string",
+      "ok": true,
+      "detail": "API key cannot contain control characters or newlines"
+    },
+    {
+      "check": "/api/downloads 422 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/downloads 422 has detail",
+      "ok": true,
+      "detail": "{\"detail\":[{\"type\":\"string_pattern_mismatch\",\"loc\":[\"body\",\"provider\"],\"msg\":\"String should match pattern '^(twelve_data...<truncated>"
+    },
+    {
+      "check": "/api/downloads 422 detail list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "/api/downloads 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/downloads 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"UI downloads currently support EURUSD and GBPUSD\"}"
+    },
+    {
+      "check": "/api/downloads 400 detail string",
+      "ok": true,
+      "detail": "UI downloads currently support EURUSD and GBPUSD"
+    },
+    {
+      "check": "/api/downloads 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/downloads 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"UI downloads currently support M1 only\"}"
+    },
+    {
+      "check": "/api/downloads 400 detail string",
+      "ok": true,
+      "detail": "UI downloads currently support M1 only"
+    },
+    {
+      "check": "/api/downloads 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/downloads 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"start_date cannot be after end_date\"}"
+    },
+    {
+      "check": "/api/downloads 400 detail string",
+      "ok": true,
+      "detail": "start_date cannot be after end_date"
+    },
+    {
+      "check": "/api/downloads 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/downloads 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"UI downloads are limited to 31 days\"}"
+    },
+    {
+      "check": "/api/downloads 400 detail string",
+      "ok": true,
+      "detail": "UI downloads are limited to 31 days"
+    },
+    {
+      "check": "/api/downloads 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/downloads 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"end_date cannot be in the future\"}"
+    },
+    {
+      "check": "/api/downloads 400 detail string",
+      "ok": true,
+      "detail": "end_date cannot be in the future"
+    },
+    {
+      "check": "/api/downloads 400 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/downloads 400 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Existing partition 2026.csv was written by twelve_data, not dukascopy. Use a separate REX_DATA_DIR or overwri...<truncated>"
+    },
+    {
+      "check": "/api/downloads 400 detail string",
+      "ok": true,
+      "detail": "Existing partition 2026.csv was written by twelve_data, not dukascopy. Use a separate REX_DATA_DIR or overwrite it deliberately."
+    },
+    {
+      "check": "/api/downloads 503 json content-type",
+      "ok": true,
+      "detail": "application/json"
+    },
+    {
+      "check": "/api/downloads 503 has detail",
+      "ok": true,
+      "detail": "{\"detail\":\"Twelve Data API key is not configured; add it in System → Key handling.\"}"
+    },
+    {
+      "check": "/api/downloads 503 detail string",
+      "ok": true,
+      "detail": "Twelve Data API key is not configured; add it in System → Key handling."
+    }
+  ],
+  "calls": [],
+  "recorded_at_utc": "2026-11-03T13:38:25.163148+00:00"
+}

@@ -1,0 +1,9 @@
+{
+  "test_id": "STRAT-012",
+  "label": "unknown_strategy",
+  "scenario": "Unknown strategy ID",
+  "data_config": "EURUSD/M1/2026; strategy_id=NOPE",
+  "expected": "Explicit unsupported-strategy error (HTTP 400 path).",
+  "actual": "ValueError: Strategy 'NOPE' is not exposed in the UI",
+  "status": "PASS"
+}

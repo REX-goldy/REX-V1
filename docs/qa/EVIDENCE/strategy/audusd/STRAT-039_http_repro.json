@@ -1,0 +1,98 @@
+{
+  "test_id": "STRAT-039",
+  "server": "uvicorn server.main:app on 0.0.0.0:16904 (temporary; REX_RUNS_DIR=/tmp/opencode/qa-strategy/http-runs)",
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/health",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/strategies",
+      "status": 200,
+      "note": "S002/CORE requires_zones=true; S008 requires_zones=false"
+    },
+    {
+      "method": "GET",
+      "path": "/api/datasets",
+      "status": 200,
+      "note": "AUDUSD/M1/2026 is listed (first attempt timed out at the 5s client cap while cold parsing; retry returned 200)",
+      "audusd_listed": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/backtests",
+      "body": {
+        "dataset_id": "AUDUSD/M1/2026",
+        "strategy_id": "S002",
+        "start_date": "2026-05-04",
+        "end_date": "2026-05-05"
+      },
+      "status": 400,
+      "body_response": {
+        "detail": "No zone book is configured for AUDUSD in config/zones.json"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/backtests",
+      "body": {
+        "dataset_id": "AUDUSD/M1/2026",
+        "strategy_id": "CORE_ZONE_BREAKOUT",
+        "start_date": "2026-05-04",
+        "end_date": "2026-05-05"
+      },
+      "status": 400,
+      "body_response": {
+        "detail": "No zone book is configured for AUDUSD in config/zones.json"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/backtests",
+      "body": {
+        "dataset_id": "AUDUSD/M1/2026",
+        "strategy_id": "S008",
+        "start_date": "2026-05-04",
+        "end_date": "2026-05-05"
+      },
+      "status": 200,
+      "note": "S008 succeeds because it does not require zones; metrics total_signals=46 total_trades=40 in the run summary"
+    },
+    {
+      "method": "POST",
+      "path": "/api/backtests",
+      "body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "NOPE",
+        "start_date": "2026-05-04",
+        "end_date": "2026-05-05"
+      },
+      "status": 400,
+      "body_response": {
+        "detail": "Strategy 'NOPE' is not exposed in the UI"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/backtests",
+      "body": {
+        "dataset_id": "NZDUSD/M1/2026",
+        "strategy_id": "S008",
+        "start_date": "2026-05-04",
+        "end_date": "2026-05-05"
+      },
+      "status": 404,
+      "body_response": {
+        "detail": "Dataset not found: NZDUSD/M1/2026"
+      }
+    }
+  ],
+  "static_path": [
+    "server/main.py:197-212 POST /api/backtests -> _fail maps ValueError to HTTP 400",
+    "server/research_service.py:807-809 zone lookup and explicit No zone book error",
+    "server/research_service.py:116-190 STRATEGY_SPECS requires_zones flags"
+  ],
+  "transcript": "docs/qa/EVIDENCE/strategy/audusd/http_transcript.txt"
+}

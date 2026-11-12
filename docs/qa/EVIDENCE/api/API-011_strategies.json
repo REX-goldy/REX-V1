@@ -1,0 +1,148 @@
+{
+  "test_id": "API-011",
+  "endpoint": "/api/strategies",
+  "scenario": "Strategy registry",
+  "test_data": "GET /api/strategies",
+  "expected": "200; CORE_ZONE_BREAKOUT/S002/S008 with correct flags and S008 params",
+  "actual": "ids=['CORE_ZONE_BREAKOUT', 'S002', 'S008']",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "HTTP 200",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "3 strategies",
+      "ok": true,
+      "detail": "['CORE_ZONE_BREAKOUT', 'S002', 'S008']"
+    },
+    {
+      "check": "S008 trade simulation yes, zones no",
+      "ok": true,
+      "detail": "(True, False)"
+    },
+    {
+      "check": "S008 params",
+      "ok": true,
+      "detail": "['lookback', 'min_wick_ratio', 'tolerance']"
+    },
+    {
+      "check": "S002 zones yes",
+      "ok": true,
+      "detail": "(True, True)"
+    },
+    {
+      "check": "CORE signal-only",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "no non-finite floats",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/strategies",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 3.1,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "1669",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "8af706d9e845264a2530b23aa86c2b2646988e986f53907c6e9c7dfbc9412ca6",
+      "response_bytes": 1669,
+      "response_json": [
+        {
+          "id": "CORE_ZONE_BREAKOUT",
+          "name": "Existing Zone Breakout",
+          "description": "Existing stateful support/resistance interaction strategy.",
+          "trade_simulation": false,
+          "requires_zones": true,
+          "parameters": [],
+          "note": "Signal study only. The default execution layer has no breakout setup factory, so this strategy cannot be trade-simulated yet."
+        },
+        {
+          "id": "S002",
+          "name": "BreakoutRetest",
+          "description": "Zone breakout followed by a causal boundary retest within max_wait bars.",
+          "trade_simulation": true,
+          "requires_zones": true,
+          "parameters": [
+            {
+              "name": "tolerance",
+              "label": "Retest tolerance",
+              "type": "number",
+              "default": 0.0005,
+              "min": 1e-05,
+              "max": 0.05,
+              "step": 0.0001,
+              "help": "Price tolerance around the broken zone boundary."
+            },
+            {
+              "name": "max_wait",
+              "label": "Max wait (bars)",
+              "type": "integer",
+              "default": 5,
+              "min": 1,
+              "max": 200,
+              "step": 1,
+              "help": "Bars after breakout to accept a retest."
+            }
+          ],
+          "note": "Zone breakout → retest. Uses static manual zones."
+        },
+        {
+          "id": "S008",
+          "name": "Liquidity Sweep V1",
+          "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps.",
+          "trade_simulation": true,
+          "requires_zones": false,
+          "parameters": [
+            {
+              "name": "lookback",
+              "label": "Swing lookback",
+              "type": "integer",
+              "default": 10,
+              "min": 2,
+              "max": 200,
+              "step": 1,
+              "help": "Bars used to define the prior swing high/low."
+            },
+            {
+              "name": "min_wick_ratio",
+              "label": "Minimum wick ratio",
+              "type": "number",
+              "default": 0.6,
+              "min": 0.0,
+              "max": 1.0,
+              "step": 0.01,
+              "help": "Wick-to-range ratio required for a sweep."
+            },
+            {
+              "name": "tolerance",
+              "label": "Sweep tolerance",
+              "type": "number",
+              "default": 0.0,
+              "min": 0.0,
+              "max": 0.05,
+              "step": 0.0001,
+              "help": "Extra distance beyond the swing required to sweep."
+            }
+          ],
+          "note": "Liquidity sweep. Trade simulation is wired to the sweep factory."
+        }
+      ],
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.210222+00:00"
+}

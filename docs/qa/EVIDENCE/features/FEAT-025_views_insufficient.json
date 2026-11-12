@@ -1,0 +1,10 @@
+{
+  "bars": 3,
+  "trend": "unknown",
+  "momentum_direction": "bullish",
+  "momentum_strength": 5.971400570259975e-05,
+  "volatility_state": "unavailable",
+  "phase": "range",
+  "single_bar_momentum_direction": "unknown",
+  "single_bar_momentum_strength": 0.0
+}

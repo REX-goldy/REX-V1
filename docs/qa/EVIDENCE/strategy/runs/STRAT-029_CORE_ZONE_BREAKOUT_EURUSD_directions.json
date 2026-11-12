@@ -1,0 +1,51 @@
+{
+  "strategy_id": "CORE_ZONE_BREAKOUT",
+  "symbol": "EURUSD",
+  "range": [
+    "2026-03-24",
+    "2026-03-25"
+  ],
+  "up_signal_type": "break_above",
+  "up_count": 9,
+  "first_up": {
+    "symbol": "EURUSD",
+    "timestamp": "2026-03-24T20:27:00",
+    "signal_type": "break_above",
+    "zone_id": 4,
+    "price": 1.16252,
+    "outcome": null
+  },
+  "last_up": {
+    "symbol": "EURUSD",
+    "timestamp": "2026-03-25T01:39:00",
+    "signal_type": "break_above",
+    "zone_id": 4,
+    "price": 1.16207,
+    "outcome": null
+  },
+  "down_signal_type": "break_below",
+  "down_count": 27,
+  "first_down": {
+    "symbol": "EURUSD",
+    "timestamp": "2026-03-24T00:17:00",
+    "signal_type": "break_below",
+    "zone_id": 4,
+    "price": 1.15919,
+    "outcome": null
+  },
+  "last_down": {
+    "symbol": "EURUSD",
+    "timestamp": "2026-03-25T13:13:00",
+    "signal_type": "break_below",
+    "zone_id": 4,
+    "price": 1.15901,
+    "outcome": null
+  },
+  "simulated": false,
+  "first_long_trade": null,
+  "first_short_trade": null,
+  "direction_mapping_verification": {
+    "trade_directions": {},
+    "note": "No trade simulation for CORE (STRATEGY_SPECS.trade_simulation=false)."
+  }
+}

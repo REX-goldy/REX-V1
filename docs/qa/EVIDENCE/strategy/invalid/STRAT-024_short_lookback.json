@@ -1,0 +1,9 @@
+{
+  "test_id": "STRAT-024",
+  "label": "short_lookback",
+  "scenario": "Range shorter than strategy requirement",
+  "data_config": "fixture GBPUSD/M1/2026 five bars, lookback=10",
+  "expected": "Explicit ValueError stating S008 needs at least lookback+2 bars.",
+  "actual": "ValueError: The selected range contains 5 bars, but S008 needs at least 12 with the current parameters.",
+  "status": "PASS"
+}

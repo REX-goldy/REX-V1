@@ -1,0 +1,234 @@
+{
+  "id": "20261103T133731Z_e35955a8",
+  "created_at": "2026-11-03T13:37:31.067885+00:00",
+  "dataset_id": "EURUSD/M1/2026",
+  "strategy": {
+    "id": "S008",
+    "name": "Liquidity Sweep V1",
+    "description": "Orchestrates LiquiditySweepRule to detect bullish/bearish sweeps."
+  },
+  "parameters": {
+    "lookback": 10,
+    "min_wick_ratio": 0.6,
+    "tolerance": 0.0
+  },
+  "request": {
+    "start": "2026-05-04",
+    "end": "2026-05-08",
+    "timeframe": "M1",
+    "r_multiple": 2.0,
+    "equity": 100000.0,
+    "risk_fraction": 0.01
+  },
+  "range": {
+    "start": "2026-05-04",
+    "end": "2026-05-08",
+    "bar_count": 7080,
+    "gap_count": 0
+  },
+  "bar_count": 7080,
+  "simulated": true,
+  "metrics": {
+    "total_signals": 303,
+    "total_trades": 272,
+    "wins": 60,
+    "losses": 211,
+    "win_rate": 22.14022140221402,
+    "profit_factor": 0.5441269717942145,
+    "expectancy": -0.36505519278687976,
+    "max_drawdown_r": 100.29501243803129,
+    "largest_win": 2.0,
+    "largest_loss": -2.285714285720177,
+    "ambiguous_exits": 19,
+    "avg_holding_duration": 2.922794117647059
+  },
+  "reconciliation": {
+    "generated": 303,
+    "accepted": 289,
+    "ignored": 14,
+    "rejected": 0,
+    "difference": 0
+  },
+  "signals": {
+    "total": 303,
+    "by_type": {
+      "bearish_sweep": 113,
+      "bullish_sweep": 190
+    }
+  },
+  "assumptions": {
+    "costs_applied": false,
+    "entry_model": "next candle open",
+    "timestamps": "naive UTC",
+    "zone_source": "none",
+    "result_units": "R-multiples",
+    "timeframe": "M1",
+    "derived_timeframe": false
+  },
+  "warnings": [
+    "Transaction costs (spread, commission, slippage) are not applied.",
+    "Performance is in R-multiples; no currency equity or compounding.",
+    "19 ambiguous intrabar exits were conservatively scored at -1R."
+  ],
+  "warning_count": 3,
+  "trades_count": 272,
+  "trades_by_direction": {
+    "SHORT": 100,
+    "LONG": 172
+  },
+  "trades_by_close_reason": {
+    "SL": 192,
+    "TP": 59,
+    "AMBIGUITY": 19,
+    "TIMEOUT": 1,
+    "FORCE_CLOSE_END_OF_DATA": 1
+  },
+  "first_long_trade": {
+    "symbol": "EURUSD",
+    "direction": "LONG",
+    "entry_time": "2026-05-04T00:48:00",
+    "exit_time": "2026-05-04T00:50:00",
+    "entry_price": 1.17251,
+    "exit_price": 1.17265,
+    "sl_price": 1.17244,
+    "tp_price": 1.17265,
+    "pnl_r": 2.0,
+    "close_reason": "TP",
+    "holding_duration_candles": 2,
+    "strategy_id": "S008"
+  },
+  "first_short_trade": {
+    "symbol": "EURUSD",
+    "direction": "SHORT",
+    "entry_time": "2026-05-04T00:38:00",
+    "exit_time": "2026-05-04T00:41:00",
+    "entry_price": 1.17256,
+    "exit_price": 1.17261,
+    "sl_price": 1.17261,
+    "tp_price": 1.1724600000000003,
+    "pnl_r": -1.0,
+    "close_reason": "SL",
+    "holding_duration_candles": 3,
+    "strategy_id": "S008"
+  },
+  "trade_sample": [
+    {
+      "symbol": "EURUSD",
+      "direction": "SHORT",
+      "entry_time": "2026-05-04T00:38:00",
+      "exit_time": "2026-05-04T00:41:00",
+      "entry_price": 1.17256,
+      "exit_price": 1.17261,
+      "sl_price": 1.17261,
+      "tp_price": 1.1724600000000003,
+      "pnl_r": -1.0,
+      "close_reason": "SL",
+      "holding_duration_candles": 3,
+      "strategy_id": "S008"
+    },
+    {
+      "symbol": "EURUSD",
+      "direction": "LONG",
+      "entry_time": "2026-05-04T00:48:00",
+      "exit_time": "2026-05-04T00:50:00",
+      "entry_price": 1.17251,
+      "exit_price": 1.17265,
+      "sl_price": 1.17244,
+      "tp_price": 1.17265,
+      "pnl_r": 2.0,
+      "close_reason": "TP",
+      "holding_duration_candles": 2,
+      "strategy_id": "S008"
+    },
+    {
+      "symbol": "EURUSD",
+      "direction": "SHORT",
+      "entry_time": "2026-05-04T01:20:00",
+      "exit_time": "2026-05-04T02:14:00",
+      "entry_price": 1.17242,
+      "exit_price": 1.17277,
+      "sl_price": 1.17273,
+      "tp_price": 1.1718,
+      "pnl_r": -1.129,
+      "close_reason": "SL",
+      "holding_duration_candles": 54,
+      "strategy_id": "S008"
+    }
+  ],
+  "direct": {
+    "signals_by_type": {
+      "bearish_sweep": 113,
+      "bullish_sweep": 190
+    },
+    "reconcile_signals": {
+      "generated": 303,
+      "accepted": 289,
+      "ignored": 14,
+      "rejected": 0,
+      "difference": 0
+    },
+    "reconcile_execution": {
+      "accepted": 289,
+      "closed": 272,
+      "expired": 0,
+      "rejected": 17,
+      "cancelled": 0,
+      "active": 0,
+      "difference": 0
+    },
+    "accepted_setups": 289,
+    "ignored_active_lifecycle": 14,
+    "rejected_policy_boundary": 0,
+    "terminated_by_reason": {
+      "REJECTED_INVALID_ENTRY": 17
+    },
+    "trades_by_direction": {
+      "SHORT": 100,
+      "LONG": 172
+    },
+    "trades_by_close_reason": {
+      "SL": 192,
+      "TP": 59,
+      "AMBIGUITY": 19,
+      "TIMEOUT": 1,
+      "FORCE_CLOSE_END_OF_DATA": 1
+    },
+    "first_signal_by_direction_class": {
+      "up": "2026-05-04T00:20:00",
+      "down": "2026-05-04T00:37:00"
+    },
+    "first_long_trade": {
+      "symbol": "EURUSD",
+      "direction": "LONG",
+      "entry_time": "2026-05-04T00:48:00",
+      "exit_time": "2026-05-04T00:50:00",
+      "entry_price": 1.17251,
+      "exit_price": 1.17265,
+      "sl_price": 1.17244,
+      "tp_price": 1.17265,
+      "pnl_r": 2.0,
+      "close_reason": "TP",
+      "holding_duration_candles": 2,
+      "strategy_id": "S008"
+    },
+    "first_short_trade": {
+      "symbol": "EURUSD",
+      "direction": "SHORT",
+      "entry_time": "2026-05-04T00:38:00",
+      "exit_time": "2026-05-04T00:41:00",
+      "entry_price": 1.17256,
+      "exit_price": 1.17261,
+      "sl_price": 1.17261,
+      "tp_price": 1.1724600000000003,
+      "pnl_r": -1.0,
+      "close_reason": "SL",
+      "holding_duration_candles": 3,
+      "strategy_id": "S008"
+    }
+  },
+  "consistency_check": {
+    "service_signals_equal_direct": true,
+    "service_trades_equal_direct": true,
+    "service_by_type_equal_direct": true
+  }
+}

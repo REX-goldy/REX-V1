@@ -1,0 +1,57 @@
+# SEC-024 Frontend key-handling and bundle hygiene
+generated: 2026-11-03T13:35:53Z
+
+## SystemPage input attributes
+340:                        type="password"
+341:                        name={`api-key-${provider.id}`}
+342:                        autoComplete="off"
+343:                        spellCheck={false}
+
+## Secret cleared from component state on submit/delete
+99:    // Drop the secret from component state as soon as it is submitted.
+100:    setDraft(provider.id, "");
+124:    setDraft(provider.id, "");
+
+## API sends key in request body, not URL/query
+87:  providers: () => request<ProviderCredential[]>("/settings/providers"),
+88:  saveProvider: (id: string, apiKey: string) =>
+89:    request<ProviderCredential>(`/settings/providers/${encodeURIComponent(id)}`, {
+91:      body: JSON.stringify({ api_key: apiKey }),
+93:  deleteProvider: (id: string) =>
+94:    request<ProviderCredential>(`/settings/providers/${encodeURIComponent(id)}`, {
+
+## Dangerous DOM / storage / console usage in frontend source (code patterns)
+(none)
+
+## Key-in-URL heuristic in frontend source
+(none)
+
+## Production bundle scan
+bundle=frontend/dist/assets/index-CpKTyMyY.js size=456085
+dummy QA key literals: 0
+high-confidence token patterns: 0
+dangerouslySetInnerHTML/innerHTML assignment in bundle: 17
+localStorage/sessionStorage in bundle: 0
+console.(log|debug|info|warn|error) in bundle: 4
+provider form uses type=password in bundle: 1
+
+## index.html script references
+<script type="module" crossorigin src="/assets/index-CpKTyMyY.js"
+
+## Build command/result
+transforming...
+[32m✓[39m 1605 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mdist/[22m[32mindex.html                 [39m[1m[2m  0.91 kB[22m[1m[22m[2m │ gzip:   0.49 kB[22m
+[2mdist/[22m[2massets/[22m[35mindex-Brfs1tiN.css  [39m[1m[2m 36.86 kB[22m[1m[22m[2m │ gzip:   7.53 kB[22m
+[2mdist/[22m[2massets/[22m[36mindex-CpKTyMyY.js   [39m[1m[2m455.82 kB[22m[1m[22m[2m │ gzip: 139.96 kB[22m
+[32m✓ built in 2.92s[39m
+
+## Bundle match interpretation
+The 17 bundles matches for dangerouslySetInnerHTML/innerHTML and 4 console.*
+matches are React DOM / TradingView attribution-widget vendor internals (e.g.
+`children dangerouslySetInnerHTML ...`, `e.innerHTML=e`, TradingView `tv-attr-logo`).
+The application source (frontend/src) has zero occurrences of
+dangerouslySetInnerHTML, innerHTML assignment, eval/new Function,
+localStorage/sessionStorage, or console.* calls.

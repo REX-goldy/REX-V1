@@ -1,0 +1,34 @@
+{
+  "dataset_listed": true,
+  "datasets": [
+    "AUDUSD/M1/2026",
+    "EURUSD/M1/2026",
+    "GBPUSD/M1/2026",
+    "USDCAD/M1/2026",
+    "USDJPY/M1/2026"
+  ],
+  "zone_books": {
+    "EURUSD": 8,
+    "GBPUSD": 1
+  },
+  "audusd_zone_book_present": false,
+  "strategy_specs": {
+    "CORE_ZONE_BREAKOUT": {
+      "requires_zones": true,
+      "trade_simulation": false
+    },
+    "S002": {
+      "requires_zones": true,
+      "trade_simulation": true
+    },
+    "S008": {
+      "requires_zones": false,
+      "trade_simulation": true
+    }
+  },
+  "service_error": {
+    "type": "ValueError",
+    "message": "No zone book is configured for AUDUSD in config/zones.json"
+  },
+  "classification": "Correct validation guard (missing required manual zone book) triggered by incomplete AUDUSD configuration; not a strategy/engine/calculation bug. Secondary UX gap: /api/strategies exposes requires_zones but no zone-availability catalog, so the UI allows selecting AUDUSD+S002 and only surfaces the guarded error after submit."
+}

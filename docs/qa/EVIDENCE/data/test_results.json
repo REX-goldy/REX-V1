@@ -1,0 +1,754 @@
+{
+  "tests": [
+    {
+      "test_id": "DATA-001",
+      "dataset": "EURUSD",
+      "scenario": "Dataset inventory",
+      "test_data": "data/historical/EURUSD/M1/2026.csv; meta=data/historical/EURUSD/M1/2026.meta.json",
+      "expected": "bar_count=184963, metadata start/end consistent",
+      "actual": "bar_count=184963, first=2026-01-01T13:00:00, last=2026-06-30T23:59:00, size=9902091B, closure_filtered=70564, raw_gaps=35, unexpected_gaps=10",
+      "status": "PASS",
+      "evidence": "inventory.json"
+    },
+    {
+      "test_id": "DATA-002",
+      "dataset": "EURUSD",
+      "scenario": "Timestamp/order integrity",
+      "test_data": "184963 rows",
+      "expected": "strictly increasing, 0 duplicates/order violations/malformed/non-minute deltas",
+      "actual": "duplicates=0, order_violations=0, malformed=0, non_minute_deltas=0, seconds_microseconds_nonzero=0, delta_minutes_distribution={1: 184927, 2: 5, 3: 2, 4: 2, 2881: 25, 2883: 1}",
+      "status": "PASS",
+      "evidence": "timestamp_integrity.json"
+    },
+    {
+      "test_id": "DATA-003",
+      "dataset": "EURUSD",
+      "scenario": "OHLC/volume validity",
+      "test_data": "184963 rows; independent pandas cross-check",
+      "expected": "0 invalid bars (high>=max(o,c), low<=min(o,c), high>=low, positive, finite); volume reported",
+      "actual": "invalid=0 (high<max(o,c)=0, low>min(o,c)=0, high<low=0, nonpositive=0, nonfinite=0); pandas_invalid=0; volume_blank_rows=184963/184963",
+      "status": "PASS",
+      "evidence": "ohlc_validation.json"
+    },
+    {
+      "test_id": "DATA-004",
+      "dataset": "EURUSD",
+      "scenario": "Session/closure boundaries and gaps",
+      "test_data": "fx_open_minutes_v1 (Fri 22:00-Sun 22:00 UTC closed)",
+      "expected": "0 bars inside closure; unexpected gaps <=10 (README); all other gaps closure-only",
+      "actual": "closed_bars=0, first_open=True, last_open=True, raw_gaps=35, closure_only=25, unexpected=10, open_missing_total=17",
+      "status": "PASS",
+      "evidence": "session_gaps.json; gaps.csv"
+    },
+    {
+      "test_id": "DATA-005",
+      "dataset": "EURUSD",
+      "scenario": "Source data completeness (unexpected gaps)",
+      "test_data": "fx_open_minutes_v1 gap audit",
+      "expected": "0 unexpected gaps that remove FX-open minutes",
+      "actual": "unexpected_gaps=10, unfilled_open_minutes=17",
+      "status": "FAIL",
+      "evidence": "gaps.csv; session_gaps.json"
+    },
+    {
+      "test_id": "DATA-006",
+      "dataset": "EURUSD",
+      "scenario": "Metadata/provenance consistency",
+      "test_data": "data/historical/EURUSD/M1/2026.meta.json vs actual CSV",
+      "expected": "symbol/timeframe/year/provider/coverage/counts match; open-minute completeness reconciles",
+      "actual": "all_metadata_checks_pass=True, checks={'symbol': True, 'timeframe': True, 'year': True, 'provider_present': True, 'actual_start_date': True, 'actual_end_date': True, 'bar_count': True, 'duplicate_count': True, 'invalid_bar_count': True, 'timestamp_gap_count': True}, expected_present_open_bars=184963, actual_bars=184963, closure_filtered=70564 vs theoretical_closed=74880",
+      "status": "PASS",
+      "evidence": "metadata_comparison.json"
+    },
+    {
+      "test_id": "DATA-007",
+      "dataset": "EURUSD",
+      "scenario": "Storage/loading consistency",
+      "test_data": "HistoricalDataParser.parse_file two independent loads, 184963 rows",
+      "expected": "row counts/values match CSV; repeated loads identical; source hash unchanged",
+      "actual": "parsed_rows=184963, value_mismatches=0, deterministic=True, quality_bar_count=184963, quality_gap_count=35",
+      "status": "PASS",
+      "evidence": "parser_consistency.json"
+    },
+    {
+      "test_id": "DATA-008",
+      "dataset": "EURUSD",
+      "scenario": "Derived M5 resampling",
+      "test_data": "resample_bars(M1 -> M5) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=36987, independent=36987, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=9, unexpected_derived_gaps=6 (traceable_to_source=9, untraceable=0), volume_none=36987",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-009",
+      "dataset": "EURUSD",
+      "scenario": "Causal M5 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=36987, resampler=36987, common=36987, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-010",
+      "dataset": "EURUSD",
+      "scenario": "Derived M15 resampling",
+      "test_data": "resample_bars(M1 -> M15) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=12325, independent=12325, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=7, unexpected_derived_gaps=4 (traceable_to_source=7, untraceable=0), volume_none=12325",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-011",
+      "dataset": "EURUSD",
+      "scenario": "Causal M15 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=12325, resampler=12325, common=12325, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-012",
+      "dataset": "EURUSD",
+      "scenario": "Derived H1 resampling",
+      "test_data": "resample_bars(M1 -> H1) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=3079, independent=3079, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=4, unexpected_derived_gaps=4 (traceable_to_source=4, untraceable=0), volume_none=3079",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-013",
+      "dataset": "EURUSD",
+      "scenario": "Causal H1 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=3079, resampler=3079, common=3079, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-014",
+      "dataset": "EURUSD",
+      "scenario": "Derived H4 resampling",
+      "test_data": "resample_bars(M1 -> H4) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=792, independent=792, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=5, unexpected_derived_gaps=4 (traceable_to_source=4, untraceable=0), volume_none=792",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-015",
+      "dataset": "EURUSD",
+      "scenario": "Causal H4 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=741, resampler=792, common=741, causal_only=0 (unexpected=0), resampler_only=51 (partial-closure=51), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-016",
+      "dataset": "GBPUSD",
+      "scenario": "Dataset inventory",
+      "test_data": "data/historical/GBPUSD/M1/2026.csv; meta=data/historical/GBPUSD/M1/2026.meta.json",
+      "expected": "bar_count=93600, metadata start/end consistent",
+      "actual": "bar_count=93600, first=2026-04-01T00:00:00, last=2026-06-30T23:59:00, size=5012055B, closure_filtered=37432, raw_gaps=13, unexpected_gaps=0",
+      "status": "PASS",
+      "evidence": "inventory.json"
+    },
+    {
+      "test_id": "DATA-017",
+      "dataset": "GBPUSD",
+      "scenario": "Timestamp/order integrity",
+      "test_data": "93600 rows",
+      "expected": "strictly increasing, 0 duplicates/order violations/malformed/non-minute deltas",
+      "actual": "duplicates=0, order_violations=0, malformed=0, non_minute_deltas=0, seconds_microseconds_nonzero=0, delta_minutes_distribution={1: 93586, 2881: 13}",
+      "status": "PASS",
+      "evidence": "timestamp_integrity.json"
+    },
+    {
+      "test_id": "DATA-018",
+      "dataset": "GBPUSD",
+      "scenario": "OHLC/volume validity",
+      "test_data": "93600 rows; independent pandas cross-check",
+      "expected": "0 invalid bars (high>=max(o,c), low<=min(o,c), high>=low, positive, finite); volume reported",
+      "actual": "invalid=0 (high<max(o,c)=0, low>min(o,c)=0, high<low=0, nonpositive=0, nonfinite=0); pandas_invalid=0; volume_blank_rows=93600/93600",
+      "status": "PASS",
+      "evidence": "ohlc_validation.json"
+    },
+    {
+      "test_id": "DATA-019",
+      "dataset": "GBPUSD",
+      "scenario": "Session/closure boundaries and gaps",
+      "test_data": "fx_open_minutes_v1 (Fri 22:00-Sun 22:00 UTC closed)",
+      "expected": "0 bars inside closure; unexpected gaps =0; all other gaps closure-only",
+      "actual": "closed_bars=0, first_open=True, last_open=True, raw_gaps=13, closure_only=13, unexpected=0, open_missing_total=0",
+      "status": "PASS",
+      "evidence": "session_gaps.json; gaps.csv"
+    },
+    {
+      "test_id": "DATA-020",
+      "dataset": "GBPUSD",
+      "scenario": "Source data completeness (unexpected gaps)",
+      "test_data": "fx_open_minutes_v1 gap audit",
+      "expected": "0 unexpected gaps that remove FX-open minutes",
+      "actual": "unexpected_gaps=0, unfilled_open_minutes=0",
+      "status": "PASS",
+      "evidence": "gaps.csv; session_gaps.json"
+    },
+    {
+      "test_id": "DATA-021",
+      "dataset": "GBPUSD",
+      "scenario": "Metadata/provenance consistency",
+      "test_data": "data/historical/GBPUSD/M1/2026.meta.json vs actual CSV",
+      "expected": "symbol/timeframe/year/provider/coverage/counts match; open-minute completeness reconciles",
+      "actual": "all_metadata_checks_pass=True, checks={'symbol': True, 'timeframe': True, 'year': True, 'provider_present': True, 'actual_start_date': True, 'actual_end_date': True, 'bar_count': True, 'duplicate_count': True, 'invalid_bar_count': True, 'timestamp_gap_count': True}, expected_present_open_bars=93600, actual_bars=93600, closure_filtered=37432 vs theoretical_closed=37440",
+      "status": "PASS",
+      "evidence": "metadata_comparison.json"
+    },
+    {
+      "test_id": "DATA-022",
+      "dataset": "GBPUSD",
+      "scenario": "Storage/loading consistency",
+      "test_data": "HistoricalDataParser.parse_file two independent loads, 93600 rows",
+      "expected": "row counts/values match CSV; repeated loads identical; source hash unchanged",
+      "actual": "parsed_rows=93600, value_mismatches=0, deterministic=True, quality_bar_count=93600, quality_gap_count=13",
+      "status": "PASS",
+      "evidence": "parser_consistency.json"
+    },
+    {
+      "test_id": "DATA-023",
+      "dataset": "GBPUSD",
+      "scenario": "Derived M5 resampling",
+      "test_data": "resample_bars(M1 -> M5) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=18720, independent=18720, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=18720",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-024",
+      "dataset": "GBPUSD",
+      "scenario": "Causal M5 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=18720, resampler=18720, common=18720, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-025",
+      "dataset": "GBPUSD",
+      "scenario": "Derived M15 resampling",
+      "test_data": "resample_bars(M1 -> M15) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=6240, independent=6240, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=6240",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-026",
+      "dataset": "GBPUSD",
+      "scenario": "Causal M15 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=6240, resampler=6240, common=6240, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-027",
+      "dataset": "GBPUSD",
+      "scenario": "Derived H1 resampling",
+      "test_data": "resample_bars(M1 -> H1) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=1560, independent=1560, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=1560",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-028",
+      "dataset": "GBPUSD",
+      "scenario": "Causal H1 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=1560, resampler=1560, common=1560, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-029",
+      "dataset": "GBPUSD",
+      "scenario": "Derived H4 resampling",
+      "test_data": "resample_bars(M1 -> H4) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=403, independent=403, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=403",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-030",
+      "dataset": "GBPUSD",
+      "scenario": "Causal H4 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=377, resampler=403, common=377, causal_only=0 (unexpected=0), resampler_only=26 (partial-closure=26), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-031",
+      "dataset": "AUDUSD",
+      "scenario": "Dataset inventory",
+      "test_data": "data/historical/AUDUSD/M1/2026.csv; meta=data/historical/AUDUSD/M1/2026.meta.json",
+      "expected": "bar_count=93600, metadata start/end consistent",
+      "actual": "bar_count=93600, first=2026-04-01T00:00:00, last=2026-06-30T23:59:00, size=5008654B, closure_filtered=37432, raw_gaps=13, unexpected_gaps=0",
+      "status": "PASS",
+      "evidence": "inventory.json"
+    },
+    {
+      "test_id": "DATA-032",
+      "dataset": "AUDUSD",
+      "scenario": "Timestamp/order integrity",
+      "test_data": "93600 rows",
+      "expected": "strictly increasing, 0 duplicates/order violations/malformed/non-minute deltas",
+      "actual": "duplicates=0, order_violations=0, malformed=0, non_minute_deltas=0, seconds_microseconds_nonzero=0, delta_minutes_distribution={1: 93586, 2881: 13}",
+      "status": "PASS",
+      "evidence": "timestamp_integrity.json"
+    },
+    {
+      "test_id": "DATA-033",
+      "dataset": "AUDUSD",
+      "scenario": "OHLC/volume validity",
+      "test_data": "93600 rows; independent pandas cross-check",
+      "expected": "0 invalid bars (high>=max(o,c), low<=min(o,c), high>=low, positive, finite); volume reported",
+      "actual": "invalid=0 (high<max(o,c)=0, low>min(o,c)=0, high<low=0, nonpositive=0, nonfinite=0); pandas_invalid=0; volume_blank_rows=93600/93600",
+      "status": "PASS",
+      "evidence": "ohlc_validation.json"
+    },
+    {
+      "test_id": "DATA-034",
+      "dataset": "AUDUSD",
+      "scenario": "Session/closure boundaries and gaps",
+      "test_data": "fx_open_minutes_v1 (Fri 22:00-Sun 22:00 UTC closed)",
+      "expected": "0 bars inside closure; unexpected gaps =0; all other gaps closure-only",
+      "actual": "closed_bars=0, first_open=True, last_open=True, raw_gaps=13, closure_only=13, unexpected=0, open_missing_total=0",
+      "status": "PASS",
+      "evidence": "session_gaps.json; gaps.csv"
+    },
+    {
+      "test_id": "DATA-035",
+      "dataset": "AUDUSD",
+      "scenario": "Source data completeness (unexpected gaps)",
+      "test_data": "fx_open_minutes_v1 gap audit",
+      "expected": "0 unexpected gaps that remove FX-open minutes",
+      "actual": "unexpected_gaps=0, unfilled_open_minutes=0",
+      "status": "PASS",
+      "evidence": "gaps.csv; session_gaps.json"
+    },
+    {
+      "test_id": "DATA-036",
+      "dataset": "AUDUSD",
+      "scenario": "Metadata/provenance consistency",
+      "test_data": "data/historical/AUDUSD/M1/2026.meta.json vs actual CSV",
+      "expected": "symbol/timeframe/year/provider/coverage/counts match; open-minute completeness reconciles",
+      "actual": "all_metadata_checks_pass=True, checks={'symbol': True, 'timeframe': True, 'year': True, 'provider_present': True, 'actual_start_date': True, 'actual_end_date': True, 'bar_count': True, 'duplicate_count': True, 'invalid_bar_count': True, 'timestamp_gap_count': True}, expected_present_open_bars=93600, actual_bars=93600, closure_filtered=37432 vs theoretical_closed=37440",
+      "status": "PASS",
+      "evidence": "metadata_comparison.json"
+    },
+    {
+      "test_id": "DATA-037",
+      "dataset": "AUDUSD",
+      "scenario": "Storage/loading consistency",
+      "test_data": "HistoricalDataParser.parse_file two independent loads, 93600 rows",
+      "expected": "row counts/values match CSV; repeated loads identical; source hash unchanged",
+      "actual": "parsed_rows=93600, value_mismatches=0, deterministic=True, quality_bar_count=93600, quality_gap_count=13",
+      "status": "PASS",
+      "evidence": "parser_consistency.json"
+    },
+    {
+      "test_id": "DATA-038",
+      "dataset": "AUDUSD",
+      "scenario": "Derived M5 resampling",
+      "test_data": "resample_bars(M1 -> M5) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=18720, independent=18720, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=18720",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-039",
+      "dataset": "AUDUSD",
+      "scenario": "Causal M5 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=18720, resampler=18720, common=18720, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-040",
+      "dataset": "AUDUSD",
+      "scenario": "Derived M15 resampling",
+      "test_data": "resample_bars(M1 -> M15) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=6240, independent=6240, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=6240",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-041",
+      "dataset": "AUDUSD",
+      "scenario": "Causal M15 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=6240, resampler=6240, common=6240, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-042",
+      "dataset": "AUDUSD",
+      "scenario": "Derived H1 resampling",
+      "test_data": "resample_bars(M1 -> H1) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=1560, independent=1560, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=1560",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-043",
+      "dataset": "AUDUSD",
+      "scenario": "Causal H1 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=1560, resampler=1560, common=1560, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-044",
+      "dataset": "AUDUSD",
+      "scenario": "Derived H4 resampling",
+      "test_data": "resample_bars(M1 -> H4) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=403, independent=403, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=403",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-045",
+      "dataset": "AUDUSD",
+      "scenario": "Causal H4 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=377, resampler=403, common=377, causal_only=0 (unexpected=0), resampler_only=26 (partial-closure=26), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-046",
+      "dataset": "USDJPY",
+      "scenario": "Dataset inventory",
+      "test_data": "data/historical/USDJPY/M1/2026.csv; meta=data/historical/USDJPY/M1/2026.meta.json",
+      "expected": "bar_count=93600, metadata start/end consistent",
+      "actual": "bar_count=93600, first=2026-04-01T00:00:00, last=2026-06-30T23:59:00, size=5761240B, closure_filtered=37432, raw_gaps=13, unexpected_gaps=0",
+      "status": "PASS",
+      "evidence": "inventory.json"
+    },
+    {
+      "test_id": "DATA-047",
+      "dataset": "USDJPY",
+      "scenario": "Timestamp/order integrity",
+      "test_data": "93600 rows",
+      "expected": "strictly increasing, 0 duplicates/order violations/malformed/non-minute deltas",
+      "actual": "duplicates=0, order_violations=0, malformed=0, non_minute_deltas=0, seconds_microseconds_nonzero=0, delta_minutes_distribution={1: 93586, 2881: 13}",
+      "status": "PASS",
+      "evidence": "timestamp_integrity.json"
+    },
+    {
+      "test_id": "DATA-048",
+      "dataset": "USDJPY",
+      "scenario": "OHLC/volume validity",
+      "test_data": "93600 rows; independent pandas cross-check",
+      "expected": "0 invalid bars (high>=max(o,c), low<=min(o,c), high>=low, positive, finite); volume reported",
+      "actual": "invalid=0 (high<max(o,c)=0, low>min(o,c)=0, high<low=0, nonpositive=0, nonfinite=0); pandas_invalid=0; volume_blank_rows=93600/93600",
+      "status": "PASS",
+      "evidence": "ohlc_validation.json"
+    },
+    {
+      "test_id": "DATA-049",
+      "dataset": "USDJPY",
+      "scenario": "Session/closure boundaries and gaps",
+      "test_data": "fx_open_minutes_v1 (Fri 22:00-Sun 22:00 UTC closed)",
+      "expected": "0 bars inside closure; unexpected gaps =0; all other gaps closure-only",
+      "actual": "closed_bars=0, first_open=True, last_open=True, raw_gaps=13, closure_only=13, unexpected=0, open_missing_total=0",
+      "status": "PASS",
+      "evidence": "session_gaps.json; gaps.csv"
+    },
+    {
+      "test_id": "DATA-050",
+      "dataset": "USDJPY",
+      "scenario": "Source data completeness (unexpected gaps)",
+      "test_data": "fx_open_minutes_v1 gap audit",
+      "expected": "0 unexpected gaps that remove FX-open minutes",
+      "actual": "unexpected_gaps=0, unfilled_open_minutes=0",
+      "status": "PASS",
+      "evidence": "gaps.csv; session_gaps.json"
+    },
+    {
+      "test_id": "DATA-051",
+      "dataset": "USDJPY",
+      "scenario": "Metadata/provenance consistency",
+      "test_data": "data/historical/USDJPY/M1/2026.meta.json vs actual CSV",
+      "expected": "symbol/timeframe/year/provider/coverage/counts match; open-minute completeness reconciles",
+      "actual": "all_metadata_checks_pass=True, checks={'symbol': True, 'timeframe': True, 'year': True, 'provider_present': True, 'actual_start_date': True, 'actual_end_date': True, 'bar_count': True, 'duplicate_count': True, 'invalid_bar_count': True, 'timestamp_gap_count': True}, expected_present_open_bars=93600, actual_bars=93600, closure_filtered=37432 vs theoretical_closed=37440",
+      "status": "PASS",
+      "evidence": "metadata_comparison.json"
+    },
+    {
+      "test_id": "DATA-052",
+      "dataset": "USDJPY",
+      "scenario": "Storage/loading consistency",
+      "test_data": "HistoricalDataParser.parse_file two independent loads, 93600 rows",
+      "expected": "row counts/values match CSV; repeated loads identical; source hash unchanged",
+      "actual": "parsed_rows=93600, value_mismatches=0, deterministic=True, quality_bar_count=93600, quality_gap_count=13",
+      "status": "PASS",
+      "evidence": "parser_consistency.json"
+    },
+    {
+      "test_id": "DATA-053",
+      "dataset": "USDJPY",
+      "scenario": "Derived M5 resampling",
+      "test_data": "resample_bars(M1 -> M5) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=18720, independent=18720, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=18720",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-054",
+      "dataset": "USDJPY",
+      "scenario": "Causal M5 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=18720, resampler=18720, common=18720, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-055",
+      "dataset": "USDJPY",
+      "scenario": "Derived M15 resampling",
+      "test_data": "resample_bars(M1 -> M15) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=6240, independent=6240, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=6240",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-056",
+      "dataset": "USDJPY",
+      "scenario": "Causal M15 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=6240, resampler=6240, common=6240, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-057",
+      "dataset": "USDJPY",
+      "scenario": "Derived H1 resampling",
+      "test_data": "resample_bars(M1 -> H1) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=1560, independent=1560, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=1560",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-058",
+      "dataset": "USDJPY",
+      "scenario": "Causal H1 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=1560, resampler=1560, common=1560, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-059",
+      "dataset": "USDJPY",
+      "scenario": "Derived H4 resampling",
+      "test_data": "resample_bars(M1 -> H4) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=403, independent=403, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=403",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-060",
+      "dataset": "USDJPY",
+      "scenario": "Causal H4 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=377, resampler=403, common=377, causal_only=0 (unexpected=0), resampler_only=26 (partial-closure=26), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-061",
+      "dataset": "USDCAD",
+      "scenario": "Dataset inventory",
+      "test_data": "data/historical/USDCAD/M1/2026.csv; meta=data/historical/USDCAD/M1/2026.meta.json",
+      "expected": "bar_count=93600, metadata start/end consistent",
+      "actual": "bar_count=93600, first=2026-04-01T00:00:00, last=2026-06-30T23:59:00, size=5013265B, closure_filtered=37432, raw_gaps=13, unexpected_gaps=0",
+      "status": "PASS",
+      "evidence": "inventory.json"
+    },
+    {
+      "test_id": "DATA-062",
+      "dataset": "USDCAD",
+      "scenario": "Timestamp/order integrity",
+      "test_data": "93600 rows",
+      "expected": "strictly increasing, 0 duplicates/order violations/malformed/non-minute deltas",
+      "actual": "duplicates=0, order_violations=0, malformed=0, non_minute_deltas=0, seconds_microseconds_nonzero=0, delta_minutes_distribution={1: 93586, 2881: 13}",
+      "status": "PASS",
+      "evidence": "timestamp_integrity.json"
+    },
+    {
+      "test_id": "DATA-063",
+      "dataset": "USDCAD",
+      "scenario": "OHLC/volume validity",
+      "test_data": "93600 rows; independent pandas cross-check",
+      "expected": "0 invalid bars (high>=max(o,c), low<=min(o,c), high>=low, positive, finite); volume reported",
+      "actual": "invalid=0 (high<max(o,c)=0, low>min(o,c)=0, high<low=0, nonpositive=0, nonfinite=0); pandas_invalid=0; volume_blank_rows=93600/93600",
+      "status": "PASS",
+      "evidence": "ohlc_validation.json"
+    },
+    {
+      "test_id": "DATA-064",
+      "dataset": "USDCAD",
+      "scenario": "Session/closure boundaries and gaps",
+      "test_data": "fx_open_minutes_v1 (Fri 22:00-Sun 22:00 UTC closed)",
+      "expected": "0 bars inside closure; unexpected gaps =0; all other gaps closure-only",
+      "actual": "closed_bars=0, first_open=True, last_open=True, raw_gaps=13, closure_only=13, unexpected=0, open_missing_total=0",
+      "status": "PASS",
+      "evidence": "session_gaps.json; gaps.csv"
+    },
+    {
+      "test_id": "DATA-065",
+      "dataset": "USDCAD",
+      "scenario": "Source data completeness (unexpected gaps)",
+      "test_data": "fx_open_minutes_v1 gap audit",
+      "expected": "0 unexpected gaps that remove FX-open minutes",
+      "actual": "unexpected_gaps=0, unfilled_open_minutes=0",
+      "status": "PASS",
+      "evidence": "gaps.csv; session_gaps.json"
+    },
+    {
+      "test_id": "DATA-066",
+      "dataset": "USDCAD",
+      "scenario": "Metadata/provenance consistency",
+      "test_data": "data/historical/USDCAD/M1/2026.meta.json vs actual CSV",
+      "expected": "symbol/timeframe/year/provider/coverage/counts match; open-minute completeness reconciles",
+      "actual": "all_metadata_checks_pass=True, checks={'symbol': True, 'timeframe': True, 'year': True, 'provider_present': True, 'actual_start_date': True, 'actual_end_date': True, 'bar_count': True, 'duplicate_count': True, 'invalid_bar_count': True, 'timestamp_gap_count': True}, expected_present_open_bars=93600, actual_bars=93600, closure_filtered=37432 vs theoretical_closed=37440",
+      "status": "PASS",
+      "evidence": "metadata_comparison.json"
+    },
+    {
+      "test_id": "DATA-067",
+      "dataset": "USDCAD",
+      "scenario": "Storage/loading consistency",
+      "test_data": "HistoricalDataParser.parse_file two independent loads, 93600 rows",
+      "expected": "row counts/values match CSV; repeated loads identical; source hash unchanged",
+      "actual": "parsed_rows=93600, value_mismatches=0, deterministic=True, quality_bar_count=93600, quality_gap_count=13",
+      "status": "PASS",
+      "evidence": "parser_consistency.json"
+    },
+    {
+      "test_id": "DATA-068",
+      "dataset": "USDCAD",
+      "scenario": "Derived M5 resampling",
+      "test_data": "resample_bars(M1 -> M5) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=18720, independent=18720, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=18720",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-069",
+      "dataset": "USDCAD",
+      "scenario": "Causal M5 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=18720, resampler=18720, common=18720, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-070",
+      "dataset": "USDCAD",
+      "scenario": "Derived M15 resampling",
+      "test_data": "resample_bars(M1 -> M15) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=6240, independent=6240, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=6240",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-071",
+      "dataset": "USDCAD",
+      "scenario": "Causal M15 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=6240, resampler=6240, common=6240, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-072",
+      "dataset": "USDCAD",
+      "scenario": "Derived H1 resampling",
+      "test_data": "resample_bars(M1 -> H1) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=1560, independent=1560, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=1560",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-073",
+      "dataset": "USDCAD",
+      "scenario": "Causal H1 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=1560, resampler=1560, common=1560, causal_only=0 (unexpected=0), resampler_only=0 (partial-closure=0), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    },
+    {
+      "test_id": "DATA-074",
+      "dataset": "USDCAD",
+      "scenario": "Derived H4 resampling",
+      "test_data": "resample_bars(M1 -> H4) vs independent FX-open aggregation",
+      "expected": "aligned UTC buckets, valid OHLC, complete buckets only, no containment/future leak, independent match",
+      "actual": "emitted=403, independent=403, misaligned=0, invalid_ohlc=0, containment=0, independent_mismatches=0, stats_match=True, skipped_incomplete=0, unexpected_derived_gaps=0 (traceable_to_source=0, untraceable=0), volume_none=403",
+      "status": "PASS",
+      "evidence": "resampled_summary.json"
+    },
+    {
+      "test_id": "DATA-075",
+      "dataset": "USDCAD",
+      "scenario": "Causal H4 vs resampler",
+      "test_data": "aggregate_completed_bars asof=2026-07-01T00:00:00+00:00 vs resample_bars",
+      "expected": "common buckets identical; no future data; stable under earlier as-of; differences only documented closure/as-of",
+      "actual": "causal=377, resampler=403, common=377, causal_only=0 (unexpected=0), resampler_only=26 (partial-closure=26), mismatches=0, future_leaks=0, stability_failures=0",
+      "status": "PASS",
+      "evidence": "causal_htf.json"
+    }
+  ]
+}

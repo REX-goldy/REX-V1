@@ -1,0 +1,98 @@
+{
+  "data": "REAL EURUSD M1 last 500 bars of week",
+  "sma": {
+    "length": 20,
+    "first_valid_index": 19,
+    "nan_prefix": 19,
+    "comparison_count": 481,
+    "max_abs_diff": 0.0,
+    "last": 1.163153
+  },
+  "ema": {
+    "length": 20,
+    "first_valid_index": 19,
+    "comparison_count": 481,
+    "max_abs_diff": 0.0,
+    "last": 1.1632244519,
+    "notes": "TA-Lib/pandas-ta convention: SMA seed at index length-1 then adjust=False recursion"
+  },
+  "rsi": {
+    "length": 14,
+    "first_valid_index": 14,
+    "comparison_count": 486,
+    "max_abs_diff": 2.842170943040401e-14,
+    "last": 70.1620699297,
+    "notes": "Wilder RMA implementation"
+  },
+  "atr": {
+    "length": 14,
+    "first_valid_index": 14,
+    "comparison_count": 486,
+    "max_abs_diff": 1.0842021724855044e-19,
+    "last": 9.12456e-05,
+    "notes": "Wilder RMA implementation"
+  },
+  "macd": {
+    "comparison_count_macd": 475,
+    "max_abs_diff_macd": 0.0,
+    "comparison_count_signal": 467,
+    "max_abs_diff_signal": 0.0,
+    "last": {
+      "macd": -1.3841e-06,
+      "signal": -5.81168e-05,
+      "histogram": 5.67326e-05
+    },
+    "histogram_identity_abs_diff": 0.0
+  },
+  "relative_volume": {
+    "real_last_is_nan": true,
+    "synthetic_last": 2.0,
+    "synthetic_expected": 2.0,
+    "synthetic_label": "SYNTHETIC TEST FIXTURE \u2014 NOT REAL MARKET DATA"
+  },
+  "warmup": {
+    "sma": {
+      "nan_count": 19,
+      "first_valid_index": 19,
+      "length": 20
+    },
+    "ema": {
+      "nan_count": 19,
+      "first_valid_index": 19,
+      "length": 20
+    },
+    "rsi": {
+      "nan_count": 14,
+      "first_valid_index": 14,
+      "length": 14
+    },
+    "atr": {
+      "nan_count": 14,
+      "first_valid_index": 14,
+      "length": 14
+    }
+  },
+  "timeframe_alignment": {
+    "entry_timeframe": "M15",
+    "m15_bar_count": 480,
+    "m15_last_timestamp": "2026-01-09T21:45:00+00:00",
+    "pack_values": {
+      "ema_fast_last": 1.1635204683,
+      "ema_slow_last": 1.1638502358,
+      "atr_last": 0.0004131702,
+      "rsi_last": 49.1227497069
+    },
+    "engine_values": {
+      "ema_fast_last": 1.1635204683,
+      "ema_slow_last": 1.1638502358,
+      "atr_last": 0.0004131702,
+      "rsi_last": 49.1227497069
+    },
+    "abs_diffs": {
+      "ema_fast_last": 0.0,
+      "ema_slow_last": 0.0,
+      "atr_last": 0.0,
+      "rsi_last": 0.0
+    }
+  }
+}

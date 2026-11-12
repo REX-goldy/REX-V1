@@ -1,0 +1,185 @@
+{
+  "datasets": [
+    {
+      "dataset": "EURUSD",
+      "closed_window_bar_count": 0,
+      "closed_window_bar_samples": [],
+      "first_timestamp": "2026-01-01T13:00:00",
+      "first_is_fx_open": true,
+      "last_timestamp": "2026-06-30T23:59:00",
+      "last_is_fx_open": true,
+      "raw_gap_count": 35,
+      "closure_only_gap_count": 25,
+      "unexpected_gap_count": 10,
+      "open_minutes_missing_total": 17,
+      "closed_minutes_missing_total": 74880,
+      "unexpected_gaps": [
+        {
+          "before": "2026-01-21 01:19:00",
+          "after": "2026-01-21 01:23:00",
+          "duration_minutes": 4,
+          "missing_minutes": 3,
+          "expected_open_missing_minutes": 3,
+          "closed_missing_minutes": 0,
+          "crosses_closure": false,
+          "unexpected": true
+        },
+        {
+          "before": "2026-02-06 21:59:00",
+          "after": "2026-02-08 22:02:00",
+          "duration_minutes": 2883,
+          "missing_minutes": 2882,
+          "expected_open_missing_minutes": 2,
+          "closed_missing_minutes": 2880,
+          "crosses_closure": true,
+          "unexpected": true
+        },
+        {
+          "before": "2026-02-08 22:28:00",
+          "after": "2026-02-08 22:30:00",
+          "duration_minutes": 2,
+          "missing_minutes": 1,
+          "expected_open_missing_minutes": 1,
+          "closed_missing_minutes": 0,
+          "crosses_closure": false,
+          "unexpected": true
+        },
+        {
+          "before": "2026-02-08 22:35:00",
+          "after": "2026-02-08 22:39:00",
+          "duration_minutes": 4,
+          "missing_minutes": 3,
+          "expected_open_missing_minutes": 3,
+          "closed_missing_minutes": 0,
+          "crosses_closure": false,
+          "unexpected": true
+        },
+        {
+          "before": "2026-02-08 22:41:00",
+          "after": "2026-02-08 22:44:00",
+          "duration_minutes": 3,
+          "missing_minutes": 2,
+          "expected_open_missing_minutes": 2,
+          "closed_missing_minutes": 0,
+          "crosses_closure": false,
+          "unexpected": true
+        },
+        {
+          "before": "2026-02-08 22:46:00",
+          "after": "2026-02-08 22:48:00",
+          "duration_minutes": 2,
+          "missing_minutes": 1,
+          "expected_open_missing_minutes": 1,
+          "closed_missing_minutes": 0,
+          "crosses_closure": false,
+          "unexpected": true
+        },
+        {
+          "before": "2026-02-08 22:49:00",
+          "after": "2026-02-08 22:51:00",
+          "duration_minutes": 2,
+          "missing_minutes": 1,
+          "expected_open_missing_minutes": 1,
+          "closed_missing_minutes": 0,
+          "crosses_closure": false,
+          "unexpected": true
+        },
+        {
+          "before": "2026-02-08 22:52:00",
+          "after": "2026-02-08 22:54:00",
+          "duration_minutes": 2,
+          "missing_minutes": 1,
+          "expected_open_missing_minutes": 1,
+          "closed_missing_minutes": 0,
+          "crosses_closure": false,
+          "unexpected": true
+        },
+        {
+          "before": "2026-02-09 04:49:00",
+          "after": "2026-02-09 04:51:00",
+          "duration_minutes": 2,
+          "missing_minutes": 1,
+          "expected_open_missing_minutes": 1,
+          "closed_missing_minutes": 0,
+          "crosses_closure": false,
+          "unexpected": true
+        },
+        {
+          "before": "2026-03-03 18:01:00",
+          "after": "2026-03-03 18:04:00",
+          "duration_minutes": 3,
+          "missing_minutes": 2,
+          "expected_open_missing_minutes": 2,
+          "closed_missing_minutes": 0,
+          "crosses_closure": false,
+          "unexpected": true
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "dataset": "GBPUSD",
+      "closed_window_bar_count": 0,
+      "closed_window_bar_samples": [],
+      "first_timestamp": "2026-04-01T00:00:00",
+      "first_is_fx_open": true,
+      "last_timestamp": "2026-06-30T23:59:00",
+      "last_is_fx_open": true,
+      "raw_gap_count": 13,
+      "closure_only_gap_count": 13,
+      "unexpected_gap_count": 0,
+      "open_minutes_missing_total": 0,
+      "closed_minutes_missing_total": 37440,
+      "unexpected_gaps": [],
+      "status": "PASS"
+    },
+    {
+      "dataset": "AUDUSD",
+      "closed_window_bar_count": 0,
+      "closed_window_bar_samples": [],
+      "first_timestamp": "2026-04-01T00:00:00",
+      "first_is_fx_open": true,
+      "last_timestamp": "2026-06-30T23:59:00",
+      "last_is_fx_open": true,
+      "raw_gap_count": 13,
+      "closure_only_gap_count": 13,
+      "unexpected_gap_count": 0,
+      "open_minutes_missing_total": 0,
+      "closed_minutes_missing_total": 37440,
+      "unexpected_gaps": [],
+      "status": "PASS"
+    },
+    {
+      "dataset": "USDJPY",
+      "closed_window_bar_count": 0,
+      "closed_window_bar_samples": [],
+      "first_timestamp": "2026-04-01T00:00:00",
+      "first_is_fx_open": true,
+      "last_timestamp": "2026-06-30T23:59:00",
+      "last_is_fx_open": true,
+      "raw_gap_count": 13,
+      "closure_only_gap_count": 13,
+      "unexpected_gap_count": 0,
+      "open_minutes_missing_total": 0,
+      "closed_minutes_missing_total": 37440,
+      "unexpected_gaps": [],
+      "status": "PASS"
+    },
+    {
+      "dataset": "USDCAD",
+      "closed_window_bar_count": 0,
+      "closed_window_bar_samples": [],
+      "first_timestamp": "2026-04-01T00:00:00",
+      "first_is_fx_open": true,
+      "last_timestamp": "2026-06-30T23:59:00",
+      "last_is_fx_open": true,
+      "raw_gap_count": 13,
+      "closure_only_gap_count": 13,
+      "unexpected_gap_count": 0,
+      "open_minutes_missing_total": 0,
+      "closed_minutes_missing_total": 37440,
+      "unexpected_gaps": [],
+      "status": "PASS"
+    }
+  ]
+}

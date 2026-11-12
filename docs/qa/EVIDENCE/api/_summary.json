@@ -1,0 +1,783 @@
+{
+  "environment": {
+    "date_utc": "2026-11-03T13:38:23.733612+00:00",
+    "python": "3.11.6",
+    "live_api": "http://127.0.0.1:16901",
+    "isolated_env_api": "http://127.0.0.1:16902",
+    "isolated_nokey_api": "http://127.0.0.1:16903",
+    "git_commit": "95f8aaa998f1ce1539c65777b5dd10ac063cbd34",
+    "data_root": "/home/user/workspaces/7de05e41da33/data/historical",
+    "expected_dataset_counts": {
+      "EURUSD/M1/2026": 184963,
+      "GBPUSD/M1/2026": 93600,
+      "AUDUSD/M1/2026": 93600,
+      "USDJPY/M1/2026": 93600,
+      "USDCAD/M1/2026": 93600
+    },
+    "notes": "Isolated instances share the real read-only dataset; temp REX_RUNS_DIR and REX_KEYS_FILE prevent artifact/credential pollution."
+  },
+  "counts": {
+    "total": 51,
+    "pass": 51,
+    "fail": 0,
+    "blocked": 0
+  },
+  "results": [
+    {
+      "test_id": "API-001",
+      "endpoint": "/api/health",
+      "scenario": "Health endpoint returns ok",
+      "test_data": "GET /api/health",
+      "expected": "200 with status=ok and service=rex-research-terminal",
+      "actual": "status=200 body={\"status\":\"ok\",\"service\":\"rex-research-terminal\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-001_health.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 6.1
+    },
+    {
+      "test_id": "API-002",
+      "endpoint": "/openapi.json",
+      "scenario": "OpenAPI document availability and paths",
+      "test_data": "GET /openapi.json",
+      "expected": "200, OpenAPI 3.x, all 14 route paths and key methods present",
+      "actual": "paths=15; openapi=3.1.0; methods={'/api/settings/providers/{provider_id}': ['delete', 'put'], '/api/frame': ['get'], '/api/health': ['get'], '/api/dataset': ['get'], '/api/downloads': ['post'], '/api/datasets': ['get'], '/api/bars': ['get'], '/api/overview': ['get'], '/api/range': ['get'], '/api/runs': ['get'], '/api/runs/{run_id}': ['get'], '/api/strategies': ['get'], '/api/settings/providers': ['get'], '/api/backtests': ['post']}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-002_openapi.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 2.9
+    },
+    {
+      "test_id": "API-003",
+      "endpoint": "OPTIONS /api/overview",
+      "scenario": "CORS preflight",
+      "test_data": "Origin: https://preview.example.test; ACRM: GET; ACRH: content-type",
+      "expected": "200 with allow-origin and GET/content-type allowed",
+      "actual": "status=200 acao=* methods=DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, QUERY headers=content-type",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-003_cors_preflight.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 1.8
+    },
+    {
+      "test_id": "API-004",
+      "endpoint": "GET /api/health",
+      "scenario": "CORS headers on actual response",
+      "test_data": "Origin header",
+      "expected": "access-control-allow-origin present, no credentials+wildcard",
+      "actual": "status=200 acao=*",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-004_cors_headers.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 2.5
+    },
+    {
+      "test_id": "API-005",
+      "endpoint": "/api/overview",
+      "scenario": "Overview schema and dataset cross-check",
+      "test_data": "GET /api/overview",
+      "expected": "200; 5 datasets with expected counts; EURUSD bounds; 3 strategies; capabilities",
+      "actual": "datasets=[('AUDUSD/M1/2026', 93600), ('EURUSD/M1/2026', 184963), ('GBPUSD/M1/2026', 93600), ('USDCAD/M1/2026', 93600), ('USDJPY/M1/2026', 93600)]; strategies=['CORE_ZONE_BREAKOUT', 'S002', 'S008']; capabilities={'twelve_data': True, 'dukascopy': True, 'trade_simulation': ['S002', 'S008'], 'download_max_days': 31}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-005_overview.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 36.5
+    },
+    {
+      "test_id": "API-006",
+      "endpoint": "/api/datasets",
+      "scenario": "Dataset list vs CSV files",
+      "test_data": "GET /api/datasets",
+      "expected": "200; 5 entries; bar_count and first/last timestamps equal CSV contents",
+      "actual": "EURUSD/M1/2026: api=184963 csv=184963 first=2026-01-01T13:00:00 vs 2026-01-01 13:00:00 last=2026-06-30T23:59:00 vs 2026-06-30 23:59:00; GBPUSD/M1/2026: api=93600 csv=93600 first=2026-04-01T00:00:00 vs 2026-04-01 00:00:00 last=2026-06-30T23:59:00 vs 2026-06-30 23:59:00; AUDUSD/M1/2026: api=93600 csv=93600 first=2026-04-01T00:00:00 vs 2026-04-01 00:00:00 last=2026-06-30T23:59:00 vs 2026-06-30 23:59:00; USDJPY/M1/2026: api=93600 csv=93600 first=2026-04-01T00:00:00 vs 2026-04-01 00:00:00 last=2026-06-30T23:59:00 vs 2026-06-30 23:59:00; USDCAD/M1/2026: api=93600 csv=93600 first=2026-04-01T00:00:00 vs 2026-04-01 00:00:00 last=2026-06-30T23:59:00 vs 2026-06-30 23:59:00",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-006_datasets_crosscheck.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 4.2
+    },
+    {
+      "test_id": "API-007",
+      "endpoint": "/api/dataset",
+      "scenario": "Dataset detail EURUSD",
+      "test_data": "dataset_id=EURUSD/M1/2026",
+      "expected": "200; 184963 bars; provider twelve_data; M1..H4 available; metadata",
+      "actual": "id=EURUSD/M1/2026 bars=184963 provider=twelve_data tf=['M1', 'M5', 'M15', 'H1', 'H4']",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-007_dataset_detail.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 3.6
+    },
+    {
+      "test_id": "API-008",
+      "endpoint": "/api/frame",
+      "scenario": "Derived timeframes from M1",
+      "test_data": "timeframe=M5,M15,H1,H4",
+      "expected": "200; derived_from M1; plausible bar counts; derivation warning",
+      "actual": "M5:36987; M15:12325; H1:3079; H4:792",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-008_frame_derived.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 91.8
+    },
+    {
+      "test_id": "API-009",
+      "endpoint": "/api/range",
+      "scenario": "Valid range summary",
+      "test_data": "EURUSD 2026-03-02..2026-03-06",
+      "expected": "200; valid true; positive bar_count; total_frame_bars 184963",
+      "actual": "valid=True bars=7078 gaps=1 unexpected=1",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-009_range_valid.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 27.8
+    },
+    {
+      "test_id": "API-010",
+      "endpoint": "/api/bars",
+      "scenario": "Valid bars window",
+      "test_data": "EURUSD 2026-03-02, limit=100",
+      "expected": "200; <=100 ascending bars; OHLC finite and valid; date matches",
+      "actual": "n=100 first_time=1772490000 last_time=1772495940 first_bar={\"time\":1772490000,\"open\":1.16891,\"high\":1.169,\"low\":1.16889,\"close\":1.16897,\"volume\":null}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-010_bars_valid.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 36.0
+    },
+    {
+      "test_id": "API-011",
+      "endpoint": "/api/strategies",
+      "scenario": "Strategy registry",
+      "test_data": "GET /api/strategies",
+      "expected": "200; CORE_ZONE_BREAKOUT/S002/S008 with correct flags and S008 params",
+      "actual": "ids=['CORE_ZONE_BREAKOUT', 'S002', 'S008']",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-011_strategies.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 3.1
+    },
+    {
+      "test_id": "API-012",
+      "endpoint": "/api/runs",
+      "scenario": "Runs list schema and ordering",
+      "test_data": "limit=25 and limit=1",
+      "expected": "200; list schema; created_at desc; limit honored",
+      "actual": "n=5 ids=['20261103T133657Z_5249e0f7', '20261103T133655Z_0d7426ea', '20261103T133522Z_0dacd4dc']",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-012_runs_list.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 92.5
+    },
+    {
+      "test_id": "API-013",
+      "endpoint": "/api/runs/{run_id}",
+      "scenario": "Existing run schema",
+      "test_data": "first run id from /api/runs",
+      "expected": "200; ui_run_v1; full schema; reconciliation difference 0",
+      "actual": "id=20261103T133657Z_5249e0f7 strategy=S008 trades=1310 metrics={\"total_signals\":1387,\"total_trades\":1310,\"wins\":155,\"losses\":1155,\"win_rate\":11.83206106870229,\"profit_factor\":0.2618383521235236,\"expectancy\":-0.6517210786489162,\"max_drawdown_r\":853.7546130300801,\"largest_win\":2.0,\"largest_loss\":-4.468750000001865,\"ambiguous_exits\":22,\"avg_holding_duration\":2.962...<truncated>",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-013_run_detail.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 19.1
+    },
+    {
+      "test_id": "API-014",
+      "endpoint": "/api/runs/{run_id}",
+      "scenario": "Unknown/invalid run id",
+      "test_data": "does-not-exist_123; bad!id",
+      "expected": "404 with Run not found / Invalid run id",
+      "actual": "unknown=404 {\"detail\":\"Run not found\"}; invalid=404 {\"detail\":\"Invalid run id\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-014_run_invalid.json",
+      "http_statuses": [
+        404
+      ],
+      "duration_ms_total": 7.3
+    },
+    {
+      "test_id": "API-015",
+      "endpoint": "/api/dataset|frame|range|bars",
+      "scenario": "Unknown dataset",
+      "test_data": "dataset_id=NOPE/M1/2026 on 4 read endpoints",
+      "expected": "404 Dataset not found, not 5xx",
+      "actual": "404 with dataset-not-found detail on dataset/frame/range/bars",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-015_unknown_dataset.json",
+      "http_statuses": [
+        404
+      ],
+      "duration_ms_total": 11.5
+    },
+    {
+      "test_id": "API-016",
+      "endpoint": "/api/dataset",
+      "scenario": "Malformed id / path traversal",
+      "test_data": "2 parts, extra parts, ../, non-numeric year, absent year, encoded ../",
+      "expected": "4xx each; no file contents leaked",
+      "actual": "two-parts=404:Dataset id must be SYMBOL/TIMEFRAME/YEAR; too-many-parts=404:Dataset id must be SYMBOL/TIMEFRAME/YEAR; dot-dot-traversal=404:Dataset id must be SYMBOL/TIMEFRAME/YEAR; traversal-with-year=404:Dataset id must be SYMBOL/TIMEFRAME/YEAR; non-numeric-year=404:Dataset year is invalid; valid-but-absent-year=404:Dataset not found: EURUSD/M1/1990; encoded-traversal=404:Dataset year is invalid",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-016_malformed_dataset.json",
+      "http_statuses": [
+        404
+      ],
+      "duration_ms_total": 15.9
+    },
+    {
+      "test_id": "API-017",
+      "endpoint": "/api/dataset|bars|backtests",
+      "scenario": "Unsupported timeframe",
+      "test_data": "timeframe=M2",
+      "expected": "400 with allowed-timeframe message on all three",
+      "actual": "dataset=400 bars=400 backtest=400",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-017_unsupported_timeframe.json",
+      "http_statuses": [
+        400
+      ],
+      "duration_ms_total": 11.6
+    },
+    {
+      "test_id": "API-018",
+      "endpoint": "/api/bars|runs",
+      "scenario": "Limit boundaries",
+      "test_data": "bars 0/5001/-1 and 1; runs 0/101",
+      "expected": "422 for out-of-range, 200 for limit=1",
+      "actual": "bars:0=422; bars:5001=422; bars:-1=422; bars:1=200/n=1; runs:0=422; runs:101=422",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-018_limit_boundaries.json",
+      "http_statuses": [
+        200,
+        422
+      ],
+      "duration_ms_total": 22.2
+    },
+    {
+      "test_id": "API-019",
+      "endpoint": "/api/bars|backtests",
+      "scenario": "Invalid dates",
+      "test_data": "start>end; malformed date",
+      "expected": "400 for start>end, 422 for malformed date",
+      "actual": "bars>400 malformed=422 backtest>400 bm=422",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-019_invalid_dates.json",
+      "http_statuses": [
+        400,
+        422
+      ],
+      "duration_ms_total": 12.8
+    },
+    {
+      "test_id": "API-020",
+      "endpoint": "/api/range",
+      "scenario": "Invalid range dates",
+      "test_data": "start>end; out-of-coverage dates",
+      "expected": "No 5xx; 200 with valid=false and understandable error (documented contract)",
+      "actual": "start>end status=200 valid=False error='Start date is after the end date. The selected range contains no bars.'; out_of_coverage status=200 valid=False error='Start date 2025-01-01 is before the first available bar (2026-01-01). The selected range contains no bars.'",
+      "status": "PASS",
+      "notes": "Range endpoint is a validation summary, so it reports validity in-body rather than via 4xx.",
+      "evidence": "docs/qa/EVIDENCE/api/API-020_range_invalid_dates.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 60.8
+    },
+    {
+      "test_id": "API-021",
+      "endpoint": "/api/backtests",
+      "scenario": "Unknown strategy",
+      "test_data": "strategy_id=NOPE",
+      "expected": "400 with not-exposed detail",
+      "actual": "status=400 detail={\"detail\":\"Strategy 'NOPE' is not exposed in the UI\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-021_unknown_strategy.json",
+      "http_statuses": [
+        400
+      ],
+      "duration_ms_total": 26.2
+    },
+    {
+      "test_id": "API-022",
+      "endpoint": "/api/backtests",
+      "scenario": "Invalid strategy parameters",
+      "test_data": "lookback 1/abc/true, foo, min_wick_ratio 1.5, tolerance -0.1",
+      "expected": "400 with parameter-specific detail",
+      "actual": "lookback below min=400:lookback must be >= 2; lookback non-integer=400:lookback must be an integer; unknown parameter=400:Unknown parameters: foo; min_wick_ratio above max=400:min_wick_ratio must be <= 1.0; tolerance below min=400:tolerance must be >= 0.0; boolean as integer=400:lookback must be an integer",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-022_invalid_parameters.json",
+      "http_statuses": [
+        400
+      ],
+      "duration_ms_total": 166.4
+    },
+    {
+      "test_id": "API-023",
+      "endpoint": "/api/backtests",
+      "scenario": "Zone-based strategy without zone config",
+      "test_data": "AUDUSD + S002",
+      "expected": "400 No zone book is configured for AUDUSD",
+      "actual": "status=400 detail={\"detail\":\"No zone book is configured for AUDUSD in config/zones.json\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-023_missing_zone_book.json",
+      "http_statuses": [
+        400
+      ],
+      "duration_ms_total": 15.0
+    },
+    {
+      "test_id": "API-024",
+      "endpoint": "/api/backtests",
+      "scenario": "Range outside coverage",
+      "test_data": "EURUSD 2026-07-01..2026-07-02",
+      "expected": "400 with after-the-last-available-bar detail",
+      "actual": "status=400 detail={\"detail\":\"End date 2026-07-02 is after the last available M1 bar (2026-06-30).\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-024_empty_range.json",
+      "http_statuses": [
+        400
+      ],
+      "duration_ms_total": 5.6
+    },
+    {
+      "test_id": "API-025",
+      "endpoint": "/api/backtests",
+      "scenario": "Valid range with zero signals",
+      "test_data": "EURUSD weekend 2026-01-03..2026-01-04, S008 defaults",
+      "expected": "200; zero signals/trades; profit_factor null; finite JSON",
+      "actual": "status=200 metrics={\"total_signals\":0,\"total_trades\":0,\"wins\":0,\"losses\":0,\"win_rate\":0.0,\"profit_factor\":null,\"expectancy\":0.0,\"max_drawdown_r\":0.0,\"largest_win\":0.0,\"largest_loss\":0.0,\"ambiguous_exits\":0,\"avg_holding_duration\":0.0} warnings=['Transaction costs (spread, commission, slippage) are not applied.', 'Performance is in R-multiples; no currency equity or compounding.']",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-025_no_signal_range.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 33.6
+    },
+    {
+      "test_id": "API-026",
+      "endpoint": "/api/backtests",
+      "scenario": "Valid S008 EURUSD backtest",
+      "test_data": "EURUSD 2026-03-02..2026-03-06; lookback 10; R=2",
+      "expected": "200 full run schema; finite metrics; reconciliation 0; warnings; artifact saved",
+      "actual": "status=200 id=20261103T133824Z_e8c5f403 dataset=EURUSD/M1/2026 bars=7078 metrics={\"total_signals\":51,\"total_trades\":51,\"wins\":18,\"losses\":33,\"win_rate\":35.294117647058826,\"profit_factor\":1.0909090909090908,\"expectancy\":0.058823529411764705,\"max_drawdown_r\":8.0,\"largest_win\":2.0,\"largest_loss\":-1.0,\"ambiguous_exits\":3,\"avg_holding_duration\":2.156862745098039} warnings=['Transaction costs (spread, commission, slippage) are not applied.', 'Performance is in R-multiples; no currency equity or compounding.', '3 ambiguous intrabar exits were conservatively scored at -1R.', 'Small sample: 51 closed trades. Not statistically reliable.', 'Selected range contains 1 timestamp gap(s) larger than one M1 bar (market closures included).']",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-026_bt_eurusd.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 87.9
+    },
+    {
+      "test_id": "API-027",
+      "endpoint": "/api/backtests",
+      "scenario": "Valid S008 GBPUSD backtest",
+      "test_data": "GBPUSD 2026-05-01..2026-05-08",
+      "expected": "200 full run schema; finite metrics; reconciliation 0; artifact saved",
+      "actual": "status=200 id=20261103T133824Z_5624caff dataset=GBPUSD/M1/2026 bars=8520 metrics={\"total_signals\":229,\"total_trades\":218,\"wins\":46,\"losses\":172,\"win_rate\":21.100917431192663,\"profit_factor\":0.5099256946894973,\"expectancy\":-0.3944028101804123,\"max_drawdown_r\":93.67845038733127,\"largest_win\":2.0,\"largest_loss\":-2.600000000005329,\"ambiguous_exits\":6,\"avg_holding_duration\":3.770642201834862} warnings=['Transaction costs (spread, commission, slippage) are not applied.', 'Performance is in R-multiples; no currency equity or compounding.', '6 ambiguous intrabar exits were conservatively scored at -1R.', 'Selected range contains 1 timestamp gap(s) larger than one M1 bar (market closures included).']",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-027_bt_gbpusd.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 124.9
+    },
+    {
+      "test_id": "API-028",
+      "endpoint": "/api/runs/{run_id}",
+      "scenario": "Backtest artifact retrieval",
+      "test_data": "GET the EURUSD run id; also list + disk file",
+      "expected": "200; identical metrics/trades; listed; temp-run file exists",
+      "actual": "GET status=200 id=20261103T133824Z_e8c5f403 file_exists=True listed=True",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-028_run_artifact.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 15.7
+    },
+    {
+      "test_id": "API-029",
+      "endpoint": "/api/backtests",
+      "scenario": "Backtest numeric boundaries",
+      "test_data": "r_multiple 0/101; risk_fraction 0/0.2; equity 0/-5",
+      "expected": "422 for each Pydantic violation",
+      "actual": "r_multiple=0=422; r_multiple=101=422; risk_fraction=0.2=422; risk_fraction=0=422; equity=0=422; equity=-5=422",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-029_bt_boundaries.json",
+      "http_statuses": [
+        422
+      ],
+      "duration_ms_total": 9.3
+    },
+    {
+      "test_id": "API-030",
+      "endpoint": "/api/settings/providers",
+      "scenario": "Masked provider status, env fallback",
+      "test_data": "GET on isolated store with dummy env key",
+      "expected": "200; two providers; twelve_data source=environment hint=0001; no api_key",
+      "actual": "twelve_data={\"id\":\"twelve_data\",\"name\":\"Twelve Data\",\"description\":\"Twelve Data historical M1 candles\",\"env_var\":\"TWELVE_DATA_API_KEY\",\"required\":true,\"configured\":true,\"source\":\"environment\",\"hint\":\"0001\",\"updated_at\":null}; dukascopy={\"id\":\"dukascopy\",\"name\":\"Dukascopy\",\"description\":\"Dukascopy historical adapter; current downloader does not require a key\",\"env_var\":\"DUKASCOPY_API_KEY\",\"required\":false,\"configured\":false,\"source\":\"none\",\"hint\":\"••••\",\"updated_at\":null}",
+      "status": "PASS",
+      "notes": "Isolated instance 16902 with TWELVE_DATA_API_KEY=dummy-env-key-0001; temp store.",
+      "evidence": "docs/qa/EVIDENCE/api/API-030_provider_get_masked.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 1.9
+    },
+    {
+      "test_id": "API-031",
+      "endpoint": "/api/settings/providers/{id}",
+      "scenario": "Store dummy key and mask it",
+      "test_data": "PUT twelve_data dummy-stored-key-9999",
+      "expected": "200 source=stored hint=9999; full key absent; store mode 0600",
+      "actual": "status=200 view={\"id\":\"twelve_data\",\"name\":\"Twelve Data\",\"description\":\"Twelve Data historical M1 candles\",\"env_var\":\"TWELVE_DATA_API_KEY\",\"required\":true,\"configured\":true,\"source\":\"stored\",\"hint\":\"9999\",\"updated_at\":\"2026-11-03T13:38:25.049737+00:00\"} store_mode=0o600",
+      "status": "PASS",
+      "notes": "Dummy key only. Temp store /tmp/opencode/qa-api/keys_a.json.",
+      "evidence": "docs/qa/EVIDENCE/api/API-031_provider_put.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 3.9
+    },
+    {
+      "test_id": "API-032",
+      "endpoint": "/api/settings/providers/{id}",
+      "scenario": "Delete stored key, env fallback restored",
+      "test_data": "GET then DELETE twelve_data; DELETE again",
+      "expected": "200; source falls back to environment; store entry removed; idempotent",
+      "actual": "delete status=200 source=environment hint=0001; idempotent=200",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-032_provider_delete.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 8.8
+    },
+    {
+      "test_id": "API-033",
+      "endpoint": "/api/settings/providers/{id}",
+      "scenario": "Unknown provider",
+      "test_data": "PUT and DELETE /api/settings/providers/nope",
+      "expected": "404 Unknown provider on both",
+      "actual": "PUT=404 {\"detail\":\"Unknown provider: 'nope'\"}; DELETE=404 {\"detail\":\"Unknown provider: 'nope'\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-033_provider_unknown.json",
+      "http_statuses": [
+        404
+      ],
+      "duration_ms_total": 4.0
+    },
+    {
+      "test_id": "API-034",
+      "endpoint": "/api/settings/providers/{id}",
+      "scenario": "Empty/whitespace key",
+      "test_data": "PUT api_key='' and '   '",
+      "expected": "400 cannot be empty",
+      "actual": "empty=400:API key cannot be empty; whitespace=400:API key cannot be empty",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-034_provider_empty.json",
+      "http_statuses": [
+        400
+      ],
+      "duration_ms_total": 3.4
+    },
+    {
+      "test_id": "API-035",
+      "endpoint": "/api/settings/providers/{id}",
+      "scenario": "Oversized/boundary key",
+      "test_data": "PUT 513 x's then 512 b's",
+      "expected": "400 >512; 512 accepted and masked; cleanup delete",
+      "actual": "oversized=400 {\"detail\":\"API key cannot be longer than 512 characters\"}; boundary=200 hint=bbbb; cleanup=200",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-035_provider_oversized.json",
+      "http_statuses": [
+        200,
+        400
+      ],
+      "duration_ms_total": 7.2
+    },
+    {
+      "test_id": "API-036",
+      "endpoint": "/api/settings/providers/{id}",
+      "scenario": "Control characters in key",
+      "test_data": "newline, NUL, tab, DEL",
+      "expected": "400 control-character detail",
+      "actual": "newline=400; nul=400; tab=400; del=400",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-036_provider_control.json",
+      "http_statuses": [
+        400
+      ],
+      "duration_ms_total": 6.4
+    },
+    {
+      "test_id": "API-037",
+      "endpoint": "/api/settings/providers/{id}",
+      "scenario": "Stored vs environment precedence",
+      "test_data": "env -> PUT stored -> GET -> DELETE -> GET",
+      "expected": "stored overrides env; delete reverts to env; no full key echoed",
+      "actual": "env->stored->env; before={\"id\":\"twelve_data\",\"name\":\"Twelve Data\",\"description\":\"Twelve Data historical M1 candles\",\"env_var\":\"TWELVE_DATA_API_KEY\",\"required\":true,\"configured\":true,\"source\":\"environment\",\"hint\":\"0001\",\"updated_at\":null}; during={\"id\":\"twelve_data\",\"name\":\"Twelve Data\",\"description\":\"Twelve Data historical M1 candles\",\"env_var\":\"TWELVE_DATA_API_KEY\",\"required\":true,\"configured\":true,\"source\":\"stored\",\"hint\":\"2222\",\"updated_at\":\"2026-11-03T13:38:25.088591+00:00\"}; after={\"id\":\"twelve_data\",\"name\":\"Twelve Data\",\"description\":\"Twelve Data historical M1 candles\",\"env_var\":\"TWELVE_DATA_API_KEY\",\"required\":true,\"configured\":true,\"source\":\"environment\",\"hint\":\"0001\",\"updated_at\":null}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-037_provider_precedence.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 11.4
+    },
+    {
+      "test_id": "API-038",
+      "endpoint": "/api/downloads",
+      "scenario": "Unsupported provider",
+      "test_data": "provider=bogus",
+      "expected": "422 validation pattern error",
+      "actual": "status=422 detail={\"detail\":[{\"type\":\"string_pattern_mismatch\",\"loc\":[\"body\",\"provider\"],\"msg\":\"String should match pattern '^(twelve_data|dukascopy)$'\",\"input\":\"bogus\",\"ctx\":{\"pattern\":\"^(twelve_data|dukascopy)$\"}}]}",
+      "status": "PASS",
+      "notes": "No provider request made.",
+      "evidence": "docs/qa/EVIDENCE/api/API-038_download_invalid_provider.json",
+      "http_statuses": [
+        422
+      ],
+      "duration_ms_total": 2.2
+    },
+    {
+      "test_id": "API-039",
+      "endpoint": "/api/downloads",
+      "scenario": "Unsupported symbol",
+      "test_data": "symbol=XXXYYY, dukascopy",
+      "expected": "400 before any provider call",
+      "actual": "status=400 detail={\"detail\":\"UI downloads currently support EURUSD and GBPUSD\"}",
+      "status": "PASS",
+      "notes": "Observed message lists only EURUSD/GBPUSD while 7 symbols are accepted: reported as D-01 (LOW).",
+      "evidence": "docs/qa/EVIDENCE/api/API-039_download_invalid_symbol.json",
+      "http_statuses": [
+        400
+      ],
+      "duration_ms_total": 2.4
+    },
+    {
+      "test_id": "API-040",
+      "endpoint": "/api/downloads",
+      "scenario": "Unsupported download timeframe",
+      "test_data": "timeframe=M5",
+      "expected": "400 M1 only",
+      "actual": "status=400 detail={\"detail\":\"UI downloads currently support M1 only\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-040_download_invalid_timeframe.json",
+      "http_statuses": [
+        400
+      ],
+      "duration_ms_total": 2.1
+    },
+    {
+      "test_id": "API-041",
+      "endpoint": "/api/downloads",
+      "scenario": "Invalid download dates/range",
+      "test_data": "start>end; >31 days; future end",
+      "expected": "400 with specific detail each",
+      "actual": "start>end=400:start_date cannot be after end_date; range>31d=400:UI downloads are limited to 31 days; future=400:end_date cannot be in the future",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-041_download_invalid_dates.json",
+      "http_statuses": [
+        400
+      ],
+      "duration_ms_total": 7.9
+    },
+    {
+      "test_id": "API-042",
+      "endpoint": "/api/downloads",
+      "scenario": "Provider provenance conflict",
+      "test_data": "dukascopy over twelve_data EURUSD 2026 partition",
+      "expected": "400 written by twelve_data, not dukascopy",
+      "actual": "status=400 detail={\"detail\":\"Existing partition 2026.csv was written by twelve_data, not dukascopy. Use a separate REX_DATA_DIR or overwrite it deliberately.\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-042_download_provenance.json",
+      "http_statuses": [
+        400
+      ],
+      "duration_ms_total": 2.6
+    },
+    {
+      "test_id": "API-043",
+      "endpoint": "/api/downloads",
+      "scenario": "Missing provider credential",
+      "test_data": "twelve_data on isolated no-key instance",
+      "expected": "503 not configured; fast rejection, no network",
+      "actual": "status=503 detail={\"detail\":\"Twelve Data API key is not configured; add it in System → Key handling.\"} duration_ms=3.5",
+      "status": "PASS",
+      "notes": "Isolated instance 16903 with no TWELVE_DATA_API_KEY and empty temp store.",
+      "evidence": "docs/qa/EVIDENCE/api/API-043_download_missing_key.json",
+      "http_statuses": [
+        503
+      ],
+      "duration_ms_total": 3.5
+    },
+    {
+      "test_id": "API-044",
+      "endpoint": "multiple",
+      "scenario": "No NaN/Infinity values",
+      "test_data": "overview, datasets, detail, range, bars, strategies, runs, run, backtests, no-signal",
+      "expected": "All floats finite; no NaN/Infinity tokens",
+      "actual": "scanned=['backtest_eurusd', 'backtest_gbpusd', 'bars_valid', 'dataset', 'datasets', 'no_signal', 'overview', 'range', 'run_detail', 'runs_list', 'strategies']",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-044_non_finite.json",
+      "http_statuses": [],
+      "duration_ms_total": 0
+    },
+    {
+      "test_id": "API-045",
+      "endpoint": "/api/backtests + /api/bars",
+      "scenario": "Timestamp/order/count consistency",
+      "test_data": "EURUSD/GBPUSD/S002 runs; 100 bars",
+      "expected": "ascending orders; signal/trade/reconciliation counts consistent; finite",
+      "actual": "backtests=['eurusd', 'gbpusd']; bars_n=100; checks per run = signals/reconciliation/trade order/equity curve/distribution",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-045_consistency.json",
+      "http_statuses": [],
+      "duration_ms_total": 0
+    },
+    {
+      "test_id": "API-046",
+      "endpoint": "multiple",
+      "scenario": "Error content type and detail",
+      "test_data": "all captured 4xx/5xx samples",
+      "expected": "application/json with detail string/list",
+      "actual": "samples=['404:/api/runs/does-not-exist_123', '404:/api/runs/bad!id', '404:/api/dataset', '404:/api/frame', '404:/api/range', '404:/api/bars', '404:/api/dataset', '404:/api/dataset', '404:/api/dataset', '404:/api/dataset', '404:/api/dataset', '404:/api/dataset', '404:/api/dataset', '400:/api/dataset', '400:/api/bars', '400:/api/backtests', '422:/api/bars', '422:/api/bars', '422:/api/bars', '422:/api/runs', '422:/api/runs', '400:/api/bars', '422:/api/bars', '400:/api/backtests', '422:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '400:/api/backtests', '422:/api/backtests', '422:/api/backtests', '422:/api/backtests', '422:/api/backtests', '422:/api/backtests', '422:/api/backtests', '404:/api/settings/providers/nope', '404:/api/settings/providers/nope', '400:/api/settings/providers/twelve_data', '400:/api/settings/providers/twelve_data', '400:/api/settings/providers/twelve_data', '400:/api/settings/providers/twelve_data', '400:/api/settings/providers/twelve_data', '400:/api/settings/providers/twelve_data', '400:/api/settings/providers/twelve_data', '422:/api/downloads', '400:/api/downloads', '400:/api/downloads', '400:/api/downloads', '400:/api/downloads', '400:/api/downloads', '400:/api/downloads', '503:/api/downloads']",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-046_error_shape.json",
+      "http_statuses": [],
+      "duration_ms_total": 0
+    },
+    {
+      "test_id": "API-047",
+      "endpoint": "multiple",
+      "scenario": "Sensitive data leakage",
+      "test_data": "provider views + overview + backtests",
+      "expected": "no api_key fields; hints <=4 chars; dummy secrets never echoed",
+      "actual": "provider_views=13; no api_key/hint<=4/dummy values absent; scanned overview + 2 backtests",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-047_sensitive.json",
+      "http_statuses": [],
+      "duration_ms_total": 0
+    },
+    {
+      "test_id": "API-048",
+      "endpoint": "GET health/strategies/bars/overview",
+      "scenario": "Concurrent reads",
+      "test_data": "44 requests, 12 workers",
+      "expected": "all 200; stable per-endpoint bodies",
+      "actual": "requests=44 elapsed_ms=270.4 statuses={'health': [200], 'strategies': [200], 'bars': [200], 'overview': [200]}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-048_concurrency.json",
+      "http_statuses": [],
+      "duration_ms_total": 0
+    },
+    {
+      "test_id": "API-049",
+      "endpoint": "GET health/runs",
+      "scenario": "Repeated requests",
+      "test_data": "50x health; 20x runs",
+      "expected": "all 200; consistent bodies",
+      "actual": "health=50 runs=20 elapsed_ms=1212.8 distinct_run_bodies=1",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-049_repeated.json",
+      "http_statuses": [],
+      "duration_ms_total": 0
+    },
+    {
+      "test_id": "API-050",
+      "endpoint": "/api/bars",
+      "scenario": "Large bounded bars request",
+      "test_data": "limit=5000",
+      "expected": "200; exactly 5000 ascending finite bars; <2MB",
+      "actual": "n=5000 bytes=467660 duration_ms=35.0 first_time=1782391200 last_time=1782863940",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-050_large_bars.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 35.0
+    },
+    {
+      "test_id": "API-051",
+      "endpoint": "/api/backtests",
+      "scenario": "Zone-based S002 backtest",
+      "test_data": "EURUSD 2026-03-02..2026-03-06",
+      "expected": "200 full schema; finite metrics; reconciliation 0",
+      "actual": "status=200 id=20261103T133826Z_704e39ec dataset=EURUSD/M1/2026 bars=7078 metrics={\"total_signals\":322,\"total_trades\":143,\"wins\":46,\"losses\":97,\"win_rate\":32.16783216783217,\"profit_factor\":0.9093279090009806,\"expectancy\":-0.06277071221481079,\"max_drawdown_r\":29.496413866930975,\"largest_win\":2.0,\"largest_loss\":-2.4999999999888978,\"ambiguous_exits\":6,\"avg_holding_duration\":4.034965034965035} warnings=['Transaction costs (spread, commission, slippage) are not applied.', 'Performance is in R-multiples; no currency equity or compounding.', 'Zone levels are static manual annotations without confirmation timestamps.', '6 ambiguous intrabar exits were conservatively scored at -1R.', 'Selected range contains 1 timestamp gap(s) larger than one M1 bar (market closures included).']",
+      "status": "PASS",
+      "notes": "",
+      "evidence": "docs/qa/EVIDENCE/api/API-051_bt_s002.json",
+      "http_statuses": [
+        200
+      ],
+      "duration_ms_total": 115.1
+    }
+  ]
+}

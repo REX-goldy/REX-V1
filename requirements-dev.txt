@@ -1,0 +1,3 @@
+# Lightweight local/CI quality tooling. Runtime deps remain in requirements.txt.
+coverage>=7.0
+pyflakes>=3.2

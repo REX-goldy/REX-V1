@@ -1,0 +1,379 @@
+{
+  "test_id": "API-008",
+  "endpoint": "/api/frame",
+  "scenario": "Derived timeframes from M1",
+  "test_data": "timeframe=M5,M15,H1,H4",
+  "expected": "200; derived_from M1; plausible bar counts; derivation warning",
+  "actual": "M5:36987; M15:12325; H1:3079; H4:792",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "M5 HTTP 200",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "M5 derived flag",
+      "ok": true,
+      "detail": "(True, 'M1')"
+    },
+    {
+      "check": "M5 bar_count range",
+      "ok": true,
+      "detail": "36987"
+    },
+    {
+      "check": "M5 derived warning",
+      "ok": true,
+      "detail": "['10 unexpected timestamp gaps (beyond FX closures).', '31 unexpected timestamp gaps beyond FX closures.', 'M5 is derived from stored M1 with the existing resampler; incomplete buckets are skipped and no derived data is persisted.']"
+    },
+    {
+      "check": "M5 available timeframes",
+      "ok": true,
+      "detail": "['M1', 'M5', 'M15', 'H1', 'H4']"
+    },
+    {
+      "check": "M15 HTTP 200",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "M15 derived flag",
+      "ok": true,
+      "detail": "(True, 'M1')"
+    },
+    {
+      "check": "M15 bar_count range",
+      "ok": true,
+      "detail": "12325"
+    },
+    {
+      "check": "M15 derived warning",
+      "ok": true,
+      "detail": "['10 unexpected timestamp gaps (beyond FX closures).', '29 unexpected timestamp gaps beyond FX closures.', 'M15 is derived from stored M1 with the existing resampler; incomplete buckets are skipped and no derived data is persisted.']"
+    },
+    {
+      "check": "M15 available timeframes",
+      "ok": true,
+      "detail": "['M1', 'M5', 'M15', 'H1', 'H4']"
+    },
+    {
+      "check": "H1 HTTP 200",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "H1 derived flag",
+      "ok": true,
+      "detail": "(True, 'M1')"
+    },
+    {
+      "check": "H1 bar_count range",
+      "ok": true,
+      "detail": "3079"
+    },
+    {
+      "check": "H1 derived warning",
+      "ok": true,
+      "detail": "['10 unexpected timestamp gaps (beyond FX closures).', '29 unexpected timestamp gaps beyond FX closures.', 'H1 is derived from stored M1 with the existing resampler; incomplete buckets are skipped and no derived data is persisted.']"
+    },
+    {
+      "check": "H1 available timeframes",
+      "ok": true,
+      "detail": "['M1', 'M5', 'M15', 'H1', 'H4']"
+    },
+    {
+      "check": "H4 HTTP 200",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "H4 derived flag",
+      "ok": true,
+      "detail": "(True, 'M1')"
+    },
+    {
+      "check": "H4 bar_count range",
+      "ok": true,
+      "detail": "792"
+    },
+    {
+      "check": "H4 derived warning",
+      "ok": true,
+      "detail": "['10 unexpected timestamp gaps (beyond FX closures).', '29 unexpected timestamp gaps beyond FX closures.', 'H4 is derived from stored M1 with the existing resampler; incomplete buckets are skipped and no derived data is persisted.']"
+    },
+    {
+      "check": "H4 available timeframes",
+      "ok": true,
+      "detail": "['M1', 'M5', 'M15', 'H1', 'H4']"
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/frame",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "timeframe": "M5"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 55.9,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "1099",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "b3de01453334d6f38778703ac2ed02cc6b064ebe20ac6e677adcf57a192e8c52",
+      "response_bytes": 1099,
+      "response_json": {
+        "id": "EURUSD/M1/2026",
+        "symbol": "EURUSD",
+        "timeframe": "M5",
+        "year": 2026,
+        "provider": "twelve_data",
+        "path": "data/historical/EURUSD/M1/2026.csv",
+        "bar_count": 36987,
+        "size_bytes": 9902091,
+        "status": "warning",
+        "warnings": [
+          "10 unexpected timestamp gaps (beyond FX closures).",
+          "31 unexpected timestamp gaps beyond FX closures.",
+          "M5 is derived from stored M1 with the existing resampler; incomplete buckets are skipped and no derived data is persisted."
+        ],
+        "coverage": {
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "requested_start": "2026-01-01",
+          "requested_end": "2026-06-30",
+          "actual_start": "2026-01-01T13:00:00",
+          "actual_end": "2026-06-30T23:55:00",
+          "retrieved_at": "2026-10-29T21:33:25.344166+00:00"
+        },
+        "quality": {
+          "duplicate_count": 0,
+          "invalid_bar_count": 0,
+          "timestamp_gap_count": 31,
+          "unexpected_gap_count": 31,
+          "notes": [
+            "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+            "Gap count is raw timestamp spacing, not session-aware missing bars."
+          ]
+        },
+        "first_timestamp": "2026-01-01T13:00:00",
+        "last_timestamp": "2026-06-30T23:55:00",
+        "derived": true,
+        "available_timeframes": [
+          "M1",
+          "M5",
+          "M15",
+          "H1",
+          "H4"
+        ],
+        "derived_from": "M1"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/frame",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "timeframe": "M15"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 24.2,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "1101",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "87ea968fd989faf445052837fd13aacfcc13bae39035f0c8db92d04c6a65f323",
+      "response_bytes": 1101,
+      "response_json": {
+        "id": "EURUSD/M1/2026",
+        "symbol": "EURUSD",
+        "timeframe": "M15",
+        "year": 2026,
+        "provider": "twelve_data",
+        "path": "data/historical/EURUSD/M1/2026.csv",
+        "bar_count": 12325,
+        "size_bytes": 9902091,
+        "status": "warning",
+        "warnings": [
+          "10 unexpected timestamp gaps (beyond FX closures).",
+          "29 unexpected timestamp gaps beyond FX closures.",
+          "M15 is derived from stored M1 with the existing resampler; incomplete buckets are skipped and no derived data is persisted."
+        ],
+        "coverage": {
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "requested_start": "2026-01-01",
+          "requested_end": "2026-06-30",
+          "actual_start": "2026-01-01T13:00:00",
+          "actual_end": "2026-06-30T23:45:00",
+          "retrieved_at": "2026-10-29T21:33:25.344166+00:00"
+        },
+        "quality": {
+          "duplicate_count": 0,
+          "invalid_bar_count": 0,
+          "timestamp_gap_count": 29,
+          "unexpected_gap_count": 29,
+          "notes": [
+            "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+            "Gap count is raw timestamp spacing, not session-aware missing bars."
+          ]
+        },
+        "first_timestamp": "2026-01-01T13:00:00",
+        "last_timestamp": "2026-06-30T23:45:00",
+        "derived": true,
+        "available_timeframes": [
+          "M1",
+          "M5",
+          "M15",
+          "H1",
+          "H4"
+        ],
+        "derived_from": "M1"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/frame",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "timeframe": "H1"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 7.6,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "1098",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "1f8606264a29965b6d5ce609820291208583c2e9b2bea2cf64056b945d532265",
+      "response_bytes": 1098,
+      "response_json": {
+        "id": "EURUSD/M1/2026",
+        "symbol": "EURUSD",
+        "timeframe": "H1",
+        "year": 2026,
+        "provider": "twelve_data",
+        "path": "data/historical/EURUSD/M1/2026.csv",
+        "bar_count": 3079,
+        "size_bytes": 9902091,
+        "status": "warning",
+        "warnings": [
+          "10 unexpected timestamp gaps (beyond FX closures).",
+          "29 unexpected timestamp gaps beyond FX closures.",
+          "H1 is derived from stored M1 with the existing resampler; incomplete buckets are skipped and no derived data is persisted."
+        ],
+        "coverage": {
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "requested_start": "2026-01-01",
+          "requested_end": "2026-06-30",
+          "actual_start": "2026-01-01T13:00:00",
+          "actual_end": "2026-06-30T23:00:00",
+          "retrieved_at": "2026-10-29T21:33:25.344166+00:00"
+        },
+        "quality": {
+          "duplicate_count": 0,
+          "invalid_bar_count": 0,
+          "timestamp_gap_count": 29,
+          "unexpected_gap_count": 29,
+          "notes": [
+            "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+            "Gap count is raw timestamp spacing, not session-aware missing bars."
+          ]
+        },
+        "first_timestamp": "2026-01-01T13:00:00",
+        "last_timestamp": "2026-06-30T23:00:00",
+        "derived": true,
+        "available_timeframes": [
+          "M1",
+          "M5",
+          "M15",
+          "H1",
+          "H4"
+        ],
+        "derived_from": "M1"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/frame",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "timeframe": "H4"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 4.1,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "1097",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "bfefdd93a48e4e9337ac2a94ce1f054e060c9557f222f7a45f49bf976d93b932",
+      "response_bytes": 1097,
+      "response_json": {
+        "id": "EURUSD/M1/2026",
+        "symbol": "EURUSD",
+        "timeframe": "H4",
+        "year": 2026,
+        "provider": "twelve_data",
+        "path": "data/historical/EURUSD/M1/2026.csv",
+        "bar_count": 792,
+        "size_bytes": 9902091,
+        "status": "warning",
+        "warnings": [
+          "10 unexpected timestamp gaps (beyond FX closures).",
+          "29 unexpected timestamp gaps beyond FX closures.",
+          "H4 is derived from stored M1 with the existing resampler; incomplete buckets are skipped and no derived data is persisted."
+        ],
+        "coverage": {
+          "start": "2026-01-01",
+          "end": "2026-06-30",
+          "requested_start": "2026-01-01",
+          "requested_end": "2026-06-30",
+          "actual_start": "2026-01-01T16:00:00",
+          "actual_end": "2026-06-30T20:00:00",
+          "retrieved_at": "2026-10-29T21:33:25.344166+00:00"
+        },
+        "quality": {
+          "duplicate_count": 0,
+          "invalid_bar_count": 0,
+          "timestamp_gap_count": 29,
+          "unexpected_gap_count": 29,
+          "notes": [
+            "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+            "Gap count is raw timestamp spacing, not session-aware missing bars."
+          ]
+        },
+        "first_timestamp": "2026-01-01T16:00:00",
+        "last_timestamp": "2026-06-30T20:00:00",
+        "derived": true,
+        "available_timeframes": [
+          "M1",
+          "M5",
+          "M15",
+          "H1",
+          "H4"
+        ],
+        "derived_from": "M1"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.139648+00:00"
+}

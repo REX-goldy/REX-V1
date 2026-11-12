@@ -1,0 +1,11 @@
+OK data/historical/AUDUSD/M1/2026.csv
+OK data/historical/AUDUSD/M1/2026.meta.json
+OK data/historical/EURUSD/M1/2026.csv
+OK data/historical/EURUSD/M1/2026.meta.json
+OK data/historical/GBPUSD/M1/2026.csv
+OK data/historical/GBPUSD/M1/2026.meta.json
+OK data/historical/USDCAD/M1/2026.csv
+OK data/historical/USDCAD/M1/2026.meta.json
+OK data/historical/USDJPY/M1/2026.csv
+OK data/historical/USDJPY/M1/2026.meta.json
+TOTAL 10 checked, 0 mismatched

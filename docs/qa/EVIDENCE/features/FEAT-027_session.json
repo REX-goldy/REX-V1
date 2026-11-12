@@ -1,0 +1,65 @@
+{
+  "known_windows": {
+    "2026-01-05T12:00:00+00:00": {
+      "session": "LONDON",
+      "overlap": false,
+      "high_liquidity": false,
+      "active": [
+        "LONDON"
+      ]
+    },
+    "2026-01-05T14:00:00+00:00": {
+      "session": "LONDON",
+      "overlap": true,
+      "high_liquidity": true,
+      "active": [
+        "LONDON",
+        "NEW_YORK"
+      ]
+    },
+    "2026-01-05T02:00:00+00:00": {
+      "session": "TOKYO",
+      "overlap": true,
+      "high_liquidity": false,
+      "active": [
+        "SYDNEY",
+        "TOKYO"
+      ]
+    },
+    "2026-01-05T06:00:00+00:00": {
+      "session": "TOKYO",
+      "overlap": true,
+      "high_liquidity": false,
+      "active": [
+        "SYDNEY",
+        "TOKYO"
+      ]
+    },
+    "2026-01-05T18:00:00+00:00": {
+      "session": "NEW_YORK",
+      "overlap": false,
+      "high_liquidity": false,
+      "active": [
+        "NEW_YORK"
+      ]
+    },
+    "2026-01-05T22:30:00+00:00": {
+      "session": "SYDNEY",
+      "overlap": false,
+      "high_liquidity": false,
+      "active": [
+        "SYDNEY"
+      ]
+    }
+  },
+  "pack_at_real_asof": {
+    "asof": "2026-01-09T21:59:00+00:00",
+    "session": "NEW_YORK",
+    "active_sessions": [
+      "NEW_YORK"
+    ],
+    "overlap": false,
+    "high_liquidity": false
+  },
+  "pack_matches_session_manager": true
+}

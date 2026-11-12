@@ -1,0 +1,9 @@
+{
+  "test_id": "STRAT-016",
+  "label": "wrong_type",
+  "scenario": "Wrong parameter type",
+  "data_config": "EURUSD/M1/2026; lookback=\"abc\"",
+  "expected": "Explicit ValueError stating lookback must be an integer.",
+  "actual": "ValueError: lookback must be an integer",
+  "status": "PASS"
+}

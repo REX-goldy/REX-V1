@@ -1,0 +1,6 @@
+# SEC-010 GET/PUT/DELETE credential responses never contain the full key or api_key field
+component: server/main.py
+test_data: PUT dummy, GET list, DELETE
+expected: No full secret, no api_key field, hint=1234 for stored key
+actual: full_present=False api_key_field_present=False hint_ok=True
+status: PASS

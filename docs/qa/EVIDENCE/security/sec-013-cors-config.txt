@@ -1,0 +1,6 @@
+# SEC-013 CORS is wildcard for dev with credentials disabled (no ambient credential leak)
+component: server/main.py
+test_data: Inspect app middleware
+expected: allow_origins=['*'], allow_credentials=False
+actual: cors={'allow_origins': ['*'], 'allow_credentials': False, 'allow_methods': ['*'], 'allow_headers': ['*']}
+status: PASS

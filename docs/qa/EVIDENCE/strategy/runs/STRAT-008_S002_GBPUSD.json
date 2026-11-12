@@ -1,0 +1,113 @@
+{
+  "id": "20261103T133731Z_f97bba29",
+  "created_at": "2026-11-03T13:37:31.884762+00:00",
+  "dataset_id": "GBPUSD/M1/2026",
+  "strategy": {
+    "id": "S002",
+    "name": "BreakoutRetest",
+    "description": "Zone breakout followed by a causal boundary retest within max_wait bars."
+  },
+  "parameters": {
+    "tolerance": 0.0005,
+    "max_wait": 5
+  },
+  "request": {
+    "start": "2026-04-01",
+    "end": "2026-06-30",
+    "timeframe": "M1",
+    "r_multiple": 2.0,
+    "equity": 100000.0,
+    "risk_fraction": 0.01
+  },
+  "range": {
+    "start": "2026-04-01",
+    "end": "2026-06-30",
+    "bar_count": 93600,
+    "gap_count": 13
+  },
+  "bar_count": 93600,
+  "simulated": true,
+  "metrics": {
+    "total_signals": 0,
+    "total_trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0.0,
+    "profit_factor": null,
+    "expectancy": 0.0,
+    "max_drawdown_r": 0.0,
+    "largest_win": 0.0,
+    "largest_loss": 0.0,
+    "ambiguous_exits": 0,
+    "avg_holding_duration": 0.0
+  },
+  "reconciliation": {
+    "generated": 0,
+    "accepted": 0,
+    "ignored": 0,
+    "rejected": 0,
+    "difference": 0
+  },
+  "signals": {
+    "total": 0,
+    "by_type": {}
+  },
+  "assumptions": {
+    "costs_applied": false,
+    "entry_model": "next candle open",
+    "timestamps": "naive UTC",
+    "zone_source": "manual/static",
+    "result_units": "R-multiples",
+    "timeframe": "M1",
+    "derived_timeframe": false
+  },
+  "warnings": [
+    "Transaction costs (spread, commission, slippage) are not applied.",
+    "Performance is in R-multiples; no currency equity or compounding.",
+    "Zone levels are static manual annotations without confirmation timestamps.",
+    "Selected range contains 13 timestamp gap(s) larger than one M1 bar (market closures included)."
+  ],
+  "warning_count": 4,
+  "trades_count": 0,
+  "trades_by_direction": {},
+  "trades_by_close_reason": {},
+  "first_long_trade": null,
+  "first_short_trade": null,
+  "trade_sample": [],
+  "direct": {
+    "signals_by_type": {},
+    "reconcile_signals": {
+      "generated": 0,
+      "accepted": 0,
+      "ignored": 0,
+      "rejected": 0,
+      "difference": 0
+    },
+    "reconcile_execution": {
+      "accepted": 0,
+      "closed": 0,
+      "expired": 0,
+      "rejected": 0,
+      "cancelled": 0,
+      "active": 0,
+      "difference": 0
+    },
+    "accepted_setups": 0,
+    "ignored_active_lifecycle": 0,
+    "rejected_policy_boundary": 0,
+    "terminated_by_reason": {},
+    "trades_by_direction": {},
+    "trades_by_close_reason": {},
+    "first_signal_by_direction_class": {
+      "up": null,
+      "down": null
+    },
+    "first_long_trade": null,
+    "first_short_trade": null
+  },
+  "consistency_check": {
+    "service_signals_equal_direct": true,
+    "service_trades_equal_direct": true,
+    "service_by_type_equal_direct": true
+  }
+}

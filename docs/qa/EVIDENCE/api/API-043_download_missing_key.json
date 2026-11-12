@@ -1,0 +1,56 @@
+{
+  "test_id": "API-043",
+  "endpoint": "/api/downloads",
+  "scenario": "Missing provider credential",
+  "test_data": "twelve_data on isolated no-key instance",
+  "expected": "503 not configured; fast rejection, no network",
+  "actual": "status=503 detail={\"detail\":\"Twelve Data API key is not configured; add it in System → Key handling.\"} duration_ms=3.5",
+  "status": "PASS",
+  "notes": "Isolated instance 16903 with no TWELVE_DATA_API_KEY and empty temp store.",
+  "assertions": [
+    {
+      "check": "503",
+      "ok": true,
+      "detail": "503"
+    },
+    {
+      "check": "configuration detail",
+      "ok": true,
+      "detail": "{'detail': 'Twelve Data API key is not configured; add it in System → Key handling.'}"
+    },
+    {
+      "check": "fast rejection (no provider call)",
+      "ok": true,
+      "detail": "3.5"
+    }
+  ],
+  "calls": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16903/api/downloads",
+      "params": null,
+      "request_body": {
+        "provider": "twelve_data",
+        "symbol": "NZDUSD",
+        "timeframe": "M1",
+        "start_date": "2025-01-01",
+        "end_date": "2025-01-02"
+      },
+      "request_headers": {},
+      "duration_ms": 3.5,
+      "status_code": 503,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "86",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "a21e6fe286ed3496b0efaf12aee5f9eb1025a4c1c3f230827f5d560a462e209a",
+      "response_bytes": 86,
+      "response_json": {
+        "detail": "Twelve Data API key is not configured; add it in System → Key handling."
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.121294+00:00"
+}

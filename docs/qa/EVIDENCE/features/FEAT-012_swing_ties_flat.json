@@ -1,0 +1,34 @@
+{
+  "data_label": "SYNTHETIC TEST FIXTURE \u2014 NOT REAL MARKET DATA",
+  "tied_highs_lows": [
+    [
+      2,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      2
+    ],
+    [
+      4,
+      2
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      2,
+      0
+    ]
+  ],
+  "tie_swing_highs": [],
+  "tie_swing_lows": [],
+  "flat_bars": 8,
+  "flat_swing_highs": [],
+  "flat_swing_lows": []
+}

@@ -1,0 +1,112 @@
+{
+  "test_id": "API-017",
+  "endpoint": "/api/dataset|bars|backtests",
+  "scenario": "Unsupported timeframe",
+  "test_data": "timeframe=M2",
+  "expected": "400 with allowed-timeframe message on all three",
+  "actual": "dataset=400 bars=400 backtest=400",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "dataset M2 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "dataset M2 message",
+      "ok": true,
+      "detail": "{'detail': 'Timeframe must be one of: M1, M5, M15, H1, H4'}"
+    },
+    {
+      "check": "bars M2 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "backtest M2 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "backtest M2 message",
+      "ok": true,
+      "detail": "{'detail': 'Timeframe must be one of: M1, M5, M15, H1, H4'}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/dataset",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "timeframe": "M2"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 5.0,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "58",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "aa2df38007587851ce58f1cb2dc16863a426ba4575aea8cd8f1ff29e40424203",
+      "response_bytes": 58,
+      "response_json": {
+        "detail": "Timeframe must be one of: M1, M5, M15, H1, H4"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/bars",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "timeframe": "M2"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.8,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "58",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "aa2df38007587851ce58f1cb2dc16863a426ba4575aea8cd8f1ff29e40424203",
+      "response_bytes": 58,
+      "response_json": {
+        "detail": "Timeframe must be one of: M1, M5, M15, H1, H4"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "timeframe": "M2",
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06"
+      },
+      "request_headers": {},
+      "duration_ms": 3.8,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "58",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "aa2df38007587851ce58f1cb2dc16863a426ba4575aea8cd8f1ff29e40424203",
+      "response_bytes": 58,
+      "response_json": {
+        "detail": "Timeframe must be one of: M1, M5, M15, H1, H4"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.441747+00:00"
+}

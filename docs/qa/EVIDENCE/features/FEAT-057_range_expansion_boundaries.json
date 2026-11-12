@@ -1,0 +1,30 @@
+{
+  "data_label": "SYNTHETIC TEST FIXTURE \u2014 NOT REAL MARKET DATA",
+  "boundary_cases": {
+    "below_low": {
+      "state": "low",
+      "ratio": 0.6792452830188679
+    },
+    "exact_low_0.70": {
+      "state": "normal",
+      "ratio": 0.7
+    },
+    "middle_1.00": {
+      "state": "normal",
+      "ratio": 1.0
+    },
+    "exact_high_1.30": {
+      "state": "normal",
+      "ratio": 1.3
+    },
+    "above_high": {
+      "state": "high",
+      "ratio": 1.3333333333333333
+    }
+  },
+  "zero_body_baseline": {
+    "state": "unavailable",
+    "ratio": null,
+    "reason": "Historical candle body average is zero; ratio undefined; range expansion unavailable."
+  }
+}

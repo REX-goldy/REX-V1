@@ -1,0 +1,10 @@
+{
+  "price": 1.16353,
+  "active_ids": [],
+  "nearest": {
+    "zone_id": 8,
+    "side": "below"
+  },
+  "inside_zone": false,
+  "note": "ZonePack calls active_zones/distance/is_inside with default htf_only=True"
+}

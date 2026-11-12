@@ -1,0 +1,9 @@
+{
+  "test_id": "STRAT-014",
+  "label": "s002_max_wait_below_min",
+  "scenario": "Parameter below minimum",
+  "data_config": "EURUSD/M1/2026; max_wait=0",
+  "expected": "Explicit ValueError stating max_wait must be >= 1.",
+  "actual": "ValueError: max_wait must be >= 1",
+  "status": "PASS"
+}

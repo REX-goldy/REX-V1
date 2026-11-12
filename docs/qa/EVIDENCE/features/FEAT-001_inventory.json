@@ -1,0 +1,49 @@
+{
+  "default_pack_ids": [
+    "price",
+    "volatility",
+    "indicators",
+    "zones",
+    "session",
+    "structure"
+  ],
+  "registry_pack_ids": [
+    "price",
+    "structure",
+    "volatility",
+    "indicators",
+    "zones",
+    "session"
+  ],
+  "generator_feature_ids": {
+    "swings": "swings",
+    "returns": "returns",
+    "range_expansion": "range_expansion"
+  },
+  "structure_bos_method_id": "swing_bos_v1",
+  "views": {
+    "TrendView": [
+      "market_structure_v1",
+      "drift_v1 (reserved, unimplemented)"
+    ],
+    "MomentumView": [
+      "ts_mom_v1"
+    ],
+    "VolatilityView": [
+      "range_expansion_v1"
+    ],
+    "PhaseView": [
+      "heuristic_v1"
+    ],
+    "LiquidityView": [
+      "unsupported (no pack)"
+    ]
+  },
+  "choch_modules": [],
+  "structure_pack_fields": [
+    "pack_id",
+    "swings"
+  ],
+  "config_path": "config/market_structure.json",
+  "config_matches_builtin_defaults": false
+}

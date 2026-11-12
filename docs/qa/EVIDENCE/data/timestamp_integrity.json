@@ -1,0 +1,103 @@
+{
+  "datasets": [
+    {
+      "dataset": "EURUSD",
+      "rows": 184963,
+      "parsed_timestamps": 184963,
+      "duplicates": 0,
+      "order_violations": 0,
+      "malformed_count": 0,
+      "malformed_samples": [],
+      "non_minute_deltas": 0,
+      "seconds_microseconds_nonzero": 0,
+      "delta_minutes_distribution": {
+        "1": 184927,
+        "2": 5,
+        "3": 2,
+        "4": 2,
+        "2881": 25,
+        "2883": 1
+      },
+      "first_timestamp": "2026-01-01T13:00:00",
+      "last_timestamp": "2026-06-30T23:59:00",
+      "strictly_monotonic": true,
+      "status": "PASS"
+    },
+    {
+      "dataset": "GBPUSD",
+      "rows": 93600,
+      "parsed_timestamps": 93600,
+      "duplicates": 0,
+      "order_violations": 0,
+      "malformed_count": 0,
+      "malformed_samples": [],
+      "non_minute_deltas": 0,
+      "seconds_microseconds_nonzero": 0,
+      "delta_minutes_distribution": {
+        "1": 93586,
+        "2881": 13
+      },
+      "first_timestamp": "2026-04-01T00:00:00",
+      "last_timestamp": "2026-06-30T23:59:00",
+      "strictly_monotonic": true,
+      "status": "PASS"
+    },
+    {
+      "dataset": "AUDUSD",
+      "rows": 93600,
+      "parsed_timestamps": 93600,
+      "duplicates": 0,
+      "order_violations": 0,
+      "malformed_count": 0,
+      "malformed_samples": [],
+      "non_minute_deltas": 0,
+      "seconds_microseconds_nonzero": 0,
+      "delta_minutes_distribution": {
+        "1": 93586,
+        "2881": 13
+      },
+      "first_timestamp": "2026-04-01T00:00:00",
+      "last_timestamp": "2026-06-30T23:59:00",
+      "strictly_monotonic": true,
+      "status": "PASS"
+    },
+    {
+      "dataset": "USDJPY",
+      "rows": 93600,
+      "parsed_timestamps": 93600,
+      "duplicates": 0,
+      "order_violations": 0,
+      "malformed_count": 0,
+      "malformed_samples": [],
+      "non_minute_deltas": 0,
+      "seconds_microseconds_nonzero": 0,
+      "delta_minutes_distribution": {
+        "1": 93586,
+        "2881": 13
+      },
+      "first_timestamp": "2026-04-01T00:00:00",
+      "last_timestamp": "2026-06-30T23:59:00",
+      "strictly_monotonic": true,
+      "status": "PASS"
+    },
+    {
+      "dataset": "USDCAD",
+      "rows": 93600,
+      "parsed_timestamps": 93600,
+      "duplicates": 0,
+      "order_violations": 0,
+      "malformed_count": 0,
+      "malformed_samples": [],
+      "non_minute_deltas": 0,
+      "seconds_microseconds_nonzero": 0,
+      "delta_minutes_distribution": {
+        "1": 93586,
+        "2881": 13
+      },
+      "first_timestamp": "2026-04-01T00:00:00",
+      "last_timestamp": "2026-06-30T23:59:00",
+      "strictly_monotonic": true,
+      "status": "PASS"
+    }
+  ]
+}

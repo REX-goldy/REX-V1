@@ -1,0 +1,279 @@
+{
+  "test_id": "API-029",
+  "endpoint": "/api/backtests",
+  "scenario": "Backtest numeric boundaries",
+  "test_data": "r_multiple 0/101; risk_fraction 0/0.2; equity 0/-5",
+  "expected": "422 for each Pydantic violation",
+  "actual": "r_multiple=0=422; r_multiple=101=422; risk_fraction=0.2=422; risk_fraction=0=422; equity=0=422; equity=-5=422",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "r_multiple=0 422",
+      "ok": true,
+      "detail": "422"
+    },
+    {
+      "check": "r_multiple=101 422",
+      "ok": true,
+      "detail": "422"
+    },
+    {
+      "check": "risk_fraction=0.2 422",
+      "ok": true,
+      "detail": "422"
+    },
+    {
+      "check": "risk_fraction=0 422",
+      "ok": true,
+      "detail": "422"
+    },
+    {
+      "check": "equity=0 422",
+      "ok": true,
+      "detail": "422"
+    },
+    {
+      "check": "equity=-5 422",
+      "ok": true,
+      "detail": "422"
+    }
+  ],
+  "calls": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06",
+        "r_multiple": 0
+      },
+      "request_headers": {},
+      "duration_ms": 2.0,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "130",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "94bbed04978a7ddc714b6ad839f4f5bccd7eca87bdfc5b9af9fd036d56aefc87",
+      "response_bytes": 130,
+      "response_json": {
+        "detail": [
+          {
+            "type": "greater_than",
+            "loc": [
+              "body",
+              "r_multiple"
+            ],
+            "msg": "Input should be greater than 0",
+            "input": 0,
+            "ctx": {
+              "gt": 0.0
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06",
+        "r_multiple": 101
+      },
+      "request_headers": {},
+      "duration_ms": 1.6,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "148",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "0a83d6a28c3723dc379187e3190800cfa48c36694e11205554a36ff88edb755a",
+      "response_bytes": 148,
+      "response_json": {
+        "detail": [
+          {
+            "type": "less_than_equal",
+            "loc": [
+              "body",
+              "r_multiple"
+            ],
+            "msg": "Input should be less than or equal to 100",
+            "input": 101,
+            "ctx": {
+              "le": 100.0
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06",
+        "risk_fraction": 0.2
+      },
+      "request_headers": {},
+      "duration_ms": 1.5,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "149",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "65dff41c5d5878bb76ef958a2ed868716b9459ab8875013b74bd49235e2ec406",
+      "response_bytes": 149,
+      "response_json": {
+        "detail": [
+          {
+            "type": "less_than_equal",
+            "loc": [
+              "body",
+              "risk_fraction"
+            ],
+            "msg": "Input should be less than or equal to 0.1",
+            "input": 0.2,
+            "ctx": {
+              "le": 0.1
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06",
+        "risk_fraction": 0
+      },
+      "request_headers": {},
+      "duration_ms": 1.4,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "133",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "c4ade85b0bdafd714ab0896cd184e4390c5bee5ae35d595cdf9e0e23b2de78f5",
+      "response_bytes": 133,
+      "response_json": {
+        "detail": [
+          {
+            "type": "greater_than",
+            "loc": [
+              "body",
+              "risk_fraction"
+            ],
+            "msg": "Input should be greater than 0",
+            "input": 0,
+            "ctx": {
+              "gt": 0.0
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06",
+        "equity": 0
+      },
+      "request_headers": {},
+      "duration_ms": 1.4,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "126",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "3e2e3ee9d959a22e8340535b0b6a1c58800a10494ae5511fe5dcae99202ce047",
+      "response_bytes": 126,
+      "response_json": {
+        "detail": [
+          {
+            "type": "greater_than",
+            "loc": [
+              "body",
+              "equity"
+            ],
+            "msg": "Input should be greater than 0",
+            "input": 0,
+            "ctx": {
+              "gt": 0.0
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06",
+        "equity": -5
+      },
+      "request_headers": {},
+      "duration_ms": 1.4,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "127",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "93dc6e214f33af873ddd6e2109d3620c5a60745bd34682d99f537313465fcc66",
+      "response_bytes": 127,
+      "response_json": {
+        "detail": [
+          {
+            "type": "greater_than",
+            "loc": [
+              "body",
+              "equity"
+            ],
+            "msg": "Input should be greater than 0",
+            "input": -5,
+            "ctx": {
+              "gt": 0.0
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.045723+00:00"
+}

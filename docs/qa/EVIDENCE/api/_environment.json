@@ -1,0 +1,17 @@
+{
+  "date_utc": "2026-11-03T13:38:23.733612+00:00",
+  "python": "3.11.6",
+  "live_api": "http://127.0.0.1:16901",
+  "isolated_env_api": "http://127.0.0.1:16902",
+  "isolated_nokey_api": "http://127.0.0.1:16903",
+  "git_commit": "95f8aaa998f1ce1539c65777b5dd10ac063cbd34",
+  "data_root": "/home/user/workspaces/7de05e41da33/data/historical",
+  "expected_dataset_counts": {
+    "EURUSD/M1/2026": 184963,
+    "GBPUSD/M1/2026": 93600,
+    "AUDUSD/M1/2026": 93600,
+    "USDJPY/M1/2026": 93600,
+    "USDCAD/M1/2026": 93600
+  },
+  "notes": "Isolated instances share the real read-only dataset; temp REX_RUNS_DIR and REX_KEYS_FILE prevent artifact/credential pollution."
+}

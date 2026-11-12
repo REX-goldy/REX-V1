@@ -1,0 +1,6 @@
+# SEC-018 Provider HTTP error is redacted before surfacing
+component: historical/twelve_data.py
+test_data: 401 message containing dummy key
+expected: HistoricalDownloadError without key, key replaced by ***
+actual: HistoricalDownloadError: Twelve Data request failed (HTTP 401): invalid key ***
+status: PASS

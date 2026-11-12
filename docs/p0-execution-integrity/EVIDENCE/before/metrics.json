@@ -1,0 +1,151 @@
+{
+  "S008_EURUSD": {
+    "id": "20261103T160952Z_062ec367",
+    "metrics": {
+      "total_signals": 657,
+      "total_trades": 606,
+      "wins": 112,
+      "losses": 494,
+      "win_rate": 18.48184818481848,
+      "profit_factor": 0.43239411848961756,
+      "expectancy": -0.4795624652478231,
+      "max_drawdown_r": 297.4898539401801,
+      "largest_win": 2.0,
+      "largest_loss": -4.325581395349474,
+      "ambiguous_exits": 39,
+      "avg_holding_duration": 2.622112211221122
+    },
+    "signals": {
+      "total": 657,
+      "by_type": {
+        "bearish_sweep": 230,
+        "bullish_sweep": 427
+      }
+    },
+    "reconciliation": {
+      "generated": 657,
+      "accepted": 635,
+      "ignored": 22,
+      "rejected": 0,
+      "difference": 0
+    },
+    "bar_count": 15720,
+    "warnings": [
+      "Transaction costs (spread, commission, slippage) are not applied.",
+      "Performance is in R-multiples; no currency equity or compounding.",
+      "39 ambiguous intrabar exits were conservatively scored at -1R.",
+      "Selected range contains 2 timestamp gap(s) larger than one M1 bar (market closures included)."
+    ]
+  },
+  "S008_GBPUSD": {
+    "id": "20261103T160953Z_1bcc9288",
+    "metrics": {
+      "total_signals": 500,
+      "total_trades": 468,
+      "wins": 71,
+      "losses": 397,
+      "win_rate": 15.17094017094017,
+      "profit_factor": 0.3464678513227338,
+      "expectancy": -0.5593474299141656,
+      "max_drawdown_r": 272.47323496783093,
+      "largest_win": 2.0,
+      "largest_loss": -2.600000000005329,
+      "ambiguous_exits": 14,
+      "avg_holding_duration": 3.0128205128205128
+    },
+    "signals": {
+      "total": 500,
+      "by_type": {
+        "bearish_sweep": 232,
+        "bullish_sweep": 268
+      }
+    },
+    "reconciliation": {
+      "generated": 500,
+      "accepted": 485,
+      "ignored": 15,
+      "rejected": 0,
+      "difference": 0
+    },
+    "bar_count": 15720,
+    "warnings": [
+      "Transaction costs (spread, commission, slippage) are not applied.",
+      "Performance is in R-multiples; no currency equity or compounding.",
+      "14 ambiguous intrabar exits were conservatively scored at -1R.",
+      "Selected range contains 2 timestamp gap(s) larger than one M1 bar (market closures included)."
+    ]
+  },
+  "CORE_EURUSD": {
+    "id": "20261103T160953Z_c8ad925a",
+    "metrics": {
+      "total_signals": 21920,
+      "total_trades": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0.0,
+      "profit_factor": null,
+      "expectancy": 0.0,
+      "max_drawdown_r": 0.0,
+      "largest_win": 0.0,
+      "largest_loss": 0.0,
+      "ambiguous_exits": 0,
+      "avg_holding_duration": 0.0
+    },
+    "signals": {
+      "total": 21920,
+      "by_type": {
+        "break_above": 9,
+        "break_below": 27,
+        "close_outside": 21848,
+        "enter_zone": 36
+      }
+    },
+    "reconciliation": {
+      "generated": 21920,
+      "accepted": 0,
+      "ignored": 0,
+      "rejected": 0,
+      "difference": 21920
+    },
+    "bar_count": 2880,
+    "warnings": [
+      "Signal study only: this strategy has no trade-simulation factory.",
+      "Zone levels are static manual annotations without confirmation timestamps."
+    ]
+  },
+  "CORE_GBPUSD": {
+    "id": "20261103T160953Z_b2c8f00a",
+    "metrics": {
+      "total_signals": 2880,
+      "total_trades": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0.0,
+      "profit_factor": null,
+      "expectancy": 0.0,
+      "max_drawdown_r": 0.0,
+      "largest_win": 0.0,
+      "largest_loss": 0.0,
+      "ambiguous_exits": 0,
+      "avg_holding_duration": 0.0
+    },
+    "signals": {
+      "total": 2880,
+      "by_type": {
+        "close_outside": 2880
+      }
+    },
+    "reconciliation": {
+      "generated": 2880,
+      "accepted": 0,
+      "ignored": 0,
+      "rejected": 0,
+      "difference": 2880
+    },
+    "bar_count": 2880,
+    "warnings": [
+      "Signal study only: this strategy has no trade-simulation factory.",
+      "Zone levels are static manual annotations without confirmation timestamps."
+    ]
+  }
+}

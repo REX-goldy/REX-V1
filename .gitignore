@@ -1,0 +1,86 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+
+# macOS
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Python cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Jupyter
+.ipynb_checkpoints/
+
+# mypy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/
+
+# Pyright
+.pyright/
+
+# Coverage
+.coverage.*
+coverage.xml
+
+# OS
+Thumbs.db
+# Research datasets
+research/data/**/*.csv
+download/*.csv
+<<<<<<< HEAD
+
+# Market data is a runtime input for the API, not app source. Keeping it out
+# of the snapshot keeps preview/deploy transfers small; datasets that are
+# already tracked stay tracked.
+data/historical/
+
+# Frontend
+node_modules/
+frontend/dist/
+
+# Runtime UI artifacts
+research/outputs/ui_runs/*.json
+
+# Preserved legacy datasets (untracked audit copy)
+data/legacy/
+
+# Provider credentials are runtime-only and must never be committed
+data/provider_keys.json
+data/.provider_keys.json.*.tmp
+
+# Strategy workspace runtime state
+data/workspace/
+=======
+node_modules/
+>>>>>>> 5b44fdad84324f26274739f10a5d0036568cb9ad
+.swarm/
+.swarm-worktrees/
+.swarm-reset-bak/
+houseofapps_creds.env

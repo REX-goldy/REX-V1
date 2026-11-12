@@ -1,0 +1,50 @@
+{
+  "test_id": "API-024",
+  "endpoint": "/api/backtests",
+  "scenario": "Range outside coverage",
+  "test_data": "EURUSD 2026-07-01..2026-07-02",
+  "expected": "400 with after-the-last-available-bar detail",
+  "actual": "status=400 detail={\"detail\":\"End date 2026-07-02 is after the last available M1 bar (2026-06-30).\"}",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "understandable detail",
+      "ok": true,
+      "detail": "{'detail': 'End date 2026-07-02 is after the last available M1 bar (2026-06-30).'}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "start_date": "2026-07-01",
+        "end_date": "2026-07-02"
+      },
+      "request_headers": {},
+      "duration_ms": 5.6,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "81",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "dde0e251c1b5e1d6510fee5f98cb338f09cf30fdd6561abba566358bef350dbf",
+      "response_bytes": 81,
+      "response_json": {
+        "detail": "End date 2026-07-02 is after the last available M1 bar (2026-06-30)."
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.757007+00:00"
+}

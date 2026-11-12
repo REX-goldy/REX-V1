@@ -1,0 +1,33 @@
+# FINDING-01 (Low) houseofapps_creds.env is covered only by local .git/info/exclude
+generated: 2026-11-03T13:36:56Z
+
+## Repro 1: where does ignore come from?
+$ git check-ignore -v houseofapps_creds.env
+.git/info/exclude:15:houseofapps_creds.env	houseofapps_creds.env
+
+## Repro 2: tracked .gitignore has no houseofapps pattern
+$ grep -n houseofapps .gitignore
+(no match)
+
+## Repro 3: file is currently untracked (good)
+$ git ls-files --error-unmatch houseofapps_creds.env
+error: pathspec 'houseofapps_creds.env' did not match any file(s) known to git
+Did you forget to 'git add'?
+
+## Repro 4: .env patterns do not match houseofapps_creds.env
+tracked .gitignore credential patterns:
+32:.env
+33:.env.*
+74:data/provider_keys.json
+
+## Expected
+The tracked .gitignore should explicitly ignore houseofapps_creds.env (and *.env if intended),
+so a fresh clone is protected even when .git/info/exclude is absent.
+
+## Actual
+houseofapps_creds.env is ignored only via .git/info/exclude (local, untracked).
+A fresh clone or a lost local exclude would leave the file unignored and easy to add by mistake.
+
+## Severity / impact
+Low: no secret is currently tracked and .dockerignore keeps it out of build contexts;
+risk is accidental future commit in another checkout.

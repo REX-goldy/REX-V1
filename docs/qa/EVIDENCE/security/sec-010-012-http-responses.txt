@@ -1,0 +1,18 @@
+NAME=health STATUS=200
+BODY={"status":"ok","service":"rex-research-terminal"}
+NAME=list1 STATUS=200
+BODY=[{"id":"twelve_data","name":"Twelve Data","description":"Twelve Data historical M1 candles","env_var":"TWELVE_DATA_API_KEY","required":true,"configured":false,"source":"none","hint":"••••","updated_at":null},{"id":"dukascopy","name":"Dukascopy","description":"Dukascopy historical adapter; current downloader does not require a key","env_var":"DUKASCOPY_API_KEY","required":false,"configured":false,"source":"none","hint":"••••","updated_at":null}]
+NAME=put STATUS=200
+BODY={"id":"twelve_data","name":"Twelve Data","description":"Twelve Data historical M1 candles","env_var":"TWELVE_DATA_API_KEY","required":true,"configured":true,"source":"stored","hint":"5678","updated_at":"2026-11-03T13:35:18.012327+00:00"}
+NAME=list2 STATUS=200
+BODY=[{"id":"twelve_data","name":"Twelve Data","description":"Twelve Data historical M1 candles","env_var":"TWELVE_DATA_API_KEY","required":true,"configured":true,"source":"stored","hint":"5678","updated_at":"2026-11-03T13:35:18.012327+00:00"},{"id":"dukascopy","name":"Dukascopy","description":"Dukascopy historical adapter; current downloader does not require a key","env_var":"DUKASCOPY_API_KEY","required":false,"configured":false,"source":"none","hint":"••••","updated_at":null}]
+NAME=del STATUS=200
+BODY={"id":"twelve_data","name":"Twelve Data","description":"Twelve Data historical M1 candles","env_var":"TWELVE_DATA_API_KEY","required":true,"configured":false,"source":"none","hint":"••••","updated_at":null}
+NAME=unknown STATUS=404
+BODY={"detail":"Unknown provider: 'ghost'"}
+NAME=invalid STATUS=400
+BODY={"detail":"API key cannot be empty"}
+NAME=corrupt STATUS=500
+BODY={"detail":"Provider key store error"}
+NAME=health2 STATUS=200
+BODY={"status":"ok","service":"rex-research-terminal"}

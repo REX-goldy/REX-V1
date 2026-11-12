@@ -1,0 +1,49 @@
+.git
+.gitignore
+.github
+.venv
+venv
+__pycache__
+**/__pycache__
+*.py[cod]
+.pytest_cache
+.coverage
+.coverage.*
+htmlcov
+.mypy_cache
+.ruff_cache
+.pyright
+
+# Dependencies and build output
+node_modules
+**/node_modules
+frontend/dist
+**/dist
+build
+
+# Runtime data / logs (the tracked seed archive is the only data we ship).
+# List runtime data explicitly instead of excluding `data` wholesale so the
+# seed archive is always part of the build context.
+data/historical
+data/legacy
+data/provider_keys.json
+data/.provider_keys.json.*.tmp
+data/*.log
+logs
+*.log
+research/outputs/ui_runs
+research/data
+
+# Local env
+.env
+.env.*
+!.env.example
+houseofapps_creds.env
+
+# Editor / OS
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+
+data/workspace/

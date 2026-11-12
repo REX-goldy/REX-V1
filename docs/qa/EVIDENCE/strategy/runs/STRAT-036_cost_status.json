@@ -1,0 +1,30 @@
+{
+  "assumptions": {
+    "costs_applied": false,
+    "entry_model": "next candle open",
+    "timestamps": "naive UTC",
+    "zone_source": "none",
+    "result_units": "R-multiples",
+    "timeframe": "M1",
+    "derived_timeframe": false
+  },
+  "warnings": [
+    "Transaction costs (spread, commission, slippage) are not applied.",
+    "Performance is in R-multiples; no currency equity or compounding.",
+    "19 ambiguous intrabar exits were conservatively scored at -1R."
+  ],
+  "metrics": {
+    "total_signals": 303,
+    "total_trades": 272,
+    "wins": 60,
+    "losses": 211,
+    "win_rate": 22.14022140221402,
+    "profit_factor": 0.5441269717942145,
+    "expectancy": -0.36505519278687976,
+    "max_drawdown_r": 100.29501243803129,
+    "largest_win": 2.0,
+    "largest_loss": -2.285714285720177,
+    "ambiguous_exits": 19,
+    "avg_holding_duration": 2.922794117647059
+  }
+}

@@ -1,0 +1,922 @@
+{
+  "test_id": "API-002",
+  "endpoint": "/openapi.json",
+  "scenario": "OpenAPI document availability and paths",
+  "test_data": "GET /openapi.json",
+  "expected": "200, OpenAPI 3.x, all 14 route paths and key methods present",
+  "actual": "paths=15; openapi=3.1.0; methods={'/api/settings/providers/{provider_id}': ['delete', 'put'], '/api/frame': ['get'], '/api/health': ['get'], '/api/dataset': ['get'], '/api/downloads': ['post'], '/api/datasets': ['get'], '/api/bars': ['get'], '/api/overview': ['get'], '/api/range': ['get'], '/api/runs': ['get'], '/api/runs/{run_id}': ['get'], '/api/strategies': ['get'], '/api/settings/providers': ['get'], '/api/backtests': ['post']}",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "HTTP 200",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "openapi version 3.x",
+      "ok": true,
+      "detail": "3.1.0"
+    },
+    {
+      "check": "all expected paths present",
+      "ok": true,
+      "detail": "missing=[]"
+    },
+    {
+      "check": "backtests POST",
+      "ok": true,
+      "detail": "['post']"
+    },
+    {
+      "check": "settings PUT+DELETE",
+      "ok": true,
+      "detail": "['delete', 'put']"
+    },
+    {
+      "check": "schemas present",
+      "ok": true,
+      "detail": "['BacktestRequest', 'DownloadRequest', 'HTTPValidationError', 'ProviderKeyRequest', 'ValidationError']"
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/openapi.json",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.9,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "10625",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "0cfa03a3a419c75e7fb6396f524e77d8b99eb983a7f4cf2268f4ee062fe76821",
+      "response_bytes": 10625,
+      "response_json": {
+        "openapi": "3.1.0",
+        "info": {
+          "title": "REX Research Terminal",
+          "version": "0.1.0"
+        },
+        "paths": {
+          "/api/health": {
+            "get": {
+              "summary": "Health",
+              "operationId": "health_api_health_get",
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "additionalProperties": true,
+                        "type": "object",
+                        "title": "Response Health Api Health Get"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/settings/providers": {
+            "get": {
+              "summary": "Settings Providers",
+              "operationId": "settings_providers_api_settings_providers_get",
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "items": {
+                          "additionalProperties": true,
+                          "type": "object"
+                        },
+                        "type": "array",
+                        "title": "Response Settings Providers Api Settings Providers Get"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/settings/providers/{provider_id}": {
+            "put": {
+              "summary": "Save Settings Provider",
+              "operationId": "save_settings_provider_api_settings_providers__provider_id__put",
+              "parameters": [
+                {
+                  "name": "provider_id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "title": "Provider Id"
+                  }
+                }
+              ],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ProviderKeyRequest"
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "title": "Response Save Settings Provider Api Settings Providers  Provider Id  Put"
+                      }
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "delete": {
+              "summary": "Delete Settings Provider",
+              "operationId": "delete_settings_provider_api_settings_providers__provider_id__delete",
+              "parameters": [
+                {
+                  "name": "provider_id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "title": "Provider Id"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "title": "Response Delete Settings Provider Api Settings Providers  Provider Id  Delete"
+                      }
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/overview": {
+            "get": {
+              "summary": "Overview",
+              "operationId": "overview_api_overview_get",
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "additionalProperties": true,
+                        "type": "object",
+                        "title": "Response Overview Api Overview Get"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/strategies": {
+            "get": {
+              "summary": "Strategies",
+              "operationId": "strategies_api_strategies_get",
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "items": {
+                          "additionalProperties": true,
+                          "type": "object"
+                        },
+                        "type": "array",
+                        "title": "Response Strategies Api Strategies Get"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/datasets": {
+            "get": {
+              "summary": "Datasets",
+              "operationId": "datasets_api_datasets_get",
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "items": {
+                          "additionalProperties": true,
+                          "type": "object"
+                        },
+                        "type": "array",
+                        "title": "Response Datasets Api Datasets Get"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/dataset": {
+            "get": {
+              "summary": "Dataset",
+              "operationId": "dataset_api_dataset_get",
+              "parameters": [
+                {
+                  "name": "dataset_id",
+                  "in": "query",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "title": "Dataset Id"
+                  }
+                },
+                {
+                  "name": "timeframe",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "type": "string",
+                    "default": "M1",
+                    "title": "Timeframe"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "title": "Response Dataset Api Dataset Get"
+                      }
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/frame": {
+            "get": {
+              "summary": "Frame",
+              "operationId": "frame_api_frame_get",
+              "parameters": [
+                {
+                  "name": "dataset_id",
+                  "in": "query",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "title": "Dataset Id"
+                  }
+                },
+                {
+                  "name": "timeframe",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "type": "string",
+                    "default": "M1",
+                    "title": "Timeframe"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "title": "Response Frame Api Frame Get"
+                      }
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/range": {
+            "get": {
+              "summary": "Range Summary",
+              "operationId": "range_summary_api_range_get",
+              "parameters": [
+                {
+                  "name": "dataset_id",
+                  "in": "query",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "title": "Dataset Id"
+                  }
+                },
+                {
+                  "name": "timeframe",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "type": "string",
+                    "default": "M1",
+                    "title": "Timeframe"
+                  }
+                },
+                {
+                  "name": "start",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Start"
+                  }
+                },
+                {
+                  "name": "end",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "End"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "title": "Response Range Summary Api Range Get"
+                      }
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/bars": {
+            "get": {
+              "summary": "Bars",
+              "operationId": "bars_api_bars_get",
+              "parameters": [
+                {
+                  "name": "dataset_id",
+                  "in": "query",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "title": "Dataset Id"
+                  }
+                },
+                {
+                  "name": "timeframe",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "type": "string",
+                    "default": "M1",
+                    "title": "Timeframe"
+                  }
+                },
+                {
+                  "name": "start",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "Start"
+                  }
+                },
+                {
+                  "name": "end",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "title": "End"
+                  }
+                },
+                {
+                  "name": "limit",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "type": "integer",
+                    "maximum": 5000,
+                    "minimum": 1,
+                    "default": 600,
+                    "title": "Limit"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": true
+                        },
+                        "title": "Response Bars Api Bars Get"
+                      }
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/runs": {
+            "get": {
+              "summary": "Runs",
+              "operationId": "runs_api_runs_get",
+              "parameters": [
+                {
+                  "name": "limit",
+                  "in": "query",
+                  "required": false,
+                  "schema": {
+                    "type": "integer",
+                    "maximum": 100,
+                    "minimum": 1,
+                    "default": 25,
+                    "title": "Limit"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": true
+                        },
+                        "title": "Response Runs Api Runs Get"
+                      }
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/runs/{run_id}": {
+            "get": {
+              "summary": "Run",
+              "operationId": "run_api_runs__run_id__get",
+              "parameters": [
+                {
+                  "name": "run_id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "title": "Run Id"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "title": "Response Run Api Runs  Run Id  Get"
+                      }
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/backtests": {
+            "post": {
+              "summary": "Backtest",
+              "operationId": "backtest_api_backtests_post",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/BacktestRequest"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "additionalProperties": true,
+                        "type": "object",
+                        "title": "Response Backtest Api Backtests Post"
+                      }
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/downloads": {
+            "post": {
+              "summary": "Download",
+              "operationId": "download_api_downloads_post",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/DownloadRequest"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "items": {
+                          "additionalProperties": true,
+                          "type": "object"
+                        },
+                        "type": "array",
+                        "title": "Response Download Api Downloads Post"
+                      }
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/": {
+            "get": {
+              "summary": "Frontend",
+              "operationId": "frontend__get",
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "components": {
+          "schemas": {
+            "BacktestRequest": {
+              "properties": {
+                "dataset_id": {
+                  "type": "string",
+                  "title": "Dataset Id"
+                },
+                "strategy_id": {
+                  "type": "string",
+                  "title": "Strategy Id"
+                },
+                "timeframe": {
+                  "type": "string",
+                  "title": "Timeframe",
+                  "default": "M1"
+                },
+                "parameters": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Parameters"
+                },
+                "start_date": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Start Date"
+                },
+                "end_date": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "End Date"
+                },
+                "r_multiple": {
+                  "type": "number",
+                  "maximum": 100.0,
+                  "exclusiveMinimum": 0.0,
+                  "title": "R Multiple",
+                  "default": 2.0
+                },
+                "equity": {
+                  "type": "number",
+                  "exclusiveMinimum": 0.0,
+                  "title": "Equity",
+                  "default": 100000.0
+                },
+                "risk_fraction": {
+                  "type": "number",
+                  "maximum": 0.1,
+                  "exclusiveMinimum": 0.0,
+                  "title": "Risk Fraction",
+                  "default": 0.01
+                }
+              },
+              "type": "object",
+              "required": [
+                "dataset_id",
+                "strategy_id"
+              ],
+              "title": "BacktestRequest"
+            },
+            "DownloadRequest": {
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "pattern": "^(twelve_data|dukascopy)$",
+                  "title": "Provider"
+                },
+                "symbol": {
+                  "type": "string",
+                  "title": "Symbol"
+                },
+                "timeframe": {
+                  "type": "string",
+                  "title": "Timeframe",
+                  "default": "M1"
+                },
+                "start_date": {
+                  "type": "string",
+                  "format": "date",
+                  "title": "Start Date"
+                },
+                "end_date": {
+                  "type": "string",
+                  "format": "date",
+                  "title": "End Date"
+                }
+              },
+              "type": "object",
+              "required": [
+                "provider",
+                "symbol",
+                "start_date",
+                "end_date"
+              ],
+              "title": "DownloadRequest"
+            },
+            "HTTPValidationError": {
+              "properties": {
+                "detail": {
+                  "items": {
+                    "$ref": "#/components/schemas/ValidationError"
+                  },
+                  "type": "array",
+                  "title": "Detail"
+                }
+              },
+              "type": "object",
+              "title": "HTTPValidationError"
+            },
+            "ProviderKeyRequest": {
+              "properties": {
+                "api_key": {
+                  "type": "string",
+                  "title": "Api Key"
+                }
+              },
+              "type": "object",
+              "required": [
+                "api_key"
+              ],
+              "title": "ProviderKeyRequest"
+            },
+            "ValidationError": {
+              "properties": {
+                "loc": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      }
+                    ]
+                  },
+                  "type": "array",
+                  "title": "Location"
+                },
+                "msg": {
+                  "type": "string",
+                  "title": "Message"
+                },
+                "type": {
+                  "type": "string",
+                  "title": "Error Type"
+                },
+                "input": {
+                  "title": "Input"
+                },
+                "ctx": {
+                  "type": "object",
+                  "title": "Context"
+                }
+              },
+              "type": "object",
+              "required": [
+                "loc",
+                "msg",
+                "type"
+              ],
+              "title": "ValidationError"
+            }
+          }
+        }
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:23.744140+00:00"
+}

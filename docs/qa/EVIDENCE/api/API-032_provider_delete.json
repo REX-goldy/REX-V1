@@ -1,0 +1,142 @@
+{
+  "test_id": "API-032",
+  "endpoint": "/api/settings/providers/{id}",
+  "scenario": "Delete stored key, env fallback restored",
+  "test_data": "GET then DELETE twelve_data; DELETE again",
+  "expected": "200; source falls back to environment; store entry removed; idempotent",
+  "actual": "delete status=200 source=environment hint=0001; idempotent=200",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "precondition stored",
+      "ok": true,
+      "detail": "stored"
+    },
+    {
+      "check": "DELETE 200",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "check": "falls back to environment",
+      "ok": true,
+      "detail": "{'id': 'twelve_data', 'name': 'Twelve Data', 'description': 'Twelve Data historical M1 candles', 'env_var': 'TWELVE_DATA_API_KEY', 'required': True, 'configured': True, 'source': 'environment', 'hint': '0001', 'updated_at': None}"
+    },
+    {
+      "check": "no api_key field",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "removed from store",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "idempotent DELETE",
+      "ok": true,
+      "detail": "(200, {'id': 'twelve_data', 'name': 'Twelve Data', 'description': 'Twelve Data historical M1 candles', 'env_var': 'TWELVE_DATA_API_KEY', 'required': True, 'configured': True, 'source': 'environment', 'hint': '0001', 'updated_at': None})"
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16902/api/settings/providers",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.2,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "487",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "eda2275c2f9becf11eab33217e3a72a363fac2e36691db4392e81e43e1247080",
+      "response_bytes": 487,
+      "response_json": [
+        {
+          "id": "twelve_data",
+          "name": "Twelve Data",
+          "description": "Twelve Data historical M1 candles",
+          "env_var": "TWELVE_DATA_API_KEY",
+          "required": true,
+          "configured": true,
+          "source": "stored",
+          "hint": "9999",
+          "updated_at": "2026-11-03T13:38:25.049737+00:00"
+        },
+        {
+          "id": "dukascopy",
+          "name": "Dukascopy",
+          "description": "Dukascopy historical adapter; current downloader does not require a key",
+          "env_var": "DUKASCOPY_API_KEY",
+          "required": false,
+          "configured": false,
+          "source": "none",
+          "hint": "••••",
+          "updated_at": null
+        }
+      ],
+      "response_kind": "json"
+    },
+    {
+      "method": "DELETE",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 3.8,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "212",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "c0e851844f78b0436375303327fa63b4341833cbb39813752e33055ee233b1a3",
+      "response_bytes": 212,
+      "response_json": {
+        "id": "twelve_data",
+        "name": "Twelve Data",
+        "description": "Twelve Data historical M1 candles",
+        "env_var": "TWELVE_DATA_API_KEY",
+        "required": true,
+        "configured": true,
+        "source": "environment",
+        "hint": "0001",
+        "updated_at": null
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "DELETE",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.8,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "212",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "c0e851844f78b0436375303327fa63b4341833cbb39813752e33055ee233b1a3",
+      "response_bytes": 212,
+      "response_json": {
+        "id": "twelve_data",
+        "name": "Twelve Data",
+        "description": "Twelve Data historical M1 candles",
+        "env_var": "TWELVE_DATA_API_KEY",
+        "required": true,
+        "configured": true,
+        "source": "environment",
+        "hint": "0001",
+        "updated_at": null
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.062160+00:00"
+}

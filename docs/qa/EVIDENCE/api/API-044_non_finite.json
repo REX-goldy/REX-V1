@@ -1,0 +1,129 @@
+{
+  "test_id": "API-044",
+  "endpoint": "multiple",
+  "scenario": "No NaN/Infinity values",
+  "test_data": "overview, datasets, detail, range, bars, strategies, runs, run, backtests, no-signal",
+  "expected": "All floats finite; no NaN/Infinity tokens",
+  "actual": "scanned=['backtest_eurusd', 'backtest_gbpusd', 'bars_valid', 'dataset', 'datasets', 'no_signal', 'overview', 'range', 'run_detail', 'runs_list', 'strategies']",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "overview finite floats",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "overview no NaN/Infinity tokens",
+      "ok": true,
+      "detail": "raw JSON token scan"
+    },
+    {
+      "check": "datasets finite floats",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "datasets no NaN/Infinity tokens",
+      "ok": true,
+      "detail": "raw JSON token scan"
+    },
+    {
+      "check": "dataset finite floats",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "dataset no NaN/Infinity tokens",
+      "ok": true,
+      "detail": "raw JSON token scan"
+    },
+    {
+      "check": "range finite floats",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "range no NaN/Infinity tokens",
+      "ok": true,
+      "detail": "raw JSON token scan"
+    },
+    {
+      "check": "bars_valid finite floats",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "bars_valid no NaN/Infinity tokens",
+      "ok": true,
+      "detail": "raw JSON token scan"
+    },
+    {
+      "check": "strategies finite floats",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "strategies no NaN/Infinity tokens",
+      "ok": true,
+      "detail": "raw JSON token scan"
+    },
+    {
+      "check": "runs_list finite floats",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "runs_list no NaN/Infinity tokens",
+      "ok": true,
+      "detail": "raw JSON token scan"
+    },
+    {
+      "check": "run_detail finite floats",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "run_detail no NaN/Infinity tokens",
+      "ok": true,
+      "detail": "raw JSON token scan"
+    },
+    {
+      "check": "no_signal finite floats",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "no_signal no NaN/Infinity tokens",
+      "ok": true,
+      "detail": "raw JSON token scan"
+    },
+    {
+      "check": "backtest_eurusd finite floats",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "backtest_eurusd no NaN/Infinity tokens",
+      "ok": true,
+      "detail": "raw JSON token scan"
+    },
+    {
+      "check": "backtest_gbpusd finite floats",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "backtest_gbpusd no NaN/Infinity tokens",
+      "ok": true,
+      "detail": "raw JSON token scan"
+    },
+    {
+      "check": "at least 8 bodies scanned",
+      "ok": true,
+      "detail": "11"
+    }
+  ],
+  "calls": [],
+  "recorded_at_utc": "2026-11-03T13:38:25.161942+00:00"
+}

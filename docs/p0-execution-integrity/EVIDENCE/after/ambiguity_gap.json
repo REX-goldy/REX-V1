@@ -1,0 +1,6 @@
+{
+  "exit_price": 1.1,
+  "recorded_pnl_r": -4.999999999999978,
+  "execution_assumption": "both_levels_touched_gap_through_stop_at_open",
+  "expected_raw_r": -4.999999999999978
+}

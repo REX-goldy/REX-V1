@@ -1,0 +1,47 @@
+{
+  "all_eurusd_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "htf_eurusd_ids": [
+    5,
+    6,
+    7,
+    8
+  ],
+  "supply_ids": [
+    5,
+    7
+  ],
+  "demand_ids": [
+    6,
+    8
+  ],
+  "price_1_1425_active_htf": [
+    6
+  ],
+  "price_1_1867_active_include_h1": [
+    1
+  ],
+  "nearest_from_1_1830": {
+    "zone_id": 7,
+    "side": "above",
+    "distance_pips": 120.0000000000001
+  },
+  "inside_1_1425": {
+    "zone_id": 6,
+    "side": "inside",
+    "distance_pips": 0.0
+  },
+  "unknown_symbol": {
+    "zones": [],
+    "nearest": null,
+    "inside": false
+  }
+}

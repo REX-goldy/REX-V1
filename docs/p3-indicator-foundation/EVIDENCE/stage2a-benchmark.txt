@@ -1,0 +1,10 @@
+dataset=EURUSD/M1/2026 bars=184963
+trend-only: bars=20000 elapsed=0.116s series=n/a
+full-default-pack: bars=20000 elapsed=2.013s series=19
+trend-only: bars=184963 elapsed=0.990s series=n/a
+full-default-pack: bars=184963 elapsed=18.806s series=19
+--- instrumented (tracemalloc) ---
+trend-only: bars=20000 elapsed=0.467s series=n/a peak=3.0MiB
+full-default-pack: bars=20000 elapsed=9.430s series=19 peak=12.3MiB
+trend-only: bars=184963 elapsed=4.377s series=n/a peak=26.8MiB
+full-default-pack: bars=184963 elapsed=88.267s series=19 peak=112.9MiB

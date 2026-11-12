@@ -1,0 +1,138 @@
+{
+  "test_id": "API-020",
+  "endpoint": "/api/range",
+  "scenario": "Invalid range dates",
+  "test_data": "start>end; out-of-coverage dates",
+  "expected": "No 5xx; 200 with valid=false and understandable error (documented contract)",
+  "actual": "start>end status=200 valid=False error='Start date is after the end date. The selected range contains no bars.'; out_of_coverage status=200 valid=False error='Start date 2025-01-01 is before the first available bar (2026-01-01). The selected range contains no bars.'",
+  "status": "PASS",
+  "notes": "Range endpoint is a validation summary, so it reports validity in-body rather than via 4xx.",
+  "assertions": [
+    {
+      "check": "no 5xx",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "check": "valid false",
+      "ok": true,
+      "detail": "False"
+    },
+    {
+      "check": "understandable error",
+      "ok": true,
+      "detail": "Start date is after the end date. The selected range contains no bars."
+    },
+    {
+      "check": "out-of-coverage valid false",
+      "ok": true,
+      "detail": "False"
+    },
+    {
+      "check": "out-of-coverage error",
+      "ok": true,
+      "detail": "Start date 2025-01-01 is before the first available bar (2026-01-01). The selected range contains no bars."
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/range",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "start": "2026-03-10",
+        "end": "2026-03-01"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 28.4,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "709",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "e77b0c73850ea16de5f52aec17caabaf07b034f10b271f3950b925fdbef664ff",
+      "response_bytes": 709,
+      "response_json": {
+        "dataset_id": "EURUSD/M1/2026",
+        "timeframe": "M1",
+        "derived": false,
+        "requested_start": "2026-03-10",
+        "requested_end": "2026-03-01",
+        "first_available": "2026-01-01T13:00:00",
+        "last_available": "2026-06-30T23:59:00",
+        "bar_count": 0,
+        "total_frame_bars": 184963,
+        "gap_count": 0,
+        "unexpected_gap_count": 0,
+        "valid": false,
+        "error": "Start date is after the end date. The selected range contains no bars.",
+        "frame_warnings": [
+          "10 unexpected timestamp gaps (beyond FX closures)."
+        ],
+        "quality": {
+          "duplicate_count": 0,
+          "invalid_bar_count": 0,
+          "timestamp_gap_count": 35,
+          "unexpected_gap_count": 10,
+          "notes": [
+            "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+            "Gap count is raw timestamp spacing, not session-aware missing bars."
+          ]
+        }
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/range",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026",
+        "start": "2025-01-01",
+        "end": "2025-01-02"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 32.4,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "745",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "380db97cf2ac155d7b5eb84e9f155ef7d821ece82c45f119895680acc348d8d0",
+      "response_bytes": 745,
+      "response_json": {
+        "dataset_id": "EURUSD/M1/2026",
+        "timeframe": "M1",
+        "derived": false,
+        "requested_start": "2025-01-01",
+        "requested_end": "2025-01-02",
+        "first_available": "2026-01-01T13:00:00",
+        "last_available": "2026-06-30T23:59:00",
+        "bar_count": 0,
+        "total_frame_bars": 184963,
+        "gap_count": 0,
+        "unexpected_gap_count": 0,
+        "valid": false,
+        "error": "Start date 2025-01-01 is before the first available bar (2026-01-01). The selected range contains no bars.",
+        "frame_warnings": [
+          "10 unexpected timestamp gaps (beyond FX closures)."
+        ],
+        "quality": {
+          "duplicate_count": 0,
+          "invalid_bar_count": 0,
+          "timestamp_gap_count": 35,
+          "unexpected_gap_count": 10,
+          "notes": [
+            "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+            "Gap count is raw timestamp spacing, not session-aware missing bars."
+          ]
+        }
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.540554+00:00"
+}

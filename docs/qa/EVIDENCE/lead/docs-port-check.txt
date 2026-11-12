@@ -1,0 +1,5 @@
+README.md:64:# backend (port 8000)
+README.md:67:python -m uvicorn server.main:app --host 0.0.0.0 --port 8000
+README.md:69:# frontend (port 5173, proxies /api to :8000)
+README.md:75:Open `http://localhost:5173`. For a single-process deployment, run
+PROJECT_CONTEXT.md:174:| `frontend/` | React/Vite terminal; Vite proxy `/api` → `:8000`; design tokens and reusable components |

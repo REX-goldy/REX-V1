@@ -1,0 +1,341 @@
+{
+  "test_id": "API-006",
+  "endpoint": "/api/datasets",
+  "scenario": "Dataset list vs CSV files",
+  "test_data": "GET /api/datasets",
+  "expected": "200; 5 entries; bar_count and first/last timestamps equal CSV contents",
+  "actual": "EURUSD/M1/2026: api=184963 csv=184963 first=2026-01-01T13:00:00 vs 2026-01-01 13:00:00 last=2026-06-30T23:59:00 vs 2026-06-30 23:59:00; GBPUSD/M1/2026: api=93600 csv=93600 first=2026-04-01T00:00:00 vs 2026-04-01 00:00:00 last=2026-06-30T23:59:00 vs 2026-06-30 23:59:00; AUDUSD/M1/2026: api=93600 csv=93600 first=2026-04-01T00:00:00 vs 2026-04-01 00:00:00 last=2026-06-30T23:59:00 vs 2026-06-30 23:59:00; USDJPY/M1/2026: api=93600 csv=93600 first=2026-04-01T00:00:00 vs 2026-04-01 00:00:00 last=2026-06-30T23:59:00 vs 2026-06-30 23:59:00; USDCAD/M1/2026: api=93600 csv=93600 first=2026-04-01T00:00:00 vs 2026-04-01 00:00:00 last=2026-06-30T23:59:00 vs 2026-06-30 23:59:00",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "HTTP 200",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "is list",
+      "ok": true,
+      "detail": "list"
+    },
+    {
+      "check": "5 entries",
+      "ok": true,
+      "detail": "['AUDUSD/M1/2026', 'EURUSD/M1/2026', 'GBPUSD/M1/2026', 'USDCAD/M1/2026', 'USDJPY/M1/2026']"
+    },
+    {
+      "check": "EURUSD/M1/2026 count matches CSV",
+      "ok": true,
+      "detail": "api=184963 csv=184963 expected=184963"
+    },
+    {
+      "check": "EURUSD/M1/2026 first timestamp matches CSV",
+      "ok": true,
+      "detail": "api=2026-01-01T13:00:00 csv=2026-01-01 13:00:00"
+    },
+    {
+      "check": "EURUSD/M1/2026 last timestamp matches CSV",
+      "ok": true,
+      "detail": "api=2026-06-30T23:59:00 csv=2026-06-30 23:59:00"
+    },
+    {
+      "check": "GBPUSD/M1/2026 count matches CSV",
+      "ok": true,
+      "detail": "api=93600 csv=93600 expected=93600"
+    },
+    {
+      "check": "GBPUSD/M1/2026 first timestamp matches CSV",
+      "ok": true,
+      "detail": "api=2026-04-01T00:00:00 csv=2026-04-01 00:00:00"
+    },
+    {
+      "check": "GBPUSD/M1/2026 last timestamp matches CSV",
+      "ok": true,
+      "detail": "api=2026-06-30T23:59:00 csv=2026-06-30 23:59:00"
+    },
+    {
+      "check": "AUDUSD/M1/2026 count matches CSV",
+      "ok": true,
+      "detail": "api=93600 csv=93600 expected=93600"
+    },
+    {
+      "check": "AUDUSD/M1/2026 first timestamp matches CSV",
+      "ok": true,
+      "detail": "api=2026-04-01T00:00:00 csv=2026-04-01 00:00:00"
+    },
+    {
+      "check": "AUDUSD/M1/2026 last timestamp matches CSV",
+      "ok": true,
+      "detail": "api=2026-06-30T23:59:00 csv=2026-06-30 23:59:00"
+    },
+    {
+      "check": "USDJPY/M1/2026 count matches CSV",
+      "ok": true,
+      "detail": "api=93600 csv=93600 expected=93600"
+    },
+    {
+      "check": "USDJPY/M1/2026 first timestamp matches CSV",
+      "ok": true,
+      "detail": "api=2026-04-01T00:00:00 csv=2026-04-01 00:00:00"
+    },
+    {
+      "check": "USDJPY/M1/2026 last timestamp matches CSV",
+      "ok": true,
+      "detail": "api=2026-06-30T23:59:00 csv=2026-06-30 23:59:00"
+    },
+    {
+      "check": "USDCAD/M1/2026 count matches CSV",
+      "ok": true,
+      "detail": "api=93600 csv=93600 expected=93600"
+    },
+    {
+      "check": "USDCAD/M1/2026 first timestamp matches CSV",
+      "ok": true,
+      "detail": "api=2026-04-01T00:00:00 csv=2026-04-01 00:00:00"
+    },
+    {
+      "check": "USDCAD/M1/2026 last timestamp matches CSV",
+      "ok": true,
+      "detail": "api=2026-06-30T23:59:00 csv=2026-06-30 23:59:00"
+    },
+    {
+      "check": "required keys present",
+      "ok": true,
+      "detail": "[[], []]"
+    },
+    {
+      "check": "no non-finite floats",
+      "ok": true,
+      "detail": "[]"
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/datasets",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 4.2,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "4295",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "7d2bf0d436a4ec43d1f9a757f03bab94155a0ae45bdc02f2c3ea365018b44e1d",
+      "response_bytes": 4295,
+      "response_json": [
+        {
+          "id": "AUDUSD/M1/2026",
+          "symbol": "AUDUSD",
+          "timeframe": "M1",
+          "year": 2026,
+          "provider": "twelve_data",
+          "path": "data/historical/AUDUSD/M1/2026.csv",
+          "bar_count": 93600,
+          "size_bytes": 5008654,
+          "status": "ok",
+          "warnings": [],
+          "coverage": {
+            "start": "2026-04-01",
+            "end": "2026-06-30",
+            "requested_start": "2026-04-01",
+            "requested_end": "2026-06-30",
+            "actual_start": "2026-04-01T00:00:00",
+            "actual_end": "2026-06-30T23:59:00",
+            "retrieved_at": "2026-10-30T06:56:11.260438+00:00"
+          },
+          "quality": {
+            "duplicate_count": 0,
+            "invalid_bar_count": 0,
+            "timestamp_gap_count": 13,
+            "unexpected_gap_count": 0,
+            "notes": [
+              "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+              "Gap count is raw timestamp spacing, not session-aware missing bars."
+            ]
+          },
+          "first_timestamp": "2026-04-01T00:00:00",
+          "last_timestamp": "2026-06-30T23:59:00",
+          "derived": false,
+          "available_timeframes": [
+            "M1",
+            "M5",
+            "M15",
+            "H1",
+            "H4"
+          ]
+        },
+        {
+          "id": "EURUSD/M1/2026",
+          "symbol": "EURUSD",
+          "timeframe": "M1",
+          "year": 2026,
+          "provider": "twelve_data",
+          "path": "data/historical/EURUSD/M1/2026.csv",
+          "bar_count": 184963,
+          "size_bytes": 9902091,
+          "status": "warning",
+          "warnings": [
+            "10 unexpected timestamp gaps (beyond FX closures)."
+          ],
+          "coverage": {
+            "start": "2026-01-01",
+            "end": "2026-06-30",
+            "requested_start": "2026-01-01",
+            "requested_end": "2026-06-30",
+            "actual_start": "2026-01-01T13:00:00",
+            "actual_end": "2026-06-30T23:59:00",
+            "retrieved_at": "2026-10-29T21:33:25.344166+00:00"
+          },
+          "quality": {
+            "duplicate_count": 0,
+            "invalid_bar_count": 0,
+            "timestamp_gap_count": 35,
+            "unexpected_gap_count": 10,
+            "notes": [
+              "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+              "Gap count is raw timestamp spacing, not session-aware missing bars."
+            ]
+          },
+          "first_timestamp": "2026-01-01T13:00:00",
+          "last_timestamp": "2026-06-30T23:59:00",
+          "derived": false,
+          "available_timeframes": [
+            "M1",
+            "M5",
+            "M15",
+            "H1",
+            "H4"
+          ]
+        },
+        {
+          "id": "GBPUSD/M1/2026",
+          "symbol": "GBPUSD",
+          "timeframe": "M1",
+          "year": 2026,
+          "provider": "twelve_data",
+          "path": "data/historical/GBPUSD/M1/2026.csv",
+          "bar_count": 93600,
+          "size_bytes": 5012055,
+          "status": "ok",
+          "warnings": [],
+          "coverage": {
+            "start": "2026-04-01",
+            "end": "2026-06-30",
+            "requested_start": "2026-04-01",
+            "requested_end": "2026-06-30",
+            "actual_start": "2026-04-01T00:00:00",
+            "actual_end": "2026-06-30T23:59:00",
+            "retrieved_at": "2026-10-30T06:49:26.350860+00:00"
+          },
+          "quality": {
+            "duplicate_count": 0,
+            "invalid_bar_count": 0,
+            "timestamp_gap_count": 13,
+            "unexpected_gap_count": 0,
+            "notes": [
+              "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+              "Gap count is raw timestamp spacing, not session-aware missing bars."
+            ]
+          },
+          "first_timestamp": "2026-04-01T00:00:00",
+          "last_timestamp": "2026-06-30T23:59:00",
+          "derived": false,
+          "available_timeframes": [
+            "M1",
+            "M5",
+            "M15",
+            "H1",
+            "H4"
+          ]
+        },
+        {
+          "id": "USDCAD/M1/2026",
+          "symbol": "USDCAD",
+          "timeframe": "M1",
+          "year": 2026,
+          "provider": "twelve_data",
+          "path": "data/historical/USDCAD/M1/2026.csv",
+          "bar_count": 93600,
+          "size_bytes": 5013265,
+          "status": "ok",
+          "warnings": [],
+          "coverage": {
+            "start": "2026-04-01",
+            "end": "2026-06-30",
+            "requested_start": "2026-04-01",
+            "requested_end": "2026-06-30",
+            "actual_start": "2026-04-01T00:00:00",
+            "actual_end": "2026-06-30T23:59:00",
+            "retrieved_at": "2026-10-30T06:59:33.746146+00:00"
+          },
+          "quality": {
+            "duplicate_count": 0,
+            "invalid_bar_count": 0,
+            "timestamp_gap_count": 13,
+            "unexpected_gap_count": 0,
+            "notes": [
+              "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+              "Gap count is raw timestamp spacing, not session-aware missing bars."
+            ]
+          },
+          "first_timestamp": "2026-04-01T00:00:00",
+          "last_timestamp": "2026-06-30T23:59:00",
+          "derived": false,
+          "available_timeframes": [
+            "M1",
+            "M5",
+            "M15",
+            "H1",
+            "H4"
+          ]
+        },
+        {
+          "id": "USDJPY/M1/2026",
+          "symbol": "USDJPY",
+          "timeframe": "M1",
+          "year": 2026,
+          "provider": "twelve_data",
+          "path": "data/historical/USDJPY/M1/2026.csv",
+          "bar_count": 93600,
+          "size_bytes": 5761240,
+          "status": "ok",
+          "warnings": [],
+          "coverage": {
+            "start": "2026-04-01",
+            "end": "2026-06-30",
+            "requested_start": "2026-04-01",
+            "requested_end": "2026-06-30",
+            "actual_start": "2026-04-01T00:00:00",
+            "actual_end": "2026-06-30T23:59:00",
+            "retrieved_at": "2026-10-30T06:52:48.669450+00:00"
+          },
+          "quality": {
+            "duplicate_count": 0,
+            "invalid_bar_count": 0,
+            "timestamp_gap_count": 13,
+            "unexpected_gap_count": 0,
+            "notes": [
+              "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+              "Gap count is raw timestamp spacing, not session-aware missing bars."
+            ]
+          },
+          "first_timestamp": "2026-04-01T00:00:00",
+          "last_timestamp": "2026-06-30T23:59:00",
+          "derived": false,
+          "available_timeframes": [
+            "M1",
+            "M5",
+            "M15",
+            "H1",
+            "H4"
+          ]
+        }
+      ],
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.042116+00:00"
+}

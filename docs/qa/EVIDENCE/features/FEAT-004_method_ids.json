@@ -1,0 +1,11 @@
+{
+  "trend_none": "UnsupportedMethodError: method_id is required; silent defaults are not allowed",
+  "trend_blank": "UnsupportedMethodError: method_id is required; silent defaults are not allowed",
+  "trend_unknown": "UnsupportedMethodError: Unknown trend method_id: 'not_a_method'",
+  "trend_reserved_drift": "UnsupportedMethodError: Trend method 'drift_v1' is reserved but not implemented yet",
+  "momentum_wrong": "UnsupportedMethodError: Unknown momentum method_id: 'range_expansion_v1'. Range expansion belongs to VolatilityView.range_expansion_v1.",
+  "volatility_wrong": "UnsupportedMethodError: Unknown volatility method_id: 'ts_mom_v1'",
+  "phase_wrong": "UnsupportedMethodError: Unknown phase method_id: 'nope'",
+  "liquidity_none": "UnsupportedMethodError: method_id is required; silent defaults are not allowed",
+  "liquidity_any": "UnsupportedMethodError: Liquidity method 'unsupported' has no materialized liquidity pack in Phase 1"
+}

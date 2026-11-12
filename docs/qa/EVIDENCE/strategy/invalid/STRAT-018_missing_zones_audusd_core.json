@@ -1,0 +1,9 @@
+{
+  "test_id": "STRAT-018",
+  "label": "missing_zones_audusd_core",
+  "scenario": "Missing zone book",
+  "data_config": "AUDUSD/M1/2026; CORE_ZONE_BREAKOUT; 2026-05-04..2026-05-05",
+  "expected": "Explicit error naming AUDUSD and config/zones.json.",
+  "actual": "ValueError: No zone book is configured for AUDUSD in config/zones.json",
+  "status": "PASS"
+}

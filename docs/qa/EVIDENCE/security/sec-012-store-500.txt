@@ -1,0 +1,6 @@
+# SEC-012 Store failure returns generic 500 with no stack trace, path or secret
+component: server/main.py
+test_data: Corrupt vault contents
+expected: 500 detail 'Provider key store error' only
+actual: status=500 detail='Provider key store error'
+status: PASS

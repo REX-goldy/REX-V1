@@ -1,0 +1,6 @@
+# SEC-005 Corrupt vault fails closed without wiping data
+component: server/provider_keys.py
+test_data: File contents '{not valid json'
+expected: ProviderKeyStoreError and file preserved
+actual: raised=True message='Provider key store is not valid JSON' preserved=True
+status: PASS

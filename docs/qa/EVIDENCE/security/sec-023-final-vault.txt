@@ -1,0 +1,6 @@
+# SEC-023 Isolated QA vault left empty after run
+component: server/provider_keys.py
+test_data: Delete all providers
+expected: providers == {}
+actual: providers={}
+status: PASS

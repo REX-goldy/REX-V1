@@ -1,0 +1,52 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      TWELVE_DATA_API_KEY: ${TWELVE_DATA_API_KEY:-}
+      REX_DATA_DIR: /app/data/historical
+      REX_RUNS_DIR: /app/research/outputs/ui_runs
+    expose:
+      - "16901"
+    volumes:
+      # Mount only the data root, not /app/data, so the tracked seed archive
+      # at /app/data/seed stays visible and can bootstrap a fresh volume.
+      - rex_data:/app/data/historical
+      - rex_workspace:/app/data/workspace
+      - rex_runs:/app/research/outputs/ui_runs
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import sys, urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:16901/api/health', timeout=3).status == 200 else 1)"
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 5
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "16900:16900"
+    depends_on:
+      api:
+        condition: service_healthy
+    environment:
+      VITE_API_PROXY_TARGET: http://api:16901
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:16900/"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  rex_data:
+  rex_workspace:
+  rex_runs:

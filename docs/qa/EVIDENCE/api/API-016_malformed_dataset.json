@@ -1,0 +1,239 @@
+{
+  "test_id": "API-016",
+  "endpoint": "/api/dataset",
+  "scenario": "Malformed id / path traversal",
+  "test_data": "2 parts, extra parts, ../, non-numeric year, absent year, encoded ../",
+  "expected": "4xx each; no file contents leaked",
+  "actual": "two-parts=404:Dataset id must be SYMBOL/TIMEFRAME/YEAR; too-many-parts=404:Dataset id must be SYMBOL/TIMEFRAME/YEAR; dot-dot-traversal=404:Dataset id must be SYMBOL/TIMEFRAME/YEAR; traversal-with-year=404:Dataset id must be SYMBOL/TIMEFRAME/YEAR; non-numeric-year=404:Dataset year is invalid; valid-but-absent-year=404:Dataset not found: EURUSD/M1/1990; encoded-traversal=404:Dataset year is invalid",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "two-parts 4xx",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "two-parts no file leak",
+      "ok": true,
+      "detail": "{\"detail\": \"Dataset id must be SYMBOL/TIMEFRAME/YEAR\"}"
+    },
+    {
+      "check": "too-many-parts 4xx",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "too-many-parts no file leak",
+      "ok": true,
+      "detail": "{\"detail\": \"Dataset id must be SYMBOL/TIMEFRAME/YEAR\"}"
+    },
+    {
+      "check": "dot-dot-traversal 4xx",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "dot-dot-traversal no file leak",
+      "ok": true,
+      "detail": "{\"detail\": \"Dataset id must be SYMBOL/TIMEFRAME/YEAR\"}"
+    },
+    {
+      "check": "traversal-with-year 4xx",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "traversal-with-year no file leak",
+      "ok": true,
+      "detail": "{\"detail\": \"Dataset id must be SYMBOL/TIMEFRAME/YEAR\"}"
+    },
+    {
+      "check": "non-numeric-year 4xx",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "non-numeric-year no file leak",
+      "ok": true,
+      "detail": "{\"detail\": \"Dataset year is invalid\"}"
+    },
+    {
+      "check": "valid-but-absent-year 4xx",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "valid-but-absent-year no file leak",
+      "ok": true,
+      "detail": "{\"detail\": \"Dataset not found: EURUSD/M1/1990\"}"
+    },
+    {
+      "check": "encoded-traversal 4xx",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "encoded-traversal no file leak",
+      "ok": true,
+      "detail": "{\"detail\": \"Dataset year is invalid\"}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/dataset",
+      "params": {
+        "dataset_id": "EURUSD/M1"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 3.0,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "53",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "d8b4f13209911c407cffe11ff17c647a9b9fcb12d5cd40c83bf4f1432bf503ed",
+      "response_bytes": 53,
+      "response_json": {
+        "detail": "Dataset id must be SYMBOL/TIMEFRAME/YEAR"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/dataset",
+      "params": {
+        "dataset_id": "EURUSD/M1/2026/extra"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.3,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "53",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "d8b4f13209911c407cffe11ff17c647a9b9fcb12d5cd40c83bf4f1432bf503ed",
+      "response_bytes": 53,
+      "response_json": {
+        "detail": "Dataset id must be SYMBOL/TIMEFRAME/YEAR"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/dataset",
+      "params": {
+        "dataset_id": "../../etc/passwd"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 1.7,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "53",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "d8b4f13209911c407cffe11ff17c647a9b9fcb12d5cd40c83bf4f1432bf503ed",
+      "response_bytes": 53,
+      "response_json": {
+        "detail": "Dataset id must be SYMBOL/TIMEFRAME/YEAR"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/dataset",
+      "params": {
+        "dataset_id": "EURUSD/M1/../../etc/passwd"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 1.7,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "53",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "d8b4f13209911c407cffe11ff17c647a9b9fcb12d5cd40c83bf4f1432bf503ed",
+      "response_bytes": 53,
+      "response_json": {
+        "detail": "Dataset id must be SYMBOL/TIMEFRAME/YEAR"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/dataset",
+      "params": {
+        "dataset_id": "EURUSD/M1/notayear"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 1.6,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "36",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "4d79d6269a27b4d3fee8eec6b6589b1ec4e5f504c90131be2b40acec98e45a0c",
+      "response_bytes": 36,
+      "response_json": {
+        "detail": "Dataset year is invalid"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/dataset",
+      "params": {
+        "dataset_id": "EURUSD/M1/1990"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 2.6,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "46",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "219e67f2069013a3e25ed298302f4eb75ebb8d6228b504f5de010b0d4cc42c10",
+      "response_bytes": 46,
+      "response_json": {
+        "detail": "Dataset not found: EURUSD/M1/1990"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/dataset",
+      "params": {
+        "dataset_id": "EURUSD/M1/%2e%2e%2f%2e%2e%2fetc%2fpasswd"
+      },
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 3.0,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "36",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "4d79d6269a27b4d3fee8eec6b6589b1ec4e5f504c90131be2b40acec98e45a0c",
+      "response_bytes": 36,
+      "response_json": {
+        "detail": "Dataset year is invalid"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.428458+00:00"
+}

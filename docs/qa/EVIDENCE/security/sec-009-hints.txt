@@ -1,0 +1,6 @@
+# SEC-009 Hint reveals last four only and fully masks keys of length <=4
+component: server/provider_keys.py
+test_data: abcd, abcde, SEC-DUMMY-...1234
+expected: abcd -> bullets, abcde -> bcde, long -> 1234, never the full secret
+actual: len=4 hint='••••'; len=5 hint='bcde'; len=25 hint='1234'
+status: PASS

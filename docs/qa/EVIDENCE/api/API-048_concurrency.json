@@ -1,0 +1,54 @@
+{
+  "test_id": "API-048",
+  "endpoint": "GET health/strategies/bars/overview",
+  "scenario": "Concurrent reads",
+  "test_data": "44 requests, 12 workers",
+  "expected": "all 200; stable per-endpoint bodies",
+  "actual": "requests=44 elapsed_ms=270.4 statuses={'health': [200], 'strategies': [200], 'bars': [200], 'overview': [200]}",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "health all 200",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "health consistent body",
+      "ok": true,
+      "detail": "1"
+    },
+    {
+      "check": "strategies all 200",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "strategies consistent body",
+      "ok": true,
+      "detail": "1"
+    },
+    {
+      "check": "bars all 200",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "bars consistent body",
+      "ok": true,
+      "detail": "1"
+    },
+    {
+      "check": "overview all 200",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "overview consistent body",
+      "ok": true,
+      "detail": "1"
+    }
+  ],
+  "calls": [],
+  "recorded_at_utc": "2026-11-03T13:38:25.436947+00:00"
+}

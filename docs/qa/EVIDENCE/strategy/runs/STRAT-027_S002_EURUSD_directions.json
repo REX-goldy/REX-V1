@@ -1,0 +1,80 @@
+{
+  "strategy_id": "S002",
+  "symbol": "EURUSD",
+  "range": [
+    "2026-03-23",
+    "2026-03-27"
+  ],
+  "up_signal_type": "retest_above",
+  "up_count": 267,
+  "first_up": {
+    "symbol": "EURUSD",
+    "timestamp": "2026-03-23T06:01:00",
+    "signal_type": "retest_above",
+    "zone_id": 8,
+    "price": 1.15335,
+    "outcome": null
+  },
+  "last_up": {
+    "symbol": "EURUSD",
+    "timestamp": "2026-03-27T21:14:00",
+    "signal_type": "retest_above",
+    "zone_id": 8,
+    "price": 1.15339,
+    "outcome": null
+  },
+  "down_signal_type": "retest_below",
+  "down_count": 249,
+  "first_down": {
+    "symbol": "EURUSD",
+    "timestamp": "2026-03-23T09:48:00",
+    "signal_type": "retest_below",
+    "zone_id": 8,
+    "price": 1.14977,
+    "outcome": null
+  },
+  "last_down": {
+    "symbol": "EURUSD",
+    "timestamp": "2026-03-25T15:05:00",
+    "signal_type": "retest_below",
+    "zone_id": 4,
+    "price": 1.15869,
+    "outcome": null
+  },
+  "simulated": true,
+  "first_long_trade": {
+    "symbol": "EURUSD",
+    "direction": "LONG",
+    "entry_time": "2026-03-23T06:08:00",
+    "exit_time": "2026-03-23T06:09:00",
+    "entry_price": 1.15311,
+    "exit_price": 1.15308,
+    "sl_price": 1.15308,
+    "tp_price": 1.15317,
+    "pnl_r": -1.0,
+    "close_reason": "AMBIGUITY",
+    "holding_duration_candles": 1,
+    "strategy_id": "S002"
+  },
+  "first_short_trade": {
+    "symbol": "EURUSD",
+    "direction": "SHORT",
+    "entry_time": "2026-03-23T09:49:00",
+    "exit_time": "2026-03-23T09:49:00",
+    "entry_price": 1.14977,
+    "exit_price": 1.1496699999999997,
+    "sl_price": 1.14982,
+    "tp_price": 1.1496699999999997,
+    "pnl_r": 2.0,
+    "close_reason": "TP",
+    "holding_duration_candles": 1,
+    "strategy_id": "S002"
+  },
+  "direction_mapping_verification": {
+    "trade_directions": {
+      "LONG": 107,
+      "SHORT": 116
+    },
+    "note": "S002/S008 trade directions are produced by their setup factories; CORE is signal study only."
+  }
+}

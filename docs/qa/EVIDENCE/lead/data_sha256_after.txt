@@ -1,0 +1,10 @@
+65cab86789eb82393f4d54e130d7cbeb1358db869c40814d52058dc130ec4208  data/historical/EURUSD/M1/2026.csv
+69f62564e0d6c8dbed5d23df22c61fb94d99f02be3136835ceb9ba9dfab258a3  data/historical/USDCAD/M1/2026.meta.json
+7d1b1d3df6cfbd40a43eea99034811e9fe9758a1b47d2b596e5b8cad3bb6a62b  data/historical/GBPUSD/M1/2026.csv
+93faedca3bdca3a4ad3e22421fd3efa9ee0b2642f33a508485343c5376230deb  data/historical/AUDUSD/M1/2026.meta.json
+b01c8e79a0f97cd72a6111b4c6d9b4c00f21306907619dbb92ccc85d9bd84324  data/historical/GBPUSD/M1/2026.meta.json
+b252bbc12ac36092e6f1c8f5c8668074c9e4e948d3a94408f1533e75968d004c  data/historical/USDJPY/M1/2026.csv
+b7cc92578d76b34151ae3628121758767fc68a2eb47261a50ec3880374a5f55d  data/historical/USDCAD/M1/2026.csv
+c3f522e78ed536dcd875ebafde3dc3638a810342ea07aa0f3a8c55ae5e8d4bcc  data/historical/USDJPY/M1/2026.meta.json
+d315a52fd48b2792a1e2b4b51e02205f9e9517dec62b2eb3181417650119d557  data/historical/AUDUSD/M1/2026.csv
+d9cd718493bd4634d0ba597a67074c26fc4d91fad22861d0729e65f25707e2be  data/historical/EURUSD/M1/2026.meta.json

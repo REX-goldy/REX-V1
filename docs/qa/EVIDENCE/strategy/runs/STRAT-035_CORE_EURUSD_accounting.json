@@ -1,0 +1,21 @@
+{
+  "strategy_id": "CORE_ZONE_BREAKOUT",
+  "simulated": false,
+  "total_signals": 21920,
+  "signals_by_type": {
+    "break_above": 9,
+    "break_below": 27,
+    "close_outside": 21848,
+    "enter_zone": 36
+  },
+  "reconcile_signals": {
+    "generated": 21920,
+    "accepted": 0,
+    "ignored": 0,
+    "rejected": 0,
+    "difference": 21920
+  },
+  "reconcile_execution": null,
+  "trades": 0,
+  "note": "reconcile_signals is an execution-accounting helper; with simulate_trades=False all signals are intentionally outside the execution path, so difference equals total_signals."
+}

@@ -1,0 +1,33 @@
+Agent 7 — Backtesting & Execution QA command log
+Workspace: /home/user/workspaces/7de05e41da33
+Git HEAD at run time: 95f8aaa998f1ce1539c65777b5dd10ac063cbd34
+Python: 3.11.6
+
+# Signal-density scan (read-only)
+python /tmp/opencode/qa-backtest/scan_signals.py
+
+# Valid runs + independent metrics + lifecycle + reproducibility + multi-symbol curve probe
+REX_RUNS_DIR=/tmp/opencode/qa-backtest/runs REX_DATA_DIR=/home/user/workspaces/7de05e41da33/data/historical \
+  python /tmp/opencode/qa-backtest/qa_backtest_analysis.py
+
+# Edge cases + export/serialization + run archive compatibility
+REX_RUNS_DIR=/tmp/opencode/qa-backtest/runs REX_DATA_DIR=/home/user/workspaces/7de05e41da33/data/historical \
+  python /tmp/opencode/qa-backtest/qa_backtest_edges.py
+
+# Ambiguous gap-through-SL probe
+python /tmp/opencode/qa-backtest/qa_ambiguity_gap.py
+
+# CORE_ZONE_BREAKOUT signal-only server run (reconciliation reporting probe)
+REX_RUNS_DIR=/tmp/opencode/qa-backtest/runs \
+  python /tmp/opencode/qa-backtest/core_signal_only_server.py
+
+# Multi-symbol S002 probe (scope note)
+python /tmp/opencode/qa-backtest/probe_multisymbol_s002.py
+
+# Baseline targeted regression tests (77 tests)
+CI=1 python -m unittest tests.test_backtesting tests.test_trade_simulation tests.test_execution_qa_adversarial -v
+
+# Read-only data hashes
+sha256sum data/historical/EURUSD/M1/2026.csv data/historical/GBPUSD/M1/2026.csv
+
+# No app code, config, dataset or existing test was modified. No commit/push/deploy.

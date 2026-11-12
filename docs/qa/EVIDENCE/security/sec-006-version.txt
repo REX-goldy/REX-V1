@@ -1,0 +1,6 @@
+# SEC-006 Unsupported vault version is rejected
+component: server/provider_keys.py
+test_data: version=99
+expected: ProviderKeyStoreError
+actual: True
+status: PASS

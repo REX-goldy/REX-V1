@@ -1,0 +1,6 @@
+# SEC-015 Unknown provider rejected by get/set/delete
+component: server/provider_keys.py
+test_data: provider id 'ghost'
+expected: UnknownProviderError
+actual: get: UnknownProviderError; set: UnknownProviderError; delete: UnknownProviderError
+status: PASS

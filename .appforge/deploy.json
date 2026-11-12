@@ -1,0 +1,22 @@
+{
+  "web_service": "web",
+  "public_services": {
+    "web": "/"
+  },
+  "compose_file": "docker-compose.yml",
+  "services": {
+    "web": {
+      "port": 16900,
+      "public": true,
+      "health": "/"
+    },
+    "api": {
+      "port": 16901,
+      "public": false,
+      "health": "/api/health"
+    }
+  },
+  "env": {
+    "TWELVE_DATA_API_KEY": "$TWELVE_DATA_API_KEY"
+  }
+}

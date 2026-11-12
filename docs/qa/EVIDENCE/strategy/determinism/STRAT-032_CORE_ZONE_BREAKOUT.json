@@ -1,0 +1,46 @@
+{
+  "strategy_id": "CORE_ZONE_BREAKOUT",
+  "symbol": "EURUSD",
+  "range": [
+    "2026-03-24",
+    "2026-03-25"
+  ],
+  "same_instance_run1_run2_equal_signals": true,
+  "same_instance_run1_run2_equal_trades": true,
+  "new_instance_equal_signals": true,
+  "new_instance_equal_trades": true,
+  "signal_digest": "b61210dcb01966be944f335021f91b7bde2e11795cb3a429ef8cb3be6bc647e9",
+  "trade_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "bar_input_hash_before": "a6ebf1205277773d341bf9a2baf42b4840c14b1ba1a60dfac1be2b40e166d8a5",
+  "bar_input_hash_after": "a6ebf1205277773d341bf9a2baf42b4840c14b1ba1a60dfac1be2b40e166d8a5",
+  "bars_unmutated": true,
+  "book_hash_before": "35d8b807fcdc88ff0fee03d94687111b1fbddb52a9fa69ae5c70828da73fdaf7",
+  "book_hash_after": "35d8b807fcdc88ff0fee03d94687111b1fbddb52a9fa69ae5c70828da73fdaf7",
+  "zone_book_unmutated": true,
+  "service_repeat_equal_core_fields": true,
+  "service_run_ids": [
+    "20261103T133736Z_c1f3cdc3",
+    "20261103T133736Z_fe439651"
+  ],
+  "service_metrics": {
+    "total_signals": 21920,
+    "total_trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0.0,
+    "profit_factor": null,
+    "expectancy": 0.0,
+    "max_drawdown_r": 0.0,
+    "largest_win": 0.0,
+    "largest_loss": 0.0,
+    "ambiguous_exits": 0,
+    "avg_holding_duration": 0.0
+  },
+  "service_reconciliation": {
+    "generated": 21920,
+    "accepted": 0,
+    "ignored": 0,
+    "rejected": 0,
+    "difference": 21920
+  }
+}

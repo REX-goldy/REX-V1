@@ -1,0 +1,127 @@
+{
+  "range": [
+    "2026-03-23",
+    "2026-03-27"
+  ],
+  "signals": 516,
+  "accepted": 230,
+  "ignored": 221,
+  "rejected_policy_boundary": 65,
+  "planner_none_count": 65,
+  "zero_risk_count": 65,
+  "examples": [
+    {
+      "ts": "2026-03-23T06:01:00",
+      "dir": "LONG",
+      "entry_hint": 1.15335,
+      "stop_hint": 1.15335,
+      "signal_type": "retest_above",
+      "zone_id": "8",
+      "bar": {
+        "open": 1.1534,
+        "high": 1.15342,
+        "low": 1.15335,
+        "close": 1.15335
+      }
+    },
+    {
+      "ts": "2026-03-23T06:03:00",
+      "dir": "LONG",
+      "entry_hint": 1.15325,
+      "stop_hint": 1.15325,
+      "signal_type": "retest_above",
+      "zone_id": "8",
+      "bar": {
+        "open": 1.1533,
+        "high": 1.15331,
+        "low": 1.15325,
+        "close": 1.15325
+      }
+    },
+    {
+      "ts": "2026-03-23T06:05:00",
+      "dir": "LONG",
+      "entry_hint": 1.1531,
+      "stop_hint": 1.1531,
+      "signal_type": "retest_above",
+      "zone_id": "8",
+      "bar": {
+        "open": 1.15318,
+        "high": 1.15319,
+        "low": 1.1531,
+        "close": 1.1531
+      }
+    },
+    {
+      "ts": "2026-03-23T08:50:00",
+      "dir": "LONG",
+      "entry_hint": 1.15332,
+      "stop_hint": 1.15332,
+      "signal_type": "retest_above",
+      "zone_id": "8",
+      "bar": {
+        "open": 1.15339,
+        "high": 1.15341,
+        "low": 1.15332,
+        "close": 1.15332
+      }
+    },
+    {
+      "ts": "2026-03-23T08:52:00",
+      "dir": "LONG",
+      "entry_hint": 1.15343,
+      "stop_hint": 1.15343,
+      "signal_type": "retest_above",
+      "zone_id": "8",
+      "bar": {
+        "open": 1.15343,
+        "high": 1.15343,
+        "low": 1.15343,
+        "close": 1.15343
+      }
+    },
+    {
+      "ts": "2026-03-23T08:56:00",
+      "dir": "LONG",
+      "entry_hint": 1.15311,
+      "stop_hint": 1.15311,
+      "signal_type": "retest_above",
+      "zone_id": "8",
+      "bar": {
+        "open": 1.15326,
+        "high": 1.15331,
+        "low": 1.15311,
+        "close": 1.15311
+      }
+    },
+    {
+      "ts": "2026-03-23T10:00:00",
+      "dir": "SHORT",
+      "entry_hint": 1.14954,
+      "stop_hint": 1.14954,
+      "signal_type": "retest_below",
+      "zone_id": "8",
+      "bar": {
+        "open": 1.14941,
+        "high": 1.14954,
+        "low": 1.14941,
+        "close": 1.14954
+      }
+    },
+    {
+      "ts": "2026-03-23T12:42:00",
+      "dir": "SHORT",
+      "entry_hint": 1.15886,
+      "stop_hint": 1.15886,
+      "signal_type": "retest_below",
+      "zone_id": "4",
+      "bar": {
+        "open": 1.15826,
+        "high": 1.15886,
+        "low": 1.15825,
+        "close": 1.15886
+      }
+    }
+  ],
+  "cause": "Retest signal price is the signal bar close. The factory sets stop_hint to that bar low (LONG) or high (SHORT). When the bar closes at its extreme, entry_hint == stop_hint and FixedRiskRewardPolicy.build returns None."
+}

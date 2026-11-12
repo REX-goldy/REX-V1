@@ -1,0 +1,80 @@
+{
+  "strategy_id": "S008",
+  "symbol": "EURUSD",
+  "range": [
+    "2026-05-04",
+    "2026-05-08"
+  ],
+  "up_signal_type": "bullish_sweep",
+  "up_count": 190,
+  "first_up": {
+    "symbol": "EURUSD",
+    "timestamp": "2026-05-04T00:20:00",
+    "signal_type": "bullish_sweep",
+    "zone_id": 0,
+    "price": 1.17252,
+    "outcome": null
+  },
+  "last_up": {
+    "symbol": "EURUSD",
+    "timestamp": "2026-05-08T21:35:00",
+    "signal_type": "bullish_sweep",
+    "zone_id": 0,
+    "price": 1.17901,
+    "outcome": null
+  },
+  "down_signal_type": "bearish_sweep",
+  "down_count": 113,
+  "first_down": {
+    "symbol": "EURUSD",
+    "timestamp": "2026-05-04T00:37:00",
+    "signal_type": "bearish_sweep",
+    "zone_id": 0,
+    "price": 1.17257,
+    "outcome": null
+  },
+  "last_down": {
+    "symbol": "EURUSD",
+    "timestamp": "2026-05-08T21:57:00",
+    "signal_type": "bearish_sweep",
+    "zone_id": 0,
+    "price": 1.17886,
+    "outcome": null
+  },
+  "simulated": true,
+  "first_long_trade": {
+    "symbol": "EURUSD",
+    "direction": "LONG",
+    "entry_time": "2026-05-04T00:48:00",
+    "exit_time": "2026-05-04T00:50:00",
+    "entry_price": 1.17251,
+    "exit_price": 1.17265,
+    "sl_price": 1.17244,
+    "tp_price": 1.17265,
+    "pnl_r": 2.0,
+    "close_reason": "TP",
+    "holding_duration_candles": 2,
+    "strategy_id": "S008"
+  },
+  "first_short_trade": {
+    "symbol": "EURUSD",
+    "direction": "SHORT",
+    "entry_time": "2026-05-04T00:38:00",
+    "exit_time": "2026-05-04T00:41:00",
+    "entry_price": 1.17256,
+    "exit_price": 1.17261,
+    "sl_price": 1.17261,
+    "tp_price": 1.1724600000000003,
+    "pnl_r": -1.0,
+    "close_reason": "SL",
+    "holding_duration_candles": 3,
+    "strategy_id": "S008"
+  },
+  "direction_mapping_verification": {
+    "trade_directions": {
+      "SHORT": 100,
+      "LONG": 172
+    },
+    "note": "S002/S008 trade directions are produced by their setup factories; CORE is signal study only."
+  }
+}

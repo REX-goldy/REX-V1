@@ -1,0 +1,243 @@
+{
+  "test_id": "API-022",
+  "endpoint": "/api/backtests",
+  "scenario": "Invalid strategy parameters",
+  "test_data": "lookback 1/abc/true, foo, min_wick_ratio 1.5, tolerance -0.1",
+  "expected": "400 with parameter-specific detail",
+  "actual": "lookback below min=400:lookback must be >= 2; lookback non-integer=400:lookback must be an integer; unknown parameter=400:Unknown parameters: foo; min_wick_ratio above max=400:min_wick_ratio must be <= 1.0; tolerance below min=400:tolerance must be >= 0.0; boolean as integer=400:lookback must be an integer",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "lookback below min 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "lookback below min detail",
+      "ok": true,
+      "detail": "{'detail': 'lookback must be >= 2'}"
+    },
+    {
+      "check": "lookback non-integer 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "lookback non-integer detail",
+      "ok": true,
+      "detail": "{'detail': 'lookback must be an integer'}"
+    },
+    {
+      "check": "unknown parameter 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "unknown parameter detail",
+      "ok": true,
+      "detail": "{'detail': 'Unknown parameters: foo'}"
+    },
+    {
+      "check": "min_wick_ratio above max 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "min_wick_ratio above max detail",
+      "ok": true,
+      "detail": "{'detail': 'min_wick_ratio must be <= 1.0'}"
+    },
+    {
+      "check": "tolerance below min 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "tolerance below min detail",
+      "ok": true,
+      "detail": "{'detail': 'tolerance must be >= 0.0'}"
+    },
+    {
+      "check": "boolean as integer 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "boolean as integer detail",
+      "ok": true,
+      "detail": "{'detail': 'lookback must be an integer'}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "parameters": {
+          "lookback": 1
+        },
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06"
+      },
+      "request_headers": {},
+      "duration_ms": 33.0,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "34",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "335c2bd82d4f7fdd937442c171118c444aa7951db53b343790a629246f5b8771",
+      "response_bytes": 34,
+      "response_json": {
+        "detail": "lookback must be >= 2"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "parameters": {
+          "lookback": "abc"
+        },
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06"
+      },
+      "request_headers": {},
+      "duration_ms": 25.1,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "40",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "59849eb4645a6a853d47362cfc212b7f217707513d5a1265c342988a0482263b",
+      "response_bytes": 40,
+      "response_json": {
+        "detail": "lookback must be an integer"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "parameters": {
+          "foo": 1
+        },
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06"
+      },
+      "request_headers": {},
+      "duration_ms": 26.0,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "36",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "72d447bddf859b918698513ce365b7c760ab421435756e8d41106ca4b614e083",
+      "response_bytes": 36,
+      "response_json": {
+        "detail": "Unknown parameters: foo"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "parameters": {
+          "min_wick_ratio": 1.5
+        },
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06"
+      },
+      "request_headers": {},
+      "duration_ms": 29.3,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "42",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "255edacf3728414b89d2da378fe65edeaa58976c65d57f0f947fad167eea0c90",
+      "response_bytes": 42,
+      "response_json": {
+        "detail": "min_wick_ratio must be <= 1.0"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "parameters": {
+          "tolerance": -0.1
+        },
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06"
+      },
+      "request_headers": {},
+      "duration_ms": 26.0,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "37",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "482b758f2b550ba837dc24a606dd5567c642f64e7dc8a4f81cf903a57b3cd368",
+      "response_bytes": 37,
+      "response_json": {
+        "detail": "tolerance must be >= 0.0"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S008",
+        "parameters": {
+          "lookback": true
+        },
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06"
+      },
+      "request_headers": {},
+      "duration_ms": 27.0,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "40",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "59849eb4645a6a853d47362cfc212b7f217707513d5a1265c342988a0482263b",
+      "response_bytes": 40,
+      "response_json": {
+        "detail": "lookback must be an integer"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.735068+00:00"
+}

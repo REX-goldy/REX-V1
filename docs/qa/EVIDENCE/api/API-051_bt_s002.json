@@ -1,0 +1,3406 @@
+{
+  "test_id": "API-051",
+  "endpoint": "/api/backtests",
+  "scenario": "Zone-based S002 backtest",
+  "test_data": "EURUSD 2026-03-02..2026-03-06",
+  "expected": "200 full schema; finite metrics; reconciliation 0",
+  "actual": "status=200 id=20261103T133826Z_704e39ec dataset=EURUSD/M1/2026 bars=7078 metrics={\"total_signals\":322,\"total_trades\":143,\"wins\":46,\"losses\":97,\"win_rate\":32.16783216783217,\"profit_factor\":0.9093279090009806,\"expectancy\":-0.06277071221481079,\"max_drawdown_r\":29.496413866930975,\"largest_win\":2.0,\"largest_loss\":-2.4999999999888978,\"ambiguous_exits\":6,\"avg_holding_duration\":4.034965034965035} warnings=['Transaction costs (spread, commission, slippage) are not applied.', 'Performance is in R-multiples; no currency equity or compounding.', 'Zone levels are static manual annotations without confirmation timestamps.', '6 ambiguous intrabar exits were conservatively scored at -1R.', 'Selected range contains 1 timestamp gap(s) larger than one M1 bar (market closures included).']",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "HTTP 200",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "check": "run schema keys",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "schema_version ui_run_v1",
+      "ok": true,
+      "detail": "ui_run_v1"
+    },
+    {
+      "check": "requested range echoed",
+      "ok": true,
+      "detail": "{'start': '2026-03-02', 'end': '2026-03-06', 'timeframe': 'M1', 'r_multiple': 2.0, 'equity': 100000.0, 'risk_fraction': 0.01}"
+    },
+    {
+      "check": "range bar_count matches bar_count",
+      "ok": true,
+      "detail": "(7078, 7078)"
+    },
+    {
+      "check": "simulated true",
+      "ok": true,
+      "detail": "True"
+    },
+    {
+      "check": "metrics finite",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "reconciliation difference 0",
+      "ok": true,
+      "detail": "{'generated': 322, 'accepted': 152, 'ignored': 140, 'rejected': 30, 'difference': 0}"
+    },
+    {
+      "check": "warnings/count",
+      "ok": true,
+      "detail": "(5, 5)"
+    },
+    {
+      "check": "warnings content",
+      "ok": true,
+      "detail": "['Transaction costs (spread, commission, slippage) are not applied.', 'Performance is in R-multiples; no currency equity or compounding.', 'Zone levels are static manual annotations without confirmation timestamps.', '6 ambiguous intrabar exits were conservatively scored at -1R.', 'Selected range contains 1 timestamp gap(s) larger than one M1 bar (market closures included).']"
+    },
+    {
+      "check": "trades <= signals",
+      "ok": true,
+      "detail": "(143, 322)"
+    },
+    {
+      "check": "trades count matches metrics",
+      "ok": true,
+      "detail": "(143, 143, False)"
+    },
+    {
+      "check": "run id format",
+      "ok": true,
+      "detail": "20261103T133826Z_704e39ec"
+    }
+  ],
+  "calls": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16902/api/backtests",
+      "params": null,
+      "request_body": {
+        "dataset_id": "EURUSD/M1/2026",
+        "strategy_id": "S002",
+        "timeframe": "M1",
+        "parameters": {
+          "tolerance": 0.0005,
+          "max_wait": 5
+        },
+        "start_date": "2026-03-02",
+        "end_date": "2026-03-06",
+        "r_multiple": 2.0,
+        "equity": 100000.0,
+        "risk_fraction": 0.01
+      },
+      "request_headers": {},
+      "duration_ms": 115.1,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "52972",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "f01b2e1a7517abaab0352476b81b415cf7eb1c553632aa28ded6ed143e23af72",
+      "response_bytes": 52972,
+      "response_json": {
+        "schema_version": "ui_run_v1",
+        "id": "20261103T133826Z_704e39ec",
+        "created_at": "2026-11-03T13:38:26.868140+00:00",
+        "dataset_id": "EURUSD/M1/2026",
+        "dataset": {
+          "id": "EURUSD/M1/2026",
+          "symbol": "EURUSD",
+          "timeframe": "M1",
+          "year": 2026,
+          "provider": "twelve_data",
+          "path": "data/historical/EURUSD/M1/2026.csv",
+          "bar_count": 184963,
+          "size_bytes": 9902091,
+          "status": "warning",
+          "warnings": [
+            "10 unexpected timestamp gaps (beyond FX closures)."
+          ],
+          "coverage": {
+            "start": "2026-01-01",
+            "end": "2026-06-30",
+            "requested_start": "2026-01-01",
+            "requested_end": "2026-06-30",
+            "actual_start": "2026-01-01T13:00:00",
+            "actual_end": "2026-06-30T23:59:00",
+            "retrieved_at": "2026-10-29T21:33:25.344166+00:00"
+          },
+          "quality": {
+            "duplicate_count": 0,
+            "invalid_bar_count": 0,
+            "timestamp_gap_count": 35,
+            "unexpected_gap_count": 10,
+            "notes": [
+              "Timestamps are naive UTC wall times (provider values normalized to UTC).",
+              "Gap count is raw timestamp spacing, not session-aware missing bars."
+            ]
+          },
+          "first_timestamp": "2026-01-01T13:00:00",
+          "last_timestamp": "2026-06-30T23:59:00",
+          "derived": false,
+          "available_timeframes": [
+            "M1",
+            "M5",
+            "M15",
+            "H1",
+            "H4"
+          ]
+        },
+        "strategy": {
+          "id": "S002",
+          "name": "BreakoutRetest",
+          "description": "Zone breakout followed by a causal boundary retest within max_wait bars."
+        },
+        "parameters": {
+          "tolerance": 0.0005,
+          "max_wait": 5
+        },
+        "request": {
+          "start": "2026-03-02",
+          "end": "2026-03-06",
+          "timeframe": "M1",
+          "r_multiple": 2.0,
+          "equity": 100000.0,
+          "risk_fraction": 0.01
+        },
+        "range": {
+          "start": "2026-03-02",
+          "end": "2026-03-06",
+          "bar_count": 7078,
+          "gap_count": 1
+        },
+        "bar_count": 7078,
+        "simulated": true,
+        "metrics": {
+          "total_signals": 322,
+          "total_trades": 143,
+          "wins": 46,
+          "losses": 97,
+          "win_rate": 32.16783216783217,
+          "profit_factor": 0.9093279090009806,
+          "expectancy": -0.06277071221481079,
+          "max_drawdown_r": 29.496413866930975,
+          "largest_win": 2.0,
+          "largest_loss": -2.4999999999888978,
+          "ambiguous_exits": 6,
+          "avg_holding_duration": 4.034965034965035
+        },
+        "reconciliation": {
+          "generated": 322,
+          "accepted": 152,
+          "ignored": 140,
+          "rejected": 30,
+          "difference": 0
+        },
+        "signals": {
+          "total": 322,
+          "by_type": {
+            "retest_above": 189,
+            "retest_below": 133
+          }
+        },
+        "equity_curve": {
+          "equity": [
+            {
+              "time": 1772410980,
+              "value": -1.0
+            },
+            {
+              "time": 1772411640,
+              "value": 1.0
+            },
+            {
+              "time": 1772414280,
+              "value": 0.0
+            },
+            {
+              "time": 1772417280,
+              "value": -1.0
+            },
+            {
+              "time": 1772417400,
+              "value": -2.0
+            },
+            {
+              "time": 1772419380,
+              "value": -4.5
+            },
+            {
+              "time": 1772419500,
+              "value": -5.5
+            },
+            {
+              "time": 1772419680,
+              "value": -6.5
+            },
+            {
+              "time": 1772420400,
+              "value": -4.5
+            },
+            {
+              "time": 1772420520,
+              "value": -5.5
+            },
+            {
+              "time": 1772420640,
+              "value": -3.5
+            },
+            {
+              "time": 1772420760,
+              "value": -1.5
+            },
+            {
+              "time": 1772421600,
+              "value": 0.5
+            },
+            {
+              "time": 1772422080,
+              "value": 2.5
+            },
+            {
+              "time": 1772423340,
+              "value": 1.5
+            },
+            {
+              "time": 1772423520,
+              "value": 0.5
+            },
+            {
+              "time": 1772423640,
+              "value": -0.5
+            },
+            {
+              "time": 1772423880,
+              "value": -1.5
+            },
+            {
+              "time": 1772423940,
+              "value": -2.5
+            },
+            {
+              "time": 1772424180,
+              "value": -0.5
+            },
+            {
+              "time": 1772424300,
+              "value": -1.5
+            },
+            {
+              "time": 1772424420,
+              "value": -2.5
+            },
+            {
+              "time": 1772424900,
+              "value": -3.5
+            },
+            {
+              "time": 1772425140,
+              "value": -4.5
+            },
+            {
+              "time": 1772425860,
+              "value": -5.5
+            },
+            {
+              "time": 1772426220,
+              "value": -6.5
+            },
+            {
+              "time": 1772428440,
+              "value": -4.5
+            },
+            {
+              "time": 1772428560,
+              "value": -5.5
+            },
+            {
+              "time": 1772429040,
+              "value": -6.5
+            },
+            {
+              "time": 1772429340,
+              "value": -4.5
+            },
+            {
+              "time": 1772429460,
+              "value": -5.5
+            },
+            {
+              "time": 1772430300,
+              "value": -3.5
+            },
+            {
+              "time": 1772430960,
+              "value": -1.5
+            },
+            {
+              "time": 1772527560,
+              "value": 0.5
+            },
+            {
+              "time": 1772527740,
+              "value": -0.5
+            },
+            {
+              "time": 1772528700,
+              "value": 1.5
+            },
+            {
+              "time": 1772528760,
+              "value": 0.5
+            },
+            {
+              "time": 1772528880,
+              "value": 2.5
+            },
+            {
+              "time": 1772529600,
+              "value": 1.5
+            },
+            {
+              "time": 1772529840,
+              "value": 0.5
+            },
+            {
+              "time": 1772536680,
+              "value": 2.5
+            },
+            {
+              "time": 1772537040,
+              "value": 1.5
+            },
+            {
+              "time": 1772537160,
+              "value": 0.5
+            },
+            {
+              "time": 1772537940,
+              "value": -0.5
+            },
+            {
+              "time": 1772538000,
+              "value": -1.5
+            },
+            {
+              "time": 1772547180,
+              "value": 0.5
+            },
+            {
+              "time": 1772547300,
+              "value": 2.5
+            },
+            {
+              "time": 1772551380,
+              "value": 4.5
+            },
+            {
+              "time": 1772554620,
+              "value": 3.5
+            },
+            {
+              "time": 1772554800,
+              "value": 2.5
+            },
+            {
+              "time": 1772555100,
+              "value": 1.5
+            },
+            {
+              "time": 1772555580,
+              "value": 3.5
+            },
+            {
+              "time": 1772555700,
+              "value": 5.5
+            },
+            {
+              "time": 1772555940,
+              "value": 4.5
+            },
+            {
+              "time": 1772556120,
+              "value": 6.5
+            },
+            {
+              "time": 1772556300,
+              "value": 5.5
+            },
+            {
+              "time": 1772556420,
+              "value": 4.4531
+            },
+            {
+              "time": 1772557980,
+              "value": 3.4531
+            },
+            {
+              "time": 1772558280,
+              "value": 5.4531
+            },
+            {
+              "time": 1772558400,
+              "value": 4.4531
+            },
+            {
+              "time": 1772558460,
+              "value": 3.4531
+            },
+            {
+              "time": 1772558880,
+              "value": 2.4531
+            },
+            {
+              "time": 1772559780,
+              "value": 1.4531
+            },
+            {
+              "time": 1772560680,
+              "value": 0.4531
+            },
+            {
+              "time": 1772560860,
+              "value": -0.5469
+            },
+            {
+              "time": 1772567280,
+              "value": -1.5469
+            },
+            {
+              "time": 1772567340,
+              "value": -2.5469
+            },
+            {
+              "time": 1772567580,
+              "value": -3.5469
+            },
+            {
+              "time": 1772568840,
+              "value": -1.5469
+            },
+            {
+              "time": 1772569020,
+              "value": -2.5469
+            },
+            {
+              "time": 1772569680,
+              "value": -3.6378
+            },
+            {
+              "time": 1772569920,
+              "value": -4.6378
+            },
+            {
+              "time": 1772570160,
+              "value": -2.6378
+            },
+            {
+              "time": 1772586600,
+              "value": -3.6378
+            },
+            {
+              "time": 1772586780,
+              "value": -4.6378
+            },
+            {
+              "time": 1772587260,
+              "value": -2.6378
+            },
+            {
+              "time": 1772602140,
+              "value": -3.6378
+            },
+            {
+              "time": 1772602200,
+              "value": -4.6378
+            },
+            {
+              "time": 1772602440,
+              "value": -2.6378
+            },
+            {
+              "time": 1772602920,
+              "value": -3.6378
+            },
+            {
+              "time": 1772603280,
+              "value": -4.7711
+            },
+            {
+              "time": 1772604300,
+              "value": -5.7711
+            },
+            {
+              "time": 1772610960,
+              "value": -6.7711
+            },
+            {
+              "time": 1772635740,
+              "value": -7.7711
+            },
+            {
+              "time": 1772635920,
+              "value": -5.7711
+            },
+            {
+              "time": 1772636100,
+              "value": -6.7711
+            },
+            {
+              "time": 1772636640,
+              "value": -7.7711
+            },
+            {
+              "time": 1772637120,
+              "value": -8.7711
+            },
+            {
+              "time": 1772637900,
+              "value": -6.7711
+            },
+            {
+              "time": 1772648580,
+              "value": -4.7711
+            },
+            {
+              "time": 1772649000,
+              "value": -5.7711
+            },
+            {
+              "time": 1772649540,
+              "value": -6.7711
+            },
+            {
+              "time": 1772649900,
+              "value": -4.7711
+            },
+            {
+              "time": 1772650740,
+              "value": -5.7711
+            },
+            {
+              "time": 1772650800,
+              "value": -3.7711
+            },
+            {
+              "time": 1772677920,
+              "value": -4.7711
+            },
+            {
+              "time": 1772678280,
+              "value": -5.7711
+            },
+            {
+              "time": 1772678400,
+              "value": -3.7711
+            },
+            {
+              "time": 1772680260,
+              "value": -4.7711
+            },
+            {
+              "time": 1772680680,
+              "value": -5.7711
+            },
+            {
+              "time": 1772691060,
+              "value": -6.7711
+            },
+            {
+              "time": 1772691240,
+              "value": -7.7711
+            },
+            {
+              "time": 1772691540,
+              "value": -8.9529
+            },
+            {
+              "time": 1772698560,
+              "value": -9.9529
+            },
+            {
+              "time": 1772699820,
+              "value": -10.9529
+            },
+            {
+              "time": 1772703600,
+              "value": -11.9529
+            },
+            {
+              "time": 1772704140,
+              "value": -12.9529
+            },
+            {
+              "time": 1772706300,
+              "value": -13.9529
+            },
+            {
+              "time": 1772706660,
+              "value": -14.9529
+            },
+            {
+              "time": 1772713380,
+              "value": -15.9529
+            },
+            {
+              "time": 1772714640,
+              "value": -16.9529
+            },
+            {
+              "time": 1772714700,
+              "value": -17.9529
+            },
+            {
+              "time": 1772714880,
+              "value": -18.9529
+            },
+            {
+              "time": 1772715600,
+              "value": -19.9529
+            },
+            {
+              "time": 1772715780,
+              "value": -20.9529
+            },
+            {
+              "time": 1772716800,
+              "value": -21.9964
+            },
+            {
+              "time": 1772716920,
+              "value": -22.9964
+            },
+            {
+              "time": 1772724300,
+              "value": -20.9964
+            },
+            {
+              "time": 1772724360,
+              "value": -18.9964
+            },
+            {
+              "time": 1772726640,
+              "value": -16.9964
+            },
+            {
+              "time": 1772735880,
+              "value": -16.9762
+            },
+            {
+              "time": 1772735940,
+              "value": -17.9762
+            },
+            {
+              "time": 1772736180,
+              "value": -18.9762
+            },
+            {
+              "time": 1772736300,
+              "value": -16.9762
+            },
+            {
+              "time": 1772738220,
+              "value": -14.9762
+            },
+            {
+              "time": 1772741460,
+              "value": -15.9762
+            },
+            {
+              "time": 1772767740,
+              "value": -16.9762
+            },
+            {
+              "time": 1772769060,
+              "value": -17.9762
+            },
+            {
+              "time": 1772769660,
+              "value": -18.9762
+            },
+            {
+              "time": 1772770440,
+              "value": -16.9762
+            },
+            {
+              "time": 1772770680,
+              "value": -17.9762
+            },
+            {
+              "time": 1772771580,
+              "value": -15.9762
+            },
+            {
+              "time": 1772771760,
+              "value": -16.9762
+            },
+            {
+              "time": 1772771880,
+              "value": -17.9762
+            },
+            {
+              "time": 1772788680,
+              "value": -15.9762
+            },
+            {
+              "time": 1772789580,
+              "value": -13.9762
+            },
+            {
+              "time": 1772804040,
+              "value": -14.9762
+            },
+            {
+              "time": 1772804520,
+              "value": -12.9762
+            },
+            {
+              "time": 1772804880,
+              "value": -10.9762
+            },
+            {
+              "time": 1772809500,
+              "value": -11.9762
+            },
+            {
+              "time": 1772809560,
+              "value": -9.9762
+            },
+            {
+              "time": 1772811060,
+              "value": -7.9762
+            },
+            {
+              "time": 1772813760,
+              "value": -8.9762
+            }
+          ],
+          "drawdown": [
+            {
+              "time": 1772410980,
+              "value": 1.0
+            },
+            {
+              "time": 1772411640,
+              "value": 0.0
+            },
+            {
+              "time": 1772414280,
+              "value": 1.0
+            },
+            {
+              "time": 1772417280,
+              "value": 2.0
+            },
+            {
+              "time": 1772417400,
+              "value": 3.0
+            },
+            {
+              "time": 1772419380,
+              "value": 5.5
+            },
+            {
+              "time": 1772419500,
+              "value": 6.5
+            },
+            {
+              "time": 1772419680,
+              "value": 7.5
+            },
+            {
+              "time": 1772420400,
+              "value": 5.5
+            },
+            {
+              "time": 1772420520,
+              "value": 6.5
+            },
+            {
+              "time": 1772420640,
+              "value": 4.5
+            },
+            {
+              "time": 1772420760,
+              "value": 2.5
+            },
+            {
+              "time": 1772421600,
+              "value": 0.5
+            },
+            {
+              "time": 1772422080,
+              "value": 0.0
+            },
+            {
+              "time": 1772423340,
+              "value": 1.0
+            },
+            {
+              "time": 1772423520,
+              "value": 2.0
+            },
+            {
+              "time": 1772423640,
+              "value": 3.0
+            },
+            {
+              "time": 1772423880,
+              "value": 4.0
+            },
+            {
+              "time": 1772423940,
+              "value": 5.0
+            },
+            {
+              "time": 1772424180,
+              "value": 3.0
+            },
+            {
+              "time": 1772424300,
+              "value": 4.0
+            },
+            {
+              "time": 1772424420,
+              "value": 5.0
+            },
+            {
+              "time": 1772424900,
+              "value": 6.0
+            },
+            {
+              "time": 1772425140,
+              "value": 7.0
+            },
+            {
+              "time": 1772425860,
+              "value": 8.0
+            },
+            {
+              "time": 1772426220,
+              "value": 9.0
+            },
+            {
+              "time": 1772428440,
+              "value": 7.0
+            },
+            {
+              "time": 1772428560,
+              "value": 8.0
+            },
+            {
+              "time": 1772429040,
+              "value": 9.0
+            },
+            {
+              "time": 1772429340,
+              "value": 7.0
+            },
+            {
+              "time": 1772429460,
+              "value": 8.0
+            },
+            {
+              "time": 1772430300,
+              "value": 6.0
+            },
+            {
+              "time": 1772430960,
+              "value": 4.0
+            },
+            {
+              "time": 1772527560,
+              "value": 2.0
+            },
+            {
+              "time": 1772527740,
+              "value": 3.0
+            },
+            {
+              "time": 1772528700,
+              "value": 1.0
+            },
+            {
+              "time": 1772528760,
+              "value": 2.0
+            },
+            {
+              "time": 1772528880,
+              "value": 0.0
+            },
+            {
+              "time": 1772529600,
+              "value": 1.0
+            },
+            {
+              "time": 1772529840,
+              "value": 2.0
+            },
+            {
+              "time": 1772536680,
+              "value": 0.0
+            },
+            {
+              "time": 1772537040,
+              "value": 1.0
+            },
+            {
+              "time": 1772537160,
+              "value": 2.0
+            },
+            {
+              "time": 1772537940,
+              "value": 3.0
+            },
+            {
+              "time": 1772538000,
+              "value": 4.0
+            },
+            {
+              "time": 1772547180,
+              "value": 2.0
+            },
+            {
+              "time": 1772547300,
+              "value": 0.0
+            },
+            {
+              "time": 1772551380,
+              "value": 0.0
+            },
+            {
+              "time": 1772554620,
+              "value": 1.0
+            },
+            {
+              "time": 1772554800,
+              "value": 2.0
+            },
+            {
+              "time": 1772555100,
+              "value": 3.0
+            },
+            {
+              "time": 1772555580,
+              "value": 1.0
+            },
+            {
+              "time": 1772555700,
+              "value": 0.0
+            },
+            {
+              "time": 1772555940,
+              "value": 1.0
+            },
+            {
+              "time": 1772556120,
+              "value": 0.0
+            },
+            {
+              "time": 1772556300,
+              "value": 1.0
+            },
+            {
+              "time": 1772556420,
+              "value": 2.0469
+            },
+            {
+              "time": 1772557980,
+              "value": 3.0469
+            },
+            {
+              "time": 1772558280,
+              "value": 1.0469
+            },
+            {
+              "time": 1772558400,
+              "value": 2.0469
+            },
+            {
+              "time": 1772558460,
+              "value": 3.0469
+            },
+            {
+              "time": 1772558880,
+              "value": 4.0469
+            },
+            {
+              "time": 1772559780,
+              "value": 5.0469
+            },
+            {
+              "time": 1772560680,
+              "value": 6.0469
+            },
+            {
+              "time": 1772560860,
+              "value": 7.0469
+            },
+            {
+              "time": 1772567280,
+              "value": 8.0469
+            },
+            {
+              "time": 1772567340,
+              "value": 9.0469
+            },
+            {
+              "time": 1772567580,
+              "value": 10.0469
+            },
+            {
+              "time": 1772568840,
+              "value": 8.0469
+            },
+            {
+              "time": 1772569020,
+              "value": 9.0469
+            },
+            {
+              "time": 1772569680,
+              "value": 10.1378
+            },
+            {
+              "time": 1772569920,
+              "value": 11.1378
+            },
+            {
+              "time": 1772570160,
+              "value": 9.1378
+            },
+            {
+              "time": 1772586600,
+              "value": 10.1378
+            },
+            {
+              "time": 1772586780,
+              "value": 11.1378
+            },
+            {
+              "time": 1772587260,
+              "value": 9.1378
+            },
+            {
+              "time": 1772602140,
+              "value": 10.1378
+            },
+            {
+              "time": 1772602200,
+              "value": 11.1378
+            },
+            {
+              "time": 1772602440,
+              "value": 9.1378
+            },
+            {
+              "time": 1772602920,
+              "value": 10.1378
+            },
+            {
+              "time": 1772603280,
+              "value": 11.2711
+            },
+            {
+              "time": 1772604300,
+              "value": 12.2711
+            },
+            {
+              "time": 1772610960,
+              "value": 13.2711
+            },
+            {
+              "time": 1772635740,
+              "value": 14.2711
+            },
+            {
+              "time": 1772635920,
+              "value": 12.2711
+            },
+            {
+              "time": 1772636100,
+              "value": 13.2711
+            },
+            {
+              "time": 1772636640,
+              "value": 14.2711
+            },
+            {
+              "time": 1772637120,
+              "value": 15.2711
+            },
+            {
+              "time": 1772637900,
+              "value": 13.2711
+            },
+            {
+              "time": 1772648580,
+              "value": 11.2711
+            },
+            {
+              "time": 1772649000,
+              "value": 12.2711
+            },
+            {
+              "time": 1772649540,
+              "value": 13.2711
+            },
+            {
+              "time": 1772649900,
+              "value": 11.2711
+            },
+            {
+              "time": 1772650740,
+              "value": 12.2711
+            },
+            {
+              "time": 1772650800,
+              "value": 10.2711
+            },
+            {
+              "time": 1772677920,
+              "value": 11.2711
+            },
+            {
+              "time": 1772678280,
+              "value": 12.2711
+            },
+            {
+              "time": 1772678400,
+              "value": 10.2711
+            },
+            {
+              "time": 1772680260,
+              "value": 11.2711
+            },
+            {
+              "time": 1772680680,
+              "value": 12.2711
+            },
+            {
+              "time": 1772691060,
+              "value": 13.2711
+            },
+            {
+              "time": 1772691240,
+              "value": 14.2711
+            },
+            {
+              "time": 1772691540,
+              "value": 15.4529
+            },
+            {
+              "time": 1772698560,
+              "value": 16.4529
+            },
+            {
+              "time": 1772699820,
+              "value": 17.4529
+            },
+            {
+              "time": 1772703600,
+              "value": 18.4529
+            },
+            {
+              "time": 1772704140,
+              "value": 19.4529
+            },
+            {
+              "time": 1772706300,
+              "value": 20.4529
+            },
+            {
+              "time": 1772706660,
+              "value": 21.4529
+            },
+            {
+              "time": 1772713380,
+              "value": 22.4529
+            },
+            {
+              "time": 1772714640,
+              "value": 23.4529
+            },
+            {
+              "time": 1772714700,
+              "value": 24.4529
+            },
+            {
+              "time": 1772714880,
+              "value": 25.4529
+            },
+            {
+              "time": 1772715600,
+              "value": 26.4529
+            },
+            {
+              "time": 1772715780,
+              "value": 27.4529
+            },
+            {
+              "time": 1772716800,
+              "value": 28.4964
+            },
+            {
+              "time": 1772716920,
+              "value": 29.4964
+            },
+            {
+              "time": 1772724300,
+              "value": 27.4964
+            },
+            {
+              "time": 1772724360,
+              "value": 25.4964
+            },
+            {
+              "time": 1772726640,
+              "value": 23.4964
+            },
+            {
+              "time": 1772735880,
+              "value": 23.4762
+            },
+            {
+              "time": 1772735940,
+              "value": 24.4762
+            },
+            {
+              "time": 1772736180,
+              "value": 25.4762
+            },
+            {
+              "time": 1772736300,
+              "value": 23.4762
+            },
+            {
+              "time": 1772738220,
+              "value": 21.4762
+            },
+            {
+              "time": 1772741460,
+              "value": 22.4762
+            },
+            {
+              "time": 1772767740,
+              "value": 23.4762
+            },
+            {
+              "time": 1772769060,
+              "value": 24.4762
+            },
+            {
+              "time": 1772769660,
+              "value": 25.4762
+            },
+            {
+              "time": 1772770440,
+              "value": 23.4762
+            },
+            {
+              "time": 1772770680,
+              "value": 24.4762
+            },
+            {
+              "time": 1772771580,
+              "value": 22.4762
+            },
+            {
+              "time": 1772771760,
+              "value": 23.4762
+            },
+            {
+              "time": 1772771880,
+              "value": 24.4762
+            },
+            {
+              "time": 1772788680,
+              "value": 22.4762
+            },
+            {
+              "time": 1772789580,
+              "value": 20.4762
+            },
+            {
+              "time": 1772804040,
+              "value": 21.4762
+            },
+            {
+              "time": 1772804520,
+              "value": 19.4762
+            },
+            {
+              "time": 1772804880,
+              "value": 17.4762
+            },
+            {
+              "time": 1772809500,
+              "value": 18.4762
+            },
+            {
+              "time": 1772809560,
+              "value": 16.4762
+            },
+            {
+              "time": 1772811060,
+              "value": 14.4762
+            },
+            {
+              "time": 1772813760,
+              "value": 15.4762
+            }
+          ]
+        },
+        "trade_distribution": [
+          {
+            "date": "2026-03-02",
+            "trades": 33
+          },
+          {
+            "date": "2026-03-03",
+            "trades": 40
+          },
+          {
+            "date": "2026-03-04",
+            "trades": 22
+          },
+          {
+            "date": "2026-03-05",
+            "trades": 31
+          },
+          {
+            "date": "2026-03-06",
+            "trades": 17
+          }
+        ],
+        "trades": [
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T00:20:00",
+            "exit_time": "2026-03-02T00:23:00",
+            "entry_price": 1.17732,
+            "exit_price": 1.17739,
+            "sl_price": 1.17739,
+            "tp_price": 1.17718,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 3,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T00:28:00",
+            "exit_time": "2026-03-02T00:34:00",
+            "entry_price": 1.17714,
+            "exit_price": 1.1767600000000003,
+            "sl_price": 1.17733,
+            "tp_price": 1.1767600000000003,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 6,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T01:15:00",
+            "exit_time": "2026-03-02T01:18:00",
+            "entry_price": 1.17887,
+            "exit_price": 1.17872,
+            "sl_price": 1.17872,
+            "tp_price": 1.1791700000000003,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 3,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T01:35:00",
+            "exit_time": "2026-03-02T02:08:00",
+            "entry_price": 1.1791,
+            "exit_price": 1.17876,
+            "sl_price": 1.17876,
+            "tp_price": 1.17978,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 33,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T02:10:00",
+            "exit_time": "2026-03-02T02:10:00",
+            "entry_price": 1.1787,
+            "exit_price": 1.17868,
+            "sl_price": 1.17868,
+            "tp_price": 1.1787400000000003,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T02:42:00",
+            "exit_time": "2026-03-02T02:43:00",
+            "entry_price": 1.17876,
+            "exit_price": 1.17871,
+            "sl_price": 1.17874,
+            "tp_price": 1.1788000000000003,
+            "pnl_r": -2.5,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T02:44:00",
+            "exit_time": "2026-03-02T02:45:00",
+            "entry_price": 1.17876,
+            "exit_price": 1.17871,
+            "sl_price": 1.17871,
+            "tp_price": 1.1788600000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T02:47:00",
+            "exit_time": "2026-03-02T02:48:00",
+            "entry_price": 1.17879,
+            "exit_price": 1.17867,
+            "sl_price": 1.17867,
+            "tp_price": 1.1790299999999998,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T02:56:00",
+            "exit_time": "2026-03-02T03:00:00",
+            "entry_price": 1.17879,
+            "exit_price": 1.1789699999999999,
+            "sl_price": 1.1787,
+            "tp_price": 1.1789699999999999,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 4,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T03:02:00",
+            "exit_time": "2026-03-02T03:02:00",
+            "entry_price": 1.179,
+            "exit_price": 1.17896,
+            "sl_price": 1.17896,
+            "tp_price": 1.1790800000000001,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T03:04:00",
+            "exit_time": "2026-03-02T03:04:00",
+            "entry_price": 1.17904,
+            "exit_price": 1.1793000000000005,
+            "sl_price": 1.17891,
+            "tp_price": 1.1793000000000005,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T03:06:00",
+            "exit_time": "2026-03-02T03:06:00",
+            "entry_price": 1.17923,
+            "exit_price": 1.1793900000000002,
+            "sl_price": 1.17915,
+            "tp_price": 1.1793900000000002,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T03:11:00",
+            "exit_time": "2026-03-02T03:20:00",
+            "entry_price": 1.17906,
+            "exit_price": 1.1792399999999998,
+            "sl_price": 1.17897,
+            "tp_price": 1.1792399999999998,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 9,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T03:21:00",
+            "exit_time": "2026-03-02T03:28:00",
+            "entry_price": 1.17927,
+            "exit_price": 1.17947,
+            "sl_price": 1.17917,
+            "tp_price": 1.17947,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 7,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T03:35:00",
+            "exit_time": "2026-03-02T03:49:00",
+            "entry_price": 1.17926,
+            "exit_price": 1.17912,
+            "sl_price": 1.17912,
+            "tp_price": 1.17954,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 14,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T03:51:00",
+            "exit_time": "2026-03-02T03:52:00",
+            "entry_price": 1.17919,
+            "exit_price": 1.17911,
+            "sl_price": 1.17911,
+            "tp_price": 1.1793499999999997,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T03:53:00",
+            "exit_time": "2026-03-02T03:54:00",
+            "entry_price": 1.17916,
+            "exit_price": 1.17911,
+            "sl_price": 1.17911,
+            "tp_price": 1.1792599999999998,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T03:55:00",
+            "exit_time": "2026-03-02T03:58:00",
+            "entry_price": 1.17909,
+            "exit_price": 1.17902,
+            "sl_price": 1.17902,
+            "tp_price": 1.17923,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 3,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T03:59:00",
+            "exit_time": "2026-03-02T03:59:00",
+            "entry_price": 1.17903,
+            "exit_price": 1.17901,
+            "sl_price": 1.17901,
+            "tp_price": 1.1790700000000003,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T04:03:00",
+            "exit_time": "2026-03-02T04:03:00",
+            "entry_price": 1.17894,
+            "exit_price": 1.1789600000000002,
+            "sl_price": 1.17893,
+            "tp_price": 1.1789600000000002,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T04:05:00",
+            "exit_time": "2026-03-02T04:05:00",
+            "entry_price": 1.17903,
+            "exit_price": 1.179,
+            "sl_price": 1.179,
+            "tp_price": 1.17909,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T04:07:00",
+            "exit_time": "2026-03-02T04:07:00",
+            "entry_price": 1.17901,
+            "exit_price": 1.179,
+            "sl_price": 1.179,
+            "tp_price": 1.1790299999999996,
+            "pnl_r": -1.0,
+            "close_reason": "AMBIGUITY",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T04:15:00",
+            "exit_time": "2026-03-02T04:15:00",
+            "entry_price": 1.17879,
+            "exit_price": 1.17877,
+            "sl_price": 1.17877,
+            "tp_price": 1.1788299999999998,
+            "pnl_r": -1.0,
+            "close_reason": "AMBIGUITY",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T04:17:00",
+            "exit_time": "2026-03-02T04:19:00",
+            "entry_price": 1.17882,
+            "exit_price": 1.1788,
+            "sl_price": 1.1788,
+            "tp_price": 1.1788599999999998,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T04:31:00",
+            "exit_time": "2026-03-02T04:31:00",
+            "entry_price": 1.17873,
+            "exit_price": 1.17871,
+            "sl_price": 1.17871,
+            "tp_price": 1.1787700000000003,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-02T04:33:00",
+            "exit_time": "2026-03-02T04:37:00",
+            "entry_price": 1.17874,
+            "exit_price": 1.17869,
+            "sl_price": 1.17869,
+            "tp_price": 1.1788399999999997,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 4,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T05:14:00",
+            "exit_time": "2026-03-02T05:14:00",
+            "entry_price": 1.17774,
+            "exit_price": 1.1776400000000002,
+            "sl_price": 1.17779,
+            "tp_price": 1.1776400000000002,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T05:16:00",
+            "exit_time": "2026-03-02T05:16:00",
+            "entry_price": 1.17761,
+            "exit_price": 1.17765,
+            "sl_price": 1.17765,
+            "tp_price": 1.17753,
+            "pnl_r": -1.0,
+            "close_reason": "AMBIGUITY",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T05:22:00",
+            "exit_time": "2026-03-02T05:24:00",
+            "entry_price": 1.17754,
+            "exit_price": 1.17763,
+            "sl_price": 1.17763,
+            "tp_price": 1.1773600000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T05:26:00",
+            "exit_time": "2026-03-02T05:29:00",
+            "entry_price": 1.17769,
+            "exit_price": 1.1776099999999998,
+            "sl_price": 1.17773,
+            "tp_price": 1.1776099999999998,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 3,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T05:30:00",
+            "exit_time": "2026-03-02T05:31:00",
+            "entry_price": 1.17759,
+            "exit_price": 1.17766,
+            "sl_price": 1.17766,
+            "tp_price": 1.1774499999999999,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T05:42:00",
+            "exit_time": "2026-03-02T05:45:00",
+            "entry_price": 1.17762,
+            "exit_price": 1.1774199999999995,
+            "sl_price": 1.17772,
+            "tp_price": 1.1774199999999995,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 3,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-02T05:46:00",
+            "exit_time": "2026-03-02T05:56:00",
+            "entry_price": 1.17737,
+            "exit_price": 1.1770700000000003,
+            "sl_price": 1.17752,
+            "tp_price": 1.1770700000000003,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 10,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T08:46:00",
+            "exit_time": "2026-03-03T08:46:00",
+            "entry_price": 1.16245,
+            "exit_price": 1.1624899999999998,
+            "sl_price": 1.16243,
+            "tp_price": 1.1624899999999998,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T08:48:00",
+            "exit_time": "2026-03-03T08:49:00",
+            "entry_price": 1.16264,
+            "exit_price": 1.16244,
+            "sl_price": 1.16244,
+            "tp_price": 1.1630399999999999,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T08:50:00",
+            "exit_time": "2026-03-03T09:05:00",
+            "entry_price": 1.16218,
+            "exit_price": 1.16278,
+            "sl_price": 1.16188,
+            "tp_price": 1.16278,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 15,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T09:06:00",
+            "exit_time": "2026-03-03T09:06:00",
+            "entry_price": 1.16276,
+            "exit_price": 1.16245,
+            "sl_price": 1.16245,
+            "tp_price": 1.16338,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T09:08:00",
+            "exit_time": "2026-03-03T09:08:00",
+            "entry_price": 1.16238,
+            "exit_price": 1.1626799999999997,
+            "sl_price": 1.16223,
+            "tp_price": 1.1626799999999997,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T09:10:00",
+            "exit_time": "2026-03-03T09:20:00",
+            "entry_price": 1.16243,
+            "exit_price": 1.16218,
+            "sl_price": 1.16218,
+            "tp_price": 1.1629300000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 10,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T09:21:00",
+            "exit_time": "2026-03-03T09:24:00",
+            "entry_price": 1.16238,
+            "exit_price": 1.16216,
+            "sl_price": 1.16216,
+            "tp_price": 1.1628199999999997,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 3,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T11:11:00",
+            "exit_time": "2026-03-03T11:18:00",
+            "entry_price": 1.15886,
+            "exit_price": 1.1585400000000001,
+            "sl_price": 1.15902,
+            "tp_price": 1.1585400000000001,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 7,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T11:24:00",
+            "exit_time": "2026-03-03T11:24:00",
+            "entry_price": 1.15867,
+            "exit_price": 1.15883,
+            "sl_price": 1.15883,
+            "tp_price": 1.1583500000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T11:26:00",
+            "exit_time": "2026-03-03T11:26:00",
+            "entry_price": 1.15896,
+            "exit_price": 1.15899,
+            "sl_price": 1.15899,
+            "tp_price": 1.1589,
+            "pnl_r": -1.0,
+            "close_reason": "AMBIGUITY",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T11:38:00",
+            "exit_time": "2026-03-03T11:39:00",
+            "entry_price": 1.15882,
+            "exit_price": 1.15892,
+            "sl_price": 1.15892,
+            "tp_price": 1.15862,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T11:40:00",
+            "exit_time": "2026-03-03T11:40:00",
+            "entry_price": 1.1589,
+            "exit_price": 1.15907,
+            "sl_price": 1.15907,
+            "tp_price": 1.15856,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T14:13:00",
+            "exit_time": "2026-03-03T14:13:00",
+            "entry_price": 1.15909,
+            "exit_price": 1.1590099999999999,
+            "sl_price": 1.15913,
+            "tp_price": 1.1590099999999999,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T14:15:00",
+            "exit_time": "2026-03-03T14:15:00",
+            "entry_price": 1.15868,
+            "exit_price": 1.1584599999999998,
+            "sl_price": 1.15879,
+            "tp_price": 1.1584599999999998,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T15:23:00",
+            "exit_time": "2026-03-03T15:23:00",
+            "entry_price": 1.15341,
+            "exit_price": 1.1539100000000002,
+            "sl_price": 1.15316,
+            "tp_price": 1.1539100000000002,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T16:17:00",
+            "exit_time": "2026-03-03T16:17:00",
+            "entry_price": 1.1585,
+            "exit_price": 1.15899,
+            "sl_price": 1.15899,
+            "tp_price": 1.1575200000000003,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T16:19:00",
+            "exit_time": "2026-03-03T16:20:00",
+            "entry_price": 1.15909,
+            "exit_price": 1.15915,
+            "sl_price": 1.15915,
+            "tp_price": 1.15897,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T16:23:00",
+            "exit_time": "2026-03-03T16:25:00",
+            "entry_price": 1.15877,
+            "exit_price": 1.15913,
+            "sl_price": 1.15913,
+            "tp_price": 1.1580500000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T16:30:00",
+            "exit_time": "2026-03-03T16:33:00",
+            "entry_price": 1.15912,
+            "exit_price": 1.15864,
+            "sl_price": 1.15936,
+            "tp_price": 1.15864,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 3,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T16:34:00",
+            "exit_time": "2026-03-03T16:35:00",
+            "entry_price": 1.15863,
+            "exit_price": 1.1582500000000002,
+            "sl_price": 1.15882,
+            "tp_price": 1.1582500000000002,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T16:39:00",
+            "exit_time": "2026-03-03T16:39:00",
+            "entry_price": 1.15867,
+            "exit_price": 1.15879,
+            "sl_price": 1.15879,
+            "tp_price": 1.1584300000000003,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T16:41:00",
+            "exit_time": "2026-03-03T16:42:00",
+            "entry_price": 1.15873,
+            "exit_price": 1.15851,
+            "sl_price": 1.15884,
+            "tp_price": 1.15851,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T16:43:00",
+            "exit_time": "2026-03-03T16:45:00",
+            "entry_price": 1.15852,
+            "exit_price": 1.15878,
+            "sl_price": 1.15878,
+            "tp_price": 1.1580000000000001,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T16:46:00",
+            "exit_time": "2026-03-03T16:47:00",
+            "entry_price": 1.15882,
+            "exit_price": 1.15949,
+            "sl_price": 1.15946,
+            "tp_price": 1.15754,
+            "pnl_r": -1.0469,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T17:13:00",
+            "exit_time": "2026-03-03T17:13:00",
+            "entry_price": 1.1591,
+            "exit_price": 1.15913,
+            "sl_price": 1.15913,
+            "tp_price": 1.15904,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T17:15:00",
+            "exit_time": "2026-03-03T17:18:00",
+            "entry_price": 1.1591,
+            "exit_price": 1.1589399999999999,
+            "sl_price": 1.15918,
+            "tp_price": 1.1589399999999999,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 3,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T17:19:00",
+            "exit_time": "2026-03-03T17:20:00",
+            "entry_price": 1.15887,
+            "exit_price": 1.15906,
+            "sl_price": 1.15906,
+            "tp_price": 1.1584900000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T17:21:00",
+            "exit_time": "2026-03-03T17:21:00",
+            "entry_price": 1.15906,
+            "exit_price": 1.15909,
+            "sl_price": 1.15909,
+            "tp_price": 1.159,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T17:25:00",
+            "exit_time": "2026-03-03T17:28:00",
+            "entry_price": 1.15915,
+            "exit_price": 1.15953,
+            "sl_price": 1.15953,
+            "tp_price": 1.1583899999999998,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 3,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T17:41:00",
+            "exit_time": "2026-03-03T17:43:00",
+            "entry_price": 1.15915,
+            "exit_price": 1.15921,
+            "sl_price": 1.15921,
+            "tp_price": 1.1590299999999996,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T17:57:00",
+            "exit_time": "2026-03-03T17:58:00",
+            "entry_price": 1.15906,
+            "exit_price": 1.15917,
+            "sl_price": 1.15917,
+            "tp_price": 1.1588399999999999,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-03T18:00:00",
+            "exit_time": "2026-03-03T18:01:00",
+            "entry_price": 1.15915,
+            "exit_price": 1.15923,
+            "sl_price": 1.15923,
+            "tp_price": 1.1589899999999997,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T19:43:00",
+            "exit_time": "2026-03-03T19:48:00",
+            "entry_price": 1.16238,
+            "exit_price": 1.162,
+            "sl_price": 1.162,
+            "tp_price": 1.16314,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 5,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T19:49:00",
+            "exit_time": "2026-03-03T19:49:00",
+            "entry_price": 1.16198,
+            "exit_price": 1.16195,
+            "sl_price": 1.16195,
+            "tp_price": 1.16204,
+            "pnl_r": -1.0,
+            "close_reason": "AMBIGUITY",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T19:52:00",
+            "exit_time": "2026-03-03T19:53:00",
+            "entry_price": 1.16226,
+            "exit_price": 1.16201,
+            "sl_price": 1.16201,
+            "tp_price": 1.1627600000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T20:13:00",
+            "exit_time": "2026-03-03T20:14:00",
+            "entry_price": 1.16203,
+            "exit_price": 1.1620699999999997,
+            "sl_price": 1.16201,
+            "tp_price": 1.1620699999999997,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T20:15:00",
+            "exit_time": "2026-03-03T20:17:00",
+            "entry_price": 1.16214,
+            "exit_price": 1.16204,
+            "sl_price": 1.16204,
+            "tp_price": 1.16234,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T20:22:00",
+            "exit_time": "2026-03-03T20:28:00",
+            "entry_price": 1.16227,
+            "exit_price": 1.16215,
+            "sl_price": 1.16216,
+            "tp_price": 1.1624899999999996,
+            "pnl_r": -1.0909,
+            "close_reason": "SL",
+            "holding_duration_candles": 6,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T20:32:00",
+            "exit_time": "2026-03-03T20:32:00",
+            "entry_price": 1.16236,
+            "exit_price": 1.16225,
+            "sl_price": 1.16225,
+            "tp_price": 1.1625800000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-03T20:36:00",
+            "exit_time": "2026-03-03T20:36:00",
+            "entry_price": 1.16213,
+            "exit_price": 1.1622500000000004,
+            "sl_price": 1.16207,
+            "tp_price": 1.1622500000000004,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T01:10:00",
+            "exit_time": "2026-03-04T01:10:00",
+            "entry_price": 1.15918,
+            "exit_price": 1.1592,
+            "sl_price": 1.1592,
+            "tp_price": 1.1591400000000003,
+            "pnl_r": -1.0,
+            "close_reason": "AMBIGUITY",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T01:13:00",
+            "exit_time": "2026-03-04T01:13:00",
+            "entry_price": 1.1592,
+            "exit_price": 1.15924,
+            "sl_price": 1.15924,
+            "tp_price": 1.15912,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T01:20:00",
+            "exit_time": "2026-03-04T01:21:00",
+            "entry_price": 1.1587,
+            "exit_price": 1.15842,
+            "sl_price": 1.15884,
+            "tp_price": 1.15842,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T05:28:00",
+            "exit_time": "2026-03-04T05:29:00",
+            "entry_price": 1.15909,
+            "exit_price": 1.15915,
+            "sl_price": 1.15915,
+            "tp_price": 1.15897,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T05:30:00",
+            "exit_time": "2026-03-04T05:30:00",
+            "entry_price": 1.15913,
+            "exit_price": 1.15915,
+            "sl_price": 1.15915,
+            "tp_price": 1.1590900000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T05:33:00",
+            "exit_time": "2026-03-04T05:34:00",
+            "entry_price": 1.15917,
+            "exit_price": 1.15911,
+            "sl_price": 1.1592,
+            "tp_price": 1.15911,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T05:35:00",
+            "exit_time": "2026-03-04T05:42:00",
+            "entry_price": 1.15912,
+            "exit_price": 1.15919,
+            "sl_price": 1.15919,
+            "tp_price": 1.15898,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 7,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T05:45:00",
+            "exit_time": "2026-03-04T05:48:00",
+            "entry_price": 1.15896,
+            "exit_price": 1.15913,
+            "sl_price": 1.15911,
+            "tp_price": 1.1586599999999998,
+            "pnl_r": -1.1333,
+            "close_reason": "SL",
+            "holding_duration_candles": 3,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-04T06:05:00",
+            "exit_time": "2026-03-04T06:05:00",
+            "entry_price": 1.15904,
+            "exit_price": 1.15909,
+            "sl_price": 1.15909,
+            "tp_price": 1.1589400000000003,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-04T07:30:00",
+            "exit_time": "2026-03-04T07:56:00",
+            "entry_price": 1.16219,
+            "exit_price": 1.16201,
+            "sl_price": 1.16201,
+            "tp_price": 1.1625500000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 26,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-04T14:49:00",
+            "exit_time": "2026-03-04T14:49:00",
+            "entry_price": 1.16247,
+            "exit_price": 1.1624,
+            "sl_price": 1.1624,
+            "tp_price": 1.1626099999999995,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-04T14:51:00",
+            "exit_time": "2026-03-04T14:52:00",
+            "entry_price": 1.16244,
+            "exit_price": 1.16258,
+            "sl_price": 1.16237,
+            "tp_price": 1.16258,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-04T14:53:00",
+            "exit_time": "2026-03-04T14:55:00",
+            "entry_price": 1.16265,
+            "exit_price": 1.16245,
+            "sl_price": 1.16245,
+            "tp_price": 1.16305,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-04T14:56:00",
+            "exit_time": "2026-03-04T15:04:00",
+            "entry_price": 1.16246,
+            "exit_price": 1.16219,
+            "sl_price": 1.16219,
+            "tp_price": 1.163,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 8,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-04T15:10:00",
+            "exit_time": "2026-03-04T15:12:00",
+            "entry_price": 1.16243,
+            "exit_price": 1.16226,
+            "sl_price": 1.16226,
+            "tp_price": 1.16277,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-04T15:14:00",
+            "exit_time": "2026-03-04T15:25:00",
+            "entry_price": 1.16252,
+            "exit_price": 1.1633799999999999,
+            "sl_price": 1.16209,
+            "tp_price": 1.1633799999999999,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 11,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-04T18:23:00",
+            "exit_time": "2026-03-04T18:23:00",
+            "entry_price": 1.1625,
+            "exit_price": 1.1625200000000002,
+            "sl_price": 1.16249,
+            "tp_price": 1.1625200000000002,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-04T18:29:00",
+            "exit_time": "2026-03-04T18:30:00",
+            "entry_price": 1.16254,
+            "exit_price": 1.16245,
+            "sl_price": 1.16245,
+            "tp_price": 1.1627199999999998,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-04T18:31:00",
+            "exit_time": "2026-03-04T18:39:00",
+            "entry_price": 1.16262,
+            "exit_price": 1.16245,
+            "sl_price": 1.16245,
+            "tp_price": 1.16296,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 8,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-04T18:40:00",
+            "exit_time": "2026-03-04T18:45:00",
+            "entry_price": 1.16252,
+            "exit_price": 1.16274,
+            "sl_price": 1.16241,
+            "tp_price": 1.16274,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 5,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-04T18:58:00",
+            "exit_time": "2026-03-04T18:59:00",
+            "entry_price": 1.16252,
+            "exit_price": 1.1624,
+            "sl_price": 1.1624,
+            "tp_price": 1.1627599999999998,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-04T19:00:00",
+            "exit_time": "2026-03-04T19:00:00",
+            "entry_price": 1.16246,
+            "exit_price": 1.16258,
+            "sl_price": 1.1624,
+            "tp_price": 1.16258,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T02:24:00",
+            "exit_time": "2026-03-05T02:32:00",
+            "entry_price": 1.16265,
+            "exit_price": 1.16247,
+            "sl_price": 1.16247,
+            "tp_price": 1.16301,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 8,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T02:36:00",
+            "exit_time": "2026-03-05T02:38:00",
+            "entry_price": 1.16238,
+            "exit_price": 1.16234,
+            "sl_price": 1.16234,
+            "tp_price": 1.16246,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T02:40:00",
+            "exit_time": "2026-03-05T02:40:00",
+            "entry_price": 1.16238,
+            "exit_price": 1.16246,
+            "sl_price": 1.16234,
+            "tp_price": 1.16246,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T03:04:00",
+            "exit_time": "2026-03-05T03:11:00",
+            "entry_price": 1.16249,
+            "exit_price": 1.16236,
+            "sl_price": 1.16236,
+            "tp_price": 1.16275,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 7,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T03:13:00",
+            "exit_time": "2026-03-05T03:18:00",
+            "entry_price": 1.1621,
+            "exit_price": 1.16199,
+            "sl_price": 1.16199,
+            "tp_price": 1.1623199999999996,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 5,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T06:11:00",
+            "exit_time": "2026-03-05T06:11:00",
+            "entry_price": 1.15904,
+            "exit_price": 1.15907,
+            "sl_price": 1.15907,
+            "tp_price": 1.1589800000000001,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T06:13:00",
+            "exit_time": "2026-03-05T06:14:00",
+            "entry_price": 1.15899,
+            "exit_price": 1.15902,
+            "sl_price": 1.15902,
+            "tp_price": 1.15893,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T06:17:00",
+            "exit_time": "2026-03-05T06:19:00",
+            "entry_price": 1.15887,
+            "exit_price": 1.159,
+            "sl_price": 1.15898,
+            "tp_price": 1.1586500000000004,
+            "pnl_r": -1.1818,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T08:15:00",
+            "exit_time": "2026-03-05T08:16:00",
+            "entry_price": 1.15914,
+            "exit_price": 1.15918,
+            "sl_price": 1.15918,
+            "tp_price": 1.15906,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T08:24:00",
+            "exit_time": "2026-03-05T08:37:00",
+            "entry_price": 1.15875,
+            "exit_price": 1.15901,
+            "sl_price": 1.15901,
+            "tp_price": 1.1582299999999996,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 13,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T09:08:00",
+            "exit_time": "2026-03-05T09:40:00",
+            "entry_price": 1.1632,
+            "exit_price": 1.16212,
+            "sl_price": 1.16212,
+            "tp_price": 1.16536,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 32,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T09:44:00",
+            "exit_time": "2026-03-05T09:49:00",
+            "entry_price": 1.162,
+            "exit_price": 1.16179,
+            "sl_price": 1.16179,
+            "tp_price": 1.1624199999999996,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 5,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T10:01:00",
+            "exit_time": "2026-03-05T10:25:00",
+            "entry_price": 1.16234,
+            "exit_price": 1.16208,
+            "sl_price": 1.16208,
+            "tp_price": 1.1628599999999998,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 24,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T10:28:00",
+            "exit_time": "2026-03-05T10:31:00",
+            "entry_price": 1.16206,
+            "exit_price": 1.162,
+            "sl_price": 1.162,
+            "tp_price": 1.1621800000000004,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 3,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T12:23:00",
+            "exit_time": "2026-03-05T12:23:00",
+            "entry_price": 1.16211,
+            "exit_price": 1.16202,
+            "sl_price": 1.16202,
+            "tp_price": 1.1622899999999998,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T12:39:00",
+            "exit_time": "2026-03-05T12:44:00",
+            "entry_price": 1.16233,
+            "exit_price": 1.16217,
+            "sl_price": 1.16217,
+            "tp_price": 1.1626500000000004,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 5,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T12:45:00",
+            "exit_time": "2026-03-05T12:45:00",
+            "entry_price": 1.16213,
+            "exit_price": 1.16209,
+            "sl_price": 1.16209,
+            "tp_price": 1.1622100000000002,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T12:47:00",
+            "exit_time": "2026-03-05T12:48:00",
+            "entry_price": 1.16202,
+            "exit_price": 1.16199,
+            "sl_price": 1.16199,
+            "tp_price": 1.16208,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T12:59:00",
+            "exit_time": "2026-03-05T13:00:00",
+            "entry_price": 1.16214,
+            "exit_price": 1.16204,
+            "sl_price": 1.16204,
+            "tp_price": 1.16234,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T13:01:00",
+            "exit_time": "2026-03-05T13:03:00",
+            "entry_price": 1.16202,
+            "exit_price": 1.16193,
+            "sl_price": 1.16193,
+            "tp_price": 1.1622000000000003,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T13:12:00",
+            "exit_time": "2026-03-05T13:20:00",
+            "entry_price": 1.1622,
+            "exit_price": 1.16196,
+            "sl_price": 1.16197,
+            "tp_price": 1.1626599999999998,
+            "pnl_r": -1.0435,
+            "close_reason": "SL",
+            "holding_duration_candles": 8,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-05T13:21:00",
+            "exit_time": "2026-03-05T13:22:00",
+            "entry_price": 1.1621,
+            "exit_price": 1.16196,
+            "sl_price": 1.16196,
+            "tp_price": 1.1623799999999995,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T15:24:00",
+            "exit_time": "2026-03-05T15:25:00",
+            "entry_price": 1.159,
+            "exit_price": 1.15878,
+            "sl_price": 1.15911,
+            "tp_price": 1.15878,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T15:26:00",
+            "exit_time": "2026-03-05T15:26:00",
+            "entry_price": 1.15882,
+            "exit_price": 1.1585999999999999,
+            "sl_price": 1.15893,
+            "tp_price": 1.1585999999999999,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T16:04:00",
+            "exit_time": "2026-03-05T16:04:00",
+            "entry_price": 1.15859,
+            "exit_price": 1.15819,
+            "sl_price": 1.15879,
+            "tp_price": 1.15819,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T17:39:00",
+            "exit_time": "2026-03-05T18:38:00",
+            "entry_price": 1.15864,
+            "exit_price": 1.15862,
+            "sl_price": 1.15963,
+            "tp_price": 1.1566599999999998,
+            "pnl_r": 0.0202,
+            "close_reason": "TIMEOUT",
+            "holding_duration_candles": 60,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T18:39:00",
+            "exit_time": "2026-03-05T18:39:00",
+            "entry_price": 1.15856,
+            "exit_price": 1.15876,
+            "sl_price": 1.15876,
+            "tp_price": 1.15816,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T18:41:00",
+            "exit_time": "2026-03-05T18:43:00",
+            "entry_price": 1.15875,
+            "exit_price": 1.15881,
+            "sl_price": 1.15881,
+            "tp_price": 1.15863,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T18:45:00",
+            "exit_time": "2026-03-05T18:45:00",
+            "entry_price": 1.15904,
+            "exit_price": 1.15896,
+            "sl_price": 1.15908,
+            "tp_price": 1.15896,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T18:47:00",
+            "exit_time": "2026-03-05T19:17:00",
+            "entry_price": 1.15868,
+            "exit_price": 1.1580999999999997,
+            "sl_price": 1.15897,
+            "tp_price": 1.1580999999999997,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 30,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-05T20:10:00",
+            "exit_time": "2026-03-05T20:11:00",
+            "entry_price": 1.15853,
+            "exit_price": 1.15951,
+            "sl_price": 1.15951,
+            "tp_price": 1.15657,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-06T03:27:00",
+            "exit_time": "2026-03-06T03:29:00",
+            "entry_price": 1.162,
+            "exit_price": 1.16195,
+            "sl_price": 1.16195,
+            "tp_price": 1.1620999999999997,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-06T03:50:00",
+            "exit_time": "2026-03-06T03:51:00",
+            "entry_price": 1.16203,
+            "exit_price": 1.16197,
+            "sl_price": 1.16197,
+            "tp_price": 1.1621499999999998,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-06T04:01:00",
+            "exit_time": "2026-03-06T04:01:00",
+            "entry_price": 1.16203,
+            "exit_price": 1.16197,
+            "sl_price": 1.16197,
+            "tp_price": 1.1621499999999998,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-06T04:13:00",
+            "exit_time": "2026-03-06T04:14:00",
+            "entry_price": 1.16201,
+            "exit_price": 1.1620499999999998,
+            "sl_price": 1.16199,
+            "tp_price": 1.1620499999999998,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-06T04:17:00",
+            "exit_time": "2026-03-06T04:18:00",
+            "entry_price": 1.16202,
+            "exit_price": 1.16198,
+            "sl_price": 1.16198,
+            "tp_price": 1.1621000000000001,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-06T04:30:00",
+            "exit_time": "2026-03-06T04:33:00",
+            "entry_price": 1.16202,
+            "exit_price": 1.1620600000000003,
+            "sl_price": 1.162,
+            "tp_price": 1.1620600000000003,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 3,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-06T04:34:00",
+            "exit_time": "2026-03-06T04:36:00",
+            "entry_price": 1.16208,
+            "exit_price": 1.16204,
+            "sl_price": 1.16204,
+            "tp_price": 1.16216,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 2,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "LONG",
+            "entry_time": "2026-03-06T04:38:00",
+            "exit_time": "2026-03-06T04:38:00",
+            "entry_price": 1.16204,
+            "exit_price": 1.162,
+            "sl_price": 1.162,
+            "tp_price": 1.16212,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T09:17:00",
+            "exit_time": "2026-03-06T09:18:00",
+            "entry_price": 1.15907,
+            "exit_price": 1.1588300000000002,
+            "sl_price": 1.15919,
+            "tp_price": 1.1588300000000002,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T09:19:00",
+            "exit_time": "2026-03-06T09:33:00",
+            "entry_price": 1.15887,
+            "exit_price": 1.1582900000000003,
+            "sl_price": 1.15916,
+            "tp_price": 1.1582900000000003,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 14,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T13:31:00",
+            "exit_time": "2026-03-06T13:34:00",
+            "entry_price": 1.15815,
+            "exit_price": 1.15906,
+            "sl_price": 1.15906,
+            "tp_price": 1.15633,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 3,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T13:35:00",
+            "exit_time": "2026-03-06T13:42:00",
+            "entry_price": 1.15879,
+            "exit_price": 1.15797,
+            "sl_price": 1.1592,
+            "tp_price": 1.15797,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 7,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T13:47:00",
+            "exit_time": "2026-03-06T13:48:00",
+            "entry_price": 1.15885,
+            "exit_price": 1.1584699999999997,
+            "sl_price": 1.15904,
+            "tp_price": 1.1584699999999997,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T15:04:00",
+            "exit_time": "2026-03-06T15:05:00",
+            "entry_price": 1.1582,
+            "exit_price": 1.15885,
+            "sl_price": 1.15885,
+            "tp_price": 1.1568999999999998,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T15:06:00",
+            "exit_time": "2026-03-06T15:06:00",
+            "entry_price": 1.15889,
+            "exit_price": 1.15869,
+            "sl_price": 1.15899,
+            "tp_price": 1.15869,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T15:17:00",
+            "exit_time": "2026-03-06T15:31:00",
+            "entry_price": 1.15859,
+            "exit_price": 1.1574700000000002,
+            "sl_price": 1.15915,
+            "tp_price": 1.1574700000000002,
+            "pnl_r": 2.0,
+            "close_reason": "TP",
+            "holding_duration_candles": 14,
+            "strategy_id": "S002"
+          },
+          {
+            "symbol": "EURUSD",
+            "direction": "SHORT",
+            "entry_time": "2026-03-06T16:15:00",
+            "exit_time": "2026-03-06T16:16:00",
+            "entry_price": 1.15897,
+            "exit_price": 1.15917,
+            "sl_price": 1.15917,
+            "tp_price": 1.15857,
+            "pnl_r": -1.0,
+            "close_reason": "SL",
+            "holding_duration_candles": 1,
+            "strategy_id": "S002"
+          }
+        ],
+        "trades_truncated": false,
+        "warnings": [
+          "Transaction costs (spread, commission, slippage) are not applied.",
+          "Performance is in R-multiples; no currency equity or compounding.",
+          "Zone levels are static manual annotations without confirmation timestamps.",
+          "6 ambiguous intrabar exits were conservatively scored at -1R.",
+          "Selected range contains 1 timestamp gap(s) larger than one M1 bar (market closures included)."
+        ],
+        "warning_count": 5,
+        "assumptions": {
+          "costs_applied": false,
+          "entry_model": "next candle open",
+          "timestamps": "naive UTC",
+          "zone_source": "manual/static",
+          "result_units": "R-multiples",
+          "timeframe": "M1",
+          "derived_timeframe": false
+        }
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:26.877438+00:00"
+}

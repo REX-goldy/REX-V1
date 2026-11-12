@@ -1,0 +1,43 @@
+{
+  "trades": 606,
+  "mismatches": 543,
+  "max_ratio": 6.499999999991673,
+  "min_ratio": 0.14285714285487708,
+  "examples": [
+    {
+      "signal_id": "EURUSD_2026-05-01T00:39:00_bearish_sweep",
+      "planned_entry": 1.17275,
+      "actual_entry": 1.17285,
+      "planned_risk": 1000.0,
+      "realized_risk": 333.3333333338268
+    },
+    {
+      "signal_id": "EURUSD_2026-05-01T00:46:00_bearish_sweep",
+      "planned_entry": 1.17294,
+      "actual_entry": 1.17297,
+      "planned_risk": 1000.0,
+      "realized_risk": 624.999999999653
+    },
+    {
+      "signal_id": "EURUSD_2026-05-01T01:05:00_bullish_sweep",
+      "planned_entry": 1.17267,
+      "actual_entry": 1.1727,
+      "planned_risk": 1000.0,
+      "realized_risk": 1499.9999999981496
+    },
+    {
+      "signal_id": "EURUSD_2026-05-01T01:17:00_bearish_sweep",
+      "planned_entry": 1.17284,
+      "actual_entry": 1.17285,
+      "planned_risk": 1000.0,
+      "realized_risk": 857.1428571446697
+    },
+    {
+      "signal_id": "EURUSD_2026-05-01T01:55:00_bearish_sweep",
+      "planned_entry": 1.17316,
+      "actual_entry": 1.17315,
+      "planned_risk": 1000.0,
+      "realized_risk": 1333.3333333358005
+    }
+  ]
+}

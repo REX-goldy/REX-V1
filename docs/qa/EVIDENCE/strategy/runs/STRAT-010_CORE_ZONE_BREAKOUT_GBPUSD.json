@@ -1,0 +1,104 @@
+{
+  "id": "20261103T133732Z_c61a4444",
+  "created_at": "2026-11-03T13:37:32.694071+00:00",
+  "dataset_id": "GBPUSD/M1/2026",
+  "strategy": {
+    "id": "CORE_ZONE_BREAKOUT",
+    "name": "Existing Zone Breakout",
+    "description": "Existing stateful support/resistance interaction strategy."
+  },
+  "parameters": {},
+  "request": {
+    "start": "2026-04-01",
+    "end": "2026-04-02",
+    "timeframe": "M1",
+    "r_multiple": 2.0,
+    "equity": 100000.0,
+    "risk_fraction": 0.01
+  },
+  "range": {
+    "start": "2026-04-01",
+    "end": "2026-04-02",
+    "bar_count": 2880,
+    "gap_count": 0
+  },
+  "bar_count": 2880,
+  "simulated": false,
+  "metrics": {
+    "total_signals": 2880,
+    "total_trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0.0,
+    "profit_factor": null,
+    "expectancy": 0.0,
+    "max_drawdown_r": 0.0,
+    "largest_win": 0.0,
+    "largest_loss": 0.0,
+    "ambiguous_exits": 0,
+    "avg_holding_duration": 0.0
+  },
+  "reconciliation": {
+    "generated": 2880,
+    "accepted": 0,
+    "ignored": 0,
+    "rejected": 0,
+    "difference": 2880
+  },
+  "signals": {
+    "total": 2880,
+    "by_type": {
+      "close_outside": 2880
+    }
+  },
+  "assumptions": {
+    "costs_applied": false,
+    "entry_model": "next candle open",
+    "timestamps": "naive UTC",
+    "zone_source": "manual/static",
+    "result_units": "R-multiples",
+    "timeframe": "M1",
+    "derived_timeframe": false
+  },
+  "warnings": [
+    "Signal study only: this strategy has no trade-simulation factory.",
+    "Zone levels are static manual annotations without confirmation timestamps."
+  ],
+  "warning_count": 2,
+  "trades_count": 0,
+  "trades_by_direction": {},
+  "trades_by_close_reason": {},
+  "first_long_trade": null,
+  "first_short_trade": null,
+  "trade_sample": [],
+  "direct": {
+    "signals_by_type": {
+      "close_outside": 2880
+    },
+    "reconcile_signals": {
+      "generated": 2880,
+      "accepted": 0,
+      "ignored": 0,
+      "rejected": 0,
+      "difference": 2880
+    },
+    "reconcile_execution": null,
+    "accepted_setups": 0,
+    "ignored_active_lifecycle": 0,
+    "rejected_policy_boundary": 0,
+    "terminated_by_reason": {},
+    "trades_by_direction": {},
+    "trades_by_close_reason": {},
+    "first_signal_by_direction_class": {
+      "up": null,
+      "down": null
+    },
+    "first_long_trade": null,
+    "first_short_trade": null
+  },
+  "consistency_check": {
+    "service_signals_equal_direct": true,
+    "service_trades_equal_direct": true,
+    "service_by_type_equal_direct": true
+  }
+}

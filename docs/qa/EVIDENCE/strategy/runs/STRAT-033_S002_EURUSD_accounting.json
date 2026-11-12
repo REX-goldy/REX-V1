@@ -1,0 +1,41 @@
+{
+  "strategy_id": "S002",
+  "symbol": "EURUSD",
+  "range": [
+    "2026-03-23",
+    "2026-03-27"
+  ],
+  "total_signals": 516,
+  "signals_by_type": {
+    "retest_above": 267,
+    "retest_below": 249
+  },
+  "accepted_setups": 230,
+  "ignored_active_lifecycle": 221,
+  "rejected_policy_boundary": 65,
+  "terminated_by_reason": {
+    "REJECTED_INVALID_ENTRY": 7
+  },
+  "total_trades": 223,
+  "reconcile_signals": {
+    "generated": 516,
+    "accepted": 230,
+    "ignored": 221,
+    "rejected": 65,
+    "difference": 0
+  },
+  "reconcile_execution": {
+    "accepted": 230,
+    "closed": 223,
+    "expired": 0,
+    "rejected": 7,
+    "cancelled": 0,
+    "active": 0,
+    "difference": 0
+  },
+  "trades_by_close_reason": {
+    "AMBIGUITY": 7,
+    "SL": 142,
+    "TP": 74
+  }
+}

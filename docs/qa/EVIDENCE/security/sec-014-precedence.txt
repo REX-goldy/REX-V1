@@ -1,0 +1,6 @@
+# SEC-014 Stored key overrides environment; delete falls back to environment; readiness reflects source
+component: server/provider_keys.py
+test_data: Two dummy keys
+expected: environment -> stored -> environment after delete
+actual: env_only source=environment hint=9999; stored_over_env source=stored hint=1234; after_delete source=environment hint=9999; no_env source=none configured=False
+status: PASS

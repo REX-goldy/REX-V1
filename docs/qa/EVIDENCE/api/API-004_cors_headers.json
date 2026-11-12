@@ -1,0 +1,54 @@
+{
+  "test_id": "API-004",
+  "endpoint": "GET /api/health",
+  "scenario": "CORS headers on actual response",
+  "test_data": "Origin header",
+  "expected": "access-control-allow-origin present, no credentials+wildcard",
+  "actual": "status=200 acao=*",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "HTTP 200",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "access-control-allow-origin present",
+      "ok": true,
+      "detail": "*"
+    },
+    {
+      "check": "no allow-credentials true with wildcard",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/health",
+      "params": null,
+      "request_body": null,
+      "request_headers": {
+        "Origin": "https://preview.example.test"
+      },
+      "duration_ms": 2.5,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "49",
+        "content-type": "application/json",
+        "access-control-allow-origin": "*"
+      },
+      "response_text_sha256": "a86af8887f0b4b8f87a400984a69549dba71763a03f41c3888379870cd7a6192",
+      "response_bytes": 49,
+      "response_json": {
+        "status": "ok",
+        "service": "rex-research-terminal"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:23.750803+00:00"
+}

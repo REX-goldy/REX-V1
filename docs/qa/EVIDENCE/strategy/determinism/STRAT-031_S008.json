@@ -1,0 +1,46 @@
+{
+  "strategy_id": "S008",
+  "symbol": "EURUSD",
+  "range": [
+    "2026-05-04",
+    "2026-05-08"
+  ],
+  "same_instance_run1_run2_equal_signals": true,
+  "same_instance_run1_run2_equal_trades": true,
+  "new_instance_equal_signals": true,
+  "new_instance_equal_trades": true,
+  "signal_digest": "bc8d164dca5756fb687466bee0414767180e2b80e896c9374275444e46921ad6",
+  "trade_digest": "82a3d479f230456d3d47f85a324506bf2fdd75c76d78d7baa08ea5dee93431cc",
+  "bar_input_hash_before": "1e61b131c45457c007e1ffa5009b8e5c29f3dded6ad5cf4e2a7948edeeacced5",
+  "bar_input_hash_after": "1e61b131c45457c007e1ffa5009b8e5c29f3dded6ad5cf4e2a7948edeeacced5",
+  "bars_unmutated": true,
+  "book_hash_before": "35d8b807fcdc88ff0fee03d94687111b1fbddb52a9fa69ae5c70828da73fdaf7",
+  "book_hash_after": "35d8b807fcdc88ff0fee03d94687111b1fbddb52a9fa69ae5c70828da73fdaf7",
+  "zone_book_unmutated": true,
+  "service_repeat_equal_core_fields": true,
+  "service_run_ids": [
+    "20261103T133735Z_bfd0fbf8",
+    "20261103T133735Z_a8407f02"
+  ],
+  "service_metrics": {
+    "total_signals": 303,
+    "total_trades": 272,
+    "wins": 60,
+    "losses": 211,
+    "win_rate": 22.14022140221402,
+    "profit_factor": 0.5441269717942145,
+    "expectancy": -0.36505519278687976,
+    "max_drawdown_r": 100.29501243803129,
+    "largest_win": 2.0,
+    "largest_loss": -2.285714285720177,
+    "ambiguous_exits": 19,
+    "avg_holding_duration": 2.922794117647059
+  },
+  "service_reconciliation": {
+    "generated": 303,
+    "accepted": 289,
+    "ignored": 14,
+    "rejected": 0,
+    "difference": 0
+  }
+}

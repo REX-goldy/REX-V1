@@ -1,0 +1,25 @@
+20261030T105941Z_1684076e.json valid=True trades=926 errors=0 warnings=0
+20261103T133520Z_8fb5df13.json valid=True trades=1310 errors=0 warnings=0
+20261103T133522Z_0dacd4dc.json valid=True trades=1310 errors=0 warnings=0
+20261103T133655Z_0d7426ea.json valid=True trades=1310 errors=0 warnings=0
+20261103T133657Z_5249e0f7.json valid=True trades=1310 errors=0 warnings=0
+20261103T144626Z_57dd08ff.json valid=True trades=1316 errors=0 warnings=0
+20261103T161555Z_44ddca16.json valid=True trades=606 errors=0 warnings=0
+20261103T161632Z_2eb847d4.json valid=True trades=926 errors=0 warnings=0
+20261103T165619Z_25d1bbbd.json valid=True trades=173 errors=0 warnings=0
+20261103T165804Z_13957b59.json valid=True trades=173 errors=0 warnings=0
+20261103T165819Z_bbdfab6e.json valid=True trades=173 errors=0 warnings=0
+20261103T165833Z_5fa7f2e2.json valid=True trades=173 errors=0 warnings=0
+20261103T170124Z_988b3856.json valid=True trades=54 errors=0 warnings=0
+20261103T170201Z_256844bb.json valid=True trades=54 errors=0 warnings=0
+20261103T170248Z_3d30cd85.json valid=True trades=54 errors=0 warnings=0
+20261103T170348Z_3cff7597.json valid=True trades=54 errors=0 warnings=0
+20261103T170421Z_17372947.json valid=True trades=926 errors=0 warnings=0
+20261103T170523Z_30719ee5.json valid=True trades=54 errors=0 warnings=0
+20261103T172453Z_e5b8b2c2.json valid=True trades=1316 errors=0 warnings=0
+20261103T183143Z_c2ffcd2b.json valid=True trades=54 errors=0 warnings=0
+20261103T183200Z_49f01003.json valid=True trades=54 errors=0 warnings=0
+20261103T183602Z_a1d1be18.json valid=True trades=54 errors=0 warnings=0
+20261103T184208Z_b8e48ba9.json valid=True trades=54 errors=0 warnings=0
+20261103T184430Z_6cb4aa95.json valid=True trades=54 errors=0 warnings=0
+TOTAL valid=24 invalid=0

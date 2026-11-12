@@ -1,0 +1,79 @@
+{
+  "test_id": "API-034",
+  "endpoint": "/api/settings/providers/{id}",
+  "scenario": "Empty/whitespace key",
+  "test_data": "PUT api_key='' and '   '",
+  "expected": "400 cannot be empty",
+  "actual": "empty=400:API key cannot be empty; whitespace=400:API key cannot be empty",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "empty 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "empty detail",
+      "ok": true,
+      "detail": "{'detail': 'API key cannot be empty'}"
+    },
+    {
+      "check": "whitespace 400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "whitespace detail",
+      "ok": true,
+      "detail": "{'detail': 'API key cannot be empty'}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": {
+        "api_key": "<redacted>"
+      },
+      "request_headers": {},
+      "duration_ms": 1.8,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "36",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "eceef219f704d3b4eb69f1623e372ceaae537502a7dbad8f8c8888e24642c7cd",
+      "response_bytes": 36,
+      "response_json": {
+        "detail": "API key cannot be empty"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:16902/api/settings/providers/twelve_data",
+      "params": null,
+      "request_body": {
+        "api_key": "<redacted>"
+      },
+      "request_headers": {},
+      "duration_ms": 1.6,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "36",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "eceef219f704d3b4eb69f1623e372ceaae537502a7dbad8f8c8888e24642c7cd",
+      "response_bytes": 36,
+      "response_json": {
+        "detail": "API key cannot be empty"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.070542+00:00"
+}

@@ -1,0 +1,43 @@
+# SEC-017 File permissions and credential-file tracking
+generated: 2026-11-03T13:36:19Z
+
+## Real runtime store metadata (contents NOT read or printed)
+mode=600 owner=user group=user size=38 path=data/provider_keys.json
+real store sha256 before/after QA:
+REAL_STORE_SHA_BEFORE=7f496d2b005e8df57f03ec9a560e667a5f40af2de8ca34336bee8686f48bae6b
+REAL_STORE_SHA_AFTER=7f496d2b005e8df57f03ec9a560e667a5f40af2de8ca34336bee8686f48bae6b
+REAL_STORE_UNCHANGED=yes
+
+## Credential store is not tracked by git
+(end: empty means not tracked)
+
+## Isolated QA vault file modes and temp leftovers
+mode=600 path=/tmp/opencode/qa-security/http/keys/provider_keys.json
+mode=600 path=/tmp/opencode/qa-security/vault-s66pvp9h/nested/keys/provider_keys.json
+mode=644 path=/tmp/opencode/qa-security/vault-s66pvp9h/corrupt/provider_keys.json
+mode=644 path=/tmp/opencode/qa-security/vault-s66pvp9h/wrongver/provider_keys.json
+mode=644 path=/tmp/opencode/qa-security/vault-s66pvp9h/apicorrupt/provider_keys.json
+mode=600 path=/tmp/opencode/qa-security/vault-7zgyjdyq/nested/keys/provider_keys.json
+mode=644 path=/tmp/opencode/qa-security/vault-7zgyjdyq/corrupt/provider_keys.json
+mode=644 path=/tmp/opencode/qa-security/vault-7zgyjdyq/wrongver/provider_keys.json
+mode=644 path=/tmp/opencode/qa-security/vault-7zgyjdyq/apicorrupt/provider_keys.json
+mode=600 path=/tmp/opencode/qa-security/vault-9gli_yik/nested/keys/provider_keys.json
+mode=644 path=/tmp/opencode/qa-security/vault-9gli_yik/corrupt/provider_keys.json
+mode=644 path=/tmp/opencode/qa-security/vault-9gli_yik/wrongver/provider_keys.json
+mode=644 path=/tmp/opencode/qa-security/vault-9gli_yik/apicorrupt/provider_keys.json
+mode=600 path=/tmp/opencode/qa-security/vault-7lj0xbvu/nested/keys/provider_keys.json
+mode=644 path=/tmp/opencode/qa-security/vault-7lj0xbvu/corrupt/provider_keys.json
+mode=644 path=/tmp/opencode/qa-security/vault-7lj0xbvu/wrongver/provider_keys.json
+mode=644 path=/tmp/opencode/qa-security/vault-7lj0xbvu/apicorrupt/provider_keys.json
+leftover *.tmp under QA temp: 0
+
+## Parent directory behavior
+mode=755 path=/tmp/opencode/qa-security/vault-7lj0xbvu/nested/keys
+mode=755 path=/tmp/opencode/qa-security/vault-7zgyjdyq/nested/keys
+mode=755 path=/tmp/opencode/qa-security/vault-9gli_yik/nested/keys
+mode=755 path=/tmp/opencode/qa-security/vault-s66pvp9h/nested/keys
+File is forced to 0600 after atomic write; parent dirs use normal umask (0755 in this sandbox).
+
+## No credential material in evidence
+full QA dummy key literals in docs/qa/EVIDENCE/security: 0
+(Last-four hints such as 1234/5678/9999 are intentional and permitted.)

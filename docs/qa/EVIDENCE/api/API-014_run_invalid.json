@@ -1,0 +1,75 @@
+{
+  "test_id": "API-014",
+  "endpoint": "/api/runs/{run_id}",
+  "scenario": "Unknown/invalid run id",
+  "test_data": "does-not-exist_123; bad!id",
+  "expected": "404 with Run not found / Invalid run id",
+  "actual": "unknown=404 {\"detail\":\"Run not found\"}; invalid=404 {\"detail\":\"Invalid run id\"}",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "unknown run 404",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "unknown run detail",
+      "ok": true,
+      "detail": "{'detail': 'Run not found'}"
+    },
+    {
+      "check": "invalid run id 404",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "check": "invalid run id detail",
+      "ok": true,
+      "detail": "{'detail': 'Invalid run id'}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/runs/does-not-exist_123",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 3.3,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "26",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "dd59a76d2c1d40269ca62320aafac7c5a69d08cd0efc1708f1309fa4acaed8d9",
+      "response_bytes": 26,
+      "response_json": {
+        "detail": "Run not found"
+      },
+      "response_kind": "json"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/runs/bad!id",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 4.0,
+      "status_code": 404,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "27",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "89d38db2583ef433e5d78a4d7188012134231f008c103f4fd3a4785944f53ef8",
+      "response_bytes": 27,
+      "response_json": {
+        "detail": "Invalid run id"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:24.397859+00:00"
+}

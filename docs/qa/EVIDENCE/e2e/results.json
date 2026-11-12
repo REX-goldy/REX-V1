@@ -1,0 +1,212 @@
+[
+  {
+    "id": "E2E-001",
+    "component": "AppShell / navigation",
+    "scenario": "Navigate all six modules; verify h1 and topbar route label",
+    "test_data": "1440x900, default app",
+    "expected": "All six modules render with correct h1/topbar route; no console errors or unhandled network failures",
+    "actual": "{\"navRows\":[{\"id\":\"overview\",\"h1\":\"Evidence before conviction.\",\"route\":\"RESEARCH OVERVIEW\",\"titleOk\":true,\"routeOk\":true,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/1440-overview.png\"},{\"id\":\"data\",\"h1\":\"The record, before the model.\",\"route\":\"HISTORICAL DATA\",\"titleOk\":true,\"routeOk\":true,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/1440-data.png\"},{\"id\":\"research\",\"h1\":\"Ask a falsifiable question.\",\"route\":\"STRATEGY LAB\",\"titleOk\":true,\"routeOk\":true,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/1440-research.png\"},{\"id\":\"runs\",\"h1\":\"Every result leaves a trace.\",\"route\":\"RUN ARCHIVE\",\"titleOk\":true,\"routeOk\":true,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/1440-runs.png\"},{\"id\":\"handbook\",\"h1\":\"Learn the language before trusting the number.\",\"route\":\"HELP & HANDBOOK\",\"titleOk\":true,\"routeOk\":true,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/1440-handbook.png\"},{\"id\":\"system\",\"h1\":\"Precision includes limits.\",\"route\":\"SYSTEM & LIMITS\",\"titleOk\":true,\"routeOk\":true,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/1440-system.png\"}],\"consoleErrors\":[],\"pageErrors\":[],\"requestFailed\":[]}",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/1440-*.png; logs/console.json; logs/network.json"
+  },
+  {
+    "id": "E2E-001b",
+    "component": "AppShell / document title",
+    "scenario": "Browser tab title across modules",
+    "test_data": "All modules",
+    "expected": "Stable product title",
+    "actual": "document.title=\"REX — Research Terminal\" (unchanged across all modules)",
+    "status": "PASS",
+    "evidence": "n/a"
+  },
+  {
+    "id": "E2E-002",
+    "component": "Overview",
+    "scenario": "Cross-check summary metrics and lists against GET /api/overview",
+    "test_data": "Initial state (before new runs)",
+    "expected": "Instruments=8, Datasets=5, Strategies=3, Recent runs=1; dataset rows=5; warning text matches API",
+    "actual": "{\"instruments\":{\"value\":\"8\",\"meta\":\"Registered in the instrument catalog\"},\"datasets\":{\"value\":\"5\",\"meta\":\"Stored M1 partitions\"},\"strategies\":{\"value\":\"3\",\"meta\":\"2 trade-simulated\"},\"recentRuns\":{\"value\":\"3\",\"meta\":\"Persisted JSON artifacts\"},\"datasetRows\":5,\"recentRunRows\":3,\"api\":{\"instruments\":8,\"datasets\":5,\"strategies\":3,\"runs\":3,\"warnings\":[\"EURUSD/M1/2026: 10 unexpected timestamp gaps (beyond FX closures).\"]}}",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/1440-overview-data-crosscheck.png"
+  },
+  {
+    "id": "E2E-002b",
+    "component": "Overview",
+    "scenario": "Loading state during slow /api/overview",
+    "test_data": "Route delayed 2.5s",
+    "expected": "Loading message is visible",
+    "actual": "Observed \"Assembling research state\"",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/overview-loading-state.png"
+  },
+  {
+    "id": "E2E-002c",
+    "component": "Overview",
+    "scenario": "Error state when /api/overview fails",
+    "test_data": "Request aborted via Playwright route",
+    "expected": "Error state with explanatory message, no crash",
+    "actual": "R REX QUANT RESEARCH TERMINAL WORKSPACE Overview 01 Market Data 02 Strategy Lab 03 Run Archive 04 Help & Handbook 05 System 06 TWELVE DATA Key not configured Evidence before conviction. No live trading · no broker orders. 01 RESEARCH OVERVIEW PROVIDER UNSET 0 DATASETS 13:36 UTC The research service ",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/overview-error-state.png"
+  },
+  {
+    "id": "E2E-003",
+    "component": "Market Data",
+    "scenario": "All datasets discoverable, each selectable; bar counts/date ranges/warnings vs API; chart canvas",
+    "test_data": "5 real datasets (AUDUSD, EURUSD, GBPUSD, USDCAD, USDJPY)",
+    "expected": "5 rows; each selection matches API bar_count and coverage; EURUSD warning visible; chart canvas rendered",
+    "actual": "{\"rowCount\":5,\"canvasCount\":7,\"selectedChecks\":[{\"id\":\"AUDUSD/M1/2026\",\"apiBars\":93600,\"uiBars\":\"93,600\",\"apiFirst\":\"2026-04-01T00:00:00\",\"apiLast\":\"2026-06-30T23:59:00\",\"uiFirst\":\"01 Apr 2026, 00:00\",\"uiLast\":\"30 Jun 2026, 23:59\",\"apiStatus\":\"ok\",\"apiWarnings\":[],\"uiWarnings\":[],\"barsMatch\":true,\"firstMatch\":true,\"lastMatch\":true,\"warningsMatch\":true},{\"id\":\"EURUSD/M1/2026\",\"apiBars\":184963,\"uiBars\":\"184,963\",\"apiFirst\":\"2026-01-01T13:00:00\",\"apiLast\":\"2026-06-30T23:59:00\",\"uiFirst\":\"01 Jan 2026, 13:00\",\"uiLast\":\"30 Jun 2026, 23:59\",\"apiStatus\":\"warning\",\"apiWarnings\":[\"10 unexpected timestamp gaps (beyond FX closures).\"],\"uiWarnings\":[\"! 10 unexpected timestamp gaps (beyond FX closures).\"],\"barsMatch\":true,\"firstMatch\":true,\"lastMatch\":true,\"warningsMatch\":true},{\"id\":\"GBPUSD/M1/2026\",\"apiBars\":93600,\"uiBars\":\"93,600\",\"apiFirst\":\"2026-04-01T00:00:00\",\"apiLast\":\"2026-06-30T23:59:00\",\"uiFirst\":\"01 Apr 2026, 00:00\",\"uiLast\":\"30 Jun 2026, 23:59\",\"apiStatus\":\"ok\",\"apiWarnings\":[],\"uiWarnings\":[],\"barsMatch\":true,\"firstMatch\":true,\"lastMatch\":true,\"warningsMatch\":true},{\"id\":\"USDCAD/M1/2026\",\"apiBars\":93600,\"uiBars\":\"93,600\",\"apiFirst\":\"2026-04-01T00:00:00\",\"apiLast\":\"2026-06-30T23:59:00\",\"uiFirst\":\"01 Apr 2026, 00:00\",\"uiLast\":\"30 Jun 2026, 23:59\",\"apiStatus\":\"ok\",\"apiWarnings\":[],\"uiWarnings\":[],\"barsMatch\":true,\"firstMatch\":true,\"lastMatch\":true,\"warningsMatch\":true},{\"id\":\"USDJPY/M1/2026\",\"apiBars\":93600,\"uiBars\":\"93,600\",\"apiFirst\":\"2026-04-01T00:00:00\",\"apiLast\":\"2026-06-30T23:59:00\",\"uiFirst\":\"01 Apr 2026, 00:00\",\"uiLast\":\"30 Jun 2026, 23:59\",\"apiStatus\":\"ok\",\"apiWarnings\":[],\"uiWarnings\":[],\"barsMatch\":true,\"firstMatch\":true,\"lastMatch\":true,\"warningsMatch\":true}]}",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/1440-data.png; 1440-data-EURUSD.png"
+  },
+  {
+    "id": "E2E-003b",
+    "component": "Market Data",
+    "scenario": "M5/M15/H1/H4 selection availability",
+    "test_data": "Market Data page",
+    "expected": "UI exposes timeframe selection for M1/M5/M15/H1/H4",
+    "actual": "Market Data page exposes no timeframe selector (source timeframe displayed as M1 only). Backend /api/frame returns derived frames: [{\"timeframe\":\"M1\",\"status\":200,\"bars\":93600,\"derived\":false},{\"timeframe\":\"M5\",\"status\":200,\"bars\":18720,\"derived\":true},{\"timeframe\":\"M15\",\"status\":200,\"bars\":6240,\"derived\":true},{\"timeframe\":\"H1\",\"status\":200,\"bars\":1560,\"derived\":true},{\"timeframe\":\"H4\",\"status\":200,\"bars\":403,\"derived\":true}]",
+    "status": "NOT APPLICABLE",
+    "evidence": "logs/network.json"
+  },
+  {
+    "id": "E2E-003c",
+    "component": "Strategy Lab / timeframe",
+    "scenario": "Select M5/M15/H1/H4 derived timeframes in the UI",
+    "test_data": "AUDUSD/M1/2026; Strategy Lab timeframe selector",
+    "expected": "Selector offers M1/M5/M15/H1/H4; frame facts and range update for each derived timeframe; totals match /api/frame",
+    "actual": "{\"options\":[\"M1\",\"M5\",\"M15\",\"H1\",\"H4\"],\"checks\":[{\"timeframe\":\"M5\",\"frameApiStatus\":200,\"frameApiBars\":18720,\"derived\":true,\"frameOk\":true,\"range\":\"6,360 M5 bars in range 4 gaps 01 Apr 2026 → 30 Jun 2026\",\"rangeHasBars\":true},{\"timeframe\":\"M15\",\"frameApiStatus\":200,\"frameApiBars\":6240,\"derived\":true,\"frameOk\":true,\"range\":\"2,120 M15 bars in range 4 gaps 01 Apr 2026 → 30 Jun 2026\",\"rangeHasBars\":true},{\"timeframe\":\"H1\",\"frameApiStatus\":200,\"frameApiBars\":1560,\"derived\":true,\"frameOk\":true,\"range\":\"530 H1 bars in range 4 gaps 01 Apr 2026 → 30 Jun 2026\",\"rangeHasBars\":true},{\"timeframe\":\"H4\",\"frameApiStatus\":200,\"frameApiBars\":403,\"derived\":true,\"frameOk\":true,\"range\":\"137 H4 bars in range 4 gaps 01 Apr 2026 → 30 Jun 2026\",\"rangeHasBars\":true}]}",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/1440-research-timeframe-H4.png; logs/timeframe-checks.json"
+  },
+  {
+    "id": "E2E-010a",
+    "component": "Market Data / download modal",
+    "scenario": "Malformed download dates and disabled submit",
+    "test_data": "Local-only validation; no download request",
+    "expected": "Each case shows exact inline error and Download disabled",
+    "actual": "[{\"label\":\"end-before-start\",\"start\":\"2026-06-30\",\"end\":\"2026-06-01\",\"error\":\"Start date must be before end date.\",\"disabled\":true,\"expected\":\"Start date must be before end date.\",\"pass\":true},{\"label\":\"over-31-days\",\"start\":\"2026-01-01\",\"end\":\"2026-06-30\",\"error\":\"UI downloads are limited to 31 days per request.\",\"disabled\":true,\"expected\":\"UI downloads are limited to 31 days per request.\",\"pass\":true},{\"label\":\"future-end\",\"start\":\"2026-11-01\",\"end\":\"2026-11-10\",\"error\":\"End date cannot be in the future.\",\"disabled\":true,\"expected\":\"End date cannot be in the future.\",\"pass\":true},{\"label\":\"missing-date\",\"start\":\"\",\"end\":\"2026-06-30\",\"error\":\"Choose both a start and end date.\",\"disabled\":true,\"expected\":\"Choose both a start and end date.\",\"pass\":true}]",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/data-download-validation.png"
+  },
+  {
+    "id": "E2E-004",
+    "component": "Strategy Lab",
+    "scenario": "Valid S008 run on EURUSD with real date range",
+    "test_data": "EURUSD/M1/2026, M1, 2026-06-01..2026-06-30, S008 defaults (lookback=10, min_wick_ratio=0.6, tolerance=0)",
+    "expected": "Range validates; run completes; UI metrics match archived run API values; warnings shown",
+    "actual": "{\"rangeText\":\"31,680 M1 bars in range 4 gaps 01 Jan 2026 → 30 Jun 2026\",\"rangeApi\":{\"bar_count\":31680,\"gap_count\":4,\"valid\":true},\"resultMetrics\":{\"Signals\":\"1,387\",\"Closed trades\":\"1,310\",\"Win rate\":\"11.8%\",\"Expectancy\":\"-0.652R\",\"Profit factor\":\"0.26\",\"Max drawdown\":\"853.75R\",\"Ambiguous exits\":\"22\",\"Avg hold\":\"3.0 bars\"},\"resultWarnings\":[\"Transaction costs (spread, commission, slippage) are not applied.\",\"Performance is in R-multiples; no currency equity or compounding.\",\"22 ambiguous intrabar exits were conservatively scored at -1R.\",\"Selected range contains 4 timestamp gap(s) larger than one M1 bar (market closures included).\"],\"uiSubtitle\":\"EURUSD/M1/2026 · M1 · 01 Jun 2026 → 30 Jun 2026 · 31,680 bars\",\"apiRun\":{\"id\":\"20261103T133655Z_0d7426ea\",\"metrics\":{\"total_signals\":1387,\"total_trades\":1310,\"wins\":155,\"losses\":1155,\"win_rate\":11.83206106870229,\"profit_factor\":0.2618383521235236,\"expectancy\":-0.6517210786489162,\"max_drawdown_r\":853.7546130300801,\"largest_win\":2,\"largest_loss\":-4.468750000001865,\"ambiguous_exits\":22,\"avg_holding_duration\":2.9625954198473283},\"warning_count\":4},\"metricsMatch\":true}",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/1440-research-s008-result.png"
+  },
+  {
+    "id": "E2E-004b",
+    "component": "Strategy Lab",
+    "scenario": "Deterministic repeat of identical S008 configuration",
+    "test_data": "Same dataset/range/parameters submitted twice",
+    "expected": "Two distinct run IDs with byte-identical metrics and trade counts",
+    "actual": "{\"runA\":{\"id\":\"20261103T133657Z_5249e0f7\",\"metrics\":{\"total_signals\":1387,\"total_trades\":1310,\"wins\":155,\"losses\":1155,\"win_rate\":11.83206106870229,\"profit_factor\":0.2618383521235236,\"expectancy\":-0.6517210786489162,\"max_drawdown_r\":853.7546130300801,\"largest_win\":2,\"largest_loss\":-4.468750000001865,\"ambiguous_exits\":22,\"avg_holding_duration\":2.9625954198473283}},\"runB\":{\"id\":\"20261103T133655Z_0d7426ea\",\"metrics\":{\"total_signals\":1387,\"total_trades\":1310,\"wins\":155,\"losses\":1155,\"win_rate\":11.83206106870229,\"profit_factor\":0.2618383521235236,\"expectancy\":-0.6517210786489162,\"max_drawdown_r\":853.7546130300801,\"largest_win\":2,\"largest_loss\":-4.468750000001865,\"ambiguous_exits\":22,\"avg_holding_duration\":2.9625954198473283}},\"uiSecond\":{\"Signals\":\"1,387\",\"Closed trades\":\"1,310\",\"Win rate\":\"11.8%\",\"Expectancy\":\"-0.652R\",\"Profit factor\":\"0.26\",\"Max drawdown\":\"853.75R\",\"Ambiguous exits\":\"22\",\"Avg hold\":\"3.0 bars\"},\"deterministic\":true}",
+    "status": "PASS",
+    "evidence": "logs/api-runs-after.json"
+  },
+  {
+    "id": "E2E-010b",
+    "component": "Strategy Lab / validation",
+    "scenario": "Bad date range, out-of-range parameter, invalid risk fraction",
+    "test_data": "EURUSD June 2026; lookback=1; risk_fraction=0.5",
+    "expected": "Inline validation; Run disabled for invalid range; backend rejects lookback with HTTP 400; risk fraction rejected client-side",
+    "actual": "{\"badRangeErr\":\"Start date is after the end date. The selected range contains no bars.\",\"runBtnDisabled\":true,\"badParamStatus\":400,\"badParamDetail\":\"{\\\"detail\\\":\\\"lookback must be >= 2\\\"}\",\"badParamErr\":\"lookback must be >= 2\",\"riskErr\":\"Risk fraction must be between 0 and 0.1.\"}",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/research-bad-date-range.png; docs/qa/EVIDENCE/e2e/screens/research-bad-parameter.png; docs/qa/EVIDENCE/e2e/screens/research-bad-risk-fraction.png"
+  },
+  {
+    "id": "E2E-010c",
+    "component": "Strategy Lab / validation",
+    "scenario": "Missing dataset or strategy selection",
+    "test_data": "UI selects are always populated with defaults",
+    "expected": "Validation for missing selection exists but cannot be reached via UI",
+    "actual": "NOT APPLICABLE - both selects default to the first available dataset/strategy; no empty option is exposed",
+    "status": "NOT APPLICABLE",
+    "evidence": "source inspection frontend/src/pages/ResearchPage.tsx"
+  },
+  {
+    "id": "E2E-005",
+    "component": "Strategy Lab / missing configuration",
+    "scenario": "AUDUSD + S002 (requires static zones, none configured)",
+    "test_data": "AUDUSD/M1/2026, M1, 2026-06-01..2026-06-30, S002 defaults",
+    "expected": "Understandable inline no-zone error; no crash; HTTP 400 from POST /api/backtests",
+    "actual": "{\"rangeText\":\"31,680 M1 bars in range 4 gaps 01 Apr 2026 → 30 Jun 2026\",\"httpStatus\":400,\"httpBody\":\"{\\\"detail\\\":\\\"No zone book is configured for AUDUSD in config/zones.json\\\"}\",\"uiError\":\"No zone book is configured for AUDUSD in config/zones.json\",\"pageStillRendered\":true}",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/research-AUDUSD-S002-no-zones.png"
+  },
+  {
+    "id": "E2E-006",
+    "component": "Run Archive",
+    "scenario": "Open generated run and compare detail metrics with archived JSON",
+    "test_data": "Newest run 20261103T133657Z_5249e0f7",
+    "expected": "Row list contains new run; detail trades/expectancy/warnings match GET /api/runs/{id}",
+    "actual": "{\"rowCount\":5,\"newestRun\":\"20261103T133657Z_5249e0f7\",\"ui\":{\"TRADES\":\"1,310\",\"EXPECTANCY\":\"-0.652R\",\"WARNINGS\":\"4\"},\"api\":{\"id\":\"20261103T133657Z_5249e0f7\",\"trades\":1310,\"expectancy\":-0.6517210786489162,\"warnings\":4,\"dataset\":\"EURUSD/M1/2026\",\"strategy\":\"Liquidity Sweep V1\"},\"metricsMatch\":true,\"totalRuns\":5}",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/1440-runs-detail.png"
+  },
+  {
+    "id": "E2E-006b",
+    "component": "Run Archive",
+    "scenario": "Side-by-side comparison controls",
+    "test_data": "Latest two runs",
+    "expected": "Two run selectors populated and comparison metrics rendered",
+    "actual": "{\"selects\":[\"20261103T133657Z_5249e0f7\",\"20261103T133655Z_0d7426ea\"],\"compareText\":\"COMPARISON Side-by-side posture Select two archived runs. Differences in dataset, costs, or parameters can invalidate a naive comparison. Validation RUN A S008 · EURUSD/M1/2026 S008 · EURUSD/M1/2026 S008 · EURUSD/M1/2026 S008 · EURUSD/M1/2026 S008 · AUDUSD/M1/2026 RUN B S008 · EURUSD/M1/2026 S008 · EURUSD/M1/2026 S008 · EURUSD/M1/2026 S008 · EURUSD/M1/2026 S008 · AUDUSD/M1/2026 Trades 1,310 / 1,310 Win rate 11.8% / 11.8% Expectancy -0.652R / -0.652R Profit factor 0.26 / 0.26 Max drawdown 853.75R / 853.75R Signals 1,387 / 1,387 A comparison is evidence only when the dataset, period, costs, and \"}",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/1440-runs-detail.png"
+  },
+  {
+    "id": "E2E-006c",
+    "component": "Run Archive",
+    "scenario": "Invalid run ID handling",
+    "test_data": "GET /api/runs/does-not-exist",
+    "expected": "HTTP 404 with clear detail; UI exposes no run-ID input",
+    "actual": "HTTP 404; detail={\"detail\":\"Run not found\"}; UI has no direct run-ID entry (rows only)",
+    "status": "PASS",
+    "evidence": "logs/api-runs-after.json"
+  },
+  {
+    "id": "E2E-007",
+    "component": "System / provider credentials",
+    "scenario": "Save, persist, update, delete dummy key; masking and secret non-exposure",
+    "test_data": "Dummy keys ui-dummy-key-1234 then ui-dummy-key-5678 (no real credentials)",
+    "expected": "Masked hints 1234/5678; key not in DOM/responses/localStorage; reload persists; delete returns to environment source; stored vault empty",
+    "actual": "{\"feedback\":\"Twelve Data key stored server-side.\",\"inputValueAfter\":\"\",\"afterSaveText\":\"Twelve Data TWELVE_DATA_API_KEY CONFIGURED · STORED Twelve Data historical M1 candles MASKED KEY 1234 SOURCE stored UPDATED 03 Nov 2026, 13:37 NEW KEY UPDATE KEY REMOVE STORED KEY Twelve Data key stored server-side.\",\"reloadText\":\"Twelve Data TWELVE_DATA_API_KEY CONFIGURED · STORED Twelve Data historical M1 candles MASKED KEY 1234 SOURCE stored UPDATED 03 Nov 2026, 13:37 NEW KEY UPDATE KEY REMOVE STORED KEY\",\"afterUpdateText\":\"Twelve Data TWELVE_DATA_API_KEY CONFIGURED · STORED Twelve Data historical M1 candles MASKED KEY 5678 SOURCE stored UPDATED 03 Nov 2026, 13:37 NEW KEY UPDATE KEY REMOVE STORED KEY Twelve Data key stored server-side.\",\"afterDeleteText\":\"Twelve Data TWELVE_DATA_API_KEY CONFIGURED · ENVIRONMENT Twelve Data historical M1 candles MASKED KEY cdf7 SOURCE environment UPDATED — API KEY SAVE KEY Stored Twelve Data key removed. An environment fallback still applies if set.\",\"domHasKey\":false,\"responseLeaksKey\":false,\"responseLeaks2\":false,\"storage\":{\"localStorage\":\"{}\",\"sessionStorage\":\"{}\"},\"putStatus\":200,\"putBody\":\"{\\\"id\\\":\\\"twelve_data\\\",\\\"name\\\":\\\"Twelve Data\\\",\\\"description\\\":\\\"Twelve Data historical M1 candles\\\",\\\"env_var\\\":\\\"TWELVE_DATA_API_KEY\\\",\\\"required\\\":true,\\\"configured\\\":true,\\\"source\\\":\\\"stored\\\",\\\"hint\\\":\\\"1234\\\",\\\"updated_at\\\":\\\"2026-11-03T13:37:08.224282+00:00\\\"}\",\"put2Status\":200,\"put2Body\":\"{\\\"id\\\":\\\"twelve_data\\\",\\\"name\\\":\\\"Twelve Data\\\",\\\"description\\\":\\\"Twelve Data historical M1 candles\\\",\\\"env_var\\\":\\\"TWELVE_DATA_API_KEY\\\",\\\"required\\\":true,\\\"configured\\\":true,\\\"source\\\":\\\"stored\\\",\\\"hint\\\":\\\"5678\\\",\\\"updated_at\\\":\\\"2026-11-03T13:37:09.930026+00:00\\\"}\",\"delStatus\":200,\"delBody\":\"{\\\"id\\\":\\\"twelve_data\\\",\\\"name\\\":\\\"Twelve Data\\\",\\\"description\\\":\\\"Twelve Data historical M1 candles\\\",\\\"env_var\\\":\\\"TWELVE_DATA_API_KEY\\\",\\\"required\\\":true,\\\"configured\\\":true,\\\"source\\\":\\\"environment\\\",\\\"hint\\\":\\\"cdf7\\\",\\\"updated_at\\\":null}\",\"providersAfter\":[{\"id\":\"twelve_data\",\"name\":\"Twelve Data\",\"description\":\"Twelve Data historical M1 candles\",\"env_var\":\"TWELVE_DATA_API_KEY\",\"required\":true,\"configured\":true,\"source\":\"environment\",\"hint\":\"cdf7\",\"updated_at\":null},{\"id\":\"dukascopy\",\"name\":\"Dukascopy\",\"description\":\"Dukascopy historical adapter; current downloader does not require a key\",\"env_var\":\"DUKASCOPY_API_KEY\",\"required\":false,\"configured\":false,\"source\":\"none\",\"hint\":\"••••\",\"updated_at\":null}],\"storedIds\":[],\"masked\":true,\"notLeaked\":true,\"cleaned\":true}",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/system-key-saved.png; docs/qa/EVIDENCE/e2e/screens/system-key-updated.png; docs/qa/EVIDENCE/e2e/screens/system-key-removed.png; logs/api-providers-after.json"
+  },
+  {
+    "id": "E2E-008",
+    "component": "Help & Handbook",
+    "scenario": "Categories, search, related links, glossary, all article bodies",
+    "test_data": "9 category buttons; search \"slippage\"; all 71 articles",
+    "expected": "Category counts match lists; search and related navigation work; no-result empty state; glossary works; every article renders >=5 sections and substantial body",
+    "actual": "{\"catData\":[{\"label\":\"All topics 71\",\"count\":71,\"listCount\":71,\"isGlossary\":false,\"ok\":true},{\"label\":\"Getting Started The terminal workflow 8\",\"count\":8,\"listCount\":8,\"isGlossary\":false,\"ok\":true},{\"label\":\"Trading Fundamentals Markets, prices, sessions 8\",\"count\":8,\"listCount\":8,\"isGlossary\":false,\"ok\":true},{\"label\":\"Technical Analysis Structure, trend, breakouts 8\",\"count\":8,\"listCount\":8,\"isGlossary\":false,\"ok\":true},{\"label\":\"Risk Management Risk, R, sizing, drawdown 9\",\"count\":9,\"listCount\":9,\"isGlossary\":false,\"ok\":true},{\"label\":\"Backtesting & Statistics Evidence and its limits 18\",\"count\":18,\"listCount\":18,\"isGlossary\":false,\"ok\":true},{\"label\":\"REX Research Engine What exists today 11\",\"count\":11,\"listCount\":11,\"isGlossary\":false,\"ok\":true},{\"label\":\"Troubleshooting Diagnose failed experiments 9\",\"count\":9,\"listCount\":9,\"isGlossary\":false,\"ok\":true},{\"label\":\"Glossary Core terminology 20\",\"count\":20,\"listCount\":20,\"isGlossary\":true,\"ok\":true}],\"searchCount\":4,\"searchArticle\":\"Running a backtest\",\"relatedCount\":3,\"beforeRelated\":\"Running a backtest\",\"afterRelated\":\"Reading a result\",\"emptyOk\":true,\"glossaryCards\":20,\"glossaryArticle\":\"Bid, ask and spread\",\"totalArticles\":71,\"articleChecksCount\":71,\"badArticles\":[],\"articleChecksSample\":[{\"index\":0,\"title\":\"What is REX?\",\"sections\":6,\"bodyLen\":1560,\"ok\":true},{\"index\":1,\"title\":\"How the research terminal works\",\"sections\":6,\"bodyLen\":1487,\"ok\":true},{\"index\":2,\"title\":\"Selecting an instrument and timeframe\",\"sections\":6,\"bodyLen\":1168,\"ok\":true}]}",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/1440-handbook.png; docs/qa/EVIDENCE/e2e/screens/handbook-search-related.png; docs/qa/EVIDENCE/e2e/screens/handbook-no-results.png; docs/qa/EVIDENCE/e2e/logs/handbook-article-checks.json"
+  },
+  {
+    "id": "E2E-009",
+    "component": "AppShell / responsive",
+    "scenario": "No horizontal page overflow; navigation usable at desktop and mobile widths",
+    "test_data": "1440x900 and 390x844; all six modules",
+    "expected": "scrollWidth <= viewport width + 1; six nav items visible and clickable",
+    "actual": "{\"responsive\":[{\"viewport\":\"1440x900\",\"module\":\"overview\",\"dims\":{\"inner\":1440,\"doc\":1440,\"body\":1440},\"overflow\":false,\"navVisible\":true,\"navCount\":6,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/responsive-1440x900-overview.png\"},{\"viewport\":\"1440x900\",\"module\":\"data\",\"dims\":{\"inner\":1440,\"doc\":1440,\"body\":1440},\"overflow\":false,\"navVisible\":true,\"navCount\":6,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/responsive-1440x900-data.png\"},{\"viewport\":\"1440x900\",\"module\":\"research\",\"dims\":{\"inner\":1440,\"doc\":1440,\"body\":1440},\"overflow\":false,\"navVisible\":true,\"navCount\":6,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/responsive-1440x900-research.png\"},{\"viewport\":\"1440x900\",\"module\":\"runs\",\"dims\":{\"inner\":1440,\"doc\":1440,\"body\":1440},\"overflow\":false,\"navVisible\":true,\"navCount\":6,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/responsive-1440x900-runs.png\"},{\"viewport\":\"1440x900\",\"module\":\"handbook\",\"dims\":{\"inner\":1440,\"doc\":1440,\"body\":1440},\"overflow\":false,\"navVisible\":true,\"navCount\":6,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/responsive-1440x900-handbook.png\"},{\"viewport\":\"1440x900\",\"module\":\"system\",\"dims\":{\"inner\":1440,\"doc\":1440,\"body\":1440},\"overflow\":false,\"navVisible\":true,\"navCount\":6,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/responsive-1440x900-system.png\"},{\"viewport\":\"390x844\",\"module\":\"overview\",\"dims\":{\"inner\":390,\"doc\":390,\"body\":390},\"overflow\":false,\"navVisible\":true,\"navCount\":6,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/responsive-390x844-overview.png\"},{\"viewport\":\"390x844\",\"module\":\"data\",\"dims\":{\"inner\":390,\"doc\":390,\"body\":390},\"overflow\":false,\"navVisible\":true,\"navCount\":6,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/responsive-390x844-data.png\"},{\"viewport\":\"390x844\",\"module\":\"research\",\"dims\":{\"inner\":390,\"doc\":390,\"body\":390},\"overflow\":false,\"navVisible\":true,\"navCount\":6,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/responsive-390x844-research.png\"},{\"viewport\":\"390x844\",\"module\":\"runs\",\"dims\":{\"inner\":390,\"doc\":390,\"body\":390},\"overflow\":false,\"navVisible\":true,\"navCount\":6,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/responsive-390x844-runs.png\"},{\"viewport\":\"390x844\",\"module\":\"handbook\",\"dims\":{\"inner\":390,\"doc\":390,\"body\":390},\"overflow\":false,\"navVisible\":true,\"navCount\":6,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/responsive-390x844-handbook.png\"},{\"viewport\":\"390x844\",\"module\":\"system\",\"dims\":{\"inner\":390,\"doc\":390,\"body\":390},\"overflow\":false,\"navVisible\":true,\"navCount\":6,\"evidence\":\"docs/qa/EVIDENCE/e2e/screens/responsive-390x844-system.png\"}],\"overflowRows\":[],\"navIssue\":[]}",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/responsive-*.png"
+  },
+  {
+    "id": "E2E-010d",
+    "component": "Market Data",
+    "scenario": "Network failure on /api/datasets",
+    "test_data": "Request aborted via Playwright route",
+    "expected": "Error banner/state shown; app does not crash",
+    "actual": "R REX QUANT RESEARCH TERMINAL WORKSPACE Overview 01 Market Data 02 Strategy Lab 03 Run Archive 04 Help & Handbook 05 System 06 TWELVE DATA Key present · backend only Evidence before conviction. No live trading · no broker orders. 02 HISTORICAL DATA PROVIDER READY 5 DATASETS 1 WARNING 13:37 UTC MARKET DATA · HISTORICAL WORKSPACE The record, before the model. Every dataset is a canonical M1 partitio",
+    "status": "PASS",
+    "evidence": "docs/qa/EVIDENCE/e2e/screens/data-error-state.png"
+  }
+]

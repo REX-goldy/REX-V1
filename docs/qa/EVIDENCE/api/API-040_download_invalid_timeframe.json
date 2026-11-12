@@ -1,0 +1,51 @@
+{
+  "test_id": "API-040",
+  "endpoint": "/api/downloads",
+  "scenario": "Unsupported download timeframe",
+  "test_data": "timeframe=M5",
+  "expected": "400 M1 only",
+  "actual": "status=400 detail={\"detail\":\"UI downloads currently support M1 only\"}",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "400",
+      "ok": true,
+      "detail": "400"
+    },
+    {
+      "check": "mentions M1 only",
+      "ok": true,
+      "detail": "{'detail': 'UI downloads currently support M1 only'}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16901/api/downloads",
+      "params": null,
+      "request_body": {
+        "provider": "dukascopy",
+        "symbol": "NZDUSD",
+        "timeframe": "M5",
+        "start_date": "2025-01-01",
+        "end_date": "2025-01-02"
+      },
+      "request_headers": {},
+      "duration_ms": 2.1,
+      "status_code": 400,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "51",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "bd22034bd93bc03e3e4e30e2164fb00e44217a7e66ed641c7ed51c861e399820",
+      "response_bytes": 51,
+      "response_json": {
+        "detail": "UI downloads currently support M1 only"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.105870+00:00"
+}

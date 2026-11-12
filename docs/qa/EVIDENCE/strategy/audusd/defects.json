@@ -1,0 +1,66 @@
+{
+  "defects": [
+    {
+      "id": "DEF-01",
+      "severity": "MEDIUM",
+      "title": "CORE_ZONE_BREAKOUT emits CLOSE_OUTSIDE on every bar outside a zone, even with no zone interaction",
+      "strategy": "CORE_ZONE_BREAKOUT",
+      "evidence": [
+        "CORE_ZONE_BREAKOUT EURUSD 2026-03-24..2026-03-25: 21,920 signals of which 21,848 (99.7%) are close_outside",
+        "CORE_ZONE_BREAKOUT GBPUSD 2026-04-01..2026-04-02: 2,880 signals, 100% close_outside, 0 enter_zone/break_above/break_below"
+      ],
+      "repro": "POST /api/backtests {strategy_id:CORE_ZONE_BREAKOUT,dataset_id:GBPUSD/M1/2026,start_date:2026-04-01,end_date:2026-04-02}",
+      "expected": "A signal should represent a zone interaction/state change; a close far outside an untouched zone should not emit one signal per zone per bar.",
+      "actual": "breakout.py:_detect_close_outside returns not zone.contains_price(close) unconditionally; _evaluate_zone emits CLOSE_OUTSIDE for every zone every bar.",
+      "status": "CONFIRMED (design/semantics defect; documented behavior but materially inflates signal counts)"
+    },
+    {
+      "id": "DEF-02",
+      "severity": "LOW",
+      "title": "S002 retest signals can have zero risk distance and are silently rejected at the policy boundary without a termination record",
+      "strategy": "S002",
+      "evidence": [
+        "S002 EURUSD 2026-03-23..2026-03-27: 516 signals, 230 accepted, 221 ignored (active lifecycle), 65 rejected_policy_boundary; all 65 have stop_hint == entry_hint because the retest bar closed at its low (LONG) or high (SHORT)",
+        "Only 7 rejects are recorded as REJECTED_INVALID_ENTRY; the 65 planner None rejects have no individual reason record"
+      ],
+      "repro": "Run S002 EURUSD 2026-03-23..2026-03-27 and inspect execution/factories.py:41-46 + execution/policies.py:83-85",
+      "expected": "Either construct a non-zero structural stop (e.g. broken level) or record the rejection reason per setup so the UI can explain it.",
+      "actual": "TradeSetupFactory sets stop_hint=current_bar.low/high. When the retest candle closes at that extreme, entry_hint==stop_hint, FixedRiskRewardPolicy.build returns None (risk_distance<=1e-12), and BacktestRunner only increments rejected_policy_boundary_count.",
+      "status": "CONFIRMED (observability/execution-model defect; 12.6% of S002 signals in the evidence range)"
+    },
+    {
+      "id": "DEF-03",
+      "severity": "LOW",
+      "title": "UI cannot pre-validate zone availability for zone-requiring strategies (AUDUSD + S002/CORE)",
+      "strategy": "S002 / CORE_ZONE_BREAKOUT",
+      "evidence": [
+        "AUDUSD/M1/2026 is listed by /api/datasets",
+        "/api/strategies returns requires_zones=true but no per-symbol zone catalog",
+        "frontend/src/pages/ResearchPage.tsx submit() validates range/R/equity/risk only; it relies on the POST /api/backtests 400 detail for the missing-zone error"
+      ],
+      "repro": "Select AUDUSD + S002 in Strategy Lab and press Run; the request reaches POST /api/backtests and returns 400 \"No zone book is configured for AUDUSD in config/zones.json\".",
+      "expected": "The lab should disable or warn on a known-incompatible dataset+strategy combination before submission.",
+      "actual": "The guarded error is explicit and safe, but only appears after submit; there is no zone-availability API.",
+      "status": "CONFIRMED (UX/integration gap; service-level validation itself is correct)"
+    },
+    {
+      "id": "DEF-04",
+      "severity": "INFO",
+      "title": "BacktestRunner defaults to SweepTradeSetupFactory for any strategy when simulate_trades=True",
+      "strategy": "S002 / CORE_ZONE_BREAKOUT",
+      "evidence": [
+        "backtests/backtest_runner.py:79 sets factory = setup_factory or SweepTradeSetupFactory()",
+        "Direct BacktestRunner.run(S002, ..., simulate_trades=True) without a factory yields 0 trades because sweep factory returns None for retest signals"
+      ],
+      "repro": "Call BacktestRunner().run(S002_BreakoutRetest(zone_book), bars, simulate_trades=True) without setup_factory.",
+      "expected": "The runner should require or infer the strategy-specific factory, or fail explicitly.",
+      "actual": "It silently accepts unrelated signals, counts them as rejected_policy_boundary, and returns zero trades.",
+      "status": "CONFIRMED (API footgun; research_service avoids it by passing the correct factory)"
+    }
+  ],
+  "not_claimed": [
+    "No profitability claim: costs are not applied; results are gross R-multiples on small bounded samples.",
+    "No parameter optimization was performed.",
+    "No zone levels were invented."
+  ]
+}

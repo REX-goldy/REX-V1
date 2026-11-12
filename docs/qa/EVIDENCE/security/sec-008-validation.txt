@@ -1,0 +1,6 @@
+# SEC-008 Key validation rejects empty, oversize, control chars, newlines, non-string
+component: server/provider_keys.py
+test_data: See detail
+expected: InvalidProviderKeyError for every case, no file write
+actual: len(0): rejected; len(3): rejected; len(513): rejected; len(7): rejected; len(7): rejected; len(7): rejected; non-string: rejected
+status: PASS

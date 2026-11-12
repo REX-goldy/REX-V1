@@ -1,0 +1,64 @@
+{
+  "test_id": "API-038",
+  "endpoint": "/api/downloads",
+  "scenario": "Unsupported provider",
+  "test_data": "provider=bogus",
+  "expected": "422 validation pattern error",
+  "actual": "status=422 detail={\"detail\":[{\"type\":\"string_pattern_mismatch\",\"loc\":[\"body\",\"provider\"],\"msg\":\"String should match pattern '^(twelve_data|dukascopy)$'\",\"input\":\"bogus\",\"ctx\":{\"pattern\":\"^(twelve_data|dukascopy)$\"}}]}",
+  "status": "PASS",
+  "notes": "No provider request made.",
+  "assertions": [
+    {
+      "check": "422",
+      "ok": true,
+      "detail": "422"
+    },
+    {
+      "check": "pattern detail",
+      "ok": true,
+      "detail": "[{'type': 'string_pattern_mismatch', 'loc': ['body', 'provider'], 'msg': \"String should match pattern '^(twelve_data|dukascopy)$'\", 'input': 'bogus', 'ctx': {'pattern': '^(twelve_data|dukascopy)$'}}]"
+    }
+  ],
+  "calls": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:16901/api/downloads",
+      "params": null,
+      "request_body": {
+        "provider": "bogus",
+        "symbol": "NZDUSD",
+        "timeframe": "M1",
+        "start_date": "2025-01-01",
+        "end_date": "2025-01-02"
+      },
+      "request_headers": {},
+      "duration_ms": 2.2,
+      "status_code": 422,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "199",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "ab713730f2c930c6e6b542db2dfd6ae3ff70b54c4626b2abd40c4ef7d5528605",
+      "response_bytes": 199,
+      "response_json": {
+        "detail": [
+          {
+            "type": "string_pattern_mismatch",
+            "loc": [
+              "body",
+              "provider"
+            ],
+            "msg": "String should match pattern '^(twelve_data|dukascopy)$'",
+            "input": "bogus",
+            "ctx": {
+              "pattern": "^(twelve_data|dukascopy)$"
+            }
+          }
+        ]
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.100306+00:00"
+}

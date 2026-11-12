@@ -1,0 +1,6 @@
+# SEC-019 Provider JSON payload error message is redacted
+component: historical/twelve_data.py
+test_data: Status error code 401 with dummy key
+expected: HistoricalDownloadError without key
+actual: HistoricalDownloadError: Twelve Data request failed (code 401): bad key ***
+status: PASS

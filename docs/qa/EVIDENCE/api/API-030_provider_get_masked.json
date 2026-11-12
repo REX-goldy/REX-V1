@@ -1,0 +1,86 @@
+{
+  "test_id": "API-030",
+  "endpoint": "/api/settings/providers",
+  "scenario": "Masked provider status, env fallback",
+  "test_data": "GET on isolated store with dummy env key",
+  "expected": "200; two providers; twelve_data source=environment hint=0001; no api_key",
+  "actual": "twelve_data={\"id\":\"twelve_data\",\"name\":\"Twelve Data\",\"description\":\"Twelve Data historical M1 candles\",\"env_var\":\"TWELVE_DATA_API_KEY\",\"required\":true,\"configured\":true,\"source\":\"environment\",\"hint\":\"0001\",\"updated_at\":null}; dukascopy={\"id\":\"dukascopy\",\"name\":\"Dukascopy\",\"description\":\"Dukascopy historical adapter; current downloader does not require a key\",\"env_var\":\"DUKASCOPY_API_KEY\",\"required\":false,\"configured\":false,\"source\":\"none\",\"hint\":\"••••\",\"updated_at\":null}",
+  "status": "PASS",
+  "notes": "Isolated instance 16902 with TWELVE_DATA_API_KEY=dummy-env-key-0001; temp store.",
+  "assertions": [
+    {
+      "check": "HTTP 200",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "two providers",
+      "ok": true,
+      "detail": "['dukascopy', 'twelve_data']"
+    },
+    {
+      "check": "env fallback configured",
+      "ok": true,
+      "detail": "(True, 'environment')"
+    },
+    {
+      "check": "hint only last 4",
+      "ok": true,
+      "detail": "0001"
+    },
+    {
+      "check": "no api_key field",
+      "ok": true,
+      "detail": "['configured', 'description', 'env_var', 'hint', 'id', 'name', 'required', 'source', 'updated_at']"
+    },
+    {
+      "check": "dukascopy unconfigured",
+      "ok": true,
+      "detail": "{'id': 'dukascopy', 'name': 'Dukascopy', 'description': 'Dukascopy historical adapter; current downloader does not require a key', 'env_var': 'DUKASCOPY_API_KEY', 'required': False, 'configured': False, 'source': 'none', 'hint': '••••', 'updated_at': None}"
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16902/api/settings/providers",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 1.9,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "462",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "9de6de843a5044b1ddf054912cf3bf56a46cc5187f2d5be12b7d1d41a1e4f485",
+      "response_bytes": 462,
+      "response_json": [
+        {
+          "id": "twelve_data",
+          "name": "Twelve Data",
+          "description": "Twelve Data historical M1 candles",
+          "env_var": "TWELVE_DATA_API_KEY",
+          "required": true,
+          "configured": true,
+          "source": "environment",
+          "hint": "0001",
+          "updated_at": null
+        },
+        {
+          "id": "dukascopy",
+          "name": "Dukascopy",
+          "description": "Dukascopy historical adapter; current downloader does not require a key",
+          "env_var": "DUKASCOPY_API_KEY",
+          "required": false,
+          "configured": false,
+          "source": "none",
+          "hint": "••••",
+          "updated_at": null
+        }
+      ],
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:25.048283+00:00"
+}

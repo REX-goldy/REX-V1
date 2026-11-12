@@ -1,0 +1,9 @@
+{
+  "test_id": "STRAT-015",
+  "label": "unknown_parameter",
+  "scenario": "Unknown parameter",
+  "data_config": "EURUSD/M1/2026; parameters={not_a_parameter:1}",
+  "expected": "Explicit 'Unknown parameters' ValueError.",
+  "actual": "ValueError: Unknown parameters: not_a_parameter",
+  "status": "PASS"
+}

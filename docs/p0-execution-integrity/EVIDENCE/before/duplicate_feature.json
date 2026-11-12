@@ -1,0 +1,11 @@
+{
+  "entry_timeframe_materialize": {
+    "materialize_succeeded": true,
+    "entry_bars": 3,
+    "duplicate_retained": true,
+    "m1_swings": 0
+  },
+  "m15_entry_error": "ValueError: Missing entry timeframe candles: M15 (provide entry bars or an explicit asof with aggregatable LTF source)",
+  "aggregate_m15_bars": 0,
+  "resampler_error": "ResampleError: duplicate source timestamp: 2026-01-04 22:00:00"
+}

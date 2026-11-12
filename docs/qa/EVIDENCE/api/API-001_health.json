@@ -1,0 +1,51 @@
+{
+  "test_id": "API-001",
+  "endpoint": "/api/health",
+  "scenario": "Health endpoint returns ok",
+  "test_data": "GET /api/health",
+  "expected": "200 with status=ok and service=rex-research-terminal",
+  "actual": "status=200 body={\"status\":\"ok\",\"service\":\"rex-research-terminal\"}",
+  "status": "PASS",
+  "notes": "",
+  "assertions": [
+    {
+      "check": "HTTP 200",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "check": "JSON body",
+      "ok": true,
+      "detail": "{'status': 'ok', 'service': 'rex-research-terminal'}"
+    },
+    {
+      "check": "content-type json",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "calls": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:16901/api/health",
+      "params": null,
+      "request_body": null,
+      "request_headers": {},
+      "duration_ms": 6.1,
+      "status_code": 200,
+      "content_type": "application/json",
+      "response_headers": {
+        "content-length": "49",
+        "content-type": "application/json"
+      },
+      "response_text_sha256": "a86af8887f0b4b8f87a400984a69549dba71763a03f41c3888379870cd7a6192",
+      "response_bytes": 49,
+      "response_json": {
+        "status": "ok",
+        "service": "rex-research-terminal"
+      },
+      "response_kind": "json"
+    }
+  ],
+  "recorded_at_utc": "2026-11-03T13:38:23.740401+00:00"
+}

@@ -1,0 +1,26 @@
+{
+  "single_bar_price": {
+    "status": "available",
+    "current": 1.17234,
+    "reason": null
+  },
+  "single_bar_structure": {
+    "status": "available",
+    "trend": "unknown"
+  },
+  "single_bar_momentum": {
+    "status": "available",
+    "method_id": "ts_mom_v1",
+    "direction": "unknown",
+    "strength": 0.0,
+    "reason": "No returns available for time-series momentum."
+  },
+  "single_bar_phase": {
+    "status": "available",
+    "method_id": "heuristic_v1",
+    "phase": "range",
+    "reason": "Range expansion unavailable; trend is ranging or unknown."
+  },
+  "three_bar_swings": 0,
+  "three_bar_range_state": "unavailable"
+}

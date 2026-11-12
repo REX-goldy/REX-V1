@@ -1,0 +1,6 @@
+# SEC-020 Retry logs and final download error do not expose the configured key
+component: historical/downloader.py
+test_data: Failing Twelve Data adapter, 2 attempts
+expected: Key absent from log records and exception chain
+actual: log_records=3 key_in_log=False key_in_exception=False
+status: PASS
